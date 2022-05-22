@@ -8,21 +8,72 @@
 
 /* Begin PBXBuildFile section */
 		05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AB928367DA9004693BC /* LeitnerBoxApp.swift */; };
-		05266ABC28367DA9004693BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266ABB28367DA9004693BC /* ContentView.swift */; };
+		05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266ABB28367DA9004693BC /* LeitnerView.swift */; };
 		05266ABE28367DAA004693BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266ABD28367DAA004693BC /* Assets.xcassets */; };
 		05266AC128367DAA004693BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266AC028367DAA004693BC /* Preview Assets.xcassets */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
 		05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
+		053666D2283769A1002F899F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D1283769A1002F899F /* ReviewView.swift */; };
+		053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D32837714F002F899F /* AddOrEditQuestionView.swift */; };
+		053666D728377420002F899F /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D628377420002F899F /* PrimaryTextField.swift */; };
+		053666DC2837758F002F899F /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666DB2837758F002F899F /* ViewExtension.swift */; };
+		053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666DD28377B5B002F899F /* CheckBoxView.swift */; };
+		053666E228377E43002F899F /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E128377E43002F899F /* MultilineTextField.swift */; };
+		053666E428378918002F899F /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E328378918002F899F /* ColorEx.swift */; };
+		053666E628378949002F899F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E528378949002F899F /* UIColor.swift */; };
+		054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C12839185E008BC840 /* LeitnerEX.swift */; };
+		054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C62839602C008BC840 /* LeitnerRowView.swift */; };
+		054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */; };
+		05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6C283A2A9100F4A413 /* RoundedCorner.swift */; };
+		05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6E283A334900F4A413 /* LevelsViewModel.swift */; };
+		05867E71283A469000F4A413 /* LevelEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E70283A469000F4A413 /* LevelEX.swift */; };
+		05867E73283A480600F4A413 /* QuestionEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E72283A480600F4A413 /* QuestionEX.swift */; };
+		05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E74283A63AA00F4A413 /* ReviewViewModel.swift */; };
+		05B80B642836979600390EF9 /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B80B632836979600390EF9 /* LevelsView.swift */; };
+		05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
+		05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE2142837BA480043FAEB /* LevelRow.swift */; };
+		05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE2172837CCA50043FAEB /* SearchView.swift */; };
+		05D0329F2838DB2B00FE67D5 /* DateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0329E2838DB2B00FE67D5 /* DateEx.swift */; };
+		05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A02838E2A900FE67D5 /* SearchRowView.swift */; };
+		05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A42838E82C00FE67D5 /* SearchViewModel.swift */; };
+		05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A62838F8D300FE67D5 /* CustomDialog.swift */; };
+		05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		05266AB628367DA9004693BC /* LeitnerBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeitnerBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05266AB928367DA9004693BC /* LeitnerBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerBoxApp.swift; sourceTree = "<group>"; };
-		05266ABB28367DA9004693BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		05266ABB28367DA9004693BC /* LeitnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerView.swift; sourceTree = "<group>"; };
 		05266ABD28367DAA004693BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05266AC028367DAA004693BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
+		053666D1283769A1002F899F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		053666D32837714F002F899F /* AddOrEditQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditQuestionView.swift; sourceTree = "<group>"; };
+		053666D628377420002F899F /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
+		053666DB2837758F002F899F /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		053666DD28377B5B002F899F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		053666E128377E43002F899F /* MultilineTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
+		053666E328378918002F899F /* ColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEx.swift; sourceTree = "<group>"; };
+		053666E528378949002F899F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		054AB5C12839185E008BC840 /* LeitnerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerEX.swift; sourceTree = "<group>"; };
+		054AB5C62839602C008BC840 /* LeitnerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerRowView.swift; sourceTree = "<group>"; };
+		054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerViewModel.swift; sourceTree = "<group>"; };
+		05867E6B283A1D7100F4A413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		05867E6C283A2A9100F4A413 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		05867E6E283A334900F4A413 /* LevelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsViewModel.swift; sourceTree = "<group>"; };
+		05867E70283A469000F4A413 /* LevelEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEX.swift; sourceTree = "<group>"; };
+		05867E72283A480600F4A413 /* QuestionEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEX.swift; sourceTree = "<group>"; };
+		05867E74283A63AA00F4A413 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		05B80B632836979600390EF9 /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
+		05BAE21128379B820043FAEB /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		05BAE2142837BA480043FAEB /* LevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelRow.swift; sourceTree = "<group>"; };
+		05BAE2172837CCA50043FAEB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		05D0329E2838DB2B00FE67D5 /* DateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEx.swift; sourceTree = "<group>"; };
+		05D032A02838E2A900FE67D5 /* SearchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowView.swift; sourceTree = "<group>"; };
+		05D032A42838E82C00FE67D5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		05D032A62838F8D300FE67D5 /* CustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialog.swift; sourceTree = "<group>"; };
+		05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryCustomDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +106,14 @@
 		05266AB828367DA9004693BC /* LeitnerBox */ = {
 			isa = PBXGroup;
 			children = (
+				05867E6B283A1D7100F4A413 /* Info.plist */,
+				054AB5C528395214008BC840 /* Review */,
+				054AB5C428395203008BC840 /* Leitners */,
+				054AB5C3283951DE008BC840 /* Level */,
+				05BAE2162837CC880043FAEB /* Search */,
+				05BAE21328379C9E0043FAEB /* QuestionView */,
+				053666D828377536002F899F /* Helpers */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
-				05266ABB28367DA9004693BC /* ContentView.swift */,
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
 				05266AC228367DAA004693BC /* Persistence.swift */,
 				05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */,
@@ -71,6 +128,90 @@
 				05266AC028367DAA004693BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		053666D52837740D002F899F /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */,
+				05D032A62838F8D300FE67D5 /* CustomDialog.swift */,
+				053666D628377420002F899F /* PrimaryTextField.swift */,
+				053666E128377E43002F899F /* MultilineTextField.swift */,
+				053666DD28377B5B002F899F /* CheckBoxView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		053666D828377536002F899F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				053666DA2837755F002F899F /* Extentions */,
+				053666D52837740D002F899F /* CustomView */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		053666DA2837755F002F899F /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				053666E328378918002F899F /* ColorEx.swift */,
+				053666DB2837758F002F899F /* ViewExtension.swift */,
+				053666E528378949002F899F /* UIColor.swift */,
+				05D0329E2838DB2B00FE67D5 /* DateEx.swift */,
+				054AB5C12839185E008BC840 /* LeitnerEX.swift */,
+				05867E70283A469000F4A413 /* LevelEX.swift */,
+				05867E6C283A2A9100F4A413 /* RoundedCorner.swift */,
+				05867E72283A480600F4A413 /* QuestionEX.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		054AB5C3283951DE008BC840 /* Level */ = {
+			isa = PBXGroup;
+			children = (
+				05BAE2142837BA480043FAEB /* LevelRow.swift */,
+				05B80B632836979600390EF9 /* LevelsView.swift */,
+				05867E6E283A334900F4A413 /* LevelsViewModel.swift */,
+			);
+			path = Level;
+			sourceTree = "<group>";
+		};
+		054AB5C428395203008BC840 /* Leitners */ = {
+			isa = PBXGroup;
+			children = (
+				05266ABB28367DA9004693BC /* LeitnerView.swift */,
+				054AB5C62839602C008BC840 /* LeitnerRowView.swift */,
+				054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */,
+			);
+			path = Leitners;
+			sourceTree = "<group>";
+		};
+		054AB5C528395214008BC840 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				053666D1283769A1002F899F /* ReviewView.swift */,
+				05867E74283A63AA00F4A413 /* ReviewViewModel.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		05BAE21328379C9E0043FAEB /* QuestionView */ = {
+			isa = PBXGroup;
+			children = (
+				053666D32837714F002F899F /* AddOrEditQuestionView.swift */,
+				05BAE21128379B820043FAEB /* QuestionViewModel.swift */,
+			);
+			path = QuestionView;
+			sourceTree = "<group>";
+		};
+		05BAE2162837CC880043FAEB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				05BAE2172837CCA50043FAEB /* SearchView.swift */,
+				05D032A02838E2A900FE67D5 /* SearchRowView.swift */,
+				05D032A42838E82C00FE67D5 /* SearchViewModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,10 +284,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
+				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
+				053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */,
+				05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */,
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
-				05266ABC28367DA9004693BC /* ContentView.swift in Sources */,
+				053666E228377E43002F899F /* MultilineTextField.swift in Sources */,
+				05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */,
+				05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */,
+				05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */,
+				05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */,
 				05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */,
+				053666D2283769A1002F899F /* ReviewView.swift in Sources */,
+				05D0329F2838DB2B00FE67D5 /* DateEx.swift in Sources */,
+				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
+				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
+				05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */,
+				053666E428378918002F899F /* ColorEx.swift in Sources */,
+				053666E628378949002F899F /* UIColor.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
+				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
+				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
+				05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */,
+				054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */,
+				053666D728377420002F899F /* PrimaryTextField.swift in Sources */,
+				054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */,
+				05867E73283A480600F4A413 /* QuestionEX.swift in Sources */,
+				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
+				05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */,
+				05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +444,7 @@
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LeitnerBox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,6 +474,7 @@
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LeitnerBox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

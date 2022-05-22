@@ -13,9 +13,28 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for index in 0..<10 {
+            let newItem = Leitner(context: viewContext)
+            newItem.createDate = Date()
+            newItem.name = "English" 
+            newItem.id = Int64(index)
+            
+            newItem.level?.addingObjects(from: (1...13).map{ levelId in
+                let level = Level(context: viewContext)
+                level.level = Int16(levelId)
+                level.leitner = newItem
+                level.daysToRecommend = 8
+                level.questions?.addingObjects(from: (1...500).map{ questionId in
+                    let question = Question(context: viewContext)
+                    question.question = "Quesiton \(questionId)"
+                    question.answer = "Answer with long text to test how it looks like on small screen we want to sure that the text is perfectly fit on the screen on smart phones and computers even with huge large screen \(questionId)"
+                    question.level = level
+                    question.passTime = Date().advanced(by: -(24 * 360))
+                    question.createTime = Date()
+                    return question
+                })
+                return level
+            })
         }
         do {
             try viewContext.save()

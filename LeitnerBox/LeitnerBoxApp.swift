@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct LeitnerBoxApp: App {
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LeitnerView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

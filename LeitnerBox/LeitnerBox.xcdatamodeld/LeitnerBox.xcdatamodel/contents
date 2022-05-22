@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Leitner" representedClassName="Leitner" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="level" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Level" inverseName="leitner" inverseEntity="Level"/>
+    </entity>
+    <entity name="Level" representedClassName="Level" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="674667300" usesScalarValueType="NO"/>
+        <attribute name="daysToRecommend" attributeType="Integer 32" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="level" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="leitner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Leitner" inverseName="level" inverseEntity="Leitner"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" inverseName="level" inverseEntity="Question"/>
+    </entity>
+    <entity name="Question" representedClassName="Question" syncable="YES" codeGenerationType="class">
+        <attribute name="answer" optional="YES" attributeType="String"/>
+        <attribute name="completed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="favoriteDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="passTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="question" attributeType="String" defaultValueString=""/>
+        <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="questions" inverseEntity="Level"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Leitner" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Level" positionX="175.49609375" positionY="11.60546875" width="128" height="104"/>
+        <element name="Question" positionX="-120.17578125" positionY="180.99609375" width="128" height="149"/>
     </elements>
 </model>
