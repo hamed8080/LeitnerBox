@@ -21,7 +21,7 @@ struct ReviewView: View {
             ZStack{
                     VStack{
                         Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
-                            .font(.footnote.bold())
+                            .font(isIpad ? .title3.bold() : .footnote.bold())
                         
                         Spacer()
                         
@@ -36,7 +36,9 @@ struct ReviewView: View {
                             Spacer()
                             
                             Button {
-                                vm.showDeleteDialog()
+                                withAnimation {
+                                    vm.showDeleteDialog()
+                                }
                             } label: {
                                 Image(systemName: "trash")
                                     .resizable()
@@ -57,7 +59,9 @@ struct ReviewView: View {
                             }
                             
                             Button {
-                                vm.toggleFavorite()
+                                withAnimation {
+                                    vm.toggleFavorite()
+                                }
                             } label: {
                                 Image(systemName: vm.selectedQuestion?.favorite == true ? "star.fill" : "star")
                                     .resizable()
@@ -91,7 +95,9 @@ struct ReviewView: View {
                         
                         HStack(spacing: isIpad ? 48 : 12){
                             Button {
-                                vm.pass()
+                                withAnimation {
+                                    vm.pass()
+                                }
                             } label: {
                                 HStack{
                                     Spacer()
@@ -105,7 +111,9 @@ struct ReviewView: View {
                             .tint(.accentColor)
                             
                             Button{
-                                vm.fail()
+                                withAnimation {
+                                    vm.fail()
+                                }
                             } label: {
                                 HStack{
                                     Spacer()
