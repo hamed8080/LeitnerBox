@@ -42,7 +42,7 @@ struct LevelRow:View{
                 HStack(spacing:0){
                     Text(verbatim: " \(level.reviewableCountInsideLevel)")
                         .foregroundColor(.green.opacity(1))
-                    Text(verbatim: " / \(level.questions?.count ?? 0)")
+                    Text(verbatim: " / \(level.notCompletdCount)")
                         .foregroundColor(.primary.opacity(1))
                 }
                 

@@ -23,4 +23,9 @@ extension Question{
             return "Available".uppercased()
         }
     }
+    
+    var upperLevel:Level?{
+        let levels = level?.leitner?.level?.allObjects as? [Level]
+        return levels?.filter({(level?.level ?? 0) + 1 == $0.level }).first
+    }
 }

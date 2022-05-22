@@ -103,6 +103,14 @@ class ReviewViewModel:ObservableObject{
     
     func pass(){
         passCount += 1
+        selectedQuestion?.passTime = Date()
+        if selectedQuestion?.level?.level == 13{
+            selectedQuestion?.completed = true
+        }else{
+            selectedQuestion?.level = selectedQuestion?.upperLevel
+        }
+        
+        saveDB()
         removeFromList()
         if !hasNext{
             isFinished = true
