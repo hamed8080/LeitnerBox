@@ -91,6 +91,15 @@ struct ReviewView: View {
                             Spacer()
                         }.transition(.slide)
                         
+                        if vm.selectedQuestion?.detailDescription != nil{
+                            HStack{
+                                Spacer()
+                                Text(vm.selectedQuestion?.detailDescription ?? "")
+                                    .font(.title2.weight(.medium))
+                                Spacer()
+                            }.transition(.slide)
+                        }
+                        
                         Spacer()
                         
                         HStack(spacing: isIpad ? 48 : 12){

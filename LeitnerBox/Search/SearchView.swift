@@ -55,6 +55,10 @@ struct SearchView: View {
                                 .foregroundColor(.primary)
                                 .font(.body.weight(.medium))
                             
+                            Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
+                                .foregroundColor(.primary)
+                                .font(.body.weight(.medium))
+                            
                             Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
                                 .font(.footnote.bold())
                         }
@@ -81,38 +85,6 @@ struct SearchView: View {
             }
             .hidden()
         }
-//        .customDialog(isShowing:$vm.showLeitnersListDialog, content: {
-//            let vm = LeitnerViewModel()
-//            VStack{
-//                List {
-//                    ForEach(vm.leitners) { leitner in
-//                        Text(leitner.name ?? "")
-//                            .contentShape(Rectangle())
-//                            .onTapGesture {
-//                                withAnimation {
-//                                    self.vm.moveQuestionTo(leitner)
-//                                    self.vm.showLeitnersListDialog.toggle()
-//                                }
-//                            }
-//                    }
-//                }
-//                .listStyle(.plain)
-//                
-//                Button {
-//                    self.vm.showLeitnersListDialog.toggle()
-//                } label: {
-//                    HStack{
-//                        Spacer()
-//                        Text("Cancel")
-//                            .foregroundColor(.red)
-//                        Spacer()
-//                    }
-//                }
-//                .controlSize(.large)
-//                .buttonStyle(.bordered)
-//                .frame(maxWidth: .infinity)
-//            }
-//        })
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
         .toolbar {

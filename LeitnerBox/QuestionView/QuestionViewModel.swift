@@ -29,13 +29,17 @@ class QuestionViewModel:ObservableObject{
     var answer:String = ""
     
     @Published
+    var descriptionDetail:String = ""
+    
+    @Published
     var question:String = ""
     
     init(level:Level, editQuestion:Question? = nil){
         self.editQuestion = editQuestion
         if let editQuestion = editQuestion {
-            question = editQuestion.question ?? ""
-            answer   = editQuestion.answer ?? ""
+            question          = editQuestion.question ?? ""
+            answer            = editQuestion.answer ?? ""
+            descriptionDetail = editQuestion.detailDescription ?? ""
         }
         self.level        = level
     }
@@ -44,6 +48,7 @@ class QuestionViewModel:ObservableObject{
         do{
             editQuestion?.question = self.question
             editQuestion?.answer = self.answer
+            editQuestion?.detailDescription = self.descriptionDetail
             try viewContext.save()
         }catch{
             print("Fetch failed: Error \(error.localizedDescription)")
@@ -52,11 +57,12 @@ class QuestionViewModel:ObservableObject{
     
     func insert() {
         withAnimation {
-            let question        = Question(context : viewContext)
-            question.question   = self.question
-            question.answer     = answer
-            question.level      = level
-            question.createTime = Date()
+            let question               = Question(context : viewContext)
+            question.question          = self.question
+            question.answer            = answer
+            question.detailDescription = self.descriptionDetail
+            question.level             = level
+            question.createTime        = Date()
             do {
                 try viewContext.save()
             } catch {

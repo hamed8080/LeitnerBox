@@ -31,7 +31,9 @@ struct LevelsView: View {
             }
             
             NavigationLink(isActive: $vm.showAddQuestionView) {
-                AddOrEditQuestionView(vm: .init(level: vm.levels.first(where: {$0.level == 1})!))
+                if let levelFirst = vm.levels.first(where: {$0.level == 1}){
+                    AddOrEditQuestionView(vm: .init(level: levelFirst))
+                }
             } label: {
                 EmptyView()
             }

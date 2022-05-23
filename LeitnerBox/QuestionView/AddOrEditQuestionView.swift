@@ -51,6 +51,16 @@ struct AddOrEditQuestionView: View {
                         .onChange(of: vm.answer) { newValue in
                             
                         }
+                        
+                        MultilineTextField(
+                            vm.descriptionDetail.isEmpty == true ? "Enter your description here..." : "",
+                            text: $vm.descriptionDetail,
+                            textColor: UIColor(named: "textColor")!,
+                            backgroundColor: UIColor(.primary.opacity(0.1))
+                        )
+                        .onChange(of: vm.descriptionDetail) { newValue in
+                            
+                        }
                     }
                     
                     Button {

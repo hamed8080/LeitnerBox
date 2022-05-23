@@ -19,16 +19,16 @@ class LeitnerViewModel:ObservableObject{
     var leitners: [Leitner] = []
     
     @Published
-    var showRenameAlert = false
-    
-    @Published
-    var showAddLeitnerAlert = false
+    var showEditOrAddLeitnerAlert = false
     
     @Published
     var selectedLeitner:Leitner? = nil
     
     @Published
     var leitnerTitle:String = ""
+    
+    @Published
+    var backToTopLevel = false
     
     init(isPreview:Bool = false){
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
@@ -58,18 +58,27 @@ class LeitnerViewModel:ObservableObject{
         }
     }
     
-    func saveRename(){
+    func editOrAddLeitner(){
+        if selectedLeitner != nil{
+            editLeitner()
+        }else{
+            addLeitner()
+        }
+    }
+    
+    func editLeitner(){
         selectedLeitner?.name = leitnerTitle
+        selectedLeitner?.backToTopLevel = backToTopLevel
         do {
             try viewContext.save()
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        showRenameAlert.toggle()
+        showEditOrAddLeitnerAlert.toggle()
     }
     
-    func addItem() {
+    func addLeitner() {
         withAnimation {
             
             let maxId = leitners.max(by: {$0.id < $1.id})?.id ?? 0
@@ -77,6 +86,7 @@ class LeitnerViewModel:ObservableObject{
             newItem.createDate = Date()
             newItem.name = leitnerTitle
             newItem.id = maxId + 1
+            newItem.backToTopLevel = backToTopLevel
             let levels:[Level] = (1...13).map{ levelId in
                 let level = Level(context: viewContext)
                 level.level = Int16(levelId)
@@ -87,12 +97,14 @@ class LeitnerViewModel:ObservableObject{
             newItem.level?.addingObjects(from: levels)
             leitners.append(newItem)
             saveDB()
-            showAddLeitnerAlert.toggle()
+            showEditOrAddLeitnerAlert.toggle()
             clear()
         }
     }
     
     func clear(){
         leitnerTitle = ""
+        backToTopLevel = false
+        selectedLeitner = nil
     }
 }

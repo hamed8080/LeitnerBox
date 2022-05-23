@@ -26,6 +26,12 @@ struct SearchRowView: View {
                         .foregroundColor(.gray)
                         .font(.headline.bold())
                     
+                    if question.detailDescription != nil{
+                        Text(question.detailDescription?.uppercased() ?? "")
+                            .foregroundColor(.gray)
+                            .font(.headline.bold())
+                    }
+                    
                     HStack{
                         Text(verbatim: "LEVEL: \(question.level?.level ?? 0)")
                             .foregroundColor(.blue)

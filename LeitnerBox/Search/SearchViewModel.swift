@@ -12,6 +12,9 @@ import AVFoundation
 
 class SearchViewModel:ObservableObject{
    
+    @AppStorage("pronounceDetailAnswer")
+    private var pronounceDetailAnswer = false
+    
     @Published
     var viewContext:NSManagedObjectContext = PersistenceController.shared.container.viewContext
 
@@ -121,7 +124,8 @@ class SearchViewModel:ObservableObject{
     
     func pronounce(_ question:Question){
         isSpeaking                   = true
-        let utterance                = AVSpeechUtterance(string          : question.question ?? "")
+        let pronounceString          = question.question ?? "" + (pronounceDetailAnswer ? question.detailDescription ?? "" : "")
+        let utterance                = AVSpeechUtterance(string : pronounceString)
         utterance.voice              = AVSpeechSynthesisVoice(language : "en-GB")
         utterance.rate               = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier    = 1
