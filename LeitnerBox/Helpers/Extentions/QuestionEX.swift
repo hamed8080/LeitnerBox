@@ -28,4 +28,9 @@ extension Question{
         let levels = level?.leitner?.level?.allObjects as? [Level]
         return levels?.filter({(level?.level ?? 0) + 1 == $0.level }).first
     }
+    
+    var firstLevel:Level?{
+        let levels = level?.leitner?.level?.allObjects as? [Level]
+        return levels?.filter{ $0.level == 1 }.first
+    }
 }

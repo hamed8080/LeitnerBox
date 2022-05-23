@@ -33,7 +33,7 @@ struct LeitnerRowView: View {
                     vm.backToTopLevel = leitner.backToTopLevel
                     vm.showEditOrAddLeitnerAlert.toggle()
                 } label: {
-                    Label("Rename and Edit", systemImage: "pencil")
+                    Label("Rename and Edit", systemImage: "gear")
                 }
             }
         }

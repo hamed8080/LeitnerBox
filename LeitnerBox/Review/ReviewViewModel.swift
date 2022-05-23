@@ -59,7 +59,7 @@ class ReviewViewModel:ObservableObject{
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", level.level, level.leitner?.id ?? 0)
         do {
-            self.questions = try viewContext.fetch(req).filter({$0.isReviewable})
+            self.questions = try viewContext.fetch(req).filter({$0.isReviewable}).shuffled()
             totalCount = questions.count
         }catch{
             print("Fetch failed: Error \(error.localizedDescription)")
@@ -120,6 +120,10 @@ class ReviewViewModel:ObservableObject{
     }
     
     func fail(){
+        if level.leitner?.backToTopLevel == true{
+            selectedQuestion?.level = selectedQuestion?.firstLevel
+            saveDB()
+        }
         failedCount += 1
         removeFromList()
         if !hasNext{
