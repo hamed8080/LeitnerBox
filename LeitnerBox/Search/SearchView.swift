@@ -22,6 +22,7 @@ struct SearchView: View {
                 }
                 .onDelete(perform: vm.deleteItems)
             }
+            .animation(.easeInOut, value: vm.suggestions)
             .listStyle(.plain)
             .searchable(text: $vm.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
                 if vm.suggestions.count > 0 || vm.searchText.isEmpty{
@@ -34,7 +35,6 @@ struct SearchView: View {
                             .foregroundColor(.gray.opacity(0.8))
                         Text("Nothind has found.")
                             .foregroundColor(.gray.opacity(0.8))
-                       
                     }
                 }
             }
@@ -85,6 +85,7 @@ struct SearchView: View {
             }
             .hidden()
         }
+        .animation(.easeInOut, value: vm.suggestions)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
         .toolbar {

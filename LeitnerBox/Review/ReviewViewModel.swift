@@ -53,6 +53,9 @@ class ReviewViewModel:ObservableObject{
     @Published
     var isFinished = false
     
+    @AppStorage("selectedVoiceIdentifire")
+    var selectedVoiceIdentifire = ""
+    
     init(level:Level, isPreview:Bool = false){
         self.level = level
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
@@ -149,8 +152,10 @@ class ReviewViewModel:ObservableObject{
     
     func pronounce(){
         guard let question = selectedQuestion else { return }
-        let utterance                = AVSpeechUtterance(string          : question.question ?? "")
-        utterance.voice              = AVSpeechSynthesisVoice(language : "en-GB")
+        let utterance                = AVSpeechUtterance(string          : question.question ?? "")        
+        if !selectedVoiceIdentifire.isEmpty{
+            utterance.voice              = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)
+        }
         utterance.rate               = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier    = 1
         utterance.postUtteranceDelay = 0

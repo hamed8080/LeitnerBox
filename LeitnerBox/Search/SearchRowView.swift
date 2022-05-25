@@ -52,7 +52,7 @@ struct SearchRowView: View {
                     }
                     
                     Button {
-                        vm.pronounce(question)
+                        vm.pronounceOnce(question)
                     } label: {
                         Image(systemName: "mic.fill")
                             .resizable()

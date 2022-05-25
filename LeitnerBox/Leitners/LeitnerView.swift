@@ -63,7 +63,24 @@ struct LeitnerView: View {
                         Toggle(isOn: $pronounceDetailAnswer) {
                             Label("Prononce \ndetails answer ", systemImage: "mic")
                         }
+                        
                         Divider()
+                
+                        Menu{
+                            ForEach(vm.voices, id:\.self){ voice in
+                                let isSelected = vm.selectedVoiceIdentifire == voice.identifier
+                                Button {
+                                    vm.setSelectedVoice(voice)
+                                } label: {
+                                    Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
+                                }
+                            }
+                            Divider()
+                            
+                        } label: {
+                            Label("Pronounce Voice", systemImage: "waveform")
+                        }
+                        
                     } label: {
                         Label("More", systemImage: "gear")
                     }

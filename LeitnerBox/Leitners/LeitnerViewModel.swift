@@ -36,6 +36,12 @@ class LeitnerViewModel:ObservableObject{
     @Published
     var backupFile:TemporaryFile? = nil
     
+    @Published
+    var selectedVoiceIdentifire:String? = nil
+    
+    @Published
+    var voices:[AVSpeechSynthesisVoice] = []
+    
     init(isPreview:Bool = false){
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
         let req = Leitner.fetchRequest()
@@ -45,6 +51,8 @@ class LeitnerViewModel:ObservableObject{
         }catch{
             print("Fetch failed: Error \(error.localizedDescription)")
         }
+        voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: {$0.language > $1.language})
+        selectedVoiceIdentifire  = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
     }
     
     func delete(_ leitner:Leitner){
@@ -167,6 +175,11 @@ class LeitnerViewModel:ObservableObject{
         dateFormatter.formatOptions = [.withYear, .withMonth, .withDay, .withTime]
         let dateString = dateFormatter.string(from: Date())
         return "\(basename)-\(dateString).sqlite"
+    }
+    
+    func setSelectedVoice(_ voice: AVSpeechSynthesisVoice){
+        selectedVoiceIdentifire = voice.identifier
+        UserDefaults.standard.set(selectedVoiceIdentifire, forKey: "selectedVoiceIdentifire")
     }
 
 }

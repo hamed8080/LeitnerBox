@@ -46,6 +46,9 @@ class SearchViewModel:ObservableObject{
     
     var speechDelegate:SpeechDelegate
     
+    @AppStorage("selectedVoiceIdentifire")
+    var selectedVoiceIdentifire = ""
+    
     @Published
     var isSpeaking = false
     
@@ -122,6 +125,11 @@ class SearchViewModel:ObservableObject{
         saveDB()
     }
     
+    func pronounceOnce(_ question:Question){
+        pronounce(question)
+        isSpeaking = false
+    }
+    
     func pronounce(_ question:Question){
         isSpeaking                   = true
         let pronounceString          = question.question ?? "" + (pronounceDetailAnswer ? question.detailDescription ?? "" : "")
@@ -129,7 +137,9 @@ class SearchViewModel:ObservableObject{
         utterance.voice              = AVSpeechSynthesisVoice(language : "en-GB")
         utterance.rate               = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier    = 1
-//        utterance.voice              = AVSpeechSynthesisVoice.speechVoices().last
+        if !selectedVoiceIdentifire.isEmpty{
+            utterance.voice              = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)
+        }
         utterance.postUtteranceDelay = 0
         synthesizer.speak(utterance)
     }

@@ -20,6 +20,10 @@ struct ReviewView: View {
         else if vm.level.hasAnyReviewable{
             ZStack{
                     VStack{
+                        Text("Level: \(vm.level.level)")
+                            .font(.title.weight(.semibold))
+                            .padding(.bottom)
+                            .foregroundColor(.accentColor)
                         Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
                             .font(isIpad ? .title3.bold() : .footnote.bold())
                         

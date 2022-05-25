@@ -10,6 +10,9 @@ import SwiftUI
 struct LevelRow:View{
     
     @ObservedObject
+    var vm:LevelsViewModel
+    
+    @ObservedObject
     var level:Level
     
     var body: some View{
@@ -47,6 +50,15 @@ struct LevelRow:View{
                 }
                 
             }
+            .contextMenu{
+                Button {
+                    vm.selectedLevel = level
+                    vm.daysToRecommend = Int(level.daysToRecommend)
+                    vm.showDaysAfterDialog.toggle()
+                } label: {
+                    Label("Days to recommend", systemImage: "calendar")
+                }
+            }
             .padding([.leading, .top, .bottom] , 8)
         }
     }
@@ -55,6 +67,6 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(level: Level())
+        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), level: Level())
     }
 }

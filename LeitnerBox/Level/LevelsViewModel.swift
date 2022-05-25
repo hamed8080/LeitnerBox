@@ -36,6 +36,15 @@ class LevelsViewModel:ObservableObject{
     @Published
     var suggestions:[Question] = []
     
+    @Published
+    var showDaysAfterDialog = false
+    
+    @Published
+    var selectedLevel:Level? = nil
+    
+    @Published
+    var daysToRecommend = 0
+    
     init(leitner:Leitner, isPreview:Bool = false ){
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
         self.leitner = leitner
@@ -56,5 +65,18 @@ class LevelsViewModel:ObservableObject{
             })
         }
     }
-
+    
+    func saveDaysToRecommned(){
+        selectedLevel?.daysToRecommend = Int32(daysToRecommend)
+        saveDB()
+    }
+    
+    func saveDB(){
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
