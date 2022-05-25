@@ -7,16 +7,17 @@
 
 import CoreData
 
-struct PersistenceController {
-    static let shared = PersistenceController()
-
+class PersistenceController:ObservableObject {
+    
+    static var shared = PersistenceController()
+    
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for index in 0..<10 {
             let newItem = Leitner(context: viewContext)
             newItem.createDate = Date()
-            newItem.name = "English" 
+            newItem.name = "English"
             newItem.id = Int64(index)
             
             newItem.level?.addingObjects(from: (1...13).map{ levelId in
@@ -46,9 +47,9 @@ struct PersistenceController {
         }
         return result
     }()
-
-    let container: NSPersistentCloudKitContainer
-
+    
+    var container: NSPersistentCloudKitContainer
+    
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "LeitnerBox")
         if inMemory {
@@ -56,20 +57,53 @@ struct PersistenceController {
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    
+    func replaceDBIfExistFromShareExtension(){
+        
+       let appSuppportFile = moveAppGroupFileToAppSupportFolder()
+        
+        do{
+            let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
+            guard let oldStore = persistentCordinator.persistentStores.first , let oldStoreUrl = oldStore.url , let appSuppportFile = appSuppportFile else{return}
+            try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+                self.objectWillChange.send()
+            })
+            container.viewContext.automaticallyMergesChangesFromParent = true
+        }catch{
+            print("error in restoring back up file\(error.localizedDescription)")
+        }
+    }
+    
+    func moveAppGroupFileToAppSupportFolder()->URL?{
+        let fm = FileManager.default
+        guard let appGroupDBFolder = fm.appGroupDBFolder else{return nil}
+        if let contents = try? fm.contentsOfDirectory(atPath: appGroupDBFolder.path).filter({$0.contains(".sqlite")}), contents.count > 0 {
+
+            let appSupportDirectory = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            let appGroupFile = appGroupDBFolder.appendingPathComponent(contents.first!)
+            let appSuppportFile = appSupportDirectory!.appendingPathComponent(contents.first!)
+            do{
+                if fm.fileExists(atPath: appSuppportFile.path){
+                    try fm.removeItem(at: appSuppportFile)//to first delete old file and again replace with new one
+                }
+                try fm.moveItem(atPath: appGroupFile.path , toPath:  appSuppportFile.path)
+                return appSuppportFile
+            }catch{
+                print("Error to move appgroup file to app support folder\(error.localizedDescription)")
+                return nil
+            }
+        }else{
+            return nil
+        }
     }
 }

@@ -34,12 +34,22 @@ struct LeitnerView: View {
                 }
                 .listStyle(.plain)
             }
+            .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
+                try? vm.backupFile?.deleteDirectory()
+            }, content:{
+                if let fileUrl = vm.backupFile?.fileURL{
+                    ActivityViewControllerWrapper(activityItems: [fileUrl])
+                }else{
+                    EmptyView()
+                }
+            })
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
                     Button {
-                       
+                        vm.exportDB()
                     } label: {
-                        Label("google drive", systemImage: "externaldrive.badge.icloud")
+                        Label("Export", systemImage: "square.and.arrow.up")
                     }
                     
                     Button {

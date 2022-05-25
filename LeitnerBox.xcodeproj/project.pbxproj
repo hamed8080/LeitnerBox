@@ -13,6 +13,9 @@
 		05266AC128367DAA004693BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266AC028367DAA004693BC /* Preview Assets.xcassets */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
 		05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
+		052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
+		052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */; };
+		052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
 		053666D2283769A1002F899F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D1283769A1002F899F /* ReviewView.swift */; };
 		053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D32837714F002F899F /* AddOrEditQuestionView.swift */; };
 		053666D728377420002F899F /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D628377420002F899F /* PrimaryTextField.swift */; };
@@ -21,9 +24,14 @@
 		053666E228377E43002F899F /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E128377E43002F899F /* MultilineTextField.swift */; };
 		053666E428378918002F899F /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E328378918002F899F /* ColorEx.swift */; };
 		053666E628378949002F899F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E528378949002F899F /* UIColor.swift */; };
+		0542761B283D5C1800F1044E /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
 		054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C12839185E008BC840 /* LeitnerEX.swift */; };
 		054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C62839602C008BC840 /* LeitnerRowView.swift */; };
 		054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */; };
+		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
+		0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D4AF283CE46F000BD93D /* ShareViewController.swift */; };
+		0579D4B1283CE855000BD93D /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
 		05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6C283A2A9100F4A413 /* RoundedCorner.swift */; };
 		05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6E283A334900F4A413 /* LevelsViewModel.swift */; };
 		05867E71283A469000F4A413 /* LevelEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E70283A469000F4A413 /* LevelEX.swift */; };
@@ -40,6 +48,30 @@
 		05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0579D4A9283CE459000BD93D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05266AAE28367DA9004693BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0579D4A0283CE459000BD93D;
+			remoteInfo = Share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		052CA6BF283C9A9500376E79 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		05266AB628367DA9004693BC /* LeitnerBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeitnerBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05266AB928367DA9004693BC /* LeitnerBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerBoxApp.swift; sourceTree = "<group>"; };
@@ -48,6 +80,11 @@
 		05266AC028367DAA004693BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
+		052CA6A9283C944200376E79 /* FileManagerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerEX.swift; sourceTree = "<group>"; };
+		052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewControllerWrapper.swift; sourceTree = "<group>"; };
+		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupLocalStorage.swift; sourceTree = "<group>"; };
+		052CA6EE283CE06E00376E79 /* LeitnerBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LeitnerBox.entitlements; sourceTree = "<group>"; };
 		053666D1283769A1002F899F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		053666D32837714F002F899F /* AddOrEditQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditQuestionView.swift; sourceTree = "<group>"; };
 		053666D628377420002F899F /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
@@ -59,6 +96,11 @@
 		054AB5C12839185E008BC840 /* LeitnerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerEX.swift; sourceTree = "<group>"; };
 		054AB5C62839602C008BC840 /* LeitnerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerRowView.swift; sourceTree = "<group>"; };
 		054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerViewModel.swift; sourceTree = "<group>"; };
+		0579D4A1283CE459000BD93D /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0579D4A6283CE459000BD93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		0579D4A8283CE459000BD93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0579D4AF283CE46F000BD93D /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		0579D4B2283CEE60000BD93D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		05867E6B283A1D7100F4A413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		05867E6C283A2A9100F4A413 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		05867E6E283A334900F4A413 /* LevelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsViewModel.swift; sourceTree = "<group>"; };
@@ -84,6 +126,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0579D49E283CE459000BD93D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				05266AB828367DA9004693BC /* LeitnerBox */,
+				0579D4A2283CE459000BD93D /* Share */,
+				052CA6D7283C9E2E00376E79 /* Frameworks */,
 				05266AB728367DA9004693BC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				05266AB628367DA9004693BC /* LeitnerBox.app */,
+				0579D4A1283CE459000BD93D /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +158,7 @@
 		05266AB828367DA9004693BC /* LeitnerBox */ = {
 			isa = PBXGroup;
 			children = (
+				052CA6EE283CE06E00376E79 /* LeitnerBox.entitlements */,
 				05867E6B283A1D7100F4A413 /* Info.plist */,
 				054AB5C528395214008BC840 /* Review */,
 				054AB5C428395203008BC840 /* Leitners */,
@@ -118,6 +171,7 @@
 				05266AC228367DAA004693BC /* Persistence.swift */,
 				05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */,
 				05266ABF28367DAA004693BC /* Preview Content */,
+				052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */,
 			);
 			path = LeitnerBox;
 			sourceTree = "<group>";
@@ -130,10 +184,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		052CA6D7283C9E2E00376E79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		053666D52837740D002F899F /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */,
+				052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */,
 				05D032A62838F8D300FE67D5 /* CustomDialog.swift */,
 				053666D628377420002F899F /* PrimaryTextField.swift */,
 				053666E128377E43002F899F /* MultilineTextField.swift */,
@@ -162,6 +225,7 @@
 				05867E70283A469000F4A413 /* LevelEX.swift */,
 				05867E6C283A2A9100F4A413 /* RoundedCorner.swift */,
 				05867E72283A480600F4A413 /* QuestionEX.swift */,
+				052CA6A9283C944200376E79 /* FileManagerEX.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -195,6 +259,17 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		0579D4A2283CE459000BD93D /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				0579D4B2283CEE60000BD93D /* Share.entitlements */,
+				0579D4AF283CE46F000BD93D /* ShareViewController.swift */,
+				0579D4A5283CE459000BD93D /* MainInterface.storyboard */,
+				0579D4A8283CE459000BD93D /* Info.plist */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		05BAE21328379C9E0043FAEB /* QuestionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,15 +299,34 @@
 				05266AB228367DA9004693BC /* Sources */,
 				05266AB328367DA9004693BC /* Frameworks */,
 				05266AB428367DA9004693BC /* Resources */,
+				052CA6BF283C9A9500376E79 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0579D4AA283CE459000BD93D /* PBXTargetDependency */,
 			);
 			name = LeitnerBox;
 			productName = LeitnerBox;
 			productReference = 05266AB628367DA9004693BC /* LeitnerBox.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0579D4A0283CE459000BD93D /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0579D4AC283CE459000BD93D /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				0579D49D283CE459000BD93D /* Sources */,
+				0579D49E283CE459000BD93D /* Frameworks */,
+				0579D49F283CE459000BD93D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			productName = Share;
+			productReference = 0579D4A1283CE459000BD93D /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -245,6 +339,9 @@
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					05266AB528367DA9004693BC = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					0579D4A0283CE459000BD93D = {
 						CreatedOnToolsVersion = 13.3;
 					};
 				};
@@ -263,6 +360,7 @@
 			projectRoot = "";
 			targets = (
 				05266AB528367DA9004693BC /* LeitnerBox */,
+				0579D4A0283CE459000BD93D /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -277,6 +375,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0579D49F283CE459000BD93D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -284,8 +390,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */,
 				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
 				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
+				052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */,
 				053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */,
 				05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */,
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
@@ -306,6 +414,7 @@
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
 				05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */,
+				052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */,
 				054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */,
 				053666D728377420002F899F /* PrimaryTextField.swift in Sources */,
 				054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */,
@@ -316,7 +425,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0579D49D283CE459000BD93D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0542761B283D5C1800F1044E /* FileManagerEX.swift in Sources */,
+				0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */,
+				0579D4B1283CE855000BD93D /* AppGroupLocalStorage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0579D4AA283CE459000BD93D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0579D4A0283CE459000BD93D /* Share */;
+			targetProxy = 0579D4A9283CE459000BD93D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0579D4A5283CE459000BD93D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0579D4A6283CE459000BD93D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		05266AC728367DAA004693BC /* Debug */ = {
@@ -436,8 +574,10 @@
 		05266ACA28367DAA004693BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LeitnerBox/LeitnerBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LeitnerBox/Preview Content\"";
@@ -466,8 +606,10 @@
 		05266ACB28367DAA004693BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LeitnerBox/LeitnerBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LeitnerBox/Preview Content\"";
@@ -493,6 +635,58 @@
 			};
 			name = Release;
 		};
+		0579D4AD283CE459000BD93D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QN43D38LP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Share;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBox.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0579D4AE283CE459000BD93D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QN43D38LP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Share;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBox.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -510,6 +704,15 @@
 			buildConfigurations = (
 				05266ACA28367DAA004693BC /* Debug */,
 				05266ACB28367DAA004693BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0579D4AC283CE459000BD93D /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0579D4AD283CE459000BD93D /* Debug */,
+				0579D4AE283CE459000BD93D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
