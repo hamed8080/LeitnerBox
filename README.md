@@ -1,5 +1,5 @@
 # Leitner-Box
-<img src="https://github.com/hamed8080/LeitnerBox/raw/main/LeitnerBox/Assets.xcassets/AppIcon.appiconset/120.png" width="64" height="64" />
+<img src="https://github.com/hamed8080/LeitnerBox/raw/main/LeitnerBox/Assets.xcassets/AppIcon.appiconset/120.png" width="64" height="64" style="border-radius:12px" />
 <br />
 <br />
 
