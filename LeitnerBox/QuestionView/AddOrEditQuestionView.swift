@@ -80,9 +80,9 @@ struct AddOrEditQuestionView: View {
                         Spacer()
                     }
                     .padding()
-                    .frame(width: isIpad ? reader.size.width * 40/100 : .infinity)
-                    Spacer()
-                }
+                    
+                }.frame(width: isIpad ? reader.size.width * 40/100 : .infinity)
+                Spacer()
             }
             .animation(.easeInOut, value: vm.isManual)
             .toolbar {
