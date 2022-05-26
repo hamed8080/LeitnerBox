@@ -17,8 +17,15 @@ extension Question{
     var remainDays:String{
         let daysToRecommend = level?.daysToRecommend ?? 0
         if let passTime = passTime, passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) >= Date(){
-            let days = passTime.advanced(by: Double(daysToRecommend * (24 * 3600))).differenceWith(date: Date()).day
-            return "\( abs(days ?? 0)) day left".uppercased()
+            let components = passTime.advanced(by: Double(daysToRecommend * (24 * 3600))).differenceWith(from: Date())
+            
+            let days = (components.day ?? 0)
+            let daysString = days > 0 ? "\(days) days " : ""
+            let hours = components.hour ?? 0
+            let hoursString = hours > 0 ? " \(hours) hours " : ""
+            let minutes = components.minute ?? 0
+            let minutesString = minutes > 0 ? " \(minutes) minutes " : ""
+            return "\(daysString)\(hoursString)\(minutesString) left".uppercased()
         }else{
             return "Available".uppercased()
         }

@@ -105,6 +105,7 @@ class ReviewViewModel:ObservableObject{
     }
     
     func pass(){
+        isShowingAnswer = false
         passCount += 1
         selectedQuestion?.passTime = Date()
         if selectedQuestion?.level?.level == 13{
@@ -123,6 +124,7 @@ class ReviewViewModel:ObservableObject{
     }
     
     func fail(){
+        isShowingAnswer = false
         if level.leitner?.backToTopLevel == true{
             selectedQuestion?.level = selectedQuestion?.firstLevel
             saveDB()
@@ -163,7 +165,7 @@ class ReviewViewModel:ObservableObject{
     }
     
     func toggleAnswer(){
-        
+        isShowingAnswer.toggle()
     }
     
     func preapareNext(_ question:Question?){

@@ -19,7 +19,7 @@ struct LevelsView: View {
             List {
                 HeaderView(levels: vm.levels)
                 ForEach(vm.levels) { level in
-                    LevelRow(vm: vm, level: level)
+                    LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
                 }
             }
             .listStyle(.plain)
@@ -55,7 +55,11 @@ struct LevelsView: View {
             }
         }
         .onChange(of: vm.searchWord) { newValue in
-            vm.suggestions = vm.allQuestions.filter({$0.question?.lowercased().contains(vm.searchWord.lowercased()) ?? false })
+            vm.suggestions = vm.allQuestions.filter({
+                $0.question?.lowercased().contains( vm.searchWord.lowercased()) ?? false ||
+                $0.answer?.lowercased().contains( vm.searchWord.lowercased()) ?? false ||
+                $0.detailDescription?.lowercased().contains( vm.searchWord.lowercased()) ?? false
+            })
         }
         .animation(.easeInOut, value: vm.suggestions)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")
@@ -82,12 +86,12 @@ struct LevelsView: View {
     
     var daysToRecommendDialogView:some View{
         VStack(spacing:24){
-            Text("Level \(vm.selectedLevel?.level ?? 0)")
+            Text(verbatim: "Level \(vm.selectedLevel?.level ?? 0)")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
             
             Stepper(value: $vm.daysToRecommend, in: 1...365,step: 1) {
-                Text("Days to recommend: \(vm.daysToRecommend)")
+                Text(verbatim: "Days to recommend: \(vm.daysToRecommend)")
             }.onChange(of: vm.daysToRecommend) { newValue in
                 vm.saveDaysToRecommned()
             }

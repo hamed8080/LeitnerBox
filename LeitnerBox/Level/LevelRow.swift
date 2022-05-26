@@ -12,16 +12,17 @@ struct LevelRow:View{
     @ObservedObject
     var vm:LevelsViewModel
     
+    /// Do not move this to view it cause view reload in review
     @ObservedObject
-    var level:Level
+    var reviewViewModel:ReviewViewModel
     
     var body: some View{
         NavigationLink {
-            ReviewView(vm: ReviewViewModel(level: level))
+            ReviewView(vm: reviewViewModel)
         } label: {
             HStack{
                 HStack{
-                    Text(verbatim: "\(level.level)")
+                    Text(verbatim: "\(reviewViewModel.level.level)")
                         .foregroundColor(.white)
                         .font(.title.weight(.bold))
                         .frame(width: 48, height: 48)
@@ -29,7 +30,7 @@ struct LevelRow:View{
                             Circle()
                                 .fill(Color.blue)
                         )
-                    let favCount = (level.questions?.allObjects as? [Question] )?.filter({ $0.favorite == true }).count
+                    let favCount = (reviewViewModel.level.questions?.allObjects as? [Question] )?.filter({ $0.favorite == true }).count
   
                     Label {
                         Text(verbatim: "\(favCount ?? 0)")
@@ -40,20 +41,18 @@ struct LevelRow:View{
                 
                 Spacer()
        
-                
-                
                 HStack(spacing:0){
-                    Text(verbatim: " \(level.reviewableCountInsideLevel)")
+                    Text(verbatim: " \(reviewViewModel.level.reviewableCountInsideLevel)")
                         .foregroundColor(.green.opacity(1))
-                    Text(verbatim: " / \(level.notCompletdCount)")
+                    Text(verbatim: " / \(reviewViewModel.level.notCompletdCount)")
                         .foregroundColor(.primary.opacity(1))
                 }
                 
             }
             .contextMenu{
                 Button {
-                    vm.selectedLevel = level
-                    vm.daysToRecommend = Int(level.daysToRecommend)
+                    vm.selectedLevel = reviewViewModel.level
+                    vm.daysToRecommend = Int(reviewViewModel.level.daysToRecommend)
                     vm.showDaysAfterDialog.toggle()
                 } label: {
                     Label("Days to recommend", systemImage: "calendar")
@@ -67,6 +66,6 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), level: Level())
+        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(level: Level()))
     }
 }

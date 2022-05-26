@@ -12,194 +12,32 @@ struct ReviewView: View {
     
     @ObservedObject
     var vm:ReviewViewModel
-
+    
+    @State
+    private var isAnimationShowAnswer = false
+    
     var body: some View {
         if vm.isFinished{
             FinishedReviewView()
         }
         else if vm.level.hasAnyReviewable{
             ZStack{
-                    VStack{
-                        Text("Level: \(vm.level.level)")
-                            .font(.title.weight(.semibold))
-                            .padding(.bottom)
-                            .foregroundColor(.accentColor)
-                        Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
-                            .font(isIpad ? .title3.bold() : .footnote.bold())
-                        
-                        Spacer()
-                        
-                        HStack{
-                            Spacer()
-                            Text(vm.selectedQuestion?.question ?? "")
-                                .font(.largeTitle.weight(.bold))
-                            Spacer()
-                        }
-                        
-                        HStack(spacing: isIpad ? 48 : 36){
-                            Spacer()
-                            
-                            Button {
-                                withAnimation {
-                                    vm.showDeleteDialog()
-                                }
-                            } label: {
-                                Image(systemName: "trash")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .foregroundColor(.orange)
-                            }
-                            
-                            Button {
-                                vm.editQuestion()
-                            } label: {
-                                
-                                Image(systemName: "pencil")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .foregroundColor(.accentColor)
-                            }
-                            
-                            Button {
-                                withAnimation {
-                                    vm.toggleFavorite()
-                                }
-                            } label: {
-                                Image(systemName: vm.selectedQuestion?.favorite == true ? "star.fill" : "star")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .foregroundColor(.accentColor)
-                            }
-
-                            Button {
-                                vm.pronounce()
-                            } label: {
-                                Image(systemName: "mic.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .foregroundColor(.accentColor)
-                            }
-           
-                            Spacer()
-                        }
-                        
-                        Spacer()
-                        HStack{
-                            Spacer()
-                            Text(vm.selectedQuestion?.answer ?? "")
-                                .font(.title2.weight(.medium))
-                            Spacer()
-                        }.transition(.slide)
-                        
-                        if vm.selectedQuestion?.detailDescription != nil{
-                            HStack{
-                                Spacer()
-                                Text(vm.selectedQuestion?.detailDescription ?? "")
-                                    .font(.title2.weight(.medium))
-                                Spacer()
-                            }.transition(.slide)
-                        }
-                        
-                        Spacer()
-                        
-                        HStack(spacing: isIpad ? 48 : 12){
-                            Button {
-                                withAnimation {
-                                    vm.pass()
-                                }
-                            } label: {
-                                HStack{
-                                    Spacer()
-                                    Label("PASS", systemImage: "checkmark.circle.fill")
-                                    Spacer()
-                                }
-                            }
-                            .controlSize(.large)
-                            .buttonStyle(.bordered)
-                            .frame(maxWidth: .infinity)
-                            .tint(.accentColor)
-                            
-                            Button{
-                                withAnimation {
-                                    vm.fail()
-                                }
-                            } label: {
-                                HStack{
-                                    Spacer()
-                                    Label("FAIL", systemImage: "xmark.circle.fill")
-                                    Spacer()
-                                }
-                            }
-                            .controlSize(.large)
-                            .buttonStyle(.bordered)
-                            .frame(maxWidth: .infinity)
-                            .tint(.red)
+                VStack{
+                    ScrollView(showsIndicators: false){
+                        VStack(spacing:48){
+                            headers
+                            questionView
+                            controls
+                            answersAndDetails
                         }
                     }
-                    
-                
-                NavigationLink(isActive:$vm.showAddQuestionView) {
-                    AddOrEditQuestionView(vm: .init(level: vm.level))
-                } label: {
-                    EmptyView()
+                    Spacer()
+                    reviewControls
                 }
-                .hidden()
-                
-                NavigationLink(isActive:$vm.showEditQuestionView) {
-                    AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
-                } label: {
-                    EmptyView()
-                }
-                .hidden()
-                
-                if let leitner = vm.level.leitner{
-                    NavigationLink(isActive:$vm.showSearchView) {
-                        SearchView(vm: SearchViewModel(leitner: leitner))
-                    } label: {
-                        EmptyView()
-                    }
-                    .hidden()
-                }
-                
+                navigations
             }
             .customDialog(isShowing: $vm.showDelete, content: {
-                VStack{
-                    
-                    Text(attributedText(text: "Are you sure you want to delete \(vm.selectedQuestion?.question ?? "") question?", textRange: vm.selectedQuestion?.question ?? ""))
-                    
-                    Button {
-                        vm.showDelete.toggle()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Text("Cancel")
-                                .foregroundColor(.accentColor)
-                            Spacer()
-                        }
-                    }
-                    .controlSize(.large)
-                    .buttonStyle(.bordered)
-                    .frame(maxWidth: .infinity)
-                    
-                    Button {
-                        vm.deleteQuestion()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Text("Delete")
-                                .foregroundColor(.red)
-                            Spacer()
-                        }
-                    }
-                    .controlSize(.large)
-                    .buttonStyle(.bordered)
-                    .frame(maxWidth: .infinity)
-                }
-                
+                deleteDialog
             })
             .animation(.easeInOut, value: vm.isShowingAnswer)
             .padding()
@@ -224,6 +62,234 @@ struct ReviewView: View {
             }
         }else{
             NotAnyToReviewView()
+        }
+    }
+    
+    
+    @ViewBuilder
+    var navigations:some View{
+        NavigationLink(isActive:$vm.showAddQuestionView) {
+            AddOrEditQuestionView(vm: .init(level: vm.level))
+        } label: {
+            EmptyView()
+        }
+        .hidden()
+        
+        NavigationLink(isActive:$vm.showEditQuestionView) {
+            AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
+        } label: {
+            EmptyView()
+        }
+        .hidden()
+        
+        if let leitner = vm.level.leitner{
+            NavigationLink(isActive:$vm.showSearchView) {
+                SearchView(vm: SearchViewModel(leitner: leitner))
+            } label: {
+                EmptyView()
+            }
+            .hidden()
+        }
+    }
+    
+    var deleteDialog:some View{
+        VStack{
+            Text(attributedText(text: "Are you sure you want to delete \(vm.selectedQuestion?.question ?? "") question?", textRange: vm.selectedQuestion?.question ?? ""))
+            
+            Button {
+                vm.showDelete.toggle()
+            } label: {
+                HStack{
+                    Spacer()
+                    Text("Cancel")
+                        .foregroundColor(.accentColor)
+                    Spacer()
+                }
+            }
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+            
+            Button {
+                vm.deleteQuestion()
+            } label: {
+                HStack{
+                    Spacer()
+                    Text("Delete")
+                        .foregroundColor(.red)
+                    Spacer()
+                }
+            }
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+        }
+    }
+    
+    var headers:some View{
+        VStack{
+            Text(verbatim: "Level: \(vm.level.level)")
+                .font(.title.weight(.semibold))
+                .padding(.bottom)
+                .foregroundColor(.accentColor)
+            Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
+                .font(isIpad ? .title3.bold() : .footnote.bold())
+        }
+    }
+    
+    var reviewControls:some View{
+        HStack(spacing: isIpad ? 48 : 12){
+            Button {
+                withAnimation {
+                    vm.pass()
+                }
+            } label: {
+                HStack{
+                    Spacer()
+                    Label("PASS", systemImage: "checkmark.circle.fill")
+                    Spacer()
+                }
+            }
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+            .tint(.accentColor)
+            
+            Button{
+                withAnimation {
+                    vm.fail()
+                }
+            } label: {
+                HStack{
+                    Spacer()
+                    Label("FAIL", systemImage: "xmark.circle.fill")
+                    Spacer()
+                }
+            }
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+            .tint(.red)
+        }
+    }
+    
+    var questionView:some View{
+        HStack{
+            Spacer()
+            Text(vm.selectedQuestion?.question ?? "")
+                .multilineTextAlignment(.center)
+                .font(isIpad ? .largeTitle.weight(.bold) : .title2.weight(.semibold))
+            Spacer()
+        }
+    }
+    
+    var tapToAnswerView:some View{
+        Text("Tap to show answer")
+            .foregroundColor(.accentColor)
+            .colorMultiply(isAnimationShowAnswer ? .accentColor : .accentColor.opacity(0.5))
+            .font(.title2.weight(.medium))
+            .scaleEffect(isAnimationShowAnswer ? 1.05 : 1)
+            .animation(.easeInOut(duration: 2).repeatCount(3, autoreverses: true), value: isAnimationShowAnswer)
+            .onAppear{
+                isAnimationShowAnswer = true
+            }
+            .onDisappear{
+                isAnimationShowAnswer = false
+            }
+            .onTapGesture {
+                vm.toggleAnswer()
+            }
+    }
+    
+    @ViewBuilder
+    var answerView:some View{
+        HStack{
+            Spacer()
+            Text(vm.selectedQuestion?.answer ?? "")
+                .font( isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .onTapGesture {
+            vm.toggleAnswer()
+        }
+        .transition(.scale)
+        
+        if vm.selectedQuestion?.detailDescription != nil{
+            HStack{
+                Spacer()
+                Text(vm.selectedQuestion?.detailDescription ?? "")
+                    .font(isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
+            .transition(.scale)
+            .onTapGesture {
+                vm.toggleAnswer()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var answersAndDetails: some View{
+        if vm.isShowingAnswer{
+           answerView
+        }else{
+            tapToAnswerView
+        }
+    }
+    
+    var controls:some View{
+        HStack(spacing: isIpad ? 48 : 36){
+            
+            Spacer()
+            
+            Button {
+                withAnimation {
+                    vm.showDeleteDialog()
+                }
+            } label: {
+                Image(systemName: "trash")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(.orange)
+            }
+            
+            Button {
+                vm.editQuestion()
+            } label: {
+                
+                Image(systemName: "pencil")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(.accentColor)
+            }
+            
+            Button {
+                withAnimation {
+                    vm.toggleFavorite()
+                }
+            } label: {
+                Image(systemName: vm.selectedQuestion?.favorite == true ? "star.fill" : "star")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(.accentColor)
+            }
+            
+            Button {
+                vm.pronounce()
+            } label: {
+                Image(systemName: "mic.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(.accentColor)
+            }
+            
+            Spacer()
         }
     }
     

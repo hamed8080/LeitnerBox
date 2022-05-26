@@ -8,8 +8,8 @@
 import Foundation
 extension Date{
     
-    func differenceWith(date:Date)->DateComponents{
-        let diffs = Calendar.current.dateComponents([.year, .month, .day], from: self, to: date)
+    func differenceWith(from date:Date)->DateComponents{
+        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date, to: self)
         return diffs
     }
 }

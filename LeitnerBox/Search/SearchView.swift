@@ -39,7 +39,11 @@ struct SearchView: View {
                 }
             }
             .onChange(of: vm.searchText) { newValue in
-                vm.suggestions = vm.questions.filter({$0.question?.lowercased().contains(vm.searchText.lowercased()) ?? false })
+                vm.suggestions = vm.questions.filter({
+                    $0.question?.lowercased().contains( vm.searchText.lowercased()) ?? false ||
+                    $0.answer?.lowercased().contains( vm.searchText.lowercased()) ?? false ||
+                    $0.detailDescription?.lowercased().contains( vm.searchText.lowercased()) ?? false                    
+                })
             }
             
             if vm.isSpeaking{
@@ -85,6 +89,7 @@ struct SearchView: View {
             }
             .hidden()
         }
+        .animation(.easeInOut, value: vm.questions)
         .animation(.easeInOut, value: vm.suggestions)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
