@@ -22,7 +22,7 @@ Leitner-Box is an iOS application to memorize word forever.
 - [x] You can set custom days to review words of Leitner level with a long hold on Leitner level.
 - [x] Ability to back a question to level one, if you feel you have not really knows the meaning of the question.  
 
-<img src="/Screenshots/1.png" style="width:60%" /> <img src="/Screenshots/2.png" style="width:60%" /> <img src="/Screenshots/3.jpg" style="width:60%" /> <img src="/Screenshots/4.jpg" style="width:60%" />
+<img src="/Screenshots/1.png" style="width:60%" /> <img src="/Screenshots/2.png" style="width:60%" /> <img src="/Screenshots/3.png" style="width:60%" /> <img src="/Screenshots/4.png" style="width:60%" />
 <br/>
 <br/>
 
