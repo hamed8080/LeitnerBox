@@ -36,9 +36,6 @@ struct ReviewView: View {
                 }
                 navigations
             }
-            .customDialog(isShowing: $vm.showDelete, content: {
-                deleteDialog
-            })
             .animation(.easeInOut, value: vm.isShowingAnswer)
             .padding()
             .background( Color(named: "dialogBackground"))
@@ -60,6 +57,9 @@ struct ReviewView: View {
                     }
                 }
             }
+            .customDialog(isShowing: $vm.showDelete, content: {
+                deleteDialog
+            })
         }else{
             NotAnyToReviewView()
         }
