@@ -15,6 +15,8 @@ struct SearchRowView: View {
     @ObservedObject
     var vm:SearchViewModel
     
+    var questionState:((QuestionStateChanged)->())? = nil
+    
     var body: some View {
         VStack{
             HStack{
@@ -82,6 +84,7 @@ struct SearchRowView: View {
                         Button(role: .destructive) {
                             withAnimation {
                                 vm.delete(question)
+                                questionState?(.DELTED(question))
                             }
                         } label: {
                             Label("Delete", systemImage: "trash")

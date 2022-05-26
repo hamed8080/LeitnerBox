@@ -44,6 +44,12 @@ class LeitnerViewModel:ObservableObject{
     
     init(isPreview:Bool = false){
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
+        voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: {$0.language > $1.language})
+        selectedVoiceIdentifire  = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
+        load()
+    }
+    
+    func load(){
         let req = Leitner.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
         do {
@@ -51,8 +57,6 @@ class LeitnerViewModel:ObservableObject{
         }catch{
             print("Fetch failed: Error \(error.localizedDescription)")
         }
-        voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: {$0.language > $1.language})
-        selectedVoiceIdentifire  = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
     }
     
     func delete(_ leitner:Leitner){

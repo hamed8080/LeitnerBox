@@ -34,9 +34,6 @@ class LevelsViewModel:ObservableObject{
     var allQuestions:[Question] = []
     
     @Published
-    var suggestions:[Question] = []
-    
-    @Published
     var showDaysAfterDialog = false
     
     @Published
@@ -45,25 +42,19 @@ class LevelsViewModel:ObservableObject{
     @Published
     var daysToRecommend = 0
     
+    var filtered:[Question] {
+        return allQuestions.filter{
+            searchWord.isEmpty ||
+            $0.question?.lowercased().contains(searchWord.lowercased()) ?? false ||
+            $0.answer?.lowercased().contains(searchWord.lowercased()) ?? false ||
+            $0.detailDescription?.lowercased().contains( searchWord.lowercased()) ?? false
+        }
+    }
+    
     init(leitner:Leitner, isPreview:Bool = false ){
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
         self.leitner = leitner
-        
-        self.leitner = leitner
-        let predicate = NSPredicate(format: "leitner.id == %d", self.leitner.id)
-        let req = Level.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
-        req.predicate = predicate
-        do {
-            self.levels = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
-        levels.forEach { level in
-            (level.questions?.allObjects as? [Question])?.forEach({ question in
-                allQuestions.append(question)
-            })
-        }
+        load()
     }
     
     func saveDaysToRecommned(){
@@ -78,5 +69,50 @@ class LevelsViewModel:ObservableObject{
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+    }
+    
+    func load(){
+        let predicate = NSPredicate(format: "leitner.id == %d", self.leitner.id)
+        let req = Level.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
+        req.predicate = predicate
+        do {
+            self.levels = try viewContext.fetch(req)
+        }catch{
+            print("Fetch failed: Error \(error.localizedDescription)")
+        }
+        
+        allQuestions.removeAll()
+        levels.forEach { level in
+            (level.questions?.allObjects as? [Question])?.forEach({ question in
+                allQuestions.append(question)
+            })
+        }
+    }
+    
+    func questionStateChanged(state:QuestionStateChanged){
+        switch state {
+        case .EDITED(let question):
+            questionEdited(question)
+        case .DELTED(let question):
+            questionDeleted(question)
+        case .INSERTED(let question):
+            questionAdded(question)
+        }
+    }
+    
+    func questionDeleted(_ question:Question){
+        withAnimation {
+            allQuestions.removeAll(where: {$0 == question})
+        }
+    }
+    
+    func questionAdded(_ question:Question){
+        allQuestions.append(question)
+    }
+    
+    func questionEdited(_ question:Question){
+        allQuestions.removeAll(where: {$0 == question})
+        allQuestions.append(question)
     }
 }

@@ -45,7 +45,7 @@ struct ReviewView: View {
                     Button {
                         vm.showAddQuestionView.toggle()
                     } label: {
-                        Label("Add Item", systemImage: "plus")
+                        Label("Add Item", systemImage: "plus.square")
                     }
                 }
                 
@@ -69,7 +69,9 @@ struct ReviewView: View {
     @ViewBuilder
     var navigations:some View{
         NavigationLink(isActive:$vm.showAddQuestionView) {
-            AddOrEditQuestionView(vm: .init(level: vm.level))
+            let levels = vm.level.leitner?.level?.allObjects as? [Level]
+            let firstLevel = levels?.first(where: {$0.level == 1})
+            AddOrEditQuestionView(vm: .init(level: firstLevel!))
         } label: {
             EmptyView()
         }

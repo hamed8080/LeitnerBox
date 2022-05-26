@@ -45,6 +45,9 @@ struct SearchView: View {
                     $0.detailDescription?.lowercased().contains( vm.searchText.lowercased()) ?? false                    
                 })
             }
+            .refreshable {
+                vm.load()
+            }
             
             if vm.isSpeaking{
                 VStack(alignment:.leading){
@@ -83,7 +86,9 @@ struct SearchView: View {
             NavigationLink(isActive:$vm.showAddQuestionView) {
                 let levels = vm.leitner.level?.allObjects as? [Level]
                 let firstLevel = levels?.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion))
+                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
+                    vm.qustionStateChanged(questionState)
+                }
             } label: {
                 EmptyView()
             }
@@ -102,7 +107,6 @@ struct SearchView: View {
                     Label("Add", systemImage: "plus.square")
                 }
             }
-            
             
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                

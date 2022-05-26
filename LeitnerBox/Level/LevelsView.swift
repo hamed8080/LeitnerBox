@@ -13,75 +13,129 @@ struct LevelsView: View {
     @ObservedObject
     var vm:LevelsViewModel
     
+    @ObservedObject
+    var searchViewModel:SearchViewModel
+    
     var body: some View {
         
         ZStack{
             List {
-                HeaderView(levels: vm.levels)
+                header
                 ForEach(vm.levels) { level in
                     LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
                 }
             }
             .listStyle(.plain)
-            
-            NavigationLink(isActive:$vm.showSearchView) {
-                SearchView(vm: SearchViewModel(leitner: vm.leitner))
-            } label: {
-                EmptyView()
+            .refreshable {
+                vm.load()
             }
-            
-            NavigationLink(isActive: $vm.showAddQuestionView) {
-                if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                    AddOrEditQuestionView(vm: .init(level: levelFirst))
-                }
-            } label: {
-                EmptyView()
+            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
+                searchResult
             }
-            .hidden()
+            navigations
         }
-        .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-            if vm.suggestions.count > 0 || vm.searchWord.isEmpty{
-                ForEach(vm.suggestions){ suggestion in
-                    SearchRowView(question: suggestion, vm: SearchViewModel(leitner: vm.leitner))
-                }
-            }else{
-                HStack{
-                    Image(systemName: "doc.text.magnifyingglass")
-                        .foregroundColor(.gray.opacity(0.8))
-                    Text("Nothind has found.")
-                        .foregroundColor(.gray.opacity(0.8))
-                   
-                }
-            }
-        }
-        .onChange(of: vm.searchWord) { newValue in
-            vm.suggestions = vm.allQuestions.filter({
-                $0.question?.lowercased().contains( vm.searchWord.lowercased()) ?? false ||
-                $0.answer?.lowercased().contains( vm.searchWord.lowercased()) ?? false ||
-                $0.detailDescription?.lowercased().contains( vm.searchWord.lowercased()) ?? false
-            })
-        }
-        .animation(.easeInOut, value: vm.suggestions)
+        .animation(.easeInOut, value: vm.searchWord)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-               
-                Button {
-                    vm.showAddQuestionView.toggle()
-                } label: {
-                    Label("Add Item", systemImage: "plus.square")
-                }
-                
-                Button {
-                    vm.showSearchView.toggle()
-                } label: {
-                    Label("Search View", systemImage: "list.bullet.rectangle.portrait")
-                }
+                toolbars
             }
         }
-        .customDialog(isShowing: $vm.showDaysAfterDialog, content: {
+        .customDialog(isShowing: $vm.showDaysAfterDialog) {
             daysToRecommendDialogView
-        })
+        }
+    }
+    
+    @ViewBuilder
+    var header:some View{
+        VStack(alignment:.leading, spacing: 4){
+            let totalCount = vm.levels.map{$0.questions?.count ?? 0}.reduce(0,+)
+            
+            let completedCount = vm.levels.map{ level in
+                let completedCount = (level.questions?.allObjects as? [Question] )?.filter({
+                    return $0.completed == true
+                })
+                return completedCount?.count ?? 0
+            }.reduce(0,+)
+            
+            let reviewableCount = vm.levels.map{ level in
+                level.reviewableCountInsideLevel
+            }.reduce(0,+)
+            
+            let text = "\(totalCount) total, \(completedCount) completed, \(reviewableCount) reviewable".uppercased()
+            
+            Text(text)
+                .font(.footnote.weight(.bold))
+                .foregroundColor(.gray)
+        }
+        .listRowSeparator(.hidden)
+    }
+    
+    @ViewBuilder
+    var toolbars:some View{
+        
+        Button {
+            vm.showAddQuestionView.toggle()
+        } label: {
+            Label("Add Item", systemImage: "plus.square")
+        }
+        
+        Button {
+            vm.showSearchView.toggle()
+        } label: {
+            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+        }
+        
+    }
+    
+    @ViewBuilder
+    var searchResult:some View{
+        if vm.filtered.count > 0 || vm.searchWord.isEmpty{
+            ForEach(vm.filtered){ suggestion in
+                SearchRowView(question: suggestion, vm: searchViewModel){ questionState in
+                    vm.questionStateChanged(state: questionState)
+                }
+            }
+        }else{
+            HStack{
+                Image(systemName: "doc.text.magnifyingglass")
+                    .foregroundColor(.gray.opacity(0.8))
+                Text("Nothind has found.")
+                    .foregroundColor(.gray.opacity(0.8))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var navigations:some View{
+        NavigationLink(isActive:$vm.showSearchView) {
+            SearchView(vm: SearchViewModel(leitner: vm.leitner))
+        } label: {
+            EmptyView()
+        }
+        
+        
+        NavigationLink(isActive:$searchViewModel.showAddQuestionView) {
+            let levels = searchViewModel.leitner.level?.allObjects as? [Level]
+            let firstLevel = levels?.first(where: {$0.level == 1})
+            AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
+                searchViewModel.qustionStateChanged(questionState)
+            }
+        } label: {
+            EmptyView()
+        }
+        .hidden()
+        
+        NavigationLink(isActive: $vm.showAddQuestionView) {
+            if let levelFirst = vm.levels.first(where: {$0.level == 1}){
+                AddOrEditQuestionView(vm: .init(level: levelFirst)){ questionState in
+                    vm.questionStateChanged(state: questionState)
+                }
+            }
+        } label: {
+            EmptyView()
+        }
+        .hidden()
     }
     
     var daysToRecommendDialogView:some View{
@@ -115,40 +169,9 @@ struct LevelsView: View {
 
 struct LevelsView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelsView(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner))
+        LevelsView(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner),searchViewModel: SearchViewModel(leitner: LeitnerView_Previews.leitner))
             .previewDevice("iPhone 13 Pro Max")
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .previewInterfaceOrientation(.portrait)
     }
-}
-
-
-struct HeaderView: View {
-    
-    let levels:[Level]
-    
-    var body: some View {
-        VStack(alignment:.leading, spacing: 4){
-            let totalCount = levels.map{$0.questions?.count ?? 0}.reduce(0,+)
-            
-            let completedCount = levels.map{ level in
-                let completedCount = (level.questions?.allObjects as? [Question] )?.filter({
-                    return $0.completed == true
-                })
-                return completedCount?.count ?? 0
-            }.reduce(0,+)
-        
-            let reviewableCount = levels.map{ level in
-                level.reviewableCountInsideLevel
-            }.reduce(0,+)
-            
-            let text = "\(totalCount) total, \(completedCount) completed, \(reviewableCount) reviewable".uppercased()
-            
-            Text(text)
-                .font(.footnote.weight(.bold))
-                .foregroundColor(.gray)
-        }
-        .listRowSeparator(.hidden)
-    }
-    
 }

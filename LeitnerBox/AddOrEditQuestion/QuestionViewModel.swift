@@ -55,7 +55,7 @@ class QuestionViewModel:ObservableObject{
         }
     }
     
-    func insert() {
+    func insert() -> Question{
         withAnimation {
             let question               = Question(context : viewContext)
             question.question          = self.question
@@ -65,6 +65,7 @@ class QuestionViewModel:ObservableObject{
             question.createTime        = Date()
             do {
                 try viewContext.save()
+                return question
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -89,11 +90,13 @@ class QuestionViewModel:ObservableObject{
         }
     }
     
-    func save(){
-        if editQuestion != nil{
+    func save()->QuestionStateChanged{
+        if let editQuestion = editQuestion{
             saveEdit()
+            return .EDITED(editQuestion)
         }else{
-            insert()
+            let question = insert()
+            return .INSERTED(question)
         }
     }
     
@@ -102,4 +105,10 @@ class QuestionViewModel:ObservableObject{
         answer = ""
         question = ""
     }
+}
+
+enum QuestionStateChanged{
+    case EDITED(Question)
+    case DELTED(Question)
+    case INSERTED(Question)
 }

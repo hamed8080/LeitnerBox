@@ -22,7 +22,7 @@ struct LeitnerView: View {
             ZStack{
                 List {
                     ForEach(vm.leitners) { item in
-                      LeitnerRowView(leitner: item, vm: vm)
+                        LeitnerRowView(leitner: item, vm: vm)
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
                                     vm.delete(item)
@@ -31,6 +31,9 @@ struct LeitnerView: View {
                                 }
                             }
                     }
+                }
+                .refreshable {
+                    vm.load()
                 }
                 .listStyle(.plain)
             }
@@ -97,12 +100,7 @@ struct LeitnerView: View {
             Text("Leitner name")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
-            MultilineTextField(
-                "Enter leitner name",
-                text: $vm.leitnerTitle,
-                textColor: UIColor(named: "textColor")!,
-                backgroundColor: UIColor(.primary.opacity(0.1))
-            )
+            TextEditorView(placeholder: "Enter leitner name", string:  $vm.leitnerTitle, textEditorHeight: 48)
             
             Toggle(isOn: $vm.backToTopLevel) {
                 Label("Back to top level", systemImage: "arrow.up.to.line")

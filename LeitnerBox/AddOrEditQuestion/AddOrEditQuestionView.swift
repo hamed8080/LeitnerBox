@@ -10,60 +10,35 @@ import CoreData
 
 struct AddOrEditQuestionView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
-    
     @ObservedObject
     var vm:QuestionViewModel
     
     @Environment(\.presentationMode) var presentationMode
     
+    var questionState:((QuestionStateChanged)->())? = nil
+    
+    @State var text: String = "Multiline \ntext \nis called \nTextEditor"
+
+    
     var body: some View {
-        
-        GeometryReader{ reader in
+        Self._printChanges()
+       return GeometryReader{ reader in
             
             HStack{
                 Spacer()
                 ScrollView{
                     VStack(spacing:36){
                         
-                        MultilineTextField(
-                            vm.question.isEmpty == true ? "Enter your question here..." : "",
-                            text: $vm.question,
-                            textColor: UIColor(named: "textColor")!,
-                            backgroundColor: UIColor(.primary.opacity(0.1)),
-                            keyboardReturnType: .default
-                        )
-                        .onChange(of: vm.question) { newValue in
-                            
-                        }
-                        
+                        TextEditorView(placeholder: "Enter your question here...", string: $vm.question, textEditorHeight: 48)
                         CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
-                        
                         if vm.isManual {
-                            MultilineTextField(
-                                vm.answer.isEmpty == true ? "Enter your Answer here..." : "",
-                                text: $vm.answer,
-                                textColor: UIColor(named: "textColor")!,
-                                backgroundColor: UIColor(.primary.opacity(0.1)),
-                                keyboardReturnType: .default
-                            )
-                            .onChange(of: vm.answer) { newValue in
-                                
-                            }
-                            
-                            MultilineTextField(
-                                vm.descriptionDetail.isEmpty == true ? "Enter your description here..." : "",
-                                text: $vm.descriptionDetail,
-                                textColor: UIColor(named: "textColor")!,
-                                backgroundColor: UIColor(.primary.opacity(0.1)),
-                                keyboardReturnType: .default)
-                            .onChange(of: vm.descriptionDetail) { newValue in
-                                
-                            }
+                            TextEditorView(placeholder: "Enter your Answer here...", string: $vm.answer, textEditorHeight: 48)
+                            TextEditorView(placeholder: "Enter your description here...", string: $vm.descriptionDetail, textEditorHeight: 48)
                         }
                         
                         Button {
-                            vm.save()
+                            let state = vm.save()
+                            questionState?(state)
                             vm.clear()
                             presentationMode.wrappedValue.dismiss()
                         } label: {
@@ -81,7 +56,8 @@ struct AddOrEditQuestionView: View {
                     }
                     .padding()
                     
-                }.frame(width: isIpad ? reader.size.width * 40/100 : .infinity)
+                }
+                .frame(width: isIpad ? reader.size.width * (40/100) : .infinity)
                 Spacer()
             }
             .animation(.easeInOut, value: vm.isManual)
@@ -96,6 +72,15 @@ struct AddOrEditQuestionView: View {
                     Text((vm.editQuestion == nil ? "Add question" : "Edit question").uppercased())
                         .font(.body.weight(.bold))
                         .foregroundColor(.accentColor)
+                }
+                
+                ToolbarItemGroup(placement: .keyboard) {
+                    HStack{
+                        Spacer()
+                        Button("Done") {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                        }
+                    }
                 }
             }
             

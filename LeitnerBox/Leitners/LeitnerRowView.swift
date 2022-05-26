@@ -17,7 +17,7 @@ struct LeitnerRowView: View {
     
     var body: some View {
         NavigationLink {
-            LevelsView(vm: LevelsViewModel(leitner: leitner))
+            LevelsView(vm: LevelsViewModel(leitner: leitner), searchViewModel: SearchViewModel(leitner: leitner))
         } label: {
             HStack{
                 Text(leitner.name ?? "")

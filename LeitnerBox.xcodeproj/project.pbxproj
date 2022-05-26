@@ -16,12 +16,12 @@
 		052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
 		052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */; };
 		052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
+		0531A606283FEEF70051EB13 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0531A605283FEEF70051EB13 /* TextEditorView.swift */; };
 		053666D2283769A1002F899F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D1283769A1002F899F /* ReviewView.swift */; };
 		053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D32837714F002F899F /* AddOrEditQuestionView.swift */; };
 		053666D728377420002F899F /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666D628377420002F899F /* PrimaryTextField.swift */; };
 		053666DC2837758F002F899F /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666DB2837758F002F899F /* ViewExtension.swift */; };
 		053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666DD28377B5B002F899F /* CheckBoxView.swift */; };
-		053666E228377E43002F899F /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E128377E43002F899F /* MultilineTextField.swift */; };
 		053666E428378918002F899F /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E328378918002F899F /* ColorEx.swift */; };
 		053666E628378949002F899F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E528378949002F899F /* UIColor.swift */; };
 		0542761B283D5C1800F1044E /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
@@ -86,12 +86,12 @@
 		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupLocalStorage.swift; sourceTree = "<group>"; };
 		052CA6EE283CE06E00376E79 /* LeitnerBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LeitnerBox.entitlements; sourceTree = "<group>"; };
+		0531A605283FEEF70051EB13 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		053666D1283769A1002F899F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		053666D32837714F002F899F /* AddOrEditQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditQuestionView.swift; sourceTree = "<group>"; };
 		053666D628377420002F899F /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
 		053666DB2837758F002F899F /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		053666DD28377B5B002F899F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
-		053666E128377E43002F899F /* MultilineTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		053666E328378918002F899F /* ColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEx.swift; sourceTree = "<group>"; };
 		053666E528378949002F899F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		054AB5C12839185E008BC840 /* LeitnerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerEX.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				054AB5C428395203008BC840 /* Leitners */,
 				054AB5C3283951DE008BC840 /* Level */,
 				05BAE2162837CC880043FAEB /* Search */,
-				05BAE21328379C9E0043FAEB /* QuestionView */,
+				05BAE21328379C9E0043FAEB /* AddOrEditQuestion */,
 				053666D828377536002F899F /* Helpers */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
@@ -202,8 +202,8 @@
 				052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */,
 				05D032A62838F8D300FE67D5 /* CustomDialog.swift */,
 				053666D628377420002F899F /* PrimaryTextField.swift */,
-				053666E128377E43002F899F /* MultilineTextField.swift */,
 				053666DD28377B5B002F899F /* CheckBoxView.swift */,
+				0531A605283FEEF70051EB13 /* TextEditorView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -236,8 +236,8 @@
 		054AB5C3283951DE008BC840 /* Level */ = {
 			isa = PBXGroup;
 			children = (
-				05BAE2142837BA480043FAEB /* LevelRow.swift */,
 				05B80B632836979600390EF9 /* LevelsView.swift */,
+				05BAE2142837BA480043FAEB /* LevelRow.swift */,
 				05867E6E283A334900F4A413 /* LevelsViewModel.swift */,
 			);
 			path = Level;
@@ -273,21 +273,21 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		05BAE21328379C9E0043FAEB /* QuestionView */ = {
+		05BAE21328379C9E0043FAEB /* AddOrEditQuestion */ = {
 			isa = PBXGroup;
 			children = (
 				053666D32837714F002F899F /* AddOrEditQuestionView.swift */,
 				05BAE21128379B820043FAEB /* QuestionViewModel.swift */,
 			);
-			path = QuestionView;
+			path = AddOrEditQuestion;
 			sourceTree = "<group>";
 		};
 		05BAE2162837CC880043FAEB /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				05BAE2172837CCA50043FAEB /* SearchView.swift */,
-				05D032A02838E2A900FE67D5 /* SearchRowView.swift */,
 				05D032A42838E82C00FE67D5 /* SearchViewModel.swift */,
+				05D032A02838E2A900FE67D5 /* SearchRowView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -401,7 +401,6 @@
 				053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */,
 				05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */,
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
-				053666E228377E43002F899F /* MultilineTextField.swift in Sources */,
 				05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */,
 				05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */,
 				05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */,
@@ -424,6 +423,7 @@
 				054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */,
 				05867E73283A480600F4A413 /* QuestionEX.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
+				0531A606283FEEF70051EB13 /* TextEditorView.swift in Sources */,
 				05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */,
 				05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */,
 			);

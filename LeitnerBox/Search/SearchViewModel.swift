@@ -57,20 +57,13 @@ class SearchViewModel:ObservableObject{
         synthesizer.delegate = speechDelegate
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
         self.leitner = leitner
-        let predicate = NSPredicate(format: "level.leitner.id == %d", leitner.id)
-        let req = Question.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: true)]
-        req.predicate = predicate
-        do {
-            self.questions = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
+        load()
     }
     
     func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { questions[$0] }.forEach(viewContext.delete)
+            questions.remove(atOffsets: offsets)
             saveDB()
         }
     }
@@ -232,6 +225,30 @@ class SearchViewModel:ObservableObject{
             selectedQuestion.level = firstLevel
             saveDB()
             questions.removeAll(where: {$0 == selectedQuestion})
+        }
+    }
+    
+    func load(){
+        let predicate = NSPredicate(format: "level.leitner.id == %d", leitner.id)
+        let req = Question.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: true)]
+        req.predicate = predicate
+        do {
+            self.questions = try viewContext.fetch(req)
+        }catch{
+            print("Fetch failed: Error \(error.localizedDescription)")
+        }
+    }
+    
+    func qustionStateChanged(_ state :QuestionStateChanged){
+        switch state {
+        case .EDITED(let question):
+            questions.removeAll(where: {$0 == question})
+            questions.append(question)
+        case .DELTED(let question):
+            questions.removeAll(where: {$0 == question})
+        case .INSERTED(let question):
+            questions.append(question)
         }
     }
 }
