@@ -125,7 +125,7 @@ class SearchViewModel:ObservableObject{
     
     func pronounce(_ question:Question){
         isSpeaking                   = true
-        let pronounceString          = question.question ?? "" + (pronounceDetailAnswer ? question.detailDescription ?? "" : "")
+        let pronounceString          = "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")"
         let utterance                = AVSpeechUtterance(string : pronounceString)
         utterance.voice              = AVSpeechSynthesisVoice(language : "en-GB")
         utterance.rate               = AVSpeechUtteranceDefaultSpeechRate
