@@ -17,18 +17,16 @@ struct AddOrEditQuestionView: View {
     
     var questionState:((QuestionStateChanged)->())? = nil
     
-    @State var text: String = "Multiline \ntext \nis called \nTextEditor"
-
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
     
     var body: some View {
-        Self._printChanges()
-       return GeometryReader{ reader in
+        GeometryReader{ reader in
             
-            HStack{
+            HStack(spacing:0){
                 Spacer()
                 ScrollView{
                     VStack(spacing:36){
-                        
                         TextEditorView(placeholder: "Enter your question here...", string: $vm.question, textEditorHeight: 48)
                         CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
                         if vm.isManual {
@@ -55,11 +53,11 @@ struct AddOrEditQuestionView: View {
                         Spacer()
                     }
                     .padding()
-                    
                 }
-                .frame(width: isIpad ? reader.size.width * (40/100) : .infinity)
+                .frame(width: sizeClass == .regular ? reader.size.width * (60/100) : reader.size.width)
                 Spacer()
             }
+            .frame(width: reader.size.width)
             .animation(.easeInOut, value: vm.isManual)
             .toolbar {
                 ToolbarItem {
@@ -95,6 +93,7 @@ struct AddOrEditQuestionView: View {
 struct AddQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         AddOrEditQuestionView(vm: .init(level: Level()))
+            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .preferredColorScheme(.dark)
     }
 }

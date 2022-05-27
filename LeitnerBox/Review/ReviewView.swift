@@ -16,6 +16,9 @@ struct ReviewView: View {
     @State
     private var isAnimationShowAnswer = false
     
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+    
     var body: some View {
         if vm.isFinished{
             FinishedReviewView()
@@ -140,7 +143,7 @@ struct ReviewView: View {
     }
     
     var reviewControls:some View{
-        HStack(spacing: isIpad ? 48 : 12){
+        HStack(spacing: sizeClass == .regular ? 48 : 8){
             Button {
                 withAnimation {
                     vm.pass()
@@ -173,6 +176,7 @@ struct ReviewView: View {
             .frame(maxWidth: .infinity)
             .tint(.red)
         }
+        .padding([.leading, .trailing])
     }
     
     var questionView:some View{
