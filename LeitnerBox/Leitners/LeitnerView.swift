@@ -32,8 +32,10 @@ struct LeitnerView: View {
                             }
                     }
                 }
-                .refreshable {
-                    vm.load()
+                .if(.iOS){ view in
+                    view.refreshable {
+                        vm.load()
+                    }
                 }
                 .listStyle(.plain)
             }

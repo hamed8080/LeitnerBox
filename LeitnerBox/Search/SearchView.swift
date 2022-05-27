@@ -45,8 +45,10 @@ struct SearchView: View {
                     $0.detailDescription?.lowercased().contains( vm.searchText.lowercased()) ?? false                    
                 })
             }
-            .refreshable {
-                vm.load()
+            .if(.iOS){ view in
+                view.refreshable {
+                    vm.load()
+                }
             }
             
             if vm.isSpeaking{

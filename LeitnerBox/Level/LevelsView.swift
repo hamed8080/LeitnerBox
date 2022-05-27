@@ -26,8 +26,10 @@ struct LevelsView: View {
                 }
             }
             .listStyle(.plain)
-            .refreshable {
-                vm.load()
+            .if(.iOS){ view in
+                view.refreshable {
+                    vm.load()
+                }
             }
             .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
                 searchResult

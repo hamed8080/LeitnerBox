@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 class PersistenceController:ObservableObject {
     
@@ -65,22 +66,9 @@ class PersistenceController:ObservableObject {
     
     
     func replaceDBIfExistFromShareExtension(){
-        
        let appSuppportFile = moveAppGroupFileToAppSupportFolder()
-        
-        do{
-            let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
-            guard let oldStore = persistentCordinator.persistentStores.first , let oldStoreUrl = oldStore.url , let appSuppportFile = appSuppportFile else{return}
-            try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-                self.objectWillChange.send()
-            })
-            container.viewContext.automaticallyMergesChangesFromParent = true
-        }catch{
-            print("error in restoring back up file\(error.localizedDescription)")
+        if let appSuppportFile = appSuppportFile {
+            replaceDatabase(appSuppportFile: appSuppportFile)
         }
     }
     
@@ -104,6 +92,43 @@ class PersistenceController:ObservableObject {
             }
         }else{
             return nil
+        }
+    }
+    
+    func replaceDatabase(appSuppportFile:URL){
+        do{
+            let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
+            guard let oldStore = persistentCordinator.persistentStores.first , let oldStoreUrl = oldStore.url else{return}
+            try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+                self.objectWillChange.send()
+            })
+            container.viewContext.automaticallyMergesChangesFromParent = true
+        }catch{
+            print("error in restoring back up file\(error.localizedDescription)")
+        }
+    }
+    
+    func dropDatabase(_ info:DropInfo){
+        info.itemProviders(for: [.fileURL, .data]).forEach { item in
+            item.loadItem(forTypeIdentifier: item.registeredTypeIdentifiers.first!,options: nil){ data,error in
+                do {
+                    if let url = data as? URL,
+                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent){
+                        if FileManager.default.fileExists(atPath: newFileLocation.path){
+                            try FileManager.default.removeItem(atPath: newFileLocation.path)
+                        }
+                        let fileData = try Data(contentsOf: url)
+                        try fileData.write(to: newFileLocation)
+                        PersistenceController.shared.replaceDatabase(appSuppportFile: newFileLocation)
+                    }
+                }catch{
+                    print("error happend\(error.localizedDescription)")
+                }
+            }
         }
     }
 }
