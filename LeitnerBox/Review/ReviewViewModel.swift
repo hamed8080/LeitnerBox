@@ -56,6 +56,9 @@ class ReviewViewModel:ObservableObject{
     @AppStorage("selectedVoiceIdentifire")
     var selectedVoiceIdentifire = ""
     
+    @AppStorage("pronounceDetailAnswer")
+    private var pronounceDetailAnswer = false
+    
     init(level:Level, isPreview:Bool = false){
         self.level = level
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
@@ -154,9 +157,10 @@ class ReviewViewModel:ObservableObject{
     
     func pronounce(){
         guard let question = selectedQuestion else { return }
-        let utterance                = AVSpeechUtterance(string          : question.question ?? "")        
+        
+        let utterance                = AVSpeechUtterance(string: "\(question.question ?? "") \( pronounceDetailAnswer ? (question.detailDescription ?? "") : "")")
         if !selectedVoiceIdentifire.isEmpty{
-            utterance.voice              = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)
+            utterance.voice          = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)
         }
         utterance.rate               = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier    = 1

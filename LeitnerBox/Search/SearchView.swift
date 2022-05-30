@@ -51,39 +51,7 @@ struct SearchView: View {
                 }
             }
             
-            if vm.isSpeaking{
-                VStack(alignment:.leading){
-                    Spacer()
-                    HStack{
-                        VStack(alignment:.leading, spacing: 8){
-                            Text(verbatim: vm.lastPlayedQuestion?.question ?? "")
-                                .foregroundColor(.primary)
-                                .font(.title.weight(.bold))
-                            
-                            Text(verbatim: vm.lastPlayedQuestion?.answer ?? "")
-                                .foregroundColor(.primary)
-                                .font(.body.weight(.medium))
-                            
-                            Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
-                                .foregroundColor(.primary)
-                                .font(.body.weight(.medium))
-                            
-                            Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
-                                .font(.footnote.bold())
-                        }
-                        Spacer()
-                    }
-                    .padding()
-                    .padding(.bottom, 24)
-                    .background(
-                        Color(named: "reviewBackground")
-                            .cornerRadius(24, corners: [.topLeft,.topRight])
-                            .shadow(radius: 5)
-                    )
-                }
-                .transition(.move(edge: .bottom))
-                .ignoresSafeArea()
-            }
+            pronunceWordsView
         
             NavigationLink(isActive:$vm.showAddQuestionView) {
                 let levels = vm.leitner.level?.allObjects as? [Level]
@@ -149,7 +117,9 @@ struct SearchView: View {
                                 vm.sort(sortItem.sortType)
                             }
                         } label: {
-                            Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title, systemImage: sortItem.iconName)
+                            let favoriteCount = vm.questions.filter{$0.favorite == true}.count
+                            let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
+                            Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                         }
                     }
                     
@@ -157,6 +127,54 @@ struct SearchView: View {
                     Label("More", systemImage: "ellipsis.circle")
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    var pronunceWordsView:some View{
+        if vm.isSpeaking{
+            VStack(alignment:.leading){
+                Spacer()
+                HStack{
+                    VStack(alignment:.leading, spacing: 8){
+                        HStack{
+                            Text(verbatim: vm.lastPlayedQuestion?.question ?? "")
+                                .foregroundColor(.primary)
+                                .font(.title.weight(.bold))
+                            if vm.lastPlayedQuestion?.favorite == true{
+                                Image(systemName:"star.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .padding(8)
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
+                        
+                        Text(verbatim: vm.lastPlayedQuestion?.answer ?? "")
+                            .foregroundColor(.primary)
+                            .font(.body.weight(.medium))
+                        
+                        Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
+                            .foregroundColor(.primary)
+                            .font(.body.weight(.medium))
+                        
+                        Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
+                            .font(.footnote.bold())
+                    }
+                    Spacer()
+                }
+                .padding()
+                .padding(.bottom, 24)
+                .background(
+                    Color(named: "reviewBackground")
+                        .cornerRadius(24, corners: [.topLeft,.topRight])
+                        .shadow(radius: 5)
+                )
+            }
+            .animation(.easeInOut, value: vm.lastPlayedQuestion)
+            .transition(.move(edge: .bottom))
+            .ignoresSafeArea()
         }
     }
 }

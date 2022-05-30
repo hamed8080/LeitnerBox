@@ -121,6 +121,7 @@ struct LeitnerView: View {
             .controlSize(.large)
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
+            .tint(.accentColor)
             
             
             Button {
@@ -136,6 +137,7 @@ struct LeitnerView: View {
             .controlSize(.large)
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
+            .tint(.red)
         }
     }
 }

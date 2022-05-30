@@ -81,12 +81,8 @@ struct AddOrEditQuestionView: View {
                     }
                 }
             }
-            
         }
         .contentShape(Rectangle())
-        .onTapGesture {
-            hideKeyboard()
-        }
     }
 }
 
