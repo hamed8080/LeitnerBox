@@ -116,10 +116,13 @@ class SearchViewModel:ObservableObject{
         saveDB()
     }
     
-    func resetToFirstLevel(_ question:Question){        
-        question.level?.level = 1
-        question.completed = false
-        saveDB()
+    func resetToFirstLevel(_ question:Question){
+        if let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}){
+            question.level = firstLevel
+            question.passTime  = nil
+            question.completed = false
+            saveDB()
+        }
     }
     
     func pronounceOnce(_ question:Question){
@@ -227,6 +230,8 @@ class SearchViewModel:ObservableObject{
     func moveQuestionTo(_ leitner:Leitner){
         if let selectedQuestion = selectedQuestion, let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}) {
             selectedQuestion.level = firstLevel
+            selectedQuestion.passTime  = nil
+            selectedQuestion.completed = false
             saveDB()
             questions.removeAll(where: {$0 == selectedQuestion})
         }

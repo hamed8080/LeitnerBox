@@ -138,9 +138,6 @@ struct SearchView: View {
                 HStack{
                     VStack(alignment:.leading, spacing: 8){
                         HStack{
-                            Text(verbatim: vm.lastPlayedQuestion?.question ?? "")
-                                .foregroundColor(.primary)
-                                .font(.title.weight(.bold))
                             if vm.lastPlayedQuestion?.favorite == true{
                                 Image(systemName:"star.fill")
                                     .resizable()
@@ -149,6 +146,10 @@ struct SearchView: View {
                                     .padding(8)
                                     .foregroundColor(.accentColor)
                             }
+                            
+                            Text(verbatim: vm.lastPlayedQuestion?.question ?? "")
+                                .foregroundColor(.primary)
+                                .font(.title.weight(.bold))
                         }
                         
                         Text(verbatim: vm.lastPlayedQuestion?.answer ?? "")
