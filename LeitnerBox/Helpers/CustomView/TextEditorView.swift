@@ -33,6 +33,7 @@ struct TextEditorView: View {
                 .frame(height: max(40,textEditorHeight))
                 .cornerRadius(10.0)
                 .foregroundColor(Color(named: "textColor"))
+                .multilineTextAlignment(string.isContainPersianCharacter ? .trailing : .leading)
                 .focused($isFocused)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10).stroke(isFocused ? .accentColor : Color.primary.opacity(0.5))

@@ -182,9 +182,21 @@ struct ReviewView: View {
     var questionView:some View{
         HStack{
             Spacer()
-            Text(vm.selectedQuestion?.question ?? "")
-                .multilineTextAlignment(.center)
-                .font(isIpad ? .largeTitle.weight(.bold) : .title2.weight(.semibold))
+            VStack(spacing:16){
+                Text(vm.selectedQuestion?.question ?? "")
+                    .multilineTextAlignment(.center)
+                    .font(isIpad ? .largeTitle.weight(.bold) : .title2.weight(.semibold))
+               
+                Text(vm.selectedQuestion?.detailDescription ?? "")
+                    .font(isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color("subtitleTextColor"))
+                    .transition(.scale)
+                    .onTapGesture {
+                        vm.toggleAnswer()
+                    }
+            }
+           
             Spacer()
         }
     }
@@ -220,20 +232,6 @@ struct ReviewView: View {
             vm.toggleAnswer()
         }
         .transition(.scale)
-        
-        if vm.selectedQuestion?.detailDescription != nil{
-            HStack{
-                Spacer()
-                Text(vm.selectedQuestion?.detailDescription ?? "")
-                    .font(isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }
-            .transition(.scale)
-            .onTapGesture {
-                vm.toggleAnswer()
-            }
-        }
     }
     
     @ViewBuilder

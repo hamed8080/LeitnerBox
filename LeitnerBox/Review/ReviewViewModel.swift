@@ -157,7 +157,7 @@ class ReviewViewModel:ObservableObject{
     
     func pronounce(){
         guard let question = selectedQuestion else { return }
-        
+        synthesizer.stopSpeaking(at: .immediate)
         let utterance                = AVSpeechUtterance(string: "\(question.question ?? "") \( pronounceDetailAnswer ? (question.detailDescription ?? "") : "")")
         if !selectedVoiceIdentifire.isEmpty{
             utterance.voice          = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)

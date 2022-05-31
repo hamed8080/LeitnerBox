@@ -68,6 +68,9 @@ struct SearchView: View {
         .animation(.easeInOut, value: vm.suggestions)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
+        .onAppear(perform: {
+            vm.viewDidAppear()
+        })
         .toolbar {
             ToolbarItem {
                 Button {
@@ -136,32 +139,31 @@ struct SearchView: View {
             VStack(alignment:.leading){
                 Spacer()
                 HStack{
-                    VStack(alignment:.leading, spacing: 8){
-                        HStack{
-                            if vm.lastPlayedQuestion?.favorite == true{
-                                Image(systemName:"star.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 24, height: 24)
-                                    .padding(8)
-                                    .foregroundColor(.accentColor)
-                            }
-                            
+                    HStack{
+                        
+                        if vm.lastPlayedQuestion?.favorite == true{
+                            Image(systemName:"star.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .padding(8)
+                                .foregroundColor(.accentColor)
+                        }
+                        
+                        VStack(alignment:.leading, spacing: 8){
                             Text(verbatim: vm.lastPlayedQuestion?.question ?? "")
                                 .foregroundColor(.primary)
                                 .font(.title.weight(.bold))
+                            Text(verbatim: vm.lastPlayedQuestion?.answer ?? "")
+                                .foregroundColor(.primary)
+                                .font(.body.weight(.medium))
+                            Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
+                                .foregroundColor(.primary)
+                                .font(.body.weight(.medium))
+                            Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
+                                .font(.footnote.bold())
                         }
                         
-                        Text(verbatim: vm.lastPlayedQuestion?.answer ?? "")
-                            .foregroundColor(.primary)
-                            .font(.body.weight(.medium))
-                        
-                        Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
-                            .foregroundColor(.primary)
-                            .font(.body.weight(.medium))
-                        
-                        Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
-                            .font(.footnote.bold())
                     }
                     Spacer()
                 }

@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 import AVFoundation
+import MediaPlayer
 
 class SearchViewModel:ObservableObject{
    
@@ -52,6 +53,8 @@ class SearchViewModel:ObservableObject{
     @Published
     var isSpeaking = false
     
+    var commandCenter:MPRemoteCommandCenter? = nil
+
     init(leitner:Leitner, isPreview:Bool = false ){
         self.speechDelegate = SpeechDelegate()
         synthesizer.delegate = speechDelegate
@@ -156,13 +159,16 @@ class SearchViewModel:ObservableObject{
     var timer:Timer? = nil
     var lastPlayedQuestion:Question? = nil
     func playReview(){
-        
+        isSpeaking                   = true
         if speechDelegate.viewModel == nil{
             speechDelegate.viewModel = self
         }
         
         if synthesizer.isPaused {
             synthesizer.continueSpeaking()
+        }else if lastPlayedQuestion != nil{
+            //this play because of pause method stop timer and at the result next not called anymore
+            playNext()
         }else if lastPlayedQuestion == nil, let firstQuestion = questions.first{
             pronounce(firstQuestion)
             lastPlayedQuestion = firstQuestion
@@ -175,7 +181,6 @@ class SearchViewModel:ObservableObject{
     func playNext(){
         guard let lastPlayedQuestion = lastPlayedQuestion else { return }
         if let index = questions.firstIndex(of: lastPlayedQuestion){
-            
             if questions.indices.contains(index + 1){
                 let nextQuestion = questions[index + 1]
                 pronounce(nextQuestion)
@@ -258,6 +263,26 @@ class SearchViewModel:ObservableObject{
             questions.removeAll(where: {$0 == question})
         case .INSERTED(let question):
             questions.append(question)
+        }
+    }
+    
+    func viewDidAppear(){
+        commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter?.playCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
+            self.togglePlayPauseReview()
+            return .success
+        }
+        commandCenter?.pauseCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
+            self.togglePlayPauseReview()
+            return .success
+        }
+    }
+    
+    func togglePlayPauseReview(){
+        if isSpeaking{
+            pauseReview()
+        }else{
+            playReview()
         }
     }
 }
