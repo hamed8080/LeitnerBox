@@ -309,6 +309,15 @@ class SearchViewModel:ObservableObject{
             })
         }
     }
+    
+    func complete(_ question:Question){
+        if let lastLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 13}) {
+            question.level     = lastLevel
+            question.passTime  = Date()
+            question.completed = true
+            saveDB()
+        }
+    }
 }
 
 class SpeechDelegate:NSObject, AVSpeechSynthesizerDelegate{

@@ -155,6 +155,16 @@ struct SearchRowView: View {
                     Label("Reset to first level", systemImage: "goforward")
                 }
                 
+                Button {
+                    withAnimation {
+                        vm.complete(question)
+                    }
+                } label: {
+                    Label("Mark as completed", systemImage: "tray.full")
+                }
+                
+                Divider()
+                
                 Menu("Move"){
                     let vm = LeitnerViewModel()
                     ForEach(vm.leitners){ leitner in
