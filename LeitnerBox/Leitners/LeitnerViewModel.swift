@@ -22,6 +22,9 @@ class LeitnerViewModel:ObservableObject{
     var showEditOrAddLeitnerAlert = false
     
     @Published
+    var navigateToManageTags = false
+    
+    @Published
     var selectedLeitner:Leitner? = nil
     
     @Published

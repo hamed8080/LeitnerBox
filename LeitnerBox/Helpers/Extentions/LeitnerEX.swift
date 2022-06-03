@@ -12,4 +12,9 @@ extension Leitner{
         guard let levels = level?.allObjects as? [Level] else{ return 0 }
         return levels.map{$0.questions?.count ?? 0}.reduce(0,+)
     }
+    
+    var tagsArray:[Tag]{
+        guard let tags =  tag?.allObjects as? [Tag] else{ return [] }
+        return tags
+    }
 }

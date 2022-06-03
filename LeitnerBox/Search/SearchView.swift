@@ -22,12 +22,12 @@ struct SearchView: View {
                 }
                 .onDelete(perform: vm.deleteItems)
             }
-            .animation(.easeInOut, value: vm.suggestions)
+            .animation(.easeInOut, value: vm.filtered)
             .listStyle(.plain)
             .searchable(text: $vm.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                if vm.suggestions.count > 0 || vm.searchText.isEmpty{
-                    ForEach(vm.suggestions){ suggestion in
-                        SearchRowView(question: suggestion, vm: vm)
+                if vm.filtered.count > 0 || vm.searchText.isEmpty{
+                    ForEach(vm.filtered){ question in
+                        SearchRowView(question: question, vm: vm)
                     }
                 }else{
                     HStack{
@@ -37,13 +37,6 @@ struct SearchView: View {
                             .foregroundColor(.gray.opacity(0.8))
                     }
                 }
-            }
-            .onChange(of: vm.searchText) { newValue in
-                vm.suggestions = vm.questions.filter({
-                    $0.question?.lowercased().contains( vm.searchText.lowercased()) ?? false ||
-                    $0.answer?.lowercased().contains( vm.searchText.lowercased()) ?? false ||
-                    $0.detailDescription?.lowercased().contains( vm.searchText.lowercased()) ?? false                    
-                })
             }
             .if(.iOS){ view in
                 view.refreshable {
@@ -65,7 +58,7 @@ struct SearchView: View {
             .hidden()
         }
         .animation(.easeInOut, value: vm.questions)
-        .animation(.easeInOut, value: vm.suggestions)
+        .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
         .onAppear(perform: {

@@ -52,6 +52,7 @@ class PersistenceController:ObservableObject {
     var container: NSPersistentCloudKitContainer
     
     init(inMemory: Bool = false) {
+        UIColorValueTransformer.register()
         container = NSPersistentCloudKitContainer(name: "LeitnerBox")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")

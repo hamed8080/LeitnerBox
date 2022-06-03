@@ -35,6 +35,13 @@ struct LeitnerRowView: View {
                 } label: {
                     Label("Rename and Edit", systemImage: "gear")
                 }
+                
+                Button {
+                    vm.selectedLeitner = leitner                    
+                    vm.navigateToManageTags.toggle()
+                } label: {
+                    Label("Manage Tags", systemImage: "tag")
+                }
             }
         }
     }

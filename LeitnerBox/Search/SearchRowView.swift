@@ -44,6 +44,7 @@ struct SearchRowView: View {
                 completed
                 controls
             }
+            tags
         }
     }
     
@@ -56,6 +57,7 @@ struct SearchRowView: View {
                 Spacer()
                 controls
             }
+            tags
         }
     }
     
@@ -166,6 +168,19 @@ struct SearchRowView: View {
                         }
                     }
                 }
+                
+                Menu("Tag"){
+                    let vm = TagViewModel(leitner: vm.leitner)
+                    ForEach(vm.tags){ tag in
+                        Button {
+                            withAnimation {
+                                vm.addToTag(tag, question)
+                            }
+                        } label: {
+                            Label( "\(tag.name ?? "")", systemImage: "tag")
+                        }
+                    }
+                }
             } label: {
                 Image(systemName: "ellipsis.circle")
                     .resizable()
@@ -173,6 +188,37 @@ struct SearchRowView: View {
                     .frame(width: controlSize, height: controlSize)
                     .padding(8)
                     .foregroundColor(.accentColor)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var tags:some View{
+        if let tags = question.tagsArray , tags.count > 0{
+            HStack(spacing:6){
+                Image(systemName: "tag")
+                    .frame(width: 36, height: 36)
+                    .foregroundColor(.accentColor)
+                
+                ScrollView{
+                    LazyHGrid(rows: [.init(.flexible(minimum: 48, maximum: 48), spacing: 8, alignment: .leading)]) {
+                        ForEach(tags) { tag in
+                            Text("\(tag.name ?? "")")
+                                .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
+                                .font(.footnote.weight(.semibold))
+                                .padding([.top, .bottom], 4)
+                                .padding([.trailing, .leading], 8)
+                                .background(
+                                    (tag.tagSwiftUIColor ?? .gray)
+                                )
+                                .cornerRadius(6)
+                                .onLongPressGesture {
+                                    vm.removeTagForQuestio(question, tag)
+                                }
+                                .transition(.asymmetric(insertion: .slide, removal: .scale))
+                        }
+                    }
+                }
             }
         }
     }

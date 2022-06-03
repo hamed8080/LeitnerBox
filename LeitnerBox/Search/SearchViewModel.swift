@@ -23,9 +23,6 @@ class SearchViewModel:ObservableObject{
     var questions:[Question] = []
     
     @Published
-    var suggestions:[Question] = []
-    
-    @Published
     var searchText:String = ""
     
     @Published
@@ -283,6 +280,33 @@ class SearchViewModel:ObservableObject{
             pauseReview()
         }else{
             playReview()
+        }
+    }
+    
+    func removeTagForQuestio(_ question:Question , _ tag:Tag){
+        withAnimation(.easeInOut) {
+            tag.removeFromQuestion(question)
+            saveDB()
+        }
+    }
+    
+    var filtered:[Question]{
+        if searchText.contains("#"){
+            
+            let tagName = searchText.replacingOccurrences(of: "#", with: "")
+            if tagName.isEmpty == false{
+                return questions.filter({
+                    $0.tagsArray?.contains(where: {$0.name?.lowercased().contains(tagName.lowercased()) ?? false}) ?? false
+                })
+            }else{
+                return questions
+            }
+        }else{
+            return questions.filter({
+                $0.question?.lowercased().contains( searchText.lowercased()) ?? false ||
+                $0.answer?.lowercased().contains( searchText.lowercased()) ?? false ||
+                $0.detailDescription?.lowercased().contains( searchText.lowercased()) ?? false
+            })
         }
     }
 }

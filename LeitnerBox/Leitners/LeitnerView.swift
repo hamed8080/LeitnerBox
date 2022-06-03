@@ -38,6 +38,15 @@ struct LeitnerView: View {
                     }
                 }
                 .listStyle(.plain)
+                
+                NavigationLink(isActive: $vm.navigateToManageTags) {
+                    if let selectedLeitner = vm.selectedLeitner{
+                        TagView(vm: TagViewModel(leitner: selectedLeitner))
+                    }
+                } label: {
+                    EmptyView()
+                }
+                .hidden()
             }
             .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
                 try? vm.backupFile?.deleteDirectory()

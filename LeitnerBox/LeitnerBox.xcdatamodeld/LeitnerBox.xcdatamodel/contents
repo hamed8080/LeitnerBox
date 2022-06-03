@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Leitner" representedClassName="Leitner" syncable="YES" codeGenerationType="class">
         <attribute name="backToTopLevel" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="level" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Level" inverseName="leitner" inverseEntity="Level"/>
+        <relationship name="tag" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="leitner" inverseEntity="Tag"/>
     </entity>
     <entity name="Level" representedClassName="Level" syncable="YES" codeGenerationType="class">
         <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="674667300" usesScalarValueType="NO"/>
@@ -24,10 +25,18 @@
         <attribute name="passTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="question" attributeType="String" defaultValueString=""/>
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="questions" inverseEntity="Level"/>
+        <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="question" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="UIColorValueTransformer"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="leitner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Leitner" inverseName="tag" inverseEntity="Leitner"/>
+        <relationship name="question" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="tag" inverseEntity="Question"/>
     </entity>
     <elements>
-        <element name="Leitner" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Leitner" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="Level" positionX="175.49609375" positionY="11.60546875" width="128" height="104"/>
-        <element name="Question" positionX="-120.17578125" positionY="180.99609375" width="128" height="164"/>
+        <element name="Question" positionX="-120.17578125" positionY="180.99609375" width="128" height="179"/>
+        <element name="Tag" positionX="27" positionY="144" width="128" height="89"/>
     </elements>
 </model>

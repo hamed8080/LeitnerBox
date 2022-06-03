@@ -40,4 +40,8 @@ extension Question{
         let levels = level?.leitner?.level?.allObjects as? [Level]
         return levels?.filter{ $0.level == 1 }.first
     }
+    
+    var tagsArray:[Tag]?{
+        return tag?.allObjects as? [Tag]
+    }
 }

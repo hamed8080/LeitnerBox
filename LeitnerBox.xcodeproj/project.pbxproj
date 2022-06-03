@@ -26,9 +26,14 @@
 		053666E428378918002F899F /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E328378918002F899F /* ColorEx.swift */; };
 		053666E628378949002F899F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053666E528378949002F899F /* UIColor.swift */; };
 		0542761B283D5C1800F1044E /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
+		0545068F284A358C007EBAFA /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545068E284A3519007EBAFA /* TagViewModel.swift */; };
 		054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C12839185E008BC840 /* LeitnerEX.swift */; };
 		054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C62839602C008BC840 /* LeitnerRowView.swift */; };
 		054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */; };
+		054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E771D284A4C7D006BCDEF /* UIColorValueTransformer.swift */; };
+		054E7720284A523E006BCDEF /* TagEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E771F284A523E006BCDEF /* TagEX.swift */; };
+		054E7722284A52FF006BCDEF /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E7721284A52FF006BCDEF /* TagView.swift */; };
+		054E7724284A544B006BCDEF /* TagRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E7723284A544B006BCDEF /* TagRowView.swift */; };
 		05534693283F6A96009A6029 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05534692283F6A96009A6029 /* README.md */; };
 		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
 		0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -97,9 +102,14 @@
 		053666DD28377B5B002F899F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		053666E328378918002F899F /* ColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEx.swift; sourceTree = "<group>"; };
 		053666E528378949002F899F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		0545068E284A3519007EBAFA /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
 		054AB5C12839185E008BC840 /* LeitnerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerEX.swift; sourceTree = "<group>"; };
 		054AB5C62839602C008BC840 /* LeitnerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerRowView.swift; sourceTree = "<group>"; };
 		054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerViewModel.swift; sourceTree = "<group>"; };
+		054E771D284A4C7D006BCDEF /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
+		054E771F284A523E006BCDEF /* TagEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEX.swift; sourceTree = "<group>"; };
+		054E7721284A52FF006BCDEF /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		054E7723284A544B006BCDEF /* TagRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRowView.swift; sourceTree = "<group>"; };
 		05534692283F6A96009A6029 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0579D4A1283CE459000BD93D /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0579D4A6283CE459000BD93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -172,6 +182,7 @@
 				054AB5C3283951DE008BC840 /* Level */,
 				05BAE2162837CC880043FAEB /* Search */,
 				05BAE21328379C9E0043FAEB /* AddOrEditQuestion */,
+				0545068D284A350D007EBAFA /* Tag */,
 				053666D828377536002F899F /* Helpers */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
@@ -217,6 +228,7 @@
 			children = (
 				053666DA2837755F002F899F /* Extentions */,
 				053666D52837740D002F899F /* CustomView */,
+				054E771D284A4C7D006BCDEF /* UIColorValueTransformer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -235,8 +247,19 @@
 				052CA6A9283C944200376E79 /* FileManagerEX.swift */,
 				052CBA482840BAA400544925 /* BoolEX.swift */,
 				05B0891628466F7500BFE778 /* StringEX.swift */,
+				054E771F284A523E006BCDEF /* TagEX.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		0545068D284A350D007EBAFA /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				054E7721284A52FF006BCDEF /* TagView.swift */,
+				054E7723284A544B006BCDEF /* TagRowView.swift */,
+				0545068E284A3519007EBAFA /* TagViewModel.swift */,
+			);
+			path = Tag;
 			sourceTree = "<group>";
 		};
 		054AB5C3283951DE008BC840 /* Level */ = {
@@ -401,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */,
+				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
 				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
 				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
 				052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */,
@@ -419,6 +443,7 @@
 				05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */,
 				053666E428378918002F899F /* ColorEx.swift in Sources */,
 				053666E628378949002F899F /* UIColor.swift in Sources */,
+				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
@@ -428,8 +453,11 @@
 				053666D728377420002F899F /* PrimaryTextField.swift in Sources */,
 				054AB5C22839185E008BC840 /* LeitnerEX.swift in Sources */,
 				05867E73283A480600F4A413 /* QuestionEX.swift in Sources */,
+				054E7720284A523E006BCDEF /* TagEX.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
+				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,
 				0531A606283FEEF70051EB13 /* TextEditorView.swift in Sources */,
+				0545068F284A358C007EBAFA /* TagViewModel.swift in Sources */,
 				05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */,
 				052CBA492840BAA400544925 /* BoolEX.swift in Sources */,
 				05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */,
