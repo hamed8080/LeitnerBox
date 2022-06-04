@@ -207,7 +207,7 @@ struct SearchRowView: View {
         if let tags = question.tagsArray , tags.count > 0{
             HStack(spacing:6){
                 Image(systemName: "tag")
-                    .frame(width: 36, height: 36)
+                    .frame(width: 36, height: 36, alignment: .leading)
                     .foregroundColor(.accentColor)
                 
                 ScrollView{

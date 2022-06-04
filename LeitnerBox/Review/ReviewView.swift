@@ -243,6 +243,26 @@ struct ReviewView: View {
         }
     }
     
+    var addTagsView:some View{
+        Menu {
+            ForEach(vm.tags){ tag in
+                Button {
+                    withAnimation {
+                        vm.addTagToQuestion(tag)
+                    }
+                } label: {
+                    Label( "\(tag.name ?? "")", systemImage: "tag")
+                }
+            }
+        } label: {
+            Image(systemName: "tag")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 32, height: 32)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
     var controls:some View{
         HStack(spacing: isIpad ? 48 : 36){
             
@@ -282,6 +302,8 @@ struct ReviewView: View {
                     .frame(width: 32, height: 32)
                     .foregroundColor(.accentColor)
             }
+            
+            addTagsView
             
             Button {
                 vm.pronounce()

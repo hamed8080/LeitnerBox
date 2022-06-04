@@ -59,6 +59,9 @@ class ReviewViewModel:ObservableObject{
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
     
+    @Published
+    var tags:[Tag] = []
+    
     init(level:Level, isPreview:Bool = false){
         self.level = level
         viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
@@ -72,6 +75,7 @@ class ReviewViewModel:ObservableObject{
         }
         
         preapareNext(questions.first)
+        loadTags()
     }
     
     func saveDB(){
@@ -175,4 +179,24 @@ class ReviewViewModel:ObservableObject{
     func preapareNext(_ question:Question?){
         selectedQuestion = question
     }
+    
+    func loadTags(){
+        guard let leitnerId = level.leitner?.id else{return}
+        let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
+        let req = Tag.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+        req.predicate = predicate
+        do {
+            self.tags = try viewContext.fetch(req)
+        }catch{
+            print("Fetch failed: Error \(error.localizedDescription)")
+        }
+    }
+    
+    func addTagToQuestion(_ tag:Tag){
+        guard let selectedQuestion = selectedQuestion else {return}
+        tag.addToQuestion(selectedQuestion)
+        saveDB()
+    }
+    
 }

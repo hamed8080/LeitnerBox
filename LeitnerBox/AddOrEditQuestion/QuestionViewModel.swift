@@ -23,6 +23,9 @@ class QuestionViewModel:ObservableObject{
     var isManual = true
     
     @Published
+    var isCompleted = false
+    
+    @Published
     var questions:[Question] = []
     
     @Published
@@ -34,14 +37,23 @@ class QuestionViewModel:ObservableObject{
     @Published
     var question:String = ""
     
+    @Published
+    var tags:[Tag] = []
+    
+    @Published
+    var addedTags:[Tag] = []
+    
     init(level:Level, editQuestion:Question? = nil){
         self.editQuestion = editQuestion
         if let editQuestion = editQuestion {
             question          = editQuestion.question ?? ""
             answer            = editQuestion.answer ?? ""
+            isCompleted       = editQuestion.completed
             descriptionDetail = editQuestion.detailDescription ?? ""
         }
         self.level        = level
+        
+        loadTags()
     }
     
     func saveEdit(){
@@ -49,6 +61,12 @@ class QuestionViewModel:ObservableObject{
             editQuestion?.question = self.question
             editQuestion?.answer = self.answer
             editQuestion?.detailDescription = self.descriptionDetail
+            editQuestion?.completed         = isCompleted
+            addedTags.forEach { tag in
+                if let editQuestion = editQuestion {
+                    tag.addToQuestion(editQuestion)
+                }
+            }
             try viewContext.save()
         }catch{
             print("Fetch failed: Error \(error.localizedDescription)")
@@ -62,7 +80,11 @@ class QuestionViewModel:ObservableObject{
             question.answer            = answer
             question.detailDescription = self.descriptionDetail
             question.level             = level
+            question.completed         = isCompleted
             question.createTime        = Date()
+            addedTags.forEach { tag in
+                tag.addToQuestion(question)
+            }
             do {
                 try viewContext.save()
                 return question
@@ -104,6 +126,37 @@ class QuestionViewModel:ObservableObject{
         editQuestion = nil
         answer = ""
         question = ""
+        addedTags = []
+        isCompleted = false
+        isManual = true
+        descriptionDetail = ""
+    }
+    
+    func loadTags(){
+        guard let leitnerId = level.leitner?.id else{return}
+        let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
+        let req = Tag.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+        req.predicate = predicate
+        do {
+            self.tags = try viewContext.fetch(req)
+        }catch{
+            print("Fetch failed: Error \(error.localizedDescription)")
+        }
+    }
+    
+    
+    func addTagToQuestion(_ tag:Tag){
+        addedTags.append(tag)
+    }
+    
+    func removeTagForQuestio(_ tag:Tag){
+        withAnimation {
+            addedTags.removeAll(where: {$0 == tag})
+            if let editQuestion = editQuestion {
+                tag.removeFromQuestion(editQuestion)
+            }
+        }
     }
 }
 
