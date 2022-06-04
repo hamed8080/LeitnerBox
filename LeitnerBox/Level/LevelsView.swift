@@ -88,6 +88,11 @@ struct LevelsView: View {
             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
         }
         
+        NavigationLink{
+            TagView(vm: TagViewModel(leitner: vm.leitner))
+        } label: {
+            Label("Tags", systemImage: "tag")
+        }
     }
     
     @ViewBuilder
