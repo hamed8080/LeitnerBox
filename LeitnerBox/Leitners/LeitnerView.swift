@@ -49,7 +49,9 @@ struct LeitnerView: View {
                 .hidden()
             }
             .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
-                try? vm.backupFile?.deleteDirectory()
+                if .iOS == true{
+                    try? vm.backupFile?.deleteDirectory()
+                }
             }, content:{
                 if let fileUrl = vm.backupFile?.fileURL{
                     ActivityViewControllerWrapper(activityItems: [fileUrl])

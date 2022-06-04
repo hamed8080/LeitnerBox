@@ -43,6 +43,9 @@ class QuestionViewModel:ObservableObject{
     @Published
     var addedTags:[Tag] = []
     
+    @Published
+    var isFavorite:Bool = false
+    
     init(level:Level, editQuestion:Question? = nil){
         self.editQuestion = editQuestion
         if let editQuestion = editQuestion {
@@ -50,6 +53,7 @@ class QuestionViewModel:ObservableObject{
             answer            = editQuestion.answer ?? ""
             isCompleted       = editQuestion.completed
             descriptionDetail = editQuestion.detailDescription ?? ""
+            isFavorite        = editQuestion.favorite
         }
         self.level        = level
         
@@ -81,7 +85,20 @@ class QuestionViewModel:ObservableObject{
             question.detailDescription = self.descriptionDetail
             question.level             = level
             question.completed         = isCompleted
+            
+            if question.completed {
+                if let lastLevel = (level.leitner?.level?.allObjects as? [Level])?.first(where: {$0.level == 13}) {
+                    question.level     = lastLevel
+                    question.passTime  = Date()
+                    question.completed = true
+                }
+            }
+            
             question.createTime        = Date()
+            question.favorite          = isFavorite
+            if question.favorite {
+                question.favoriteDate = Date()
+            }
             addedTags.forEach { tag in
                 tag.addToQuestion(question)
             }

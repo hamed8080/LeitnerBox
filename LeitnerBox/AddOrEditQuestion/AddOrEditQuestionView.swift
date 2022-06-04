@@ -52,7 +52,30 @@ struct AddOrEditQuestionView: View {
                         }
                         
                         HStack{
-                            tags
+                            let tags = vm.addedTags + (vm.editQuestion?.tagsArray ?? [])
+                            QuestionTagsView(tags: tags) { tag in
+                                vm.removeTagForQuestio(tag)
+                            }
+                            Spacer()
+                        }
+                        
+                        HStack{
+                            Button {
+                                withAnimation {
+                                    vm.isFavorite.toggle()
+                                }
+                            } label: {
+                                HStack{
+                                    Image(systemName: vm.isFavorite == true ? "star.fill" : "star")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .foregroundColor(.accentColor)
+                                    Text(verbatim: "favorite")
+                                        .font(.body.weight(.semibold))
+                                }
+                            }
+                            
                             Spacer()
                         }
                         
@@ -105,39 +128,6 @@ struct AddOrEditQuestionView: View {
             }
         }
         .contentShape(Rectangle())
-    }
-    
-    @ViewBuilder
-    var tags:some View{
-        let tags = vm.addedTags + (vm.editQuestion?.tagsArray ?? [])
-        if tags.count > 0{
-            HStack(spacing:0){
-                Image(systemName: "tag")
-                    .frame(width: 36, height: 36, alignment: .leading)
-                    .foregroundColor(.accentColor)
-                    .padding([.trailing], 8)
-                
-                ScrollView{
-                    LazyHGrid(rows: [.init(.flexible(minimum: 48, maximum: 48), spacing: 8, alignment: .leading)]) {
-                        ForEach(tags) { tag in
-                            Text("\(tag.name ?? "")")
-                                .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
-                                .font(.footnote.weight(.semibold))
-                                .padding([.top, .bottom], 4)
-                                .padding([.trailing, .leading], 8)
-                                .background(
-                                    (tag.tagSwiftUIColor ?? .gray)
-                                )
-                                .onLongPressGesture {
-                                    vm.removeTagForQuestio(tag)
-                                }
-                                .cornerRadius(6)
-                                .transition(.asymmetric(insertion: .slide, removal: .scale))
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

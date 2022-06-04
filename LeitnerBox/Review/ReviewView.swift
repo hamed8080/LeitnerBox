@@ -30,6 +30,7 @@ struct ReviewView: View {
                         VStack(spacing:48){
                             headers
                             questionView
+                            tags
                             controls
                             answersAndDetails
                         }
@@ -198,6 +199,15 @@ struct ReviewView: View {
             }
            
             Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    var tags:some View{
+        if let selectedQuestion = vm.selectedQuestion, let tags = selectedQuestion.tagsArray{
+            QuestionTagsView(tags: tags) { tag in
+                vm.removeTagForQuestion(tag)
+            }
         }
     }
     

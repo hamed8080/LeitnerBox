@@ -50,6 +50,7 @@ struct TagView: View {
             TextEditorView(placeholder: "Enter tag name", string:  $vm.tagName, textEditorHeight: 48)
             
             ColorPicker("Select Color", selection: $vm.colorPickerColor)
+                .frame(height: 36)
             
             Button {
                 vm.editOrAddTag()

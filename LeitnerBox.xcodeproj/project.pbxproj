@@ -44,6 +44,7 @@
 		05867E71283A469000F4A413 /* LevelEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E70283A469000F4A413 /* LevelEX.swift */; };
 		05867E73283A480600F4A413 /* QuestionEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E72283A480600F4A413 /* QuestionEX.swift */; };
 		05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E74283A63AA00F4A413 /* ReviewViewModel.swift */; };
+		0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */; };
 		05B0891728466F7500BFE778 /* StringEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B0891628466F7500BFE778 /* StringEX.swift */; };
 		05B80B642836979600390EF9 /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B80B632836979600390EF9 /* LevelsView.swift */; };
 		05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
@@ -122,6 +123,7 @@
 		05867E70283A469000F4A413 /* LevelEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEX.swift; sourceTree = "<group>"; };
 		05867E72283A480600F4A413 /* QuestionEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEX.swift; sourceTree = "<group>"; };
 		05867E74283A63AA00F4A413 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTagsView.swift; sourceTree = "<group>"; };
 		05B0891628466F7500BFE778 /* StringEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEX.swift; sourceTree = "<group>"; };
 		05B80B632836979600390EF9 /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 		05BAE21128379B820043FAEB /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				054E7721284A52FF006BCDEF /* TagView.swift */,
 				054E7723284A544B006BCDEF /* TagRowView.swift */,
 				0545068E284A3519007EBAFA /* TagViewModel.swift */,
+				0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
 				05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */,
 				053666E428378918002F899F /* ColorEx.swift in Sources */,
+				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,

@@ -199,4 +199,12 @@ class ReviewViewModel:ObservableObject{
         saveDB()
     }
     
+    func removeTagForQuestion(_ tag:Tag){
+        withAnimation {
+            guard let selectedQuestion = selectedQuestion else {return}
+            tag.addToQuestion(selectedQuestion)
+            saveDB()
+        }
+    }
+    
 }
