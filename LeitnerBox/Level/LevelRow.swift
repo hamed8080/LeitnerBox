@@ -32,10 +32,11 @@ struct LevelRow:View{
                         )
                     let favCount = (reviewViewModel.level.questions?.allObjects as? [Question] )?.filter({ $0.favorite == true }).count
   
-                    Label {
-                        Text(verbatim: "\(favCount ?? 0)")
-                    } icon: {
+                    HStack(alignment:.firstTextBaseline, spacing: 4){
                         Image(systemName: "star.fill")
+                            .foregroundColor(.accentColor)
+                        Text(verbatim: "\(favCount ?? 0)")
+                            .foregroundColor(.gray)
                     }
                 }
                 
