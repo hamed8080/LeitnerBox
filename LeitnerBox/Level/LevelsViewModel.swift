@@ -22,12 +22,6 @@ class LevelsViewModel:ObservableObject{
     var searchWord:String = ""
     
     @Published
-    var showSearchView:Bool = false
-    
-    @Published
-    var showAddQuestionView = false
-    
-    @Published
     var levels: [Level] = []
     
     @Published

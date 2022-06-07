@@ -39,14 +39,14 @@ struct LeitnerView: View {
                 }
                 .listStyle(.plain)
                 
-                NavigationLink(isActive: $vm.navigateToManageTags) {
-                    if let selectedLeitner = vm.selectedLeitner{
-                        TagView(vm: TagViewModel(leitner: selectedLeitner))
+                if  let selectedLeitner = vm.selectedLeitner{
+                    NavigationLink(isActive:(.constant(true))) {
+                            TagView(vm: TagViewModel(leitner: selectedLeitner))
+                                .onDisappear { vm.selectedLeitner = nil }
+                    } label: {
+                        EmptyView()
                     }
-                } label: {
-                    EmptyView()
                 }
-                .hidden()
             }
             .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
                 if .iOS == true{

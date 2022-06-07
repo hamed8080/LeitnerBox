@@ -46,14 +46,21 @@ struct SearchView: View {
             
             pronunceWordsView
         
-            NavigationLink(isActive:$vm.showAddQuestionView) {
+            let binding = Binding(
+                get: {return vm.selectedQuestion != nil},
+                set: { value in }
+            )
+            
+            NavigationLink(isActive:binding) {
                 let levels = vm.leitner.level?.allObjects as? [Level]
                 let firstLevel = levels?.first(where: {$0.level == 1})
                 AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
                     vm.qustionStateChanged(questionState)
+                    vm.selectedQuestion = nil
                 }
             } label: {
                 EmptyView()
+                    .frame(width: 0, height: 0)
             }
             .hidden()
         }
@@ -66,9 +73,13 @@ struct SearchView: View {
         })
         .toolbar {
             ToolbarItem {
-                Button {
-                    vm.selectedQuestion = nil
-                    vm.showAddQuestionView.toggle()
+                
+                NavigationLink {
+                    let levels = vm.leitner.level?.allObjects as? [Level]
+                    let firstLevel = levels?.first(where: {$0.level == 1})
+                    AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
+                        vm.qustionStateChanged(questionState)
+                    }
                 } label: {
                     Label("Add", systemImage: "plus.square")
                 }

@@ -26,9 +26,6 @@ class SearchViewModel:ObservableObject{
     var searchText:String = ""
     
     @Published
-    var showAddQuestionView = false
-    
-    @Published
     var showLeitnersListDialog = false
     
     @Published

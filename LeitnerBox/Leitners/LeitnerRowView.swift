@@ -37,8 +37,9 @@ struct LeitnerRowView: View {
                 }
                 
                 Button {
-                    vm.selectedLeitner = leitner                    
-                    vm.navigateToManageTags.toggle()
+                    withAnimation {
+                        vm.selectedLeitner = leitner
+                    }
                 } label: {
                     Label("Manage Tags", systemImage: "tag")
                 }

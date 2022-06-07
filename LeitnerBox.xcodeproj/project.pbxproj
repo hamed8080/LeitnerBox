@@ -50,6 +50,7 @@
 		05BAE21228379B820043FAEB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
 		05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE2142837BA480043FAEB /* LevelRow.swift */; };
 		05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE2172837CCA50043FAEB /* SearchView.swift */; };
+		05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */; };
 		05D0329F2838DB2B00FE67D5 /* DateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0329E2838DB2B00FE67D5 /* DateEx.swift */; };
 		05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A02838E2A900FE67D5 /* SearchRowView.swift */; };
 		05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A42838E82C00FE67D5 /* SearchViewModel.swift */; };
@@ -129,6 +130,7 @@
 		05BAE21128379B820043FAEB /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
 		05BAE2142837BA480043FAEB /* LevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelRow.swift; sourceTree = "<group>"; };
 		05BAE2172837CCA50043FAEB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsInsideTagView.swift; sourceTree = "<group>"; };
 		05D0329E2838DB2B00FE67D5 /* DateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEx.swift; sourceTree = "<group>"; };
 		05D032A02838E2A900FE67D5 /* SearchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowView.swift; sourceTree = "<group>"; };
 		05D032A42838E82C00FE67D5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				054E7721284A52FF006BCDEF /* TagView.swift */,
+				05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */,
 				054E7723284A544B006BCDEF /* TagRowView.swift */,
 				0545068E284A3519007EBAFA /* TagViewModel.swift */,
 				0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */,
@@ -448,6 +451,7 @@
 				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
+				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,

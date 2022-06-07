@@ -19,6 +19,9 @@ struct TagRowView: View {
         HStack{
             Text("\(tag.name ?? "")")
             Spacer()
+            Text(verbatim: "\(tag.question?.allObjects.count ?? 0)")
+                .font(.footnote.weight(.semibold))
+                .foregroundColor(.gray)
             Circle()
                 .fill(tag.tagSwiftUIColor ?? .gray)
                 .frame(width: 36, height: 36)

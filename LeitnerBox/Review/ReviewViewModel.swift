@@ -19,15 +19,6 @@ class ReviewViewModel:ObservableObject{
     var questions: [Question] = []
     
     @Published
-    var showAddQuestionView = false
-    
-    @Published
-    var showEditQuestionView = false
-    
-    @Published
-    var showSearchView = false
-    
-    @Published
     var showDelete = false
     
     @Published
@@ -105,10 +96,6 @@ class ReviewViewModel:ObservableObject{
         selectedQuestion?.favorite.toggle()
         saveDB()
         objectWillChange.send()
-    }
-    
-    func editQuestion(){
-        showEditQuestionView.toggle()
     }
     
     func pass(){

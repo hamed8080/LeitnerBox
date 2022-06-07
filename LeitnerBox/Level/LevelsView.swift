@@ -34,7 +34,23 @@ struct LevelsView: View {
             .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
                 searchResult
             }
-            navigations
+            
+            let binding = Binding(
+                get: {return searchViewModel.selectedQuestion != nil},
+                set: { value in }
+            )
+            NavigationLink(isActive:binding) {
+                let levels = searchViewModel.leitner.level?.allObjects as? [Level]
+                let firstLevel = levels?.first(where: {$0.level == 1})
+                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
+                    searchViewModel.qustionStateChanged(questionState)
+                    searchViewModel.selectedQuestion = nil
+                }
+            } label: {
+                EmptyView()
+                    .frame(width: 0, height: 0)
+            }
+            .hidden()
         }
         .animation(.easeInOut, value: vm.searchWord)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")
@@ -76,14 +92,18 @@ struct LevelsView: View {
     @ViewBuilder
     var toolbars:some View{
         
-        Button {
-            vm.showAddQuestionView.toggle()
+        NavigationLink {
+            if let levelFirst = vm.levels.first(where: {$0.level == 1}){
+                AddOrEditQuestionView(vm: .init(level: levelFirst)){ questionState in
+                    vm.questionStateChanged(state: questionState)
+                }
+            }
         } label: {
             Label("Add Item", systemImage: "plus.square")
         }
         
-        Button {
-            vm.showSearchView.toggle()
+        NavigationLink {
+            SearchView(vm: SearchViewModel(leitner: vm.leitner))
         } label: {
             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
         }
@@ -111,38 +131,6 @@ struct LevelsView: View {
                     .foregroundColor(.gray.opacity(0.8))
             }
         }
-    }
-    
-    @ViewBuilder
-    var navigations:some View{
-        NavigationLink(isActive:$vm.showSearchView) {
-            SearchView(vm: SearchViewModel(leitner: vm.leitner))
-        } label: {
-            EmptyView()
-        }
-        
-        
-        NavigationLink(isActive:$searchViewModel.showAddQuestionView) {
-            let levels = searchViewModel.leitner.level?.allObjects as? [Level]
-            let firstLevel = levels?.first(where: {$0.level == 1})
-            AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
-                searchViewModel.qustionStateChanged(questionState)
-            }
-        } label: {
-            EmptyView()
-        }
-        .hidden()
-        
-        NavigationLink(isActive: $vm.showAddQuestionView) {
-            if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(level: levelFirst)){ questionState in
-                    vm.questionStateChanged(state: questionState)
-                }
-            }
-        } label: {
-            EmptyView()
-        }
-        .hidden()
     }
     
     var daysToRecommendDialogView:some View{

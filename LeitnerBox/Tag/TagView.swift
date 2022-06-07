@@ -17,8 +17,12 @@ struct TagView: View {
         ZStack{
             
             List {
-                ForEach(vm.tags) { item in
-                    TagRowView(tag: item, vm: vm)
+                ForEach(vm.tags) { tag in
+                    NavigationLink {
+                        QuestionsInsideTagView(tag: tag)
+                    } label: {
+                        TagRowView(tag: tag, vm: vm)
+                    }
                 }
                 .onDelete(perform: vm.deleteItems)
             }

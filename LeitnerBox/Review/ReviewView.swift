@@ -38,7 +38,6 @@ struct ReviewView: View {
                     Spacer()
                     reviewControls
                 }
-                navigations
             }
             .animation(.easeInOut, value: vm.isShowingAnswer)
             .padding()
@@ -46,18 +45,24 @@ struct ReviewView: View {
             .toolbar {
                 
                 ToolbarItem {
-                    Button {
-                        vm.showAddQuestionView.toggle()
+                    
+                    NavigationLink{
+                        let levels = vm.level.leitner?.level?.allObjects as? [Level]
+                        let firstLevel = levels?.first(where: {$0.level == 1})
+                        AddOrEditQuestionView(vm: .init(level: firstLevel!))
                     } label: {
                         Label("Add Item", systemImage: "plus.square")
                     }
                 }
                 
                 ToolbarItem {
-                    Button {
-                        vm.showSearchView.toggle()
-                    } label: {
-                        Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+                    
+                    if let leitner = vm.level.leitner{
+                        NavigationLink{
+                            SearchView(vm: SearchViewModel(leitner: leitner))
+                        } label: {
+                            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+                        }
                     }
                 }
             }
@@ -66,35 +71,6 @@ struct ReviewView: View {
             })
         }else{
             NotAnyToReviewView()
-        }
-    }
-    
-    
-    @ViewBuilder
-    var navigations:some View{
-        NavigationLink(isActive:$vm.showAddQuestionView) {
-            let levels = vm.level.leitner?.level?.allObjects as? [Level]
-            let firstLevel = levels?.first(where: {$0.level == 1})
-            AddOrEditQuestionView(vm: .init(level: firstLevel!))
-        } label: {
-            EmptyView()
-        }
-        .hidden()
-        
-        NavigationLink(isActive:$vm.showEditQuestionView) {
-            AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
-        } label: {
-            EmptyView()
-        }
-        .hidden()
-        
-        if let leitner = vm.level.leitner{
-            NavigationLink(isActive:$vm.showSearchView) {
-                SearchView(vm: SearchViewModel(leitner: leitner))
-            } label: {
-                EmptyView()
-            }
-            .hidden()
         }
     }
     
@@ -290,10 +266,9 @@ struct ReviewView: View {
                     .foregroundColor(.orange)
             }
             
-            Button {
-                vm.editQuestion()
+            NavigationLink{
+                AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
             } label: {
-                
                 Image(systemName: "pencil")
                     .resizable()
                     .scaledToFit()

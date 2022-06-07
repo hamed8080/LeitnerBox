@@ -151,7 +151,6 @@ struct SearchRowView: View {
                 
                 Button {
                     vm.selectedQuestion = question
-                    vm.showAddQuestionView.toggle()
                 } label: {
                     Label("Edit", systemImage: "pencil")
                 }

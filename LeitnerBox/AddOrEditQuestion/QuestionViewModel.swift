@@ -66,6 +66,11 @@ class QuestionViewModel:ObservableObject{
             editQuestion?.answer = self.answer
             editQuestion?.detailDescription = self.descriptionDetail
             editQuestion?.completed         = isCompleted
+            
+            if editQuestion?.favorite == false && isFavorite {
+                editQuestion?.favoriteDate = Date()
+            }
+            editQuestion?.favorite          = isFavorite
             addedTags.forEach { tag in
                 if let editQuestion = editQuestion {
                     tag.addToQuestion(editQuestion)
