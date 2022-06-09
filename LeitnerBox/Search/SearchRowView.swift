@@ -36,14 +36,17 @@ struct SearchRowView: View {
     }
     
     var ipadView:some View{
-        VStack(alignment:.leading, spacing: 8){
+        VStack(alignment:.leading, spacing: 4){
             questionAndAnswer
+                .padding(.top, 8)
+                .padding([.leading,.trailing])
             HStack{
                 levelAndAvailibility
                 Spacer()
                 completed
                 controls
             }
+            .padding([.leading, .trailing])
             if let tags = question.tagsArray{
                 QuestionTagsView(tags: tags){ tag in
                     vm.removeTagForQuestio(question, tag)
@@ -53,14 +56,16 @@ struct SearchRowView: View {
     }
     
     var iphoneView:some View{
-        VStack(alignment:.leading, spacing: 4){
-            questionAndAnswer
-            levelAndAvailibility
-            HStack{
-                completed
-                Spacer()
-                controls
-            }
+        VStack{
+            VStack(alignment:.leading, spacing: 4){
+                questionAndAnswer
+                levelAndAvailibility
+                HStack{
+                    completed
+                    Spacer()
+                    controls
+                }
+            }.padding()
             
             if let tags = question.tagsArray{
                 QuestionTagsView(tags: tags){ tag in
@@ -86,13 +91,14 @@ struct SearchRowView: View {
     var questionAndAnswer:some View{
         Text(question.question ?? "")
             .font(.title2.bold())
+        if let answer = question.answer, !answer.isEmpty {
+            Text(answer.uppercased())
+                .foregroundColor(.gray)
+                .font(.headline.bold())
+        }
         
-        Text(question.answer?.uppercased() ?? "")
-            .foregroundColor(.gray)
-            .font(.headline.bold())
-        
-        if question.detailDescription != nil{
-            Text(question.detailDescription?.uppercased() ?? "")
+        if let detailDescription = question.detailDescription, !detailDescription.isEmpty{
+            Text(detailDescription.uppercased())
                 .foregroundColor(.gray)
                 .font(.headline.bold())
         }

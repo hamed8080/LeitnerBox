@@ -14,31 +14,31 @@ struct QuestionTagsView: View {
     var onLongPress:((Tag)->())? = nil
     
     var body: some View {
-        if tags.count > 0{
-            HStack(spacing:6){
-                Image(systemName: "tag")
-                    .frame(width: 36, height: 36, alignment: .leading)
-                    .foregroundColor(.accentColor)
-                
-                ScrollView{
-                    LazyHGrid(rows: [.init(.flexible(minimum: 48, maximum: 48), spacing: 8, alignment: .leading)]) {
-                        ForEach(tags) { tag in
-                            Text("\(tag.name ?? "")")
-                                .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
-                                .font(.footnote.weight(.semibold))
-                                .padding([.top, .bottom], 4)
-                                .padding([.trailing, .leading], 8)
-                                .background(
-                                    (tag.tagSwiftUIColor ?? .gray)
-                                )
-                                .cornerRadius(6)
-                                .onLongPressGesture {
-                                    onLongPress?(tag)
-                                }
-                                .transition(.asymmetric(insertion: .slide, removal: .scale))
-                        }
+        if tags.count > 0{            
+            ScrollView(.horizontal){
+                HStack(spacing:4){
+                    Image(systemName: "tag")
+                        .frame(width: 36, height: 36, alignment: .leading)
+                        .foregroundColor(.accentColor)
+                        .padding([.leading])
+                    ForEach(tags) { tag in
+                        Text("\(tag.name ?? "")")
+                            .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
+                            .font(.footnote.weight(.semibold))
+                            .padding([.top, .bottom], 4)
+                            .padding([.trailing, .leading], 8)
+                            .background(
+                                (tag.tagSwiftUIColor ?? .gray)
+                            )
+                            .cornerRadius(6)
+                            .onTapGesture {  }
+                            .onLongPressGesture {
+                                onLongPress?(tag)
+                            }
+                            .transition(.asymmetric(insertion: .slide, removal: .scale))
                     }
                 }
+                .padding([.bottom])
             }
         }
     }
@@ -46,7 +46,7 @@ struct QuestionTagsView: View {
 
 struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionTagsView(tags: [Tag()] ) { tag in
+        QuestionTagsView(tags: LeitnerView_Previews.leitner.tag?.allObjects as? [Tag] ?? [] ) { tag in
             print("tag long press\(tag.name ?? "")")
         }
     }

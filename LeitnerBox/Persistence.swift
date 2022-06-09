@@ -21,16 +21,26 @@ class PersistenceController:ObservableObject {
             newItem.name = "English"
             newItem.id = Int64(index)
             
+            var tags:[Tag] = []
+            for index in 0..<50 {
+                let tag = Tag(context: viewContext)
+                tag.leitner = newItem
+                tag.name = "Tag \(index)"
+            }            
             newItem.level?.addingObjects(from: (1...13).map{ levelId in
                 let level = Level(context: viewContext)
                 level.level = Int16(levelId)
                 level.leitner = newItem
                 level.daysToRecommend = 8
+                
+                
+                
                 level.questions?.addingObjects(from: (1...500).map{ questionId in
                     let question = Question(context: viewContext)
                     question.question = "Quesiton \(questionId)"
                     question.answer = "Answer with long text to test how it looks like on small screen we want to sure that the text is perfectly fit on the screen on smart phones and computers even with huge large screen \(questionId)"
                     question.level = level
+                    question.tag?.addingObjects(from: tags)
                     question.passTime = Date().advanced(by: -(24 * 360))
                     question.createTime = Date()
                     return question

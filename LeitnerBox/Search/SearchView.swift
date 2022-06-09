@@ -15,10 +15,10 @@ struct SearchView: View {
     
     var body: some View {
         ZStack{
-            
             List {
                 ForEach(vm.questions) { item in
                     SearchRowView(question: item, vm: vm)
+                        .listRowInsets(EdgeInsets())
                 }
                 .onDelete(perform: vm.deleteItems)
             }
@@ -64,6 +64,7 @@ struct SearchView: View {
             }
             .hidden()
         }
+        
         .animation(.easeInOut, value: vm.questions)
         .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.isSpeaking)

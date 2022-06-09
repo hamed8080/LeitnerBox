@@ -133,7 +133,7 @@ struct AddOrEditQuestionView: View {
 
 struct AddQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddOrEditQuestionView(vm: .init(level: Level()))
+        AddOrEditQuestionView(vm: .init(level: LeitnerView_Previews.leitner.level?.allObjects.first as? Level ?? Level()))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .preferredColorScheme(.dark)
     }
