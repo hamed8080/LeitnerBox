@@ -100,6 +100,14 @@ class SearchViewModel:ObservableObject{
             questions.sort(by: {
                 ($0.passTime?.timeIntervalSince1970 ?? -1) > ($1.passTime?.timeIntervalSince1970 ?? -1)
             })
+        case .NO_TAGS:
+            questions.sort(by: {
+                ($0.tagsArray?.count ?? 0) < ($1.tagsArray?.count ?? 0)
+            })
+        case .TAGS:
+            questions.sort(by: {
+                ($0.tagsArray?.count ?? 0) > ($1.tagsArray?.count ?? 0)
+            })
         }
     }
     
@@ -341,6 +349,8 @@ var searchSorts:[SortModel] = [
     .init(iconName:"calendar.badge.clock", title:"Passed Date", sortType:.PASSED_TIME),
     .init(iconName:"star", title:"Favorite", sortType:.FAVORITE),
     .init(iconName:"flag.2.crossed", title:"Completed", sortType:.COMPLETED),
+    .init(iconName:"tag", title:"Tags", sortType:.TAGS),
+    .init(iconName:"tag.slash", title:"Without Tags", sortType:.NO_TAGS),
 ]
 
 struct SortModel:Hashable{
@@ -357,4 +367,6 @@ enum SearchSort{
     case FAVORITE
     case DATE
     case PASSED_TIME
+    case TAGS
+    case NO_TAGS
 }
