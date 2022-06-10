@@ -110,7 +110,7 @@ class PersistenceController:ObservableObject {
     
     func replaceDBIfExistFromShareExtension(){
         let appSuppportFile = moveAppGroupFileToAppSupportFolder()
-        if let appSuppportFile = appSuppportFile {
+        if let appSuppportFile{
             replaceDatabase(appSuppportFile: appSuppportFile)
         }
     }

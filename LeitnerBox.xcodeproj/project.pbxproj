@@ -36,7 +36,7 @@
 		054E7724284A544B006BCDEF /* TagRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E7723284A544B006BCDEF /* TagRowView.swift */; };
 		05534693283F6A96009A6029 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05534692283F6A96009A6029 /* README.md */; };
 		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
-		0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0579D4AB283CE459000BD93D /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D4AF283CE46F000BD93D /* ShareViewController.swift */; };
 		0579D4B1283CE855000BD93D /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
 		05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6C283A2A9100F4A413 /* RoundedCorner.swift */; };
@@ -69,15 +69,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		052CA6BF283C9A9500376E79 /* Embed App Extensions */ = {
+		052CA6BF283C9A9500376E79 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */,
+				0579D4AB283CE459000BD93D /* Share.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -337,7 +337,7 @@
 				05266AB228367DA9004693BC /* Sources */,
 				05266AB328367DA9004693BC /* Frameworks */,
 				05266AB428367DA9004693BC /* Resources */,
-				052CA6BF283C9A9500376E79 /* Embed App Extensions */,
+				052CA6BF283C9A9500376E79 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -374,7 +374,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					05266AB528367DA9004693BC = {
 						CreatedOnToolsVersion = 13.3;

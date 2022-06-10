@@ -80,7 +80,7 @@ class ReviewViewModel:ObservableObject{
     
     
     func deleteQuestion(){
-        if let selectedQuestion = selectedQuestion {
+        if let selectedQuestion {
             viewContext.delete(selectedQuestion)
             saveDB()
         }
@@ -133,7 +133,7 @@ class ReviewViewModel:ObservableObject{
     }
     
     func removeFromList(){
-        if let selectedQuestion = selectedQuestion {
+        if let selectedQuestion {
             questions.removeAll(where: { $0 == selectedQuestion})
         }
     }

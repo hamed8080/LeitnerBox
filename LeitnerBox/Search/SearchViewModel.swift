@@ -227,7 +227,7 @@ class SearchViewModel:ObservableObject{
     }
     
     var reviewdCount:Int{
-        if let lastPlayedQuestion = lastPlayedQuestion , let index = questions.firstIndex(of: lastPlayedQuestion){
+        if let lastPlayedQuestion , let index = questions.firstIndex(of: lastPlayedQuestion){
             return index + 1
         }else{
             return 0
@@ -235,7 +235,7 @@ class SearchViewModel:ObservableObject{
     }
     
     func moveQuestionTo(_ leitner:Leitner){
-        if let selectedQuestion = selectedQuestion, let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}) {
+        if let selectedQuestion, let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}) {
             selectedQuestion.level = firstLevel
             selectedQuestion.passTime  = nil
             selectedQuestion.completed = false

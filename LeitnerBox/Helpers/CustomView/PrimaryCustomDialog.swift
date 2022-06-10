@@ -25,7 +25,7 @@ struct PrimaryCustomDialog: View {
     
     var body: some View{
         VStack(spacing:2){
-            if let systemImageName = systemImageName {
+            if let systemImageName {
                 Image(systemName: systemImageName)
                     .resizable()
                     .scaledToFit()
@@ -37,14 +37,14 @@ struct PrimaryCustomDialog: View {
             Text(title)
                 .fontWeight(.bold)
                 .padding([.top,.bottom])
-            if let message = message {
+            if let message {
                 Text(message)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color.gray)
                     .padding([.bottom])
             }
-            if let textBinding = textBinding {
+            if let textBinding {
                 PrimaryTextField(title: textPlaceholder ?? "",
                                  textBinding: textBinding,
                                  isEditing: true,

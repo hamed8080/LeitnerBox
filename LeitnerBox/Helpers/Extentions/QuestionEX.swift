@@ -16,7 +16,7 @@ extension Question{
     
     var remainDays:String{
         let daysToRecommend = level?.daysToRecommend ?? 0
-        if let passTime = passTime, passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) >= Date(){
+        if let passTime, passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) >= Date(){
             let components = passTime.advanced(by: Double(daysToRecommend * (24 * 3600))).differenceWith(from: Date())
             
             let days = (components.day ?? 0)

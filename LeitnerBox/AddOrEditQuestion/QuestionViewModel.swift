@@ -135,7 +135,7 @@ class QuestionViewModel:ObservableObject{
     }
     
     func save()->QuestionStateChanged{
-        if let editQuestion = editQuestion{
+        if let editQuestion{
             saveEdit()
             return .EDITED(editQuestion)
         }else{
@@ -175,7 +175,7 @@ class QuestionViewModel:ObservableObject{
     func removeTagForQuestio(_ tag:Tag){
         withAnimation {
             addedTags.removeAll(where: {$0 == tag})
-            if let editQuestion = editQuestion {
+            if let editQuestion {
                 tag.removeFromQuestion(editQuestion)
             }
         }
