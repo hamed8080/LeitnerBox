@@ -219,8 +219,17 @@ struct SearchRowView: View {
 
 struct SearchRowView_Previews: PreviewProvider {
     
+    static var tag:Tag{
+        let req = Tag.fetchRequest()
+        req.fetchLimit = 1
+        let tag = (try! PersistenceController.preview.container.viewContext.fetch(req)).first!
+        return tag
+    }
+    
     static var previews: some View {
-        SearchRowView(question: Question(context: PersistenceController.preview.container.viewContext), vm: SearchViewModel(leitner: Leitner()))
+        let leitner  = LeitnerView_Previews.leitner
+        let question = (leitner.level?.allObjects as? [Level])?.filter({$0.level == 1}).first?.questions?.allObjects.first as? Question
+        SearchRowView(question: question ?? Question(context: PersistenceController.preview.container.viewContext), vm: SearchViewModel(leitner: leitner))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

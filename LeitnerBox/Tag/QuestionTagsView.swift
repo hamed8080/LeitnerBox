@@ -14,13 +14,16 @@ struct QuestionTagsView: View {
     var onLongPress:((Tag)->())? = nil
     
     var body: some View {
-        if tags.count > 0{            
+        if tags.count > 0{
             ScrollView(.horizontal){
                 HStack(spacing:4){
                     Image(systemName: "tag")
-                        .frame(width: 36, height: 36, alignment: .leading)
+                        .resizable()
+                        .frame(width: 22, height: 22, alignment: .leading)
                         .foregroundColor(.accentColor)
                         .padding([.leading])
+                        .padding(.trailing, 8)
+                    
                     ForEach(tags) { tag in
                         Text("\(tag.name ?? "")")
                             .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
@@ -46,7 +49,8 @@ struct QuestionTagsView: View {
 
 struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionTagsView(tags: LeitnerView_Previews.leitner.tag?.allObjects as? [Tag] ?? [] ) { tag in
+        let tags = LeitnerView_Previews.leitner.tag?.allObjects as! [Tag]
+        QuestionTagsView(tags: tags) { tag in
             print("tag long press\(tag.name ?? "")")
         }
     }

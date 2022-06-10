@@ -47,7 +47,7 @@ struct QuestionsInsideTagView: View {
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     
     static var previews: some View {
-        QuestionsInsideTagView(tag: Tag())
+        QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tag?.allObjects.first as? Tag ?? Tag())
             .preferredColorScheme(.light)
     }
 }

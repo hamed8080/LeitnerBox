@@ -183,7 +183,7 @@ struct ReviewView: View {
         if let selectedQuestion = vm.selectedQuestion, let tags = selectedQuestion.tagsArray{
             QuestionTagsView(tags: tags) { tag in
                 vm.removeTagForQuestion(tag)
-            }
+            }.frame(maxWidth: sizeClass == .compact ? .infinity : 350)
         }
     }
     
@@ -350,23 +350,16 @@ struct FinishedReviewView:View{
 struct NotAnyToReviewView_Previews: PreviewProvider {
     static var previews: some View {
         NotAnyToReviewView()
-            .previewDevice("iPhone 13 Pro Max")
     }
 }
 
 
 struct ReviewView_Previews: PreviewProvider {
     
-    static var level:Level?{
-        (LeitnerView_Previews.leitner.level?.allObjects as? [Level])?.first
-    }
-    
     static var previews: some View {
-        if let level = level{
-            ReviewView(vm: ReviewViewModel(level: level))
-                .previewDevice("iPhone 13 mini")
-                .preferredColorScheme(.light)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        }
+        let level = (LeitnerView_Previews.leitner.level?.allObjects as? [Level])?.filter({$0.level == 1}).first
+        ReviewView(vm: ReviewViewModel(level: level!, isPreview: true))
+            .preferredColorScheme(.light)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

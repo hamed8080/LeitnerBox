@@ -67,6 +67,6 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(level: Level()))
+        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(level: LeitnerView_Previews.leitner.level?.allObjects.first as! Level))
     }
 }
