@@ -108,6 +108,12 @@ class ReviewViewModel:ObservableObject{
             selectedQuestion?.level = selectedQuestion?.upperLevel
         }
         
+        let statistic = Statistic(context: viewContext)
+        statistic.question = selectedQuestion
+        statistic.actionDate = Date()
+        statistic.isPassed = true
+        selectedQuestion?.statistics?.adding(statistic)
+        
         saveDB()
         removeFromList()
         if !hasNext{
@@ -119,10 +125,17 @@ class ReviewViewModel:ObservableObject{
     
     func fail(){
         isShowingAnswer = false
+        
+        let statistic = Statistic(context: viewContext)
+        statistic.question = selectedQuestion
+        statistic.actionDate = Date()
+        statistic.isPassed = false
+        selectedQuestion?.statistics?.adding(statistic)
+        
         if level.leitner?.backToTopLevel == true{
             selectedQuestion?.level = selectedQuestion?.firstLevel
-            saveDB()
         }
+        saveDB()
         failedCount += 1
         removeFromList()
         if !hasNext{

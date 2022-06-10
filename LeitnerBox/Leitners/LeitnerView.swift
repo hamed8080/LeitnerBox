@@ -16,31 +16,15 @@ struct LeitnerView: View {
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
     
+    @State
+    var navigationVisibility = true
+    
     var body: some View {
-        
-        NavigationView{
+        NavigationSplitView{
             ZStack{
-                List {
-                    ForEach(vm.leitners) { item in
-                        LeitnerRowView(leitner: item, vm: vm)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button(role: .destructive) {
-                                    vm.delete(item)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
-                    }
-                }
-                .if(.iOS){ view in
-                    view.refreshable {
-                        vm.load()
-                    }
-                }
-                .listStyle(.plain)
-                
+                leitnerList
                 if  let selectedLeitner = vm.selectedLeitner{
-                    NavigationLink(isActive:(.constant(true))) {
+                    NavigationLink {
                             TagView(vm: TagViewModel(leitner: selectedLeitner))
                                 .onDisappear { vm.selectedLeitner = nil }
                     } label: {
@@ -100,12 +84,37 @@ struct LeitnerView: View {
                     } label: {
                         Label("More", systemImage: "gear")
                     }
-                } 
+                }
             }
+        } detail: {
+            
         }
         .customDialog(isShowing: $vm.showEditOrAddLeitnerAlert, content: {
             editOrAddLeitnerView
         })
+        
+    }
+    
+    
+    var leitnerList:some View{
+        List {
+            ForEach(vm.leitners) { item in
+                LeitnerRowView(leitner: item, vm: vm)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            vm.delete(item)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+            }
+        }
+        .if(.iOS){ view in
+            view.refreshable {
+                vm.load()
+            }
+        }
+        .listStyle(.plain)
     }
     
     var editOrAddLeitnerView:some View{

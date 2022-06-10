@@ -35,22 +35,20 @@ struct LevelsView: View {
                 searchResult
             }
             
-            let binding = Binding(
-                get: {return searchViewModel.selectedQuestion != nil},
-                set: { value in }
-            )
-            NavigationLink(isActive:binding) {
-                let levels = searchViewModel.leitner.level?.allObjects as? [Level]
-                let firstLevel = levels?.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
-                    searchViewModel.qustionStateChanged(questionState)
-                    searchViewModel.selectedQuestion = nil
+            if searchViewModel.selectedQuestion != nil{
+                NavigationLink{
+                    let levels = searchViewModel.leitner.level?.allObjects as? [Level]
+                    let firstLevel = levels?.first(where: {$0.level == 1})
+                    AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
+                        searchViewModel.qustionStateChanged(questionState)
+                        searchViewModel.selectedQuestion = nil
+                    }
+                } label: {
+                    EmptyView()
+                        .frame(width: 0, height: 0)
                 }
-            } label: {
-                EmptyView()
-                    .frame(width: 0, height: 0)
+                .hidden()
             }
-            .hidden()
         }
         .animation(.easeInOut, value: vm.searchWord)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")

@@ -125,6 +125,7 @@
 		05867E72283A480600F4A413 /* QuestionEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEX.swift; sourceTree = "<group>"; };
 		05867E74283A63AA00F4A413 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTagsView.swift; sourceTree = "<group>"; };
+		0589EA5528538D1400354C8C /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		05B0891628466F7500BFE778 /* StringEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEX.swift; sourceTree = "<group>"; };
 		05B80B632836979600390EF9 /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 		05BAE21128379B820043FAEB /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 				05BAE21328379C9E0043FAEB /* AddOrEditQuestion */,
 				0545068D284A350D007EBAFA /* Tag */,
 				053666D828377536002F899F /* Helpers */,
+				0589EA5428538D0500354C8C /* Statistics */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
 				05266AC228367DAA004693BC /* Persistence.swift */,
@@ -306,6 +308,14 @@
 				0579D4A8283CE459000BD93D /* Info.plist */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		0589EA5428538D0500354C8C /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				0589EA5528538D1400354C8C /* StatisticsView.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 		05BAE21328379C9E0043FAEB /* AddOrEditQuestion */ = {
@@ -639,6 +649,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -672,6 +683,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,6 +709,7 @@
 				INFOPLIST_FILE = Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Share;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,6 +737,7 @@
 				INFOPLIST_FILE = Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Share;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
