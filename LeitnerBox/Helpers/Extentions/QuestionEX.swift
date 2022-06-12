@@ -11,7 +11,7 @@ extension Question{
     var isReviewable:Bool{
         guard let passTime = passTime else {return true}
         let daysToRecommend = level?.daysToRecommend ?? 0
-        return passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) <= Date()
+        return (passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) <= Date() && completed == false) 
     }
     
     var remainDays:String{

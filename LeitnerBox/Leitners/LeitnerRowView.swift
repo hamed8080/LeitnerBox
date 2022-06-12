@@ -16,33 +16,21 @@ struct LeitnerRowView: View {
     var vm:LeitnerViewModel
     
     var body: some View {
-        NavigationLink {
-            LevelsView(vm: LevelsViewModel(leitner: leitner), searchViewModel: SearchViewModel(leitner: leitner))
-        } label: {
-            HStack{
-                Text(leitner.name ?? "")
-                Spacer()
-                Text(verbatim: "\(leitner.totalQuestionCount)")
-                    .foregroundColor(.gray)
-                    .font(.footnote.bold())
-            }
-            .contextMenu{
-                Button {
-                    vm.selectedLeitner = leitner
-                    vm.leitnerTitle = vm.selectedLeitner?.name ?? ""
-                    vm.backToTopLevel = leitner.backToTopLevel
-                    vm.showEditOrAddLeitnerAlert.toggle()
-                } label: {
-                    Label("Rename and Edit", systemImage: "gear")
-                }
-                
-                Button {
-                    withAnimation {
-                        vm.selectedLeitner = leitner
-                    }
-                } label: {
-                    Label("Manage Tags", systemImage: "tag")
-                }
+        HStack{
+            Text(leitner.name ?? "")
+            Spacer()
+            Text(verbatim: "\(leitner.totalQuestionCount)")
+                .foregroundColor(.gray)
+                .font(.footnote.bold())
+        }
+        .contextMenu{
+            Button {
+                vm.selectedLeitner = leitner
+                vm.leitnerTitle = vm.selectedLeitner?.name ?? ""
+                vm.backToTopLevel = leitner.backToTopLevel
+                vm.showEditOrAddLeitnerAlert.toggle()
+            } label: {
+                Label("Rename and Edit", systemImage: "gear")
             }
         }
     }

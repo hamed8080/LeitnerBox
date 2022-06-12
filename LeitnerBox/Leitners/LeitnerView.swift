@@ -19,100 +19,94 @@ struct LeitnerView: View {
     @State
     var navigationVisibility = true
     
+    @State
+    var selectedLeitner:Leitner? = nil
+    
     var body: some View {
         NavigationSplitView{
-            ZStack{
-                leitnerList
-                if  let selectedLeitner = vm.selectedLeitner{
-                    NavigationLink {
-                            TagView(vm: TagViewModel(leitner: selectedLeitner))
-                                .onDisappear { vm.selectedLeitner = nil }
-                    } label: {
-                        EmptyView()
-                    }
+            leitnerSidebarList
+        } detail: {
+            NavigationStack{
+                if let selectedLeitner = vm.selectedLeitner{
+                    TagView(vm: TagViewModel(leitner: selectedLeitner))
+                        .onDisappear { vm.selectedLeitner = nil }
                 }
             }
-            .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
-                if .iOS == true{
-                    try? vm.backupFile?.deleteDirectory()
+        }
+        .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
+            if .iOS == true{
+                try? vm.backupFile?.deleteDirectory()
+            }
+        }, content:{
+            if let fileUrl = vm.backupFile?.fileURL{
+                ActivityViewControllerWrapper(activityItems: [fileUrl])
+            }else{
+                EmptyView()
+            }
+        })
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                
+                Button {
+                    vm.exportDB()
+                } label: {
+                    Label("Export", systemImage: "square.and.arrow.up")
                 }
-            }, content:{
-                if let fileUrl = vm.backupFile?.fileURL{
-                    ActivityViewControllerWrapper(activityItems: [fileUrl])
-                }else{
-                    EmptyView()
+                
+                Button {
+                    vm.clear()
+                    vm.showEditOrAddLeitnerAlert.toggle()
+                } label: {
+                    Label("Add Item", systemImage: "plus")
                 }
-            })
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    
-                    Button {
-                        vm.exportDB()
-                    } label: {
-                        Label("Export", systemImage: "square.and.arrow.up")
+                
+                Menu{
+                    Toggle(isOn: $pronounceDetailAnswer) {
+                        Label("Prononce \ndetails answer ", systemImage: "mic")
                     }
                     
-                    Button {
-                        vm.clear()
-                        vm.showEditOrAddLeitnerAlert.toggle()
-                    } label: {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    Divider()
                     
                     Menu{
-                        Toggle(isOn: $pronounceDetailAnswer) {
-                            Label("Prononce \ndetails answer ", systemImage: "mic")
-                        }
-                        
-                        Divider()
-                
-                        Menu{
-                            ForEach(vm.voices, id:\.self){ voice in
-                                let isSelected = vm.selectedVoiceIdentifire == voice.identifier
-                                Button {
-                                    vm.setSelectedVoice(voice)
-                                } label: {
-                                    Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
-                                }
+                        ForEach(vm.voices, id:\.self){ voice in
+                            let isSelected = vm.selectedVoiceIdentifire == voice.identifier
+                            Button {
+                                vm.setSelectedVoice(voice)
+                            } label: {
+                                Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
                             }
-                            Divider()
-                            
-                        } label: {
-                            Label("Pronounce Voice", systemImage: "waveform")
                         }
+                        Divider()
                         
                     } label: {
-                        Label("More", systemImage: "gear")
+                        Label("Pronounce Voice", systemImage: "waveform")
                     }
+                    
+                } label: {
+                    Label("More", systemImage: "gear")
                 }
             }
-        } detail: {
-            
         }
         .customDialog(isShowing: $vm.showEditOrAddLeitnerAlert, content: {
             editOrAddLeitnerView
         })
-        
     }
     
-    
-    var leitnerList:some View{
-        List {
-            ForEach(vm.leitners) { item in
-                LeitnerRowView(leitner: item, vm: vm)
+    var leitnerSidebarList:some View{
+        List(vm.leitners, selection: $selectedLeitner) { leitner in
+            NavigationLink(value: leitner) {
+                LeitnerRowView(leitner: leitner, vm: vm)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
-                            vm.delete(item)
+                            vm.delete(leitner)
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
                     }
             }
         }
-        .if(.iOS){ view in
-            view.refreshable {
-                vm.load()
-            }
+        .refreshable {
+            vm.load()
         }
         .listStyle(.plain)
     }
