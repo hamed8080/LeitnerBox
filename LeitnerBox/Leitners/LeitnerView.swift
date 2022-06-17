@@ -27,9 +27,8 @@ struct LeitnerView: View {
             leitnerSidebarList
         } detail: {
             NavigationStack{
-                if let selectedLeitner = vm.selectedLeitner{
-                    TagView(vm: TagViewModel(leitner: selectedLeitner))
-                        .onDisappear { vm.selectedLeitner = nil }
+                if let leitner = selectedLeitner{
+                    LevelsView(vm: LevelsViewModel(leitner: leitner), searchViewModel: SearchViewModel(leitner: leitner))
                 }
             }
         }
@@ -44,56 +43,56 @@ struct LeitnerView: View {
                 EmptyView()
             }
         })
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                
-                Button {
-                    vm.exportDB()
-                } label: {
-                    Label("Export", systemImage: "square.and.arrow.up")
-                }
-                
-                Button {
-                    vm.clear()
-                    vm.showEditOrAddLeitnerAlert.toggle()
-                } label: {
-                    Label("Add Item", systemImage: "plus")
-                }
-                
-                Menu{
-                    Toggle(isOn: $pronounceDetailAnswer) {
-                        Label("Prononce \ndetails answer ", systemImage: "mic")
-                    }
-                    
-                    Divider()
-                    
-                    Menu{
-                        ForEach(vm.voices, id:\.self){ voice in
-                            let isSelected = vm.selectedVoiceIdentifire == voice.identifier
-                            Button {
-                                vm.setSelectedVoice(voice)
-                            } label: {
-                                Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
-                            }
-                        }
-                        Divider()
-                        
-                    } label: {
-                        Label("Pronounce Voice", systemImage: "waveform")
-                    }
-                    
-                } label: {
-                    Label("More", systemImage: "gear")
-                }
-            }
-        }
         .customDialog(isShowing: $vm.showEditOrAddLeitnerAlert, content: {
             editOrAddLeitnerView
         })
     }
     
+    var toolbarView:some View{
+        HStack{
+            Button {
+                vm.exportDB()
+            } label: {
+                Label("Export", systemImage: "square.and.arrow.up")
+            }
+            
+            Button {
+                vm.clear()
+                vm.showEditOrAddLeitnerAlert.toggle()
+            } label: {
+                Label("Add Item", systemImage: "plus")
+            }
+            
+            Menu{
+                Toggle(isOn: $pronounceDetailAnswer) {
+                    Label("Prononce \ndetails answer ", systemImage: "mic")
+                }
+                
+                Divider()
+                
+                Menu{
+                    ForEach(vm.voices, id:\.self){ voice in
+                        let isSelected = vm.selectedVoiceIdentifire == voice.identifier
+                        Button {
+                            vm.setSelectedVoice(voice)
+                        } label: {
+                            Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
+                        }
+                    }
+                    Divider()
+                    
+                } label: {
+                    Label("Pronounce Voice", systemImage: "waveform")
+                }
+                
+            } label: {
+                Label("More", systemImage: "gear")
+            }
+        }
+    }
+    
     var leitnerSidebarList:some View{
-        List(vm.leitners, selection: $selectedLeitner) { leitner in
+        List(vm.leitners, selection: $selectedLeitner.animation()) { leitner in
             NavigationLink(value: leitner) {
                 LeitnerRowView(leitner: leitner, vm: vm)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -103,6 +102,11 @@ struct LeitnerView: View {
                             Label("Delete", systemImage: "trash")
                         }
                     }
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                toolbarView
             }
         }
         .refreshable {
@@ -164,7 +168,18 @@ struct LeitnerView_Previews: PreviewProvider {
         return leitner
     }
     
+    struct Preview:View{
+        
+        @StateObject
+        var vm = LeitnerViewModel(isPreview: true)
+        var body: some View{
+            LeitnerView(vm: vm)
+        }
+    }
+    
     static var previews: some View {
-        LeitnerView(vm: LeitnerViewModel(isPreview: true))
+        NavigationStack{
+            Preview()
+        }
     }
 }

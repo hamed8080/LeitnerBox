@@ -92,13 +92,17 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     
-    static var vm:TagViewModel{
-        let vm = TagViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
-        return vm
+    struct Preview: View{
+        @ObservedObject
+        var vm =  TagViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        var body: some View{
+            TagView(vm: vm)
+        }
     }
     
     static var previews: some View {
-        TagView(vm: vm)
-            .preferredColorScheme(.light)
+        NavigationStack{
+            Preview()
+        }
     }
 }

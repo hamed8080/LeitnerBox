@@ -132,10 +132,20 @@ struct AddOrEditQuestionView: View {
 }
 
 struct AddQuestionView_Previews: PreviewProvider {
+    
+    struct Preview:View{
+        
+        @StateObject
+        var vm = QuestionViewModel(level: LeitnerView_Previews.leitner.level?.allObjects.first as? Level ?? Level())
+        var body: some View{
+            AddOrEditQuestionView(vm: vm)
+        }
+    }
+    
     static var previews: some View {
-        AddOrEditQuestionView(vm: .init(level: LeitnerView_Previews.leitner.level?.allObjects.first as? Level ?? Level()))
-            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-            .preferredColorScheme(.dark)
+        NavigationStack{
+            Preview()
+        }
     }
 }
 

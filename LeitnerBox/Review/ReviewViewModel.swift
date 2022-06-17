@@ -133,7 +133,7 @@ class ReviewViewModel:ObservableObject{
         selectedQuestion?.statistics?.adding(statistic)
         
         if level.leitner?.backToTopLevel == true{
-            selectedQuestion?.level = selectedQuestion?.firstLevel
+            selectedQuestion?.level = selectedQuestion?.level?.leitner?.firstLevel
         }
         saveDB()
         failedCount += 1

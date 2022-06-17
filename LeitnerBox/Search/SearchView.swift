@@ -52,8 +52,7 @@ struct SearchView: View {
             )
             
             NavigationLink(isActive:binding) {
-                let levels = vm.leitner.level?.allObjects as? [Level]
-                let firstLevel = levels?.first(where: {$0.level == 1})
+                let firstLevel = vm.leitner.firstLevel
                 AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
                     vm.qustionStateChanged(questionState)
                     vm.selectedQuestion = nil
@@ -64,11 +63,10 @@ struct SearchView: View {
             }
             .hidden()
         }
-        
         .animation(.easeInOut, value: vm.questions)
         .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.isSpeaking)
-        .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
+        .navigationTitle(Text("Advance Search in \(vm.leitner.name ?? "")"))
         .onAppear(perform: {
             vm.viewDidAppear()
         })
@@ -192,14 +190,21 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     
-    static var vm:SearchViewModel{
-        let vm = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
-        vm.isSpeaking = false
-        return vm
+    struct Preview: View{
+        
+        @ObservedObject
+        var vm = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        var body: some View{
+            SearchView(vm: vm)
+                .onAppear{
+                    vm.isSpeaking = false
+                }
+        }
     }
     
     static var previews: some View {
-        SearchView(vm: vm)
-            .preferredColorScheme(.light)
+        NavigationStack{
+            Preview()
+        }
     }
 }

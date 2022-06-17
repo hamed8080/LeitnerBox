@@ -27,10 +27,12 @@ class PersistenceController:ObservableObject {
                 generateTags(5,leitner).forEach { tag in
                     questions.forEach { question in
                         tag.addToQuestion(question)
+                        generateStatistics(question)
                     }
                 }
             }
         }
+        
         do {
             try previewVC.save()
         } catch {
@@ -74,6 +76,14 @@ class PersistenceController:ObservableObject {
             tags.append(tag)
         }
         return tags
+    }
+    
+    
+    static func generateStatistics(_ question:Question){
+        let statistic = Statistic(context: previewVC)
+        statistic.actionDate = Calendar.current.date(byAdding: .day, value: -(Int.random(in: 1...360)), to: .now)
+        statistic.isPassed = Bool.random()
+        statistic.question = question
     }
     
     static func generateQuestions(_ count:Int, _ level:Level)->[Question]{

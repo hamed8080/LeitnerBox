@@ -314,22 +314,6 @@ struct ReviewView: View {
     }
 }
 
-struct NotAnyToReviewView:View{
-    
-    var body: some View{
-        VStack{
-            Image(systemName: "rectangle.and.text.magnifyingglass")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.gray)
-            Text("There is nothing to review here at the moment.")
-                .font(.title2.weight(.medium))
-                .foregroundColor(.gray)
-        }
-    }
-}
-
 struct FinishedReviewView:View{
     
     var body: some View{
@@ -347,19 +331,21 @@ struct FinishedReviewView:View{
     }
 }
 
-struct NotAnyToReviewView_Previews: PreviewProvider {
-    static var previews: some View {
-        NotAnyToReviewView()
-    }
-}
-
-
 struct ReviewView_Previews: PreviewProvider {
     
+    struct Preview:View{
+        
+        @StateObject
+        var vm =  ReviewViewModel(level: LeitnerView_Previews.leitner.firstLevel!, isPreview: true)
+        var body: some View{
+            ReviewView(vm: vm)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
+    }
+    
     static var previews: some View {
-        let level = (LeitnerView_Previews.leitner.level?.allObjects as? [Level])?.filter({$0.level == 1}).first
-        ReviewView(vm: ReviewViewModel(level: level!, isPreview: true))
-            .preferredColorScheme(.light)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        NavigationStack{
+            Preview()
+        }
     }
 }

@@ -37,8 +37,7 @@ struct LevelsView: View {
             
             if searchViewModel.selectedQuestion != nil{
                 NavigationLink{
-                    let levels = searchViewModel.leitner.level?.allObjects as? [Level]
-                    let firstLevel = levels?.first(where: {$0.level == 1})
+                    let firstLevel = searchViewModel.leitner.firstLevel
                     AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
                         searchViewModel.qustionStateChanged(questionState)
                         searchViewModel.selectedQuestion = nil
@@ -111,6 +110,12 @@ struct LevelsView: View {
         } label: {
             Label("Tags", systemImage: "tag")
         }
+        
+        NavigationLink{
+            StatisticsView(vm: .init())
+        } label: {
+            Label("Statictics", systemImage: "chart.xyaxis.line")
+        }
     }
     
     @ViewBuilder
@@ -161,10 +166,24 @@ struct LevelsView: View {
 }
 
 struct LevelsView_Previews: PreviewProvider {
+    
+    struct Preview: View{
+        
+        @ObservedObject
+        var vm = LevelsViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        
+        @ObservedObject
+        var searchViewModel = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        
+        var body: some View{
+            LevelsView(vm: vm, searchViewModel: searchViewModel)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
+    }
+    
     static var previews: some View {
-        LevelsView(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner),searchViewModel: SearchViewModel(leitner: LeitnerView_Previews.leitner))
-            .previewDevice("iPhone 13 Pro Max")
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .previewInterfaceOrientation(.portrait)
+        NavigationStack{
+            Preview()
+        }
     }
 }

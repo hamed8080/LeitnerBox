@@ -17,4 +17,22 @@ extension Leitner{
         guard let tags =  tag?.allObjects as? [Tag] else{ return [] }
         return tags
     }
+    
+    var firstLevel:Level?{
+        let levels = level?.allObjects as? [Level]
+        return levels?.filter{ $0.level == 1 }.first
+    }
+
+    var totalReviewableCount:Int{
+        let levels = level?.allObjects as? [Level]
+        let levelCountsArray = levels?.map{
+            level in level.questions?.filter{ ($0 as? Question)?.isReviewable ?? false }.count ?? 0
+        }
+        return levelCountsArray?.reduce(0, +) ?? 0
+    }
+
+    var succcessPercentage:Double{
+        return (Double(totalReviewableCount) / Double(totalQuestionCount)) * 100
+    }
+
 }

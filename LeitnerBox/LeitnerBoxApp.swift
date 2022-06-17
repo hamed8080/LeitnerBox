@@ -11,8 +11,6 @@ import UniformTypeIdentifiers
 @main
 struct LeitnerBoxApp: App, DropDelegate {
     
-    
-    
     @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject
