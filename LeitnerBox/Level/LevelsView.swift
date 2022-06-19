@@ -20,7 +20,7 @@ struct LevelsView: View {
         
         ZStack{
             List {
-                if vm.filtered.count > 1 {
+                if vm.filtered.count >= 1 {
                     searchResult
                 }else{
                     header
