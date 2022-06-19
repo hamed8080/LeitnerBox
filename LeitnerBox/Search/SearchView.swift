@@ -16,7 +16,7 @@ struct SearchView: View {
     var body: some View {
         ZStack{
             List {
-                ForEach(vm.questions) { item in
+                ForEach(vm.filtered) { item in
                     SearchRowView(question: item, vm: vm)
                         .listRowInsets(EdgeInsets())
                 }
@@ -25,11 +25,7 @@ struct SearchView: View {
             .animation(.easeInOut, value: vm.filtered)
             .listStyle(.plain)
             .searchable(text: $vm.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                if vm.filtered.count > 0 || vm.searchText.isEmpty{
-                    ForEach(vm.filtered){ question in
-                        SearchRowView(question: question, vm: vm)
-                    }
-                }else{
+                if vm.searchText.isEmpty == false && vm.filtered.count < 1{
                     HStack{
                         Image(systemName: "doc.text.magnifyingglass")
                             .foregroundColor(.gray.opacity(0.8))

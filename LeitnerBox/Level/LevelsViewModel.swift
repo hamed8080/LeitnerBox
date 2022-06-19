@@ -37,6 +37,9 @@ class LevelsViewModel:ObservableObject{
     var daysToRecommend = 0
     
     var filtered:[Question] {
+        if searchWord.isEmpty{
+            return []
+        }
         if searchWord.contains("#"){
             let tagName = searchWord.replacingOccurrences(of: "#", with: "")
             if tagName.isEmpty == false{

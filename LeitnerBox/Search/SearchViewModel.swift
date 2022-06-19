@@ -296,6 +296,9 @@ class SearchViewModel:ObservableObject{
     }
     
     var filtered:[Question]{
+        if searchText.isEmpty{            
+            return questions
+        }
         if searchText.contains("#"){
             
             let tagName = searchText.replacingOccurrences(of: "#", with: "")

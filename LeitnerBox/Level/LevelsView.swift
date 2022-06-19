@@ -20,9 +20,13 @@ struct LevelsView: View {
         
         ZStack{
             List {
-                header
-                ForEach(vm.levels) { level in
-                    LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
+                if vm.filtered.count > 1 {
+                    searchResult
+                }else{
+                    header
+                    ForEach(vm.levels) { level in
+                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
+                    }
                 }
             }
             .listStyle(.plain)
@@ -31,9 +35,7 @@ struct LevelsView: View {
                     vm.load()
                 }
             }
-            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                searchResult
-            }
+            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
             
             let binding = Binding(
                 get: {return searchViewModel.selectedQuestion != nil},
