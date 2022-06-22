@@ -115,7 +115,7 @@ struct ReviewView: View {
                 .padding(.bottom)
                 .foregroundColor(.accentColor)
             Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
-                .font(isIpad ? .title3.bold() : .footnote.bold())
+                .font( sizeClass == .compact ? .body.bold() : .title3.bold())
         }
     }
     
@@ -162,10 +162,10 @@ struct ReviewView: View {
             VStack(spacing:16){
                 Text(vm.selectedQuestion?.question ?? "")
                     .multilineTextAlignment(.center)
-                    .font(isIpad ? .largeTitle.weight(.bold) : .title2.weight(.semibold))
+                    .font(sizeClass == .compact ? .title2.weight(.semibold) : .largeTitle.weight(.bold))
                
                 Text(vm.selectedQuestion?.detailDescription ?? "")
-                    .font(isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                    .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color("subtitleTextColor"))
                     .transition(.scale)
@@ -210,7 +210,7 @@ struct ReviewView: View {
         HStack{
             Spacer()
             Text(vm.selectedQuestion?.answer ?? "")
-                .font( isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                .font( sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
                 .multilineTextAlignment(.center)
             Spacer()
         }
@@ -250,7 +250,7 @@ struct ReviewView: View {
     }
     
     var controls:some View{
-        HStack(spacing: isIpad ? 48 : 36){
+        HStack(spacing: sizeClass == .compact ? 26 : 48){
             
             Spacer()
             
