@@ -52,6 +52,7 @@ struct SearchView: View {
                 let firstLevel = levels?.first(where: {$0.level == 1})
                 AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
                     vm.qustionStateChanged(questionState)
+                }.onDisappear {
                     vm.selectedQuestion = nil
                 }
             } label: {
