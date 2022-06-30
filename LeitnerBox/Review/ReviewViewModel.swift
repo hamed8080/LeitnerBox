@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 import AVFoundation
+import NaturalLanguage
 
 class ReviewViewModel:ObservableObject{
     
@@ -192,6 +193,21 @@ class ReviewViewModel:ObservableObject{
             tag.addToQuestion(selectedQuestion)
             saveDB()
         }
+    }
+    
+    var partOfspeech:String?{
+        let text = String((selectedQuestion?.question ?? "").split(separator: "\n").first!)
+        let tagger = NLTagger(tagSchemes: [.lexicalClass])
+        tagger.string = text
+        let options: NLTagger.Options = [.omitPunctuation, .omitWhitespace]
+        var tags:[String] = []
+        tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange in
+            if let tag = tag {
+                tags.append("\(tag.rawValue)")
+            }
+            return true
+        }
+        return tags.joined(separator: ", ")
     }
     
 }

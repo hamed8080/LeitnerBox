@@ -172,6 +172,11 @@ struct ReviewView: View {
                     .onTapGesture {
                         vm.toggleAnswer()
                     }
+                if let ps = vm.partOfspeech{
+                    Text(ps)
+                        .font(.title3.weight(.semibold))
+                        .foregroundColor(.accentColor)
+                }
             }
            
             Spacer()

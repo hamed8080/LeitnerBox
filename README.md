@@ -6,7 +6,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5+-orange?style=flat-square)](https://img.shields.io/badge/-Orange?style=flat-square)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_Linux_Windows-Green?style=flat-square)
 
-Leitner-Box is an iOS application to memorize word forever.  
+Leitner-Box is an iOS application to memorize words forever.  
 ## Features
 
 - [x] Memorize words and phrases.
