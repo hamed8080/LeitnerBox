@@ -42,8 +42,8 @@ class LeitnerViewModel:ObservableObject{
     @Published
     var voices:[AVSpeechSynthesisVoice] = []
     
-    init(isPreview:Bool = false){
-        viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
+    init(viewContext:NSManagedObjectContext){
+        self.viewContext = viewContext
         voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: {$0.language > $1.language})
         selectedVoiceIdentifire  = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
         load()
@@ -52,11 +52,7 @@ class LeitnerViewModel:ObservableObject{
     func load(){
         let req = Leitner.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
-        do {
-            self.leitners = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
+        self.leitners = (try? viewContext.fetch(req)) ?? []
     }
     
     func delete(_ leitner:Leitner){
@@ -64,16 +60,7 @@ class LeitnerViewModel:ObservableObject{
             leitners.remove(at: index)
         }
         viewContext.delete(leitner)
-        saveDB()
-    }
-    
-    func saveDB(){
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func editOrAddLeitner(){
@@ -87,37 +74,39 @@ class LeitnerViewModel:ObservableObject{
     func editLeitner(){
         selectedLeitner?.name = leitnerTitle
         selectedLeitner?.backToTopLevel = backToTopLevel
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        PersistenceController.saveDB(viewContext: viewContext)
         showEditOrAddLeitnerAlert.toggle()
+        if let selectedLeitner = selectedLeitner, let index = leitners.firstIndex(where: {$0.id == selectedLeitner.id}){
+            leitners[index] = selectedLeitner
+        }
     }
     
     func addLeitner() {
         withAnimation {
-            
-            let maxId = leitners.max(by: {$0.id < $1.id})?.id ?? 0
-            let newItem = Leitner(context: viewContext)
-            newItem.createDate = Date()
-            newItem.name = leitnerTitle
-            newItem.id = maxId + 1
-            newItem.backToTopLevel = backToTopLevel
-            let levels:[Level] = (1...13).map{ levelId in
-                let level = Level(context: viewContext)
-                level.level = Int16(levelId)
-                level.leitner = newItem
-                level.daysToRecommend = Int32(levelId) * 2
-                return level
-            }
-            newItem.level?.addingObjects(from: levels)
+            let newItem = makeNewLeitner()
             leitners.append(newItem)
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
             showEditOrAddLeitnerAlert.toggle()
             clear()
         }
+    }
+    
+    func makeNewLeitner()->Leitner{
+        let maxId = leitners.max(by: {$0.id < $1.id})?.id ?? 0
+        let newItem = Leitner(context: viewContext)
+        newItem.createDate = Date()
+        newItem.name = leitnerTitle
+        newItem.id = maxId + 1
+        newItem.backToTopLevel = backToTopLevel
+        let levels:[Level] = (1...13).map{ levelId in
+            let level = Level(context: viewContext)
+            level.level = Int16(levelId)
+            level.leitner = newItem
+            level.daysToRecommend = Int32(levelId) * 2
+            return level
+        }
+        newItem.level?.addingObjects(from: levels)
+        return newItem
     }
     
     func clear(){
@@ -138,7 +127,7 @@ class LeitnerViewModel:ObservableObject{
             NSSQLitePragmasOption: ["journal_mode": "DELETE"],
             // Minimize file size
             NSSQLiteManualVacuumOption: true,
-            ]
+        ]
         
         
         guard let sourcePersistentStore = PersistenceController.shared.container.persistentStoreCoordinator.persistentStores.first else {return}
@@ -148,7 +137,7 @@ class LeitnerViewModel:ObservableObject{
         let backupPersistentContainer = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let intermediateStoreOptions = (sourcePersistentStore.options ?? [:]).merging([NSReadOnlyPersistentStoreOption: true],uniquingKeysWith: { $1 })
         
-        do{           
+        do{
             let newPersistentStore = try backupPersistentContainer.addPersistentStore(
                 ofType: sourcePersistentStore.type,
                 configurationName: sourcePersistentStore.configurationName,
@@ -185,5 +174,5 @@ class LeitnerViewModel:ObservableObject{
         selectedVoiceIdentifire = voice.identifier
         UserDefaults.standard.set(selectedVoiceIdentifire, forKey: "selectedVoiceIdentifire")
     }
-
+    
 }

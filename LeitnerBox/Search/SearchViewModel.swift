@@ -17,7 +17,7 @@ class SearchViewModel:ObservableObject{
     private var pronounceDetailAnswer = false
     
     @Published
-    var viewContext:NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    var viewContext:NSManagedObjectContext
 
     @Published
     var questions:[Question] = []
@@ -49,10 +49,10 @@ class SearchViewModel:ObservableObject{
     
     var commandCenter:MPRemoteCommandCenter? = nil
 
-    init(leitner:Leitner, isPreview:Bool = false ){
+    init(viewContext:NSManagedObjectContext, leitner:Leitner){
+        self.viewContext = viewContext
         self.speechDelegate = SpeechDelegate()
         synthesizer.delegate = speechDelegate
-        viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
         self.leitner = leitner
         load()
     }
@@ -61,7 +61,7 @@ class SearchViewModel:ObservableObject{
         withAnimation {
             offsets.map { questions[$0] }.forEach(viewContext.delete)
             questions.remove(atOffsets: offsets)
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
     
@@ -70,7 +70,7 @@ class SearchViewModel:ObservableObject{
         if let index = questions.firstIndex(where: {$0 == question}){
             questions.remove(at: index)
         }
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func sort(_ sort:SearchSort){
@@ -113,20 +113,20 @@ class SearchViewModel:ObservableObject{
     
     func toggleCompleted(_ question:Question){
         question.completed.toggle()
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func toggleFavorite(_ question:Question){
         question.favorite.toggle()
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func resetToFirstLevel(_ question:Question){
-        if let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}){
+        if let firstLevel = leitner.levels.first(where: {$0.level == 1}){
             question.level = firstLevel
             question.passTime  = nil
             question.completed = false
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
     
@@ -147,15 +147,6 @@ class SearchViewModel:ObservableObject{
         }
         utterance.postUtteranceDelay = 0
         synthesizer.speak(utterance)
-    }
-    
-    func saveDB(){
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
     }
     
     var timer:Timer? = nil
@@ -235,11 +226,11 @@ class SearchViewModel:ObservableObject{
     }
     
     func moveQuestionTo(_ leitner:Leitner){
-        if let selectedQuestion = selectedQuestion, let firstLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 1}) {
+        if let selectedQuestion = selectedQuestion, let firstLevel = leitner.levels.first(where: {$0.level == 1}) {
             selectedQuestion.level = firstLevel
             selectedQuestion.passTime  = nil
             selectedQuestion.completed = false
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
             questions.removeAll(where: {$0 == selectedQuestion})
         }
     }
@@ -249,11 +240,7 @@ class SearchViewModel:ObservableObject{
         let req = Question.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: true)]
         req.predicate = predicate
-        do {
-            self.questions = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
+        self.questions = (try? viewContext.fetch(req)) ?? []
     }
     
     func qustionStateChanged(_ state :QuestionStateChanged){
@@ -288,27 +275,22 @@ class SearchViewModel:ObservableObject{
         }
     }
     
-    func removeTagForQuestio(_ question:Question , _ tag:Tag){
+    func removeTagForQuestion(_ question:Question , _ tag:Tag){
         withAnimation(.easeInOut) {
             tag.removeFromQuestion(question)
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
     
     var filtered:[Question]{
-        if searchText.isEmpty{            
+        if searchText.isEmpty || searchText == "#"{
             return questions
         }
-        if searchText.contains("#"){
-            
-            let tagName = searchText.replacingOccurrences(of: "#", with: "")
-            if tagName.isEmpty == false{
-                return questions.filter({
-                    $0.tagsArray?.contains(where: {$0.name?.lowercased().contains(tagName.lowercased()) ?? false}) ?? false
-                })
-            }else{
-                return questions
-            }
+        let tagName = searchText.replacingOccurrences(of: "#", with: "")
+        if searchText.contains("#"), tagName.isEmpty == false{
+            return questions.filter({
+                $0.tagsArray?.contains(where: {$0.name?.lowercased().contains(tagName.lowercased()) ?? false}) ?? false
+            })
         }else{
             return questions.filter({
                 $0.question?.lowercased().contains( searchText.lowercased()) ?? false ||
@@ -319,11 +301,11 @@ class SearchViewModel:ObservableObject{
     }
     
     func complete(_ question:Question){
-        if let lastLevel = (leitner.level?.allObjects as? [Level])?.first(where: {$0.level == 13}) {
+        if let lastLevel = leitner.levels.first(where: {$0.level == 13}) {
             question.level     = lastLevel
             question.passTime  = Date()
             question.completed = true
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
 }

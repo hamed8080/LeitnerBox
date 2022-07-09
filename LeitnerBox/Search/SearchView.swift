@@ -48,9 +48,9 @@ struct SearchView: View {
             )
             
             NavigationLink(isActive:binding) {
-                let levels = vm.leitner.level?.allObjects as? [Level]
-                let firstLevel = levels?.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
+                let levels = vm.leitner.levels
+                let firstLevel = levels.first(where: {$0.level == 1})
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
                     vm.qustionStateChanged(questionState)
                 }.onDisappear {
                     vm.selectedQuestion = nil
@@ -73,9 +73,9 @@ struct SearchView: View {
             ToolbarItem {
                 
                 NavigationLink {
-                    let levels = vm.leitner.level?.allObjects as? [Level]
-                    let firstLevel = levels?.first(where: {$0.level == 1})
-                    AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
+                    let levels = vm.leitner.levels
+                    let firstLevel = levels.first(where: {$0.level == 1})
+                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
                         vm.qustionStateChanged(questionState)
                     }
                 } label: {
@@ -190,7 +190,7 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     
     static var vm:SearchViewModel{
-        let vm = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        let vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         vm.isSpeaking = false
         return vm
     }

@@ -19,7 +19,7 @@ struct TagRowView: View {
         HStack{
             Text("\(tag.name ?? "")")
             Spacer()
-            Text(verbatim: "\(tag.question?.allObjects.count ?? 0)")
+            Text(verbatim: "\(tag.questions.count)")
                 .font(.footnote.weight(.semibold))
                 .foregroundColor(.gray)
             Circle()
@@ -42,7 +42,7 @@ struct TagRowView: View {
 struct TagRowView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TagRowView(tag: Tag(context: PersistenceController.preview.container.viewContext), vm: TagViewModel(leitner: LeitnerView_Previews.leitner))
+        TagRowView(tag: Tag(context: PersistenceController.preview.container.viewContext), vm: TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

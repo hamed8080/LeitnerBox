@@ -14,4 +14,7 @@ extension Tag{
         return Color(uiColor: uicColor)
     }
    
+    var questions:[Question]{
+        return question?.allObjects as? [Question] ?? []
+    }
 }

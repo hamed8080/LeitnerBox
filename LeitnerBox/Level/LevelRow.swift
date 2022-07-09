@@ -26,16 +26,17 @@ struct LevelRow:View{
                         .foregroundColor(.white)
                         .font(.title.weight(.bold))
                         .frame(width: 48, height: 48)
+                        .accessibilityIdentifier("levelRow")
                         .background(
                             Circle()
                                 .fill(Color.blue)
                         )
-                    let favCount = (reviewViewModel.level.questions?.allObjects as? [Question] )?.filter({ $0.favorite == true }).count
+                    let favCount = reviewViewModel.level.allQuestions.filter({ $0.favorite == true }).count
   
                     HStack(alignment:.firstTextBaseline, spacing: 4){
                         Image(systemName: "star.fill")
                             .foregroundColor(.accentColor)
-                        Text(verbatim: "\(favCount ?? 0)")
+                        Text(verbatim: "\(favCount)")
                             .foregroundColor(.gray)
                     }
                 }
@@ -67,6 +68,6 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(level: LeitnerView_Previews.leitner.level?.allObjects.first as! Level))
+        LevelRow(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!))
     }
 }

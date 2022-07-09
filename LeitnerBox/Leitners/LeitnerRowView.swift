@@ -17,7 +17,7 @@ struct LeitnerRowView: View {
     
     var body: some View {
         NavigationLink {
-            LevelsView(vm: LevelsViewModel(leitner: leitner), searchViewModel: SearchViewModel(leitner: leitner))
+            LevelsView(vm: LevelsViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner), searchViewModel: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext,leitner: leitner))
         } label: {
             HStack{
                 Text(leitner.name ?? "")
@@ -50,6 +50,6 @@ struct LeitnerRowView: View {
 
 struct LeitnerRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(isPreview: true))
+        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext))
     }
 }

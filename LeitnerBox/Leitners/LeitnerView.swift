@@ -11,7 +11,7 @@ import CoreData
 struct LeitnerView: View {
     
     @ObservedObject
-    var vm:LeitnerViewModel = LeitnerViewModel()
+    var vm:LeitnerViewModel = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
     
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
@@ -41,7 +41,7 @@ struct LeitnerView: View {
                 
                 if  let selectedLeitner = vm.selectedLeitner{
                     NavigationLink(isActive:(.constant(true))) {
-                            TagView(vm: TagViewModel(leitner: selectedLeitner))
+                            TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: selectedLeitner))
                                 .onDisappear { vm.selectedLeitner = nil }
                     } label: {
                         EmptyView()
@@ -162,6 +162,6 @@ struct LeitnerView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        LeitnerView(vm: LeitnerViewModel(isPreview: true))
+        LeitnerView(vm: LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext))
     }
 }

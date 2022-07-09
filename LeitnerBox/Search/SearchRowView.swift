@@ -49,7 +49,7 @@ struct SearchRowView: View {
             .padding([.leading, .trailing])
             if let tags = question.tagsArray{
                 QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestio(question, tag)
+                    vm.removeTagForQuestion(question, tag)
                 }
             }
         }
@@ -69,7 +69,7 @@ struct SearchRowView: View {
             
             if let tags = question.tagsArray{
                 QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestio(question, tag)
+                    vm.removeTagForQuestion(question, tag)
                 }
             }
         }
@@ -180,7 +180,7 @@ struct SearchRowView: View {
                 Divider()
                 
                 Menu("Move"){
-                    let vm = LeitnerViewModel()
+                    let vm = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
                     ForEach(vm.leitners){ leitner in
                         Button {
                             withAnimation {
@@ -194,7 +194,7 @@ struct SearchRowView: View {
                 }
                 
                 Menu("Tag"){
-                    let vm = TagViewModel(leitner: vm.leitner)
+                    let vm = TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner)
                     ForEach(vm.tags){ tag in
                         Button {
                             withAnimation {
@@ -228,8 +228,8 @@ struct SearchRowView_Previews: PreviewProvider {
     
     static var previews: some View {
         let leitner  = LeitnerView_Previews.leitner
-        let question = (leitner.level?.allObjects as? [Level])?.filter({$0.level == 1}).first?.questions?.allObjects.first as? Question
-        SearchRowView(question: question ?? Question(context: PersistenceController.preview.container.viewContext), vm: SearchViewModel(leitner: leitner))
+        let question = leitner.levels.filter({$0.level == 1}).first?.allQuestions.first as? Question
+        SearchRowView(question: question ?? Question(context: PersistenceController.preview.container.viewContext), vm: SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

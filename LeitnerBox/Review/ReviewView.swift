@@ -47,9 +47,9 @@ struct ReviewView: View {
                 ToolbarItem {
                     
                     NavigationLink{
-                        let levels = vm.level.leitner?.level?.allObjects as? [Level]
+                        let levels = vm.level.leitner?.levels
                         let firstLevel = levels?.first(where: {$0.level == 1})
-                        AddOrEditQuestionView(vm: .init(level: firstLevel!))
+                        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
                     } label: {
                         Label("Add Item", systemImage: "plus.square")
                     }
@@ -59,7 +59,7 @@ struct ReviewView: View {
                     
                     if let leitner = vm.level.leitner{
                         NavigationLink{
-                            SearchView(vm: SearchViewModel(leitner: leitner))
+                            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
                         } label: {
                             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
                         }
@@ -261,7 +261,7 @@ struct ReviewView: View {
             
             Button {
                 withAnimation {
-                    vm.showDeleteDialog()
+                    vm.toggleDeleteDialog()
                 }
             } label: {
                 Image(systemName: "trash")
@@ -272,7 +272,7 @@ struct ReviewView: View {
             }
             
             NavigationLink{
-                AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, editQuestion: vm.selectedQuestion))
             } label: {
                 Image(systemName: "pencil")
                     .resizable()
@@ -362,8 +362,8 @@ struct NotAnyToReviewView_Previews: PreviewProvider {
 struct ReviewView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let level = (LeitnerView_Previews.leitner.level?.allObjects as? [Level])?.filter({$0.level == 1}).first
-        ReviewView(vm: ReviewViewModel(level: level!, isPreview: true))
+        let level = (LeitnerView_Previews.leitner.levels).filter({$0.level == 1}).first
+        ReviewView(vm: ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext,level: level!))
             .preferredColorScheme(.light)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }

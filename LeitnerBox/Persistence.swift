@@ -18,13 +18,17 @@ class PersistenceController:ObservableObject {
         return previewPS.container.viewContext
     }
     
-    static var preview: PersistenceController = {
-        
+    static var preview: PersistenceController = {        
+        generateAndFillLeitner()
+        return previewPS
+    }()
+    
+    static func generateAndFillLeitner(){
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
               let questions = generateQuestions(5, level)
-                generateTags(5,leitner).forEach { tag in
+                generateTags(Int.random(in: 1...5),leitner).forEach { tag in
                     questions.forEach { question in
                         tag.addToQuestion(question)
                     }
@@ -37,12 +41,11 @@ class PersistenceController:ObservableObject {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        return previewPS
-    }()
+    }
     
     static func generateLevels(leitner:Leitner)->[Level]{
         var levels:[Level] = []
-        for index in 1..<13 {
+        for index in 1...13 {
             let level = Level(context: previewVC)
             level.level = Int16(index)
             level.leitner = leitner
@@ -84,6 +87,8 @@ class PersistenceController:ObservableObject {
             question.answer = "Answer with long text to test how it looks like on small screen we want to sure that the text is perfectly fit on the screen on smart phones and computers even with huge large screen \(index)"
             question.level = level
             question.passTime = level.level == 1 ? nil : Date().advanced(by: -(24 * 360))
+            question.completed = Bool.random()
+            question.favorite = Bool.random()
             question.createTime = Date()
             
             questions.append(question)
@@ -172,6 +177,14 @@ class PersistenceController:ObservableObject {
                     print("error happend\(error.localizedDescription)")
                 }
             }
+        }
+    }
+    
+    class func saveDB(viewContext:NSManagedObjectContext, completionHandler:((MyError)->())? = nil){
+        do{
+            try viewContext.save()
+        }catch{
+            completionHandler?(.FAIL_TO_SAVE)
         }
     }
 }

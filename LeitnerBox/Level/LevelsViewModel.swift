@@ -13,7 +13,7 @@ import AVFoundation
 class LevelsViewModel:ObservableObject{
    
     @Published
-    var viewContext:NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    var viewContext:NSManagedObjectContext
     
     @Published
     var leitner:Leitner
@@ -37,45 +37,31 @@ class LevelsViewModel:ObservableObject{
     var daysToRecommend = 0
     
     var filtered:[Question] {
-        if searchWord.isEmpty{
+        if searchWord.isEmpty || searchWord == "#"{
             return []
         }
-        if searchWord.contains("#"){
-            let tagName = searchWord.replacingOccurrences(of: "#", with: "")
-            if tagName.isEmpty == false{
-                return allQuestions.filter({
-                    $0.tagsArray?.contains(where: {$0.name?.lowercased().contains(tagName.lowercased()) ?? false}) ?? false
-                })
-            }else{
-                return allQuestions
-            }
+        let tagName = searchWord.replacingOccurrences(of: "#", with: "")
+        if searchWord.contains("#"), tagName.isEmpty == false{
+            return allQuestions.filter({
+                $0.tagsArray?.contains(where: {$0.name?.lowercased().contains(tagName.lowercased()) ?? false}) ?? false
+            })
         }
         return allQuestions.filter{
-            searchWord.isEmpty ||
             $0.question?.lowercased().contains(searchWord.lowercased()) ?? false ||
             $0.answer?.lowercased().contains(searchWord.lowercased()) ?? false ||
             $0.detailDescription?.lowercased().contains( searchWord.lowercased()) ?? false
         }
     }
     
-    init(leitner:Leitner, isPreview:Bool = false ){
-        viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
+    init(viewContext:NSManagedObjectContext, leitner:Leitner){
+        self.viewContext = viewContext
         self.leitner = leitner
         load()
     }
     
     func saveDaysToRecommned(){
         selectedLevel?.daysToRecommend = Int32(daysToRecommend)
-        saveDB()
-    }
-    
-    func saveDB(){
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func load(){
@@ -83,15 +69,10 @@ class LevelsViewModel:ObservableObject{
         let req = Level.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
         req.predicate = predicate
-        do {
-            self.levels = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
-        
+        self.levels = (try? viewContext.fetch(req)) ?? []
         allQuestions.removeAll()
         levels.forEach { level in
-            (level.questions?.allObjects as? [Question])?.forEach({ question in
+            level.allQuestions.forEach({ question in
                 allQuestions.append(question)
             })
         }

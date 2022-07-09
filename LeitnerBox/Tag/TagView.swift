@@ -93,7 +93,7 @@ struct TagView: View {
 struct TagView_Previews: PreviewProvider {
     
     static var vm:TagViewModel{
-        let vm = TagViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        let vm = TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         return vm
     }
     

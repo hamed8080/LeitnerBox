@@ -54,36 +54,22 @@ class ReviewViewModel:ObservableObject{
     @Published
     var tags:[Tag] = []
     
-    init(level:Level, isPreview:Bool = false){
+    init(viewContext:NSManagedObjectContext, level:Level){
         self.level = level
-        viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
+        self.viewContext = viewContext
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", level.level, level.leitner?.id ?? 0)
-        do {
-            self.questions = try viewContext.fetch(req).filter({$0.isReviewable}).shuffled()
-            totalCount = questions.count
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
-        
+        self.questions = ((try? viewContext.fetch(req)) ?? []).filter({$0.isReviewable}).shuffled()
+        totalCount = questions.count
         preapareNext(questions.first)
         loadTags()
     }
     
-    func saveDB(){
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    
-    
     func deleteQuestion(){
         if let selectedQuestion = selectedQuestion {
             viewContext.delete(selectedQuestion)
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
+            toggleDeleteDialog()
         }
         removeFromList()
         if !hasNext{
@@ -95,7 +81,7 @@ class ReviewViewModel:ObservableObject{
     
     func toggleFavorite(){
         selectedQuestion?.favorite.toggle()
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
         objectWillChange.send()
     }
     
@@ -109,7 +95,7 @@ class ReviewViewModel:ObservableObject{
             selectedQuestion?.level = selectedQuestion?.upperLevel
         }
         
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
         removeFromList()
         if !hasNext{
             isFinished = true
@@ -122,7 +108,7 @@ class ReviewViewModel:ObservableObject{
         isShowingAnswer = false
         if level.leitner?.backToTopLevel == true{
             selectedQuestion?.level = selectedQuestion?.firstLevel
-            saveDB()
+            PersistenceController.saveDB(viewContext: viewContext)
         }
         failedCount += 1
         removeFromList()
@@ -139,7 +125,7 @@ class ReviewViewModel:ObservableObject{
         }
     }
     
-    func showDeleteDialog(){
+    func toggleDeleteDialog(){
         showDelete.toggle()
     }
     
@@ -174,24 +160,20 @@ class ReviewViewModel:ObservableObject{
         let req = Tag.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
         req.predicate = predicate
-        do {
-            self.tags = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
+        self.tags = (try? viewContext.fetch(req)) ?? []
     }
     
     func addTagToQuestion(_ tag:Tag){
         guard let selectedQuestion = selectedQuestion else {return}
         tag.addToQuestion(selectedQuestion)
-        saveDB()
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func removeTagForQuestion(_ tag:Tag){
         withAnimation {
             guard let selectedQuestion = selectedQuestion else {return}
-            tag.addToQuestion(selectedQuestion)
-            saveDB()
+            tag.removeFromQuestion(selectedQuestion)
+            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
     

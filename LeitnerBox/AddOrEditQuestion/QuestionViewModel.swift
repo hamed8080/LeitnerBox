@@ -12,7 +12,7 @@ import CoreData
 class QuestionViewModel:ObservableObject{
     
     @Published
-    var viewContext:NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    var viewContext:NSManagedObjectContext
     
     @Published
     var level:Level
@@ -46,7 +46,8 @@ class QuestionViewModel:ObservableObject{
     @Published
     var isFavorite:Bool = false
     
-    init(level:Level, editQuestion:Question? = nil){
+    init(viewContext:NSManagedObjectContext, level:Level, editQuestion:Question? = nil){
+        self.viewContext = viewContext
         self.editQuestion = editQuestion
         if let editQuestion = editQuestion {
             question          = editQuestion.question ?? ""
@@ -61,25 +62,21 @@ class QuestionViewModel:ObservableObject{
     }
     
     func saveEdit(){
-        do{
-            editQuestion?.question = self.question
-            editQuestion?.answer = self.answer
-            editQuestion?.detailDescription = self.descriptionDetail
-            editQuestion?.completed         = isCompleted
-            
-            if editQuestion?.favorite == false && isFavorite {
-                editQuestion?.favoriteDate = Date()
-            }
-            editQuestion?.favorite          = isFavorite
-            addedTags.forEach { tag in
-                if let editQuestion = editQuestion {
-                    tag.addToQuestion(editQuestion)
-                }
-            }
-            try viewContext.save()
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
+        editQuestion?.question = self.question
+        editQuestion?.answer = self.answer
+        editQuestion?.detailDescription = self.descriptionDetail
+        editQuestion?.completed         = isCompleted
+        
+        if editQuestion?.favorite == false && isFavorite {
+            editQuestion?.favoriteDate = Date()
         }
+        editQuestion?.favorite          = isFavorite
+        addedTags.forEach { tag in
+            if let editQuestion = editQuestion {
+                tag.addToQuestion(editQuestion)
+            }
+        }
+        PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func insert() -> Question{
@@ -92,7 +89,7 @@ class QuestionViewModel:ObservableObject{
             question.completed         = isCompleted
             
             if question.completed {
-                if let lastLevel = (level.leitner?.level?.allObjects as? [Level])?.first(where: {$0.level == 13}) {
+                if let lastLevel = level.leitner?.levels.first(where: {$0.level == 13}) {
                     question.level     = lastLevel
                     question.passTime  = Date()
                     question.completed = true
@@ -107,30 +104,8 @@ class QuestionViewModel:ObservableObject{
             addedTags.forEach { tag in
                 tag.addToQuestion(question)
             }
-            do {
-                try viewContext.save()
-                return question
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { questions[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            PersistenceController.saveDB(viewContext: viewContext)
+            return question
         }
     }
     
@@ -160,11 +135,7 @@ class QuestionViewModel:ObservableObject{
         let req = Tag.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
         req.predicate = predicate
-        do {
-            self.tags = try viewContext.fetch(req)
-        }catch{
-            print("Fetch failed: Error \(error.localizedDescription)")
-        }
+        self.tags = (try? viewContext.fetch(req)) ?? []
     }
     
     

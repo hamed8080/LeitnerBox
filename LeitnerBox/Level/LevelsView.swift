@@ -25,7 +25,7 @@ struct LevelsView: View {
                 }else{
                     header
                     ForEach(vm.levels) { level in
-                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
+                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: PersistenceController.shared.container.viewContext, level: level))
                     }
                 }
             }
@@ -42,9 +42,9 @@ struct LevelsView: View {
                 set: { value in }
             )
             NavigationLink(isActive:binding) {
-                let levels = searchViewModel.leitner.level?.allObjects as? [Level]
-                let firstLevel = levels?.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
+                let levels = searchViewModel.leitner.levels
+                let firstLevel = levels.first(where: {$0.level == 1})
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
                     searchViewModel.qustionStateChanged(questionState)
                     searchViewModel.selectedQuestion = nil
                 }
@@ -72,10 +72,10 @@ struct LevelsView: View {
             let totalCount = vm.levels.map{$0.questions?.count ?? 0}.reduce(0,+)
             
             let completedCount = vm.levels.map{ level in
-                let completedCount = (level.questions?.allObjects as? [Question] )?.filter({
+                let completedCount = level.allQuestions.filter({
                     return $0.completed == true
                 })
-                return completedCount?.count ?? 0
+                return completedCount.count
             }.reduce(0,+)
             
             let reviewableCount = vm.levels.map{ level in
@@ -96,7 +96,7 @@ struct LevelsView: View {
         
         NavigationLink {
             if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(level: levelFirst)){ questionState in
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst)){ questionState in
                     vm.questionStateChanged(state: questionState)
                 }
             }
@@ -105,13 +105,13 @@ struct LevelsView: View {
         }
         
         NavigationLink {
-            SearchView(vm: SearchViewModel(leitner: vm.leitner))
+            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
         }
         
         NavigationLink{
-            TagView(vm: TagViewModel(leitner: vm.leitner))
+            TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
             Label("Tags", systemImage: "tag")
         }
@@ -166,7 +166,7 @@ struct LevelsView: View {
 
 struct LevelsView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelsView(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner),searchViewModel: SearchViewModel(leitner: LeitnerView_Previews.leitner))
+        LevelsView(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner),searchViewModel: SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
             .previewDevice("iPhone 13 Pro Max")
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .previewInterfaceOrientation(.portrait)
