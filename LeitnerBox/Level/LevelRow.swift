@@ -16,6 +16,10 @@ struct LevelRow:View{
     @ObservedObject
     var reviewViewModel:ReviewViewModel
     
+    
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+    
     var body: some View{
         NavigationLink {
             ReviewView(vm: reviewViewModel)
@@ -43,12 +47,23 @@ struct LevelRow:View{
                 
                 Spacer()
        
-                HStack(spacing:0){
-                    Text(verbatim: " \(reviewViewModel.level.reviewableCountInsideLevel)")
-                        .foregroundColor(.green.opacity(1))
-                    Text(verbatim: " / \(reviewViewModel.level.notCompletdCount)")
-                        .foregroundColor(.primary.opacity(1))
+                VStack{
+                    HStack(spacing:0){
+                        Text(verbatim: "\(reviewViewModel.level.reviewableCountInsideLevel)")
+                            .foregroundColor(.accentColor.opacity(1))
+                        Spacer()
+                        Text(verbatim: "\(reviewViewModel.level.notCompletdCount)")
+                            .foregroundColor(.primary.opacity(1))
+                    }
+                    .font(.footnote)
+                    
+                    ProgressView(
+                        value: Float(reviewViewModel.level.reviewableCountInsideLevel),
+                        total: Float(reviewViewModel.level.notCompletdCount)
+                    )
+                    .progressViewStyle(.linear)
                 }
+                .frame(maxWidth: sizeClass == .regular ? 192 : 128)
                 
             }
             .contextMenu{
