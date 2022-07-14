@@ -21,7 +21,7 @@ struct ReviewView: View {
     
     var body: some View {
         if vm.isFinished{
-            FinishedReviewView()
+            NotAnyToReviewView()
         }
         else if vm.level.hasAnyReviewable{
             ZStack{
@@ -321,39 +321,35 @@ struct ReviewView: View {
 
 struct NotAnyToReviewView:View{
     
+    @State
+    private var isAnimating = false
+    
     var body: some View{
-        VStack(spacing:18){
+        VStack(spacing:12){
+            
             Image(systemName: "checkmark.circle.fill")
                 .resizable()
                 .scaledToFit()
+                .frame(width: 64, height: 64,alignment: .center)
                 .foregroundStyle(.white, Color("green_light") )
-                .frame(width: 64, height: 64)
+                .scaleEffect(isAnimating ? 1 : 0.8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 32)
                         .stroke(Color("green_light").opacity(0.5), lineWidth: 16)
+                        .scaleEffect(isAnimating ? 1.1 : 0.8)
                 )
+                .animation(.easeInOut(duration: 2).repeatForever(autoreverses: true), value: isAnimating)
+                .onAppear {
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                        isAnimating = true
+                    }
+                }
             
             Text("There is nothing to review here at the moment.")
                 .font(.body.weight(.medium))
                 .foregroundColor(.gray)
         }
-    }
-}
-
-struct FinishedReviewView:View{
-    
-    var body: some View{
-        VStack{
-            Image(systemName: "flag.filled.and.flag.crossed")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.gray)
-            
-            Text("You have finished all quesitons inside this leitner level.")
-                .font(.title2.weight(.medium))
-                .foregroundColor(.gray)
-        }
+        .frame(height: 96)
     }
 }
 
