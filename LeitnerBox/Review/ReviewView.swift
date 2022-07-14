@@ -322,14 +322,19 @@ struct ReviewView: View {
 struct NotAnyToReviewView:View{
     
     var body: some View{
-        VStack{
-            Image(systemName: "rectangle.and.text.magnifyingglass")
+        VStack(spacing:18){
+            Image(systemName: "checkmark.circle.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.gray)
+                .foregroundStyle(.white, Color("green_light") )
+                .frame(width: 64, height: 64)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 32)
+                        .stroke(Color("green_light").opacity(0.5), lineWidth: 16)
+                )
+            
             Text("There is nothing to review here at the moment.")
-                .font(.title2.weight(.medium))
+                .font(.body.weight(.medium))
                 .foregroundColor(.gray)
         }
     }
