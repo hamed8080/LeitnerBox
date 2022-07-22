@@ -28,7 +28,11 @@ struct ReviewView: View {
                 VStack{
                     ScrollView(showsIndicators: false){
                         VStack(spacing:48){
-                            headers
+                            if sizeClass == .regular{
+                                ipadHeader
+                            }else{
+                                headers
+                            }
                             questionView
                             tags
                             controls
@@ -119,6 +123,30 @@ struct ReviewView: View {
         }
     }
     
+    
+    
+    var ipadHeader:some View{
+        HStack{
+            LinearGradient(colors: [.mint.opacity(0.8), .mint.opacity(0.5), .blue.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
+                Text("\(vm.passCount)")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 96, weight: .bold, design: .rounded))
+            }
+
+            Spacer()
+            Text("Total: \(vm.totalCount)".uppercased())
+                .font( sizeClass == .compact ? .body.bold() : .title3.bold())
+            Spacer()
+            LinearGradient(colors: [.yellow.opacity(0.8), .yellow.opacity(0.5) , .orange.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
+                Text("\(vm.failedCount)")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 96, weight: .bold, design: .rounded))
+            }
+        }
+        .frame(height:128)
+        .padding([.leading, .trailing],64)
+    }
+    
     var reviewControls:some View{
         HStack(spacing: sizeClass == .regular ? 48 : 8){
             Button {
@@ -198,7 +226,8 @@ struct ReviewView: View {
             .colorMultiply(isAnimationShowAnswer ? .accentColor : .accentColor.opacity(0.5))
             .font(.title2.weight(.medium))
             .scaleEffect(isAnimationShowAnswer ? 1.05 : 1)
-            .animation(.easeInOut(duration: 2).repeatCount(3, autoreverses: true), value: isAnimationShowAnswer)
+            .rotation3DEffect(.degrees(isAnimationShowAnswer ? 0 : 90), axis: (x: 100, y: 1, z: 0), anchor: .leading, anchorZ: 10)
+            .animation(.easeInOut(duration: 0.5).repeatCount(3, autoreverses: true), value: isAnimationShowAnswer)
             .onAppear{
                 isAnimationShowAnswer = true
             }

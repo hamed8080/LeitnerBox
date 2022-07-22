@@ -10,9 +10,9 @@ import SwiftUI
 extension Bool{
     static var iOS: Bool {
         guard #available(iOS 15, *) else {
-            return true
+            // It's macOS
+            return false
         }
-        // It's macOS
-        return false
+        return true
     }
 }

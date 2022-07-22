@@ -64,6 +64,11 @@ final class LevelViewModelTests: XCTestCase {
         vm.saveDaysToRecommned()
         XCTAssertEqual(vm.levels.first(where: {$0.objectID == vm.selectedLevel?.objectID})?.daysToRecommend, 365)
     }
-    
+
+    func test_performance(){
+        measure {
+            vm.load()
+        }
+    }
 }
 

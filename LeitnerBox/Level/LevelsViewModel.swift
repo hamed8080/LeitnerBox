@@ -26,7 +26,7 @@ class LevelsViewModel:ObservableObject{
     
     @Published
     var allQuestions:[Question] = []
-    
+
     @Published
     var showDaysAfterDialog = false
     

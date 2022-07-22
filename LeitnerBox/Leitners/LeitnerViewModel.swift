@@ -41,6 +41,8 @@ class LeitnerViewModel:ObservableObject{
     
     @Published
     var voices:[AVSpeechSynthesisVoice] = []
+
+    @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions:Data?
     
     init(viewContext:NSManagedObjectContext){
         self.viewContext = viewContext
@@ -53,6 +55,21 @@ class LeitnerViewModel:ObservableObject{
         let req = Leitner.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
         self.leitners = (try? viewContext.fetch(req)) ?? []
+
+        let wqs = leitners.first?.allQuestions.prefix(200).map({ question -> WidgetQuestion in
+            let tags = question.tagsArray?.map({ WidgetQuestionTag(name: $0.name ?? "") }) ?? []
+            let wq = WidgetQuestion(question: question.question,
+                                    answer: question.answer,
+                                    tags: tags,
+                                    detailedDescription: question.detailDescription,
+                                    level: Int(question.level?.level ?? 1),
+                                    isFavorite: question.favorite,
+                                    isCompleted: question.completed)
+            return wq
+        })
+        if let wqs = wqs, let data = try? JSONEncoder().encode(wqs){
+            widgetQuestions = data
+        }
     }
     
     func delete(_ leitner:Leitner){
@@ -173,6 +190,10 @@ class LeitnerViewModel:ObservableObject{
     func setSelectedVoice(_ voice: AVSpeechSynthesisVoice){
         selectedVoiceIdentifire = voice.identifier
         UserDefaults.standard.set(selectedVoiceIdentifire, forKey: "selectedVoiceIdentifire")
+    }
+
+    func fillWidgetTopQuestions(){
+
     }
     
 }
