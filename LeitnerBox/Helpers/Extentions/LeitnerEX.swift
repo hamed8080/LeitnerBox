@@ -31,6 +31,10 @@ extension Leitner{
         }
         return arr
     }
+
+    var firstLevel: Level?{
+        levels.first(where: { $0.level == 1 })
+    }
     
     func findQuestion(objectID:NSManagedObjectID?)->Question?{
         guard let objectID = objectID else { return nil }

@@ -35,24 +35,7 @@ struct LevelsView: View {
                     vm.load()
                 }
             }
-            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
-            
-            let binding = Binding(
-                get: {return searchViewModel.selectedQuestion != nil},
-                set: { value in }
-            )
-            NavigationLink(isActive:binding) {
-                let levels = searchViewModel.leitner.levels
-                let firstLevel = levels.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
-                    searchViewModel.qustionStateChanged(questionState)
-                    searchViewModel.selectedQuestion = nil
-                }
-            } label: {
-                EmptyView()
-                    .frame(width: 0, height: 0)
-            }
-            .hidden()
+            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")            
         }
         .animation(.easeInOut, value: vm.searchWord)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")
@@ -96,9 +79,7 @@ struct LevelsView: View {
         
         NavigationLink {
             if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst)){ questionState in
-                    vm.questionStateChanged(state: questionState)
-                }
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst))
             }
         } label: {
             Label("Add Item", systemImage: "plus.square")
@@ -121,9 +102,7 @@ struct LevelsView: View {
     var searchResult:some View{
         if vm.filtered.count > 0 || vm.searchWord.isEmpty{
             ForEach(vm.filtered){ suggestion in
-                SearchRowView(question: suggestion, vm: searchViewModel){ questionState in
-                    vm.questionStateChanged(state: questionState)
-                }
+                SearchRowView(question: suggestion, vm: searchViewModel)
             }
         }else{
             HStack{

@@ -14,9 +14,7 @@ struct AddOrEditQuestionView: View {
     var vm:QuestionViewModel
     
     @Environment(\.presentationMode) var presentationMode
-    
-    var questionState:((QuestionStateChanged)->())? = nil
-    
+
     @Environment(\.horizontalSizeClass)
     var sizeClass
     
@@ -80,8 +78,7 @@ struct AddOrEditQuestionView: View {
                         }
                         
                         Button {
-                            let state = vm.save()
-                            questionState?(state)
+                            let _ = vm.save()
                             vm.clear()
                             presentationMode.wrappedValue.dismiss()
                         } label: {

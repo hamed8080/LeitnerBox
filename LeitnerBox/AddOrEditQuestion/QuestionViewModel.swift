@@ -79,7 +79,7 @@ class QuestionViewModel:ObservableObject{
         PersistenceController.saveDB(viewContext: viewContext)
     }
     
-    func insert() -> Question{
+    func insert() {
         withAnimation {
             let question               = Question(context : viewContext)
             question.question          = self.question
@@ -105,17 +105,14 @@ class QuestionViewModel:ObservableObject{
                 tag.addToQuestion(question)
             }
             PersistenceController.saveDB(viewContext: viewContext)
-            return question
         }
     }
     
-    func save()->QuestionStateChanged{
-        if let editQuestion = editQuestion{
+    func save() {
+        if editQuestion != nil {
             saveEdit()
-            return .EDITED(editQuestion)
         }else{
-            let question = insert()
-            return .INSERTED(question)
+            insert()
         }
     }
     
@@ -151,10 +148,4 @@ class QuestionViewModel:ObservableObject{
             }
         }
     }
-}
-
-enum QuestionStateChanged{
-    case EDITED(Question)
-    case DELTED(Question)
-    case INSERTED(Question)
 }

@@ -12,6 +12,9 @@ struct SearchView: View {
     
     @ObservedObject
     var vm:SearchViewModel
+
+    @State
+    var editQuestion: Question?
     
     var body: some View {
         ZStack{
@@ -34,35 +37,8 @@ struct SearchView: View {
                     }
                 }
             }
-            .if(.iOS){ view in
-                view.refreshable {
-                    vm.load()
-                }
-            }
-            
             pronunceWordsView
-        
-            let binding = Binding(
-                get: {return vm.selectedQuestion != nil},
-                set: { value in }
-            )
-            
-            NavigationLink(isActive:binding) {
-                let levels = vm.leitner.levels
-                let firstLevel = levels.first(where: {$0.level == 1})
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
-                    vm.qustionStateChanged(questionState)
-                }.onDisappear {
-                    vm.selectedQuestion = nil
-                }
-            } label: {
-                EmptyView()
-                    .frame(width: 0, height: 0)
-            }
-            .hidden()
         }
-        
-        .animation(.easeInOut, value: vm.questions)
         .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
@@ -75,9 +51,7 @@ struct SearchView: View {
                 NavigationLink {
                     let levels = vm.leitner.levels
                     let firstLevel = levels.first(where: {$0.level == 1})
-                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
-                        vm.qustionStateChanged(questionState)
-                    }
+                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
                 } label: {
                     Label("Add", systemImage: "plus.square")
                 }
@@ -122,7 +96,7 @@ struct SearchView: View {
                                 vm.sort(sortItem.sortType)
                             }
                         } label: {
-                            let favoriteCount = vm.questions.filter{$0.favorite == true}.count
+                            let favoriteCount = vm.leitner.allQuestions.filter{$0.favorite == true}.count
                             let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
                             Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                         }
@@ -162,7 +136,7 @@ struct SearchView: View {
                             Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
                                 .foregroundColor(.primary)
                                 .font(.body.weight(.medium))
-                            Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
+                            Text(verbatim: "\(vm.reviewdCount) / \(vm.leitner.allQuestions.count)")
                                 .font(.footnote.bold())
                             let tags = vm.lastPlayedQuestion?.tagsArray ?? []
                             QuestionTagsView(tags: tags)

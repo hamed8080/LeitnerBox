@@ -16,9 +16,7 @@ struct SearchRowView: View {
     
     @ObservedObject
     var vm:SearchViewModel
-    
-    var questionState:((QuestionStateChanged)->())? = nil
-    
+
     @Environment(\.horizontalSizeClass)
     var sizeClass
     
@@ -33,6 +31,9 @@ struct SearchRowView: View {
                 iphoneView
             }
         }
+        .overlay(
+            editNavigation
+        )
     }
     
     var ipadView:some View{
@@ -147,16 +148,15 @@ struct SearchRowView: View {
                 Button(role: .destructive) {
                     withAnimation {
                         vm.delete(question)
-                        questionState?(.DELTED(question))
                     }
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }
                 
                 Divider()
-                
+
                 Button {
-                    vm.selectedQuestion = question
+                    vm.editQuestion = question
                 } label: {
                     Label("Edit", systemImage: "pencil")
                 }
@@ -184,8 +184,7 @@ struct SearchRowView: View {
                     ForEach(vm.leitners){ leitner in
                         Button {
                             withAnimation {
-                                self.vm.selectedQuestion = question
-                                self.vm.moveQuestionTo(leitner)
+                                self.vm.moveQuestionTo(question, leitner: leitner)
                             }
                         } label: {
                             Label( "\(leitner.name ?? "")", systemImage: "folder")
@@ -214,6 +213,26 @@ struct SearchRowView: View {
                     .foregroundColor(.accentColor)
             }
         }
+    }
+
+    @ViewBuilder
+    var editNavigation: some View {
+        let binding = Binding(
+            get: {return vm.editQuestion != nil},
+            set: { value in }
+        )
+
+        NavigationLink(isActive:binding) {
+            let level = question.level ?? vm.leitner.firstLevel
+            AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: level!, editQuestion: vm.editQuestion))
+                .onDisappear {
+                    vm.editQuestion = nil
+                }
+        } label: {
+            EmptyView()
+                .frame(width: 0, height: 0)
+        }
+        .hidden()
     }
 }
 
