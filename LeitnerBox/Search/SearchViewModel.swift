@@ -34,7 +34,7 @@ class SearchViewModel:ObservableObject{
     @Published
     var selectedSort:SearchSort = .LEVEL
 
-    private var sorted:[Question] = []
+    private (set) var sorted:[Question] = []
     
     var synthesizer = AVSpeechSynthesizer()
     
@@ -221,14 +221,12 @@ class SearchViewModel:ObservableObject{
     }
     
     func moveQuestionTo(_ question: Question, leitner:Leitner){
-        if let firstLevel = leitner.firstLevel {
-            question.level = firstLevel
-            question.passTime  = nil
-            question.completed = false
-            PersistenceController.saveDB(viewContext: viewContext)
-            sorted.removeAll(where: { $0 == question })
-            objectWillChange.send()
-        }
+        question.level = leitner.firstLevel
+        question.passTime  = nil
+        question.completed = false
+        PersistenceController.saveDB(viewContext: viewContext)
+        sorted.removeAll(where: { $0 == question })
+        objectWillChange.send()
     }
     
     func viewDidAppear(){

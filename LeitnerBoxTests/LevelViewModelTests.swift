@@ -18,31 +18,6 @@ final class LevelViewModelTests: XCTestCase {
         vm = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner)
     }
     
-    func test_delete_question(){
-        let question = vm.allQuestions.last!
-        XCTAssertTrue(vm.allQuestions.contains(where: {$0.objectID == question.objectID}))
-        vm.questionStateChanged(state: .DELTED(question))
-        XCTAssertFalse(vm.allQuestions.contains(where: {$0.objectID == question.objectID}), "the object not deleted!")
-    }
-    
-    func test_edited_question(){
-        let question = vm.allQuestions.last!
-        question.question = "TestUpdated"
-        vm.questionStateChanged(state: .EDITED(question))
-        let updatedQuestion = vm.allQuestions.first(where: {$0.objectID == question.objectID})!
-        XCTAssertEqual(updatedQuestion.question, "TestUpdated" , "the object not edited!")
-    }
-    
-    func test_insert_question(){
-        let beforeCount = vm.allQuestions.count
-        let question = Question(context: PersistenceController.preview.container.viewContext)
-        question.question = "TestInserted"
-        vm.questionStateChanged(state: .INSERTED(question))
-        let insertedQuestion = vm.allQuestions.first(where: {$0.objectID == question.objectID})!
-        XCTAssertEqual(insertedQuestion.question, "TestInserted" , "the object not inserted!")
-        XCTAssertTrue(beforeCount < vm.allQuestions.count, "Item seems to not added to array")
-    }
-    
     func test_filter(){
         vm.searchWord = ""
         XCTAssertTrue(vm.filtered.count == 0, "filter count is not equal all question!")

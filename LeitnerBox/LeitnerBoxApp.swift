@@ -25,7 +25,7 @@ struct LeitnerBoxApp: App, DropDelegate {
                 SplashScreen()
                     .animation(.easeInOut, value: hideSplash)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             hideSplash = true
                         }
                     }
