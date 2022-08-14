@@ -21,14 +21,18 @@ struct ReviewView: View {
     
     var body: some View {
         if vm.isFinished{
-            FinishedReviewView()
+            NotAnyToReviewView()
         }
         else if vm.level.hasAnyReviewable{
             ZStack{
                 VStack{
                     ScrollView(showsIndicators: false){
                         VStack(spacing:48){
-                            headers
+                            if sizeClass == .regular{
+                                ipadHeader
+                            }else{
+                                headers
+                            }
                             questionView
                             tags
                             controls
@@ -47,9 +51,9 @@ struct ReviewView: View {
                 ToolbarItem {
                     
                     NavigationLink{
-                        let levels = vm.level.leitner?.level?.allObjects as? [Level]
+                        let levels = vm.level.leitner?.levels
                         let firstLevel = levels?.first(where: {$0.level == 1})
-                        AddOrEditQuestionView(vm: .init(level: firstLevel!))
+                        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
                     } label: {
                         Label("Add Item", systemImage: "plus.square")
                     }
@@ -59,7 +63,7 @@ struct ReviewView: View {
                     
                     if let leitner = vm.level.leitner{
                         NavigationLink{
-                            SearchView(vm: SearchViewModel(leitner: leitner))
+                            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
                         } label: {
                             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
                         }
@@ -115,8 +119,32 @@ struct ReviewView: View {
                 .padding(.bottom)
                 .foregroundColor(.accentColor)
             Text("Total: \(vm.passCount + vm.failedCount) / \(vm.totalCount), Passed: \(vm.passCount), Failed: \(vm.failedCount)".uppercased())
-                .font(isIpad ? .title3.bold() : .footnote.bold())
+                .font( sizeClass == .compact ? .body.bold() : .title3.bold())
         }
+    }
+    
+    
+    
+    var ipadHeader:some View{
+        HStack{
+            LinearGradient(colors: [.mint.opacity(0.8), .mint.opacity(0.5), .blue.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
+                Text("\(vm.passCount)")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 96, weight: .bold, design: .rounded))
+            }
+
+            Spacer()
+            Text("Total: \(vm.totalCount)".uppercased())
+                .font( sizeClass == .compact ? .body.bold() : .title3.bold())
+            Spacer()
+            LinearGradient(colors: [.yellow.opacity(0.8), .yellow.opacity(0.5) , .orange.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
+                Text("\(vm.failedCount)")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 96, weight: .bold, design: .rounded))
+            }
+        }
+        .frame(height:128)
+        .padding([.leading, .trailing],64)
     }
     
     var reviewControls:some View{
@@ -162,16 +190,21 @@ struct ReviewView: View {
             VStack(spacing:16){
                 Text(vm.selectedQuestion?.question ?? "")
                     .multilineTextAlignment(.center)
-                    .font(isIpad ? .largeTitle.weight(.bold) : .title2.weight(.semibold))
+                    .font(sizeClass == .compact ? .title2.weight(.semibold) : .largeTitle.weight(.bold))
                
                 Text(vm.selectedQuestion?.detailDescription ?? "")
-                    .font(isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                    .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color("subtitleTextColor"))
                     .transition(.scale)
                     .onTapGesture {
                         vm.toggleAnswer()
                     }
+                if let ps = vm.partOfspeech{
+                    Text(ps)
+                        .font(.title3.weight(.semibold))
+                        .foregroundColor(.accentColor)
+                }
             }
            
             Spacer()
@@ -193,7 +226,8 @@ struct ReviewView: View {
             .colorMultiply(isAnimationShowAnswer ? .accentColor : .accentColor.opacity(0.5))
             .font(.title2.weight(.medium))
             .scaleEffect(isAnimationShowAnswer ? 1.05 : 1)
-            .animation(.easeInOut(duration: 2).repeatCount(3, autoreverses: true), value: isAnimationShowAnswer)
+            .rotation3DEffect(.degrees(isAnimationShowAnswer ? 0 : 90), axis: (x: 100, y: 1, z: 0), anchor: .leading, anchorZ: 10)
+            .animation(.easeInOut(duration: 0.5).repeatCount(3, autoreverses: true), value: isAnimationShowAnswer)
             .onAppear{
                 isAnimationShowAnswer = true
             }
@@ -210,7 +244,7 @@ struct ReviewView: View {
         HStack{
             Spacer()
             Text(vm.selectedQuestion?.answer ?? "")
-                .font( isIpad ? .title2.weight(.medium) : .title3.weight(.semibold))
+                .font( sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
                 .multilineTextAlignment(.center)
             Spacer()
         }
@@ -250,13 +284,13 @@ struct ReviewView: View {
     }
     
     var controls:some View{
-        HStack(spacing: isIpad ? 48 : 36){
+        HStack(spacing: sizeClass == .compact ? 26 : 48){
             
             Spacer()
             
             Button {
                 withAnimation {
-                    vm.showDeleteDialog()
+                    vm.toggleDeleteDialog()
                 }
             } label: {
                 Image(systemName: "trash")
@@ -267,7 +301,7 @@ struct ReviewView: View {
             }
             
             NavigationLink{
-                AddOrEditQuestionView(vm: .init(level: vm.level, editQuestion: vm.selectedQuestion))
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, editQuestion: vm.selectedQuestion))
             } label: {
                 Image(systemName: "pencil")
                     .resizable()
@@ -315,28 +349,45 @@ struct ReviewView: View {
 }
 
 struct FinishedReviewView:View{
-    
+
+    @State
+    private var isAnimating = false
+
     var body: some View{
-        VStack{
-            Image(systemName: "flag.filled.and.flag.crossed")
+        VStack(spacing:12){
+            
+            Image(systemName: "checkmark.circle.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.gray)
+                .frame(width: 64, height: 64,alignment: .center)
+                .foregroundStyle(.white, Color("green_light") )
+                .scaleEffect(isAnimating ? 1 : 0.8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 32)
+                        .stroke(Color("green_light").opacity(0.5), lineWidth: 16)
+                        .scaleEffect(isAnimating ? 1.1 : 0.8)
+                )
+                .animation(.easeInOut(duration: 2).repeatForever(autoreverses: true), value: isAnimating)
+                .onAppear {
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                        isAnimating = true
+                    }
+                }
             
-            Text("You have finished all quesitons inside this leitner level.")
-                .font(.title2.weight(.medium))
+            Text("There is nothing to review here at the moment.")
+                .font(.body.weight(.medium))
                 .foregroundColor(.gray)
         }
+        .frame(height: 96)
     }
 }
 
 struct ReviewView_Previews: PreviewProvider {
     
     struct Preview:View{
-        
+        static let level = (LeitnerView_Previews.leitner.levels).filter({$0.level == 1}).first
         @StateObject
-        var vm =  ReviewViewModel(level: LeitnerView_Previews.leitner.firstLevel!, isPreview: true)
+        var vm = ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext,level: level!)
         var body: some View{
             ReviewView(vm: vm)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

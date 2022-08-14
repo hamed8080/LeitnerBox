@@ -11,18 +11,14 @@ struct QuestionsInsideTagView: View {
     
     var tag:Tag
     
-    var questions:[Question]{
-        return tag.question?.allObjects as? [Question] ?? []
-    }
-    
     var body: some View {
         ZStack{
             List {
-                ForEach(questions) { question in
+                ForEach(tag.questions) { question in
                   row(question)
                 }
             }
-            .animation(.easeInOut, value: questions)
+            .animation(.easeInOut, value: tag.questions)
             .listStyle(.plain)
         }
         .navigationTitle("\(tag.name ?? "")")
@@ -47,7 +43,7 @@ struct QuestionsInsideTagView: View {
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     
     static var previews: some View {
-        QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tag?.allObjects.first as? Tag ?? Tag())
+        QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag())
             .preferredColorScheme(.light)
     }
 }

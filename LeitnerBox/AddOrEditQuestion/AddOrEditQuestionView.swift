@@ -14,9 +14,7 @@ struct AddOrEditQuestionView: View {
     var vm:QuestionViewModel
     
     @Environment(\.presentationMode) var presentationMode
-    
-    var questionState:((QuestionStateChanged)->())? = nil
-    
+
     @Environment(\.horizontalSizeClass)
     var sizeClass
     
@@ -80,8 +78,7 @@ struct AddOrEditQuestionView: View {
                         }
                         
                         Button {
-                            let state = vm.save()
-                            questionState?(state)
+                            let _ = vm.save()
                             vm.clear()
                             presentationMode.wrappedValue.dismiss()
                         } label: {
@@ -136,7 +133,7 @@ struct AddQuestionView_Previews: PreviewProvider {
     struct Preview:View{
         
         @StateObject
-        var vm = QuestionViewModel(level: LeitnerView_Previews.leitner.level?.allObjects.first as? Level ?? Level())
+        var vm = QuestionViewModel(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!)
         var body: some View{
             AddOrEditQuestionView(vm: vm)
         }

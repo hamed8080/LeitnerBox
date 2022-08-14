@@ -32,12 +32,20 @@ struct LeitnerRowView: View {
             } label: {
                 Label("Rename and Edit", systemImage: "gear")
             }
+
+            Button {
+                withAnimation {
+                    vm.selectedLeitner = leitner
+                }
+            } label: {
+                Label("Manage Tags", systemImage: "tag")
+            }
         }
     }
 }
 
 struct LeitnerRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(isPreview: true))
+        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext))
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 extension Leitner{
     
     var totalQuestionCount:Int{
@@ -16,11 +17,6 @@ extension Leitner{
     var tagsArray:[Tag]{
         guard let tags =  tag?.allObjects as? [Tag] else{ return [] }
         return tags
-    }
-    
-    var firstLevel:Level?{
-        let levels = level?.allObjects as? [Level]
-        return levels?.filter{ $0.level == 1 }.first
     }
 
     var totalReviewableCount:Int{
@@ -35,4 +31,25 @@ extension Leitner{
         return (Double(totalReviewableCount) / Double(totalQuestionCount)) * 100
     }
 
+    var levels:[Level]{
+        return level?.allObjects as? [Level] ?? []
+    }
+    
+    var allQuestions:[Question]{
+        let allQuestionInEachLevels = levels.map{$0.allQuestions}
+        var arr: [Question] = []
+        allQuestionInEachLevels.forEach { questionsInLevel in
+            arr.append(contentsOf: questionsInLevel)
+        }
+        return arr
+    }
+
+    var firstLevel: Level?{
+        levels.first(where: { $0.level == 1 })
+    }
+    
+    func findQuestion(objectID:NSManagedObjectID?)->Question?{
+        guard let objectID = objectID else { return nil }
+        return  allQuestions.first(where: {$0.objectID == objectID})
+    }
 }

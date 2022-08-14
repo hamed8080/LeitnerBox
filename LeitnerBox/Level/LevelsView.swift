@@ -20,9 +20,13 @@ struct LevelsView: View {
         
         ZStack{
             List {
-                header
-                ForEach(vm.levels) { level in
-                    LevelRow(vm: vm, reviewViewModel: ReviewViewModel(level: level))
+                if vm.filtered.count >= 1 {
+                    searchResult
+                }else{
+                    header
+                    ForEach(vm.levels) { level in
+                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: PersistenceController.shared.container.viewContext, level: level))
+                    }
                 }
             }
             .listStyle(.plain)
@@ -33,20 +37,6 @@ struct LevelsView: View {
             }
             .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
                 searchResult
-            }
-            
-            if searchViewModel.selectedQuestion != nil{
-                NavigationLink{
-                    let firstLevel = searchViewModel.leitner.firstLevel
-                    AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: searchViewModel.selectedQuestion)){ questionState in
-                        searchViewModel.qustionStateChanged(questionState)
-                        searchViewModel.selectedQuestion = nil
-                    }
-                } label: {
-                    EmptyView()
-                        .frame(width: 0, height: 0)
-                }
-                .hidden()
             }
         }
         .animation(.easeInOut, value: vm.searchWord)
@@ -67,10 +57,10 @@ struct LevelsView: View {
             let totalCount = vm.levels.map{$0.questions?.count ?? 0}.reduce(0,+)
             
             let completedCount = vm.levels.map{ level in
-                let completedCount = (level.questions?.allObjects as? [Question] )?.filter({
+                let completedCount = level.allQuestions.filter({
                     return $0.completed == true
                 })
-                return completedCount?.count ?? 0
+                return completedCount.count
             }.reduce(0,+)
             
             let reviewableCount = vm.levels.map{ level in
@@ -91,22 +81,20 @@ struct LevelsView: View {
         
         NavigationLink {
             if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(level: levelFirst)){ questionState in
-                    vm.questionStateChanged(state: questionState)
-                }
+                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst))
             }
         } label: {
             Label("Add Item", systemImage: "plus.square")
         }
         
         NavigationLink {
-            SearchView(vm: SearchViewModel(leitner: vm.leitner))
+            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
         }
         
         NavigationLink{
-            TagView(vm: TagViewModel(leitner: vm.leitner))
+            TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
             Label("Tags", systemImage: "tag")
         }
@@ -122,9 +110,7 @@ struct LevelsView: View {
     var searchResult:some View{
         if vm.filtered.count > 0 || vm.searchWord.isEmpty{
             ForEach(vm.filtered){ suggestion in
-                SearchRowView(question: suggestion, vm: searchViewModel){ questionState in
-                    vm.questionStateChanged(state: questionState)
-                }
+                SearchRowView(question: suggestion, vm: searchViewModel)
             }
         }else{
             HStack{
@@ -170,10 +156,10 @@ struct LevelsView_Previews: PreviewProvider {
     struct Preview: View{
         
         @ObservedObject
-        var vm = LevelsViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        var vm = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         
         @ObservedObject
-        var searchViewModel = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        var searchViewModel = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         
         var body: some View{
             LevelsView(vm: vm, searchViewModel: searchViewModel)

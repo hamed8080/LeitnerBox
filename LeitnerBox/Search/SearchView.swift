@@ -12,11 +12,14 @@ struct SearchView: View {
     
     @ObservedObject
     var vm:SearchViewModel
+
+    @State
+    var editQuestion: Question?
     
     var body: some View {
         ZStack{
             List {
-                ForEach(vm.questions) { item in
+                ForEach(vm.filtered) { item in
                     SearchRowView(question: item, vm: vm)
                         .listRowInsets(EdgeInsets())
                 }
@@ -25,11 +28,7 @@ struct SearchView: View {
             .animation(.easeInOut, value: vm.filtered)
             .listStyle(.plain)
             .searchable(text: $vm.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                if vm.filtered.count > 0 || vm.searchText.isEmpty{
-                    ForEach(vm.filtered){ question in
-                        SearchRowView(question: question, vm: vm)
-                    }
-                }else{
+                if vm.searchText.isEmpty == false && vm.filtered.count < 1{
                     HStack{
                         Image(systemName: "doc.text.magnifyingglass")
                             .foregroundColor(.gray.opacity(0.8))
@@ -38,32 +37,8 @@ struct SearchView: View {
                     }
                 }
             }
-            .if(.iOS){ view in
-                view.refreshable {
-                    vm.load()
-                }
-            }
-            
             pronunceWordsView
-        
-            let binding = Binding(
-                get: {return vm.selectedQuestion != nil},
-                set: { value in }
-            )
-            
-            NavigationLink(isActive:binding) {
-                let firstLevel = vm.leitner.firstLevel
-                AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
-                    vm.qustionStateChanged(questionState)
-                    vm.selectedQuestion = nil
-                }
-            } label: {
-                EmptyView()
-                    .frame(width: 0, height: 0)
-            }
-            .hidden()
         }
-        .animation(.easeInOut, value: vm.questions)
         .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.isSpeaking)
         .navigationTitle(Text("Advance Search in \(vm.leitner.name ?? "")"))
@@ -74,11 +49,9 @@ struct SearchView: View {
             ToolbarItem {
                 
                 NavigationLink {
-                    let levels = vm.leitner.level?.allObjects as? [Level]
-                    let firstLevel = levels?.first(where: {$0.level == 1})
-                    AddOrEditQuestionView(vm: .init(level:  firstLevel!, editQuestion: vm.selectedQuestion)){ questionState in
-                        vm.qustionStateChanged(questionState)
-                    }
+                    let levels = vm.leitner.levels
+                    let firstLevel = levels.first(where: {$0.level == 1})
+                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
                 } label: {
                     Label("Add", systemImage: "plus.square")
                 }
@@ -123,7 +96,7 @@ struct SearchView: View {
                                 vm.sort(sortItem.sortType)
                             }
                         } label: {
-                            let favoriteCount = vm.questions.filter{$0.favorite == true}.count
+                            let favoriteCount = vm.leitner.allQuestions.filter{$0.favorite == true}.count
                             let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
                             Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                         }
@@ -163,7 +136,7 @@ struct SearchView: View {
                             Text(verbatim: vm.lastPlayedQuestion?.detailDescription ?? "")
                                 .foregroundColor(.primary)
                                 .font(.body.weight(.medium))
-                            Text(verbatim: "\(vm.reviewdCount) / \(vm.questions.count)")
+                            Text(verbatim: "\(vm.reviewdCount) / \(vm.leitner.allQuestions.count)")
                                 .font(.footnote.bold())
                             let tags = vm.lastPlayedQuestion?.tagsArray ?? []
                             QuestionTagsView(tags: tags)
@@ -193,7 +166,7 @@ struct SearchView_Previews: PreviewProvider {
     struct Preview: View{
         
         @ObservedObject
-        var vm = SearchViewModel(leitner: LeitnerView_Previews.leitner, isPreview: true)
+        var vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         var body: some View{
             SearchView(vm: vm)
                 .onAppear{

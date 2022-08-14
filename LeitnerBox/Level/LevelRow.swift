@@ -16,6 +16,10 @@ struct LevelRow:View{
     @ObservedObject
     var reviewViewModel:ReviewViewModel
     
+    
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+    
     var body: some View{
         NavigationLink {
             ReviewView(vm: reviewViewModel)
@@ -26,28 +30,40 @@ struct LevelRow:View{
                         .foregroundColor(.white)
                         .font(.title.weight(.bold))
                         .frame(width: 48, height: 48)
+                        .accessibilityIdentifier("levelRow")
                         .background(
                             Circle()
                                 .fill(Color.blue)
                         )
-                    let favCount = (reviewViewModel.level.questions?.allObjects as? [Question] )?.filter({ $0.favorite == true }).count
+                    let favCount = reviewViewModel.level.allQuestions.filter({ $0.favorite == true }).count
   
                     HStack(alignment:.firstTextBaseline, spacing: 4){
                         Image(systemName: "star.fill")
                             .foregroundColor(.accentColor)
-                        Text(verbatim: "\(favCount ?? 0)")
+                        Text(verbatim: "\(favCount)")
                             .foregroundColor(.gray)
                     }
                 }
                 
                 Spacer()
        
-                HStack(spacing:0){
-                    Text(verbatim: " \(reviewViewModel.level.reviewableCountInsideLevel)")
-                        .foregroundColor(.green.opacity(1))
-                    Text(verbatim: " / \(reviewViewModel.level.notCompletdCount)")
-                        .foregroundColor(.primary.opacity(1))
+                VStack{
+                    HStack(spacing:0){
+                        Text(verbatim: "\(reviewViewModel.level.reviewableCountInsideLevel)")
+                            .foregroundColor(.accentColor.opacity(1))
+                        Spacer()
+                        Text(verbatim: "\(reviewViewModel.level.notCompletdCount)")
+                            .foregroundColor(.primary.opacity(1))
+                    }
+                    .font(.footnote)
+                    
+                    ProgressView(
+                        value: Float(reviewViewModel.level.reviewableCountInsideLevel),
+                        total: Float(reviewViewModel.level.notCompletdCount)
+                    )
+                    .progressViewStyle(.linear)
                 }
+                .frame(maxWidth: sizeClass == .regular ? 192 : 128)
                 
             }
             .contextMenu{
@@ -67,6 +83,6 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(vm: LevelsViewModel(leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(level: LeitnerView_Previews.leitner.level?.allObjects.first as! Level))
+        LevelRow(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!))
     }
 }

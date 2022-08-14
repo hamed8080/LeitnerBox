@@ -11,7 +11,7 @@ import CoreData
 struct LeitnerView: View {
     
     @ObservedObject
-    var vm:LeitnerViewModel = LeitnerViewModel()
+    var vm:LeitnerViewModel = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
     
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
@@ -28,7 +28,7 @@ struct LeitnerView: View {
         } detail: {
             NavigationStack{
                 if let leitner = selectedLeitner{
-                    LevelsView(vm: LevelsViewModel(leitner: leitner), searchViewModel: SearchViewModel(leitner: leitner))
+                    LevelsView(vm: LevelsViewModel(viewContext:  PersistenceController.preview.container.viewContext, leitner: leitner), searchViewModel: SearchViewModel(viewContext:  PersistenceController.preview.container.viewContext, leitner: leitner))
                 }
             }
         }
@@ -171,7 +171,7 @@ struct LeitnerView_Previews: PreviewProvider {
     struct Preview:View{
         
         @StateObject
-        var vm = LeitnerViewModel(isPreview: true)
+        var vm =  LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
         var body: some View{
             LeitnerView(vm: vm)
         }

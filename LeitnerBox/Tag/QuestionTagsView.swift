@@ -49,7 +49,7 @@ struct QuestionTagsView: View {
 
 struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        let tags = LeitnerView_Previews.leitner.tag?.allObjects as! [Tag]
+        let tags = LeitnerView_Previews.leitner.tagsArray
         QuestionTagsView(tags: tags) { tag in
             print("tag long press\(tag.name ?? "")")
         }

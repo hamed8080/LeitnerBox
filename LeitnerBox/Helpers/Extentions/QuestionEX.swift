@@ -11,7 +11,7 @@ extension Question{
     var isReviewable:Bool{
         guard let passTime = passTime else {return true}
         let daysToRecommend = level?.daysToRecommend ?? 0
-        return (passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) <= Date() && completed == false) 
+        return passTime.advanced(by: Double(daysToRecommend * (24 * 3600))) <= Date() && completed == false
     }
     
     var remainDays:String{
@@ -32,8 +32,13 @@ extension Question{
     }
     
     var upperLevel:Level?{
-        let levels = level?.leitner?.level?.allObjects as? [Level]
+        let levels = level?.leitner?.levels
         return levels?.filter({(level?.level ?? 0) + 1 == $0.level }).first
+    }
+    
+    var firstLevel:Level?{
+        let levels = level?.leitner?.levels
+        return levels?.filter{ $0.level == 1 }.first
     }
     
     var tagsArray:[Tag]?{

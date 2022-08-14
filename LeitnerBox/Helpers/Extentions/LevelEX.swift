@@ -24,4 +24,8 @@ extension Level{
         let questions = questions?.allObjects as? [Question]
         return questions?.filter({$0.completed == false}).count ?? 0
     }
+    
+    var allQuestions:[Question]{
+        return questions?.allObjects as? [Question] ?? []
+    }
 }
