@@ -160,6 +160,15 @@ struct SearchRowView: View {
                 } label: {
                     Label("Edit", systemImage: "pencil")
                 }
+
+                Button {
+                    UIPasteboard.general.string = [question.question, question.answer, question.detailDescription]
+                        .compactMap{$0?.trimmingCharacters(in: .whitespacesAndNewlines)}
+                        .filter{ !$0.isEmpty }
+                        .joined(separator: "\n")
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                }
                 
                 Button {
                     withAnimation {
