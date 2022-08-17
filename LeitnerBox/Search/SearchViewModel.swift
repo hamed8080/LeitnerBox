@@ -194,7 +194,7 @@ class SearchViewModel:ObservableObject{
     
     func pauseReview(){
         isSpeaking = false
-        speechDelegate.timer?.invalidate()
+        speechDelegate.task?.cancel()
         if synthesizer.isSpeaking{
             synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
         }
@@ -203,7 +203,7 @@ class SearchViewModel:ObservableObject{
     func stopReview(){
         synthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
-        speechDelegate.timer?.invalidate()
+        speechDelegate.task?.cancel()
         self.lastPlayedQuestion = nil
     }
     
@@ -287,15 +287,24 @@ class SearchViewModel:ObservableObject{
 class SpeechDelegate:NSObject, AVSpeechSynthesizerDelegate{
 
     var viewModel:SearchViewModel? = nil
-    var timer:Timer? = nil
-    
+    var task:Task<Void, Error>? = nil
+
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if viewModel?.hasNext() == true{
-            timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
-                self.viewModel?.playNext()
-            }
+            timerTask()
         }else{
             viewModel?.finished()
+        }
+    }
+
+    func timerTask(){
+        task = Task {
+            guard !Task.isCancelled else {return}
+            try await Task.sleep(nanoseconds: 2_000_000_000)
+
+            await MainActor.run {
+                self.viewModel?.playNext()
+            }
         }
     }
 }
