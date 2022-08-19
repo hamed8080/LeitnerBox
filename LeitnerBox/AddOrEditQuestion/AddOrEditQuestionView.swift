@@ -17,6 +17,8 @@ struct AddOrEditQuestionView: View {
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         GeometryReader{ reader in
@@ -105,7 +107,10 @@ struct AddOrEditQuestionView: View {
             .toolbar {
                 ToolbarItem {
                     Button(action: vm.clear) {
-                        Label("clear", systemImage: "trash")
+                        Label("clear", systemImage: "trash.square")
+                            .font(.title3)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                     }
                 }
                 

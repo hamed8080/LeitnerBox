@@ -18,6 +18,8 @@ struct ReviewView: View {
     
     @Environment(\.horizontalSizeClass)
     var sizeClass
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         if vm.isFinished{
@@ -57,13 +59,19 @@ struct ReviewView: View {
                         AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
                     } label: {
                         Label("Add Item", systemImage: "plus.square")
+                            .font(.title3)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                     }
 
                     if let leitner = vm.level.leitner{
                         NavigationLink{
                             SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
                         } label: {
-                            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+                            Label("Search View", systemImage: "square.text.square")
+                                .font(.title3)
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                         }
                     }
                 }

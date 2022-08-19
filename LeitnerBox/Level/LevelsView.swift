@@ -15,6 +15,8 @@ struct LevelsView: View {
     
     @ObservedObject
     var searchViewModel:SearchViewModel
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -42,6 +44,9 @@ struct LevelsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 toolbars
+                    .font(.title3)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
             }
         }
         .customDialog(isShowing: $vm.showDaysAfterDialog) {
@@ -88,13 +93,19 @@ struct LevelsView: View {
         NavigationLink {
             SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
-            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+            Label("Search View", systemImage: "square.text.square")
         }
         
         NavigationLink{
             TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
         } label: {
-            Label("Tags", systemImage: "tag")
+            Label("Tags", systemImage: "tag.square")
+        }
+
+        NavigationLink{
+            SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!))
+        } label: {
+            Label("Synonyms", systemImage: "arrow.left.and.right.square")
         }
     }
     

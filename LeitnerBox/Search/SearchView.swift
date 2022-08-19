@@ -15,6 +15,8 @@ struct SearchView: View {
 
     @State
     var editQuestion: Question?
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack{
@@ -46,66 +48,70 @@ struct SearchView: View {
             vm.viewDidAppear()
         })
         .toolbar {
-            ToolbarItem {
-                
-                NavigationLink {
-                    let levels = vm.leitner.levels
-                    let firstLevel = levels.first(where: {$0.level == 1})
-                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
-                } label: {
-                    Label("Add", systemImage: "plus.square")
-                }
-            }
             
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-               
-                Button {
-                    vm.stopReview()
-                } label: {
-                    Label("Stop", systemImage: "stop.fill")
-                }
-                .disabled(!vm.isSpeaking)
-                
-                
-                Button {
-                    vm.pauseReview()
-                } label: {
-                    Label("Pause", systemImage: "pause.fill")
-                }
-                .disabled(!vm.isSpeaking)
-                
-                
-                Button {
-                    vm.playReview()
-                } label: {
-                    Label("Play", systemImage: "play.fill")
-                }.disabled(vm.isSpeaking)
-                
-                Button {
-                    vm.playNextImmediately()
-                } label: {
-                    Label("Next", systemImage: "forward.end.fill")
-                }.disabled(!vm.isSpeaking)
-                
-                Menu {
-                    Text("Sort By")
-                    
-                    ForEach(searchSorts, id:\.self){ sortItem in
-                        Button {
-                            withAnimation {
-                                vm.sort(sortItem.sortType)
-                            }
-                        } label: {
-                            let favoriteCount = vm.leitner.allQuestions.filter{$0.favorite == true}.count
-                            let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
-                            Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
-                        }
+                HStack{
+                    NavigationLink {
+                        let levels = vm.leitner.levels
+                        let firstLevel = levels.first(where: {$0.level == 1})
+                        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
+                    } label: {
+                        Label("Add", systemImage: "plus.square")
                     }
-                    
-                } label: {
-                    Label("More", systemImage: "ellipsis.circle")
+
+                    Button {
+                        vm.stopReview()
+                    } label: {
+                        Label("Stop", systemImage: "stop.circle")
+                    }
+                    .disabled(!vm.isSpeaking)
+
+
+                    Button {
+                        vm.pauseReview()
+                    } label: {
+                        Label("Pause", systemImage: "pause.circle")
+                    }
+                    .disabled(!vm.isSpeaking)
+
+
+                    Button {
+                        vm.playReview()
+                    } label: {
+                        Label("Play", systemImage: "play.square")
+                    }.disabled(vm.isSpeaking)
+
+                    Button {
+                        vm.playNextImmediately()
+                    } label: {
+                        Label("Next", systemImage: "forward.end")
+                            .foregroundStyle(Color.accentColor)
+                    }.disabled(!vm.isSpeaking)
+
+                    Menu {
+                        Text("Sort By")
+
+                        ForEach(searchSorts, id:\.self){ sortItem in
+                            Button {
+                                withAnimation {
+                                    vm.sort(sortItem.sortType)
+                                }
+                            } label: {
+                                let favoriteCount = vm.leitner.allQuestions.filter{$0.favorite == true}.count
+                                let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
+                                Label( "\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
+                            }
+                        }
+
+                    } label: {
+                        Label("More", systemImage: "ellipsis.circle")
+                    }
                 }
+                .font(.title3)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
             }
+
         }
     }
     
@@ -139,8 +145,12 @@ struct SearchView: View {
                             Text(verbatim: "\(vm.reviewdCount) / \(vm.leitner.allQuestions.count)")
                                 .font(.footnote.bold())
                             if let question = vm.lastPlayedQuestion {
-                                QuestionTagsView(question: question, viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner))
-                                    .frame(maxHeight:64)
+                                QuestionTagsView(
+                                    question: question,
+                                    showAddButton: false,
+                                    viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner)
+                                )
+                                .frame(maxHeight:64)
                             }
                         }
                         

@@ -200,19 +200,7 @@ struct SearchRowView: View {
                         }
                     }
                 }
-                
-                Menu("Tag"){
-                    let vm = TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner)
-                    ForEach(vm.tags){ tag in
-                        Button {
-                            withAnimation {
-                                vm.addToTag(tag, question)
-                            }
-                        } label: {
-                            Label( "\(tag.name ?? "")", systemImage: "tag")
-                        }
-                    }
-                }
+
             } label: {
                 Image(systemName: "ellipsis.circle")
                     .resizable()

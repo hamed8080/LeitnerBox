@@ -12,7 +12,9 @@ struct TagView: View {
     
     @ObservedObject
     var vm:TagViewModel
-    
+
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack{
             
@@ -37,6 +39,9 @@ struct TagView: View {
                     vm.showAddOrEditTagDialog.toggle()
                 } label: {
                     Label("Add", systemImage: "plus.square")
+                        .font(.title3)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                 }
             }
         }.customDialog(isShowing: $vm.showAddOrEditTagDialog) {

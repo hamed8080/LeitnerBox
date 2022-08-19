@@ -57,4 +57,9 @@ class SynonymViewModel: ObservableObject{
             objectWillChange.send()
         }
     }
+
+    var allSynonymsInLeitner: [Synonym]{
+        let req = Synonym.fetchRequest()
+        return (try? viewContext.fetch(req)) ?? []
+    }
 }

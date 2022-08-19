@@ -25,6 +25,7 @@ struct QuestionSynonymsView: View {
             } label: {
                 Label("Synonyms", systemImage: "plus.circle")
             }
+            .buttonStyle(.borderless)
 
             let synonym = viewModel.baseQuestion.synonymsArray ?? []
             let allSynonymsQuestions = (synonym.first?.allQuestions ?? []).filter({$0.objectID != viewModel.baseQuestion.objectID})

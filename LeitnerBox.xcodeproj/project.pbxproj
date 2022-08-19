@@ -81,6 +81,7 @@
 		05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A42838E82C00FE67D5 /* SearchViewModel.swift */; };
 		05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A62838F8D300FE67D5 /* CustomDialog.swift */; };
 		05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */; };
+		05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DB660028AFFFCD00E01999 /* SynonymsView.swift */; };
 		05E315C328A63AB100E020FC /* AnimatableGradientModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */; };
 		05F1C8A7288AD07A00CD5F1E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */; };
 		05F1C8A9288AD07A00CD5F1E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */; };
@@ -213,6 +214,7 @@
 		05D032A42838E82C00FE67D5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		05D032A62838F8D300FE67D5 /* CustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialog.swift; sourceTree = "<group>"; };
 		05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryCustomDialog.swift; sourceTree = "<group>"; };
+		05DB660028AFFFCD00E01999 /* SynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymsView.swift; sourceTree = "<group>"; };
 		05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableGradientModifier.swift; sourceTree = "<group>"; };
 		05F1C8A5288AD07A00CD5F1E /* ReviewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReviewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -454,6 +456,7 @@
 				05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */,
 				05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */,
 				05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */,
+				05DB660028AFFFCD00E01999 /* SynonymsView.swift */,
 			);
 			path = AddSynonym;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
 				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
 				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
+				05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */,
 				052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */,
 				053666DE28377B5B002F899F /* CheckBoxView.swift in Sources */,
 				05867E6D283A2A9100F4A413 /* RoundedCorner.swift in Sources */,
