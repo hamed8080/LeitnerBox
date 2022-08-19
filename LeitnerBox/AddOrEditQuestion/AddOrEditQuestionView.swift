@@ -13,7 +13,7 @@ struct AddOrEditQuestionView: View {
     @ObservedObject
     var vm:QuestionViewModel
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dissmiss
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
@@ -25,38 +25,29 @@ struct AddOrEditQuestionView: View {
                 Spacer()
                 ScrollView{
                     VStack(spacing:36){
-                        TextEditorView(placeholder: "Enter your question here...", string: $vm.question, textEditorHeight: 48)
+                        TextEditorView(
+                            placeholder: "Enter your question here...",
+                            shortPlaceholder: "Question",
+                            string: $vm.question,
+                            textEditorHeight: 48
+                        )
                         CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
                         if vm.isManual {
-                            TextEditorView(placeholder: "Enter your Answer here...", string: $vm.answer, textEditorHeight: 48)
-                            TextEditorView(placeholder: "Enter your description here...", string: $vm.descriptionDetail, textEditorHeight: 48)
+                            TextEditorView(
+                                placeholder: "Enter your Answer here...",
+                                shortPlaceholder: "Answer",
+                                string: $vm.answer,
+                                textEditorHeight: 48
+                            )
+                            TextEditorView(
+                                placeholder: "Enter your description here...",
+                                shortPlaceholder: "Description",
+                                string: $vm.descriptionDetail,
+                                textEditorHeight: 48
+                            )
                         }
-                        HStack{
-                            CheckBoxView(isActive: $vm.isCompleted, text: "Complete Answer")
+                        CheckBoxView(isActive: $vm.isCompleted, text: "Complete Answer")
 
-                            Menu {
-                                ForEach(vm.tags){ tag in
-                                    Button {
-                                        withAnimation {
-                                            vm.addTagToQuestion(tag)
-                                        }
-                                    } label: {
-                                        Label( "\(tag.name ?? "")", systemImage: "tag")
-                                    }
-                                }
-                            } label: {
-                                Label("Tag", systemImage: "tag")
-                            }
-                        }
-                        
-                        HStack{
-                            let tags = vm.addedTags + (vm.editQuestion?.tagsArray ?? [])
-                            QuestionTagsView(tags: tags) { tag in
-                                vm.removeTagForQuestio(tag)
-                            }
-                            Spacer()
-                        }
-                        
                         HStack{
                             Button {
                                 withAnimation {
@@ -76,11 +67,21 @@ struct AddOrEditQuestionView: View {
                             
                             Spacer()
                         }
+
+                        VStack {
+                            if let question = vm.editQuestion, let leitner = vm.level.leitner{
+                                QuestionTagsView(question: question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                            }
+
+                            if let question = vm.editQuestion {
+                                QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question))
+                            }
+                        }
                         
                         Button {
                             let _ = vm.save()
                             vm.clear()
-                            presentationMode.wrappedValue.dismiss()
+                            dissmiss()
                         } label: {
                             HStack{
                                 Spacer()

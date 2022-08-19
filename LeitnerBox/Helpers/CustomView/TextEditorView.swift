@@ -12,9 +12,11 @@ import SwiftUI
 struct TextEditorView: View {
     
     var placeholder : String = ""
+    var shortPlaceholder : String = ""
     @Binding var string: String
     @State var textEditorHeight : CGFloat = 20
     @FocusState private var isFocused: Bool
+    var cornerRadius = 10.0
     
     var body: some View {
         
@@ -31,12 +33,22 @@ struct TextEditorView: View {
             TextEditor(text: $string)
                 .font(.system(.body))
                 .frame(height: max(40,textEditorHeight))
-                .cornerRadius(10.0)
+                .cornerRadius(cornerRadius)
                 .foregroundColor(Color(named: "textColor"))
                 .multilineTextAlignment(string.isContainPersianCharacter ? .trailing : .leading)
                 .focused($isFocused)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10).stroke(isFocused ? .accentColor : Color.primary.opacity(0.5))
+                    ZStack{
+                        if !string.isEmpty{
+                            GeometryReader{ reader in
+                                Text(shortPlaceholder.uppercased())
+                                    .font(.footnote)
+                                    .foregroundColor(isFocused ? .accentColor : Color.primary.opacity(0.5))
+                                    .offset(x: cornerRadius / 2, y: -18)
+                            }
+                        }
+                        RoundedRectangle(cornerRadius: cornerRadius).stroke(isFocused ? .accentColor : Color.primary.opacity(0.5))
+                    }.animation(.easeInOut, value: string.isEmpty)
                 )
                 .overlay(
                     HStack{
@@ -51,7 +63,7 @@ struct TextEditorView: View {
                 .background(
                     Color.primary
                         .opacity(0.1)
-                        .cornerRadius(10)
+                        .cornerRadius(cornerRadius)
                 )
         }        
         .onAppear {

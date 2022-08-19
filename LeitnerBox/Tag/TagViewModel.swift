@@ -32,16 +32,36 @@ class TagViewModel:ObservableObject{
     @Published
     var colorPickerColor:Color = .gray
 
+    @Published
+    var searchText:String = ""
+
+    var filtered:[Tag]{
+        if searchText.isEmpty {
+            return tags
+        } else{
+            return tags.filter({
+                $0.name?.lowercased().contains( searchText.lowercased()) ?? false
+            })
+        }
+    }
+
     init(viewContext:NSManagedObjectContext, leitner:Leitner){
         self.viewContext = viewContext
         self.leitner = leitner
         load()
     }
-    
+
     func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { tags[$0] }.forEach(viewContext.delete)
             tags.remove(atOffsets: offsets)
+            PersistenceController.saveDB(viewContext: viewContext)
+        }
+    }
+
+    func deleteTagFromQuestion(_ tag: Tag, _ question: Question) {
+        withAnimation {
+            tag.removeFromQuestion(question)
             PersistenceController.saveDB(viewContext: viewContext)
         }
     }

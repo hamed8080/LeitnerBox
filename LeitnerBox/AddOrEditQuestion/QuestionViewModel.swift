@@ -16,7 +16,8 @@ class QuestionViewModel:ObservableObject{
     
     @Published
     var level:Level
-    
+
+    @Published
     var editQuestion:Question? = nil
     
     @Published

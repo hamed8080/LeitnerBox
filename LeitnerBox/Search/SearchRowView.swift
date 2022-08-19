@@ -45,11 +45,11 @@ struct SearchRowView: View {
                 controls
             }
             .padding([.leading, .trailing])
-            if let tags = question.tagsArray{
-                QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestion(question, tag)
-                }
-            }
+            QuestionTagsView(
+                question: question,
+                viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner),
+                addPadding: true
+            )
         }
     }
     
@@ -64,12 +64,12 @@ struct SearchRowView: View {
                     controls
                 }
             }.padding()
-            
-            if let tags = question.tagsArray{
-                QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestion(question, tag)
-                }
-            }
+
+            QuestionTagsView(
+                question: question,
+                viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner),
+                addPadding: true
+            )
         }
     }
     
@@ -157,6 +157,15 @@ struct SearchRowView: View {
                     AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: fakeLevel, editQuestion: question))
                 } label: {
                     Label("Edit", systemImage: "pencil")
+                }
+
+                Button {
+                    UIPasteboard.general.string = [question.question, question.answer, question.detailDescription]
+                        .compactMap{$0?.trimmingCharacters(in: .whitespacesAndNewlines)}
+                        .filter{ !$0.isEmpty }
+                        .joined(separator: "\n")
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
                 }
                 
                 Button {

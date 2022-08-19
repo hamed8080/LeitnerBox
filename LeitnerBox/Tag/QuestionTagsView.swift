@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct QuestionTagsView: View {
-    
-    var tags:[Tag]
-    
-    var onLongPress:((Tag)->())? = nil
+
+    @ObservedObject
+    var question: Question
+
+    @State
+    private var showAddTags = false
+
+    let viewModel: TagViewModel
+
+    var addPadding = false
     
     var body: some View {
-        if tags.count > 0{
+        VStack(alignment: .leading){
+            Button {
+                showAddTags.toggle()
+            } label: {
+                Label("Tags", systemImage: "plus.circle")
+            }
+            .padding(addPadding ? [.leading, .trailing] : [])
+
             ScrollView(.horizontal){
-                HStack(spacing:4){
-                    Image(systemName: "tag")
-                        .resizable()
-                        .frame(width: 22, height: 22, alignment: .leading)
-                        .foregroundColor(.accentColor)
-                        .padding([.leading])
-                        .padding(.trailing, 8)
-                    
+                HStack(spacing:12){
+                    let tags = question.tagsArray ?? []
                     ForEach(tags) { tag in
                         Text("\(tag.name ?? "")")
                             .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
@@ -34,24 +41,30 @@ struct QuestionTagsView: View {
                                 (tag.tagSwiftUIColor ?? .gray)
                             )
                             .cornerRadius(6)
-                            .onTapGesture {  }
+                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                            .onTapGesture {  } //do not remove this line it'll stop scrolling
                             .onLongPressGesture {
-                                onLongPress?(tag)
+                                viewModel.deleteTagFromQuestion(tag, question)
                             }
-                            .transition(.asymmetric(insertion: .slide, removal: .scale))
                     }
                 }
-                .padding([.bottom])
+                .padding(addPadding ? [.leading, .trailing] : [])
+                .padding(.bottom)
             }
         }
+
+        .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
+            if let leitner = viewModel.leitner{
+                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner))
+            }
+        })
     }
 }
 
 struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        let tags = LeitnerView_Previews.leitner.tagsArray
-        QuestionTagsView(tags: tags) { tag in
-            print("tag long press\(tag.name ?? "")")
-        }
+        let leitner = LeitnerView_Previews.leitner
+        let question = leitner.allQuestions.first!
+        QuestionTagsView(question: question, viewModel: .init(viewContext: PersistenceController.previewVC, leitner: leitner))
     }
 }

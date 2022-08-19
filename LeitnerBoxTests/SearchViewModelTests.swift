@@ -104,15 +104,6 @@ final class SearchViewModelTests: XCTestCase {
         XCTAssertGreaterThan(vm.filtered.count, 0, "couldn't find any quetion!")
     }
     
-    func test_remove_tag_for_question(){
-        let question = vm.leitner.allQuestions.first!
-        let tagCountBefore = question.tag?.count ?? 0
-        let tag = question.tagsArray!.first!
-        vm.removeTagForQuestion(question, tag)
-        let updated = vm.leitner.allQuestions.first(where: {$0.objectID == question.objectID})
-        XCTAssertLessThan(updated?.tagsArray?.count ?? 0, tagCountBefore, "Tag not removed properly!")
-    }
-    
     func test_has_next(){
         vm.lastPlayedQuestion = vm.sorted.first!
         XCTAssertTrue(vm.hasNext(), "The Array should have next Item!")
@@ -181,7 +172,7 @@ final class SearchViewModelTests: XCTestCase {
         
         vm.pauseReview()
         XCTAssertFalse(vm.isSpeaking)
-        XCTAssertEqual(vm.speechDelegate.timer?.isValid ?? false, false)
+        XCTAssertEqual(vm.speechDelegate.task?.isCancelled ?? false, false)
     }
     
     func test_stop_speaking(){
@@ -191,7 +182,7 @@ final class SearchViewModelTests: XCTestCase {
         vm.stopReview()
         XCTAssertFalse(vm.isSpeaking)
         XCTAssertNil(vm.lastPlayedQuestion)
-        XCTAssertEqual(vm.speechDelegate.timer?.isValid ?? false, false)
+        XCTAssertEqual(vm.speechDelegate.task?.isCancelled ?? false, false)
     }
     
     func test_finished(){
