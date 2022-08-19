@@ -48,11 +48,11 @@ struct SearchRowView: View {
                 controls
             }
             .padding([.leading, .trailing])
-            if let tags = question.tagsArray{
-                QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestion(question, tag)
-                }
-            }
+            QuestionTagsView(
+                question: question,
+                viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner),
+                addPadding: true
+            )
         }
     }
     
@@ -67,12 +67,12 @@ struct SearchRowView: View {
                     controls
                 }
             }.padding()
-            
-            if let tags = question.tagsArray{
-                QuestionTagsView(tags: tags){ tag in
-                    vm.removeTagForQuestion(question, tag)
-                }
-            }
+
+            QuestionTagsView(
+                question: question,
+                viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner),
+                addPadding: true
+            )
         }
     }
     

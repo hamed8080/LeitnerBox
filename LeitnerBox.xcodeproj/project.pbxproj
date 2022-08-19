@@ -50,6 +50,10 @@
 		0565CA3C2876DAC40076F6F4 /* LevelViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565CA3B2876DAC40076F6F4 /* LevelViewModelTests.swift */; };
 		0565CA3E2876E79A0076F6F4 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565CA3D2876E79A0076F6F4 /* SearchViewModelTests.swift */; };
 		0565CA42287718D50076F6F4 /* ReviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565CA41287718D50076F6F4 /* ReviewViewModelTests.swift */; };
+		05747BFC28AE82ED00868CC6 /* SynonymEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFB28AE82BE00868CC6 /* SynonymEX.swift */; };
+		05747BFF28AE9D7B00868CC6 /* AddSynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */; };
+		05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */; };
+		05747C0328AED1EC00868CC6 /* QuestionSynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */; };
 		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
 		0579D4AB283CE459000BD93D /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D4AF283CE46F000BD93D /* ShareViewController.swift */; };
@@ -63,6 +67,8 @@
 		05867E73283A480600F4A413 /* QuestionEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E72283A480600F4A413 /* QuestionEX.swift */; };
 		05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E74283A63AA00F4A413 /* ReviewViewModel.swift */; };
 		0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */; };
+		058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39328AF520E0080BDDF /* AddTagsView.swift */; };
+		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
 		05B0891728466F7500BFE778 /* StringEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B0891628466F7500BFE778 /* StringEX.swift */; };
@@ -173,6 +179,10 @@
 		0565CA3B2876DAC40076F6F4 /* LevelViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewModelTests.swift; sourceTree = "<group>"; };
 		0565CA3D2876E79A0076F6F4 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		0565CA41287718D50076F6F4 /* ReviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModelTests.swift; sourceTree = "<group>"; };
+		05747BFB28AE82BE00868CC6 /* SynonymEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymEX.swift; sourceTree = "<group>"; };
+		05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSynonymsView.swift; sourceTree = "<group>"; };
+		05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymViewModel.swift; sourceTree = "<group>"; };
+		05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSynonymsView.swift; sourceTree = "<group>"; };
 		0579D4A1283CE459000BD93D /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0579D4A6283CE459000BD93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0579D4A8283CE459000BD93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,6 +198,8 @@
 		05867E72283A480600F4A413 /* QuestionEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEX.swift; sourceTree = "<group>"; };
 		05867E74283A63AA00F4A413 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTagsView.swift; sourceTree = "<group>"; };
+		058EA39328AF520E0080BDDF /* AddTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsView.swift; sourceTree = "<group>"; };
+		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		05B0891628466F7500BFE778 /* StringEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEX.swift; sourceTree = "<group>"; };
@@ -290,6 +302,7 @@
 				054AB5C3283951DE008BC840 /* Level */,
 				05BAE2162837CC880043FAEB /* Search */,
 				05BAE21328379C9E0043FAEB /* AddOrEditQuestion */,
+				05747BFD28AE9D6500868CC6 /* AddSynonym */,
 				0545068D284A350D007EBAFA /* Tag */,
 				053666D828377536002F899F /* Helpers */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
@@ -329,6 +342,7 @@
 				05D032A62838F8D300FE67D5 /* CustomDialog.swift */,
 				053666D628377420002F899F /* PrimaryTextField.swift */,
 				053666DD28377B5B002F899F /* CheckBoxView.swift */,
+				058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */,
 				0531A605283FEEF70051EB13 /* TextEditorView.swift */,
 			);
 			path = CustomView;
@@ -357,6 +371,7 @@
 				05D0329E2838DB2B00FE67D5 /* DateEx.swift */,
 				054AB5C12839185E008BC840 /* LeitnerEX.swift */,
 				05867E70283A469000F4A413 /* LevelEX.swift */,
+				05747BFB28AE82BE00868CC6 /* SynonymEX.swift */,
 				05867E6C283A2A9100F4A413 /* RoundedCorner.swift */,
 				05867E72283A480600F4A413 /* QuestionEX.swift */,
 				052CA6A9283C944200376E79 /* FileManagerEX.swift */,
@@ -385,6 +400,7 @@
 		0545068D284A350D007EBAFA /* Tag */ = {
 			isa = PBXGroup;
 			children = (
+				058EA39328AF520E0080BDDF /* AddTagsView.swift */,
 				054E7721284A52FF006BCDEF /* TagView.swift */,
 				05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */,
 				054E7723284A544B006BCDEF /* TagRowView.swift */,
@@ -430,6 +446,16 @@
 				05517F8428720B74004FEEE1 /* LeitnerBoxUITestsLaunchTests.swift */,
 			);
 			path = LeitnerBoxUITests;
+			sourceTree = "<group>";
+		};
+		05747BFD28AE9D6500868CC6 /* AddSynonym */ = {
+			isa = PBXGroup;
+			children = (
+				05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */,
+				05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */,
+				05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */,
+			);
+			path = AddSynonym;
 			sourceTree = "<group>";
 		};
 		0579D4A2283CE459000BD93D /* Share */ = {
@@ -666,6 +692,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */,
+				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
 				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
 				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
 				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
@@ -681,6 +708,7 @@
 				05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */,
 				053666D2283769A1002F899F /* ReviewView.swift in Sources */,
 				05D0329F2838DB2B00FE67D5 /* DateEx.swift in Sources */,
+				058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */,
 				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
@@ -688,12 +716,15 @@
 				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
+				05747C0328AED1EC00868CC6 /* QuestionSynonymsView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
+				058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */,
 				051B7DAE288B02C300465C24 /* WidgetQuestion.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
+				05747BFC28AE82ED00868CC6 /* SynonymEX.swift in Sources */,
 				059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */,
 				05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */,
 				052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */,
@@ -710,6 +741,7 @@
 				0545068F284A358C007EBAFA /* TagViewModel.swift in Sources */,
 				05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */,
 				05E315C328A63AB100E020FC /* AnimatableGradientModifier.swift in Sources */,
+				05747BFF28AE9D7B00868CC6 /* AddSynonymsView.swift in Sources */,
 				052CBA492840BAA400544925 /* BoolEX.swift in Sources */,
 				05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */,
 				05B0891728466F7500BFE778 /* StringEX.swift in Sources */,

@@ -138,9 +138,10 @@ struct SearchView: View {
                                 .font(.body.weight(.medium))
                             Text(verbatim: "\(vm.reviewdCount) / \(vm.leitner.allQuestions.count)")
                                 .font(.footnote.bold())
-                            let tags = vm.lastPlayedQuestion?.tagsArray ?? []
-                            QuestionTagsView(tags: tags)
-                                .frame(maxHeight:64)
+                            if let question = vm.lastPlayedQuestion {
+                                QuestionTagsView(question: question, viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner))
+                                    .frame(maxHeight:64)
+                            }
                         }
                         
                     }

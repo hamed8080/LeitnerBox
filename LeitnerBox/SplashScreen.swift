@@ -32,6 +32,22 @@ struct SplashScreen: View {
                         .rotation3DEffect(.degrees(animateGradient ? 45 : 0), axis: (x: 0, y: 1, z: 0))
                         .animation(.interpolatingSpring(stiffness: 1, damping: 1).speed(3), value: hideSplash)
                 }
+
+            VStack{
+                Spacer()
+                HStack(spacing: 4){
+                    Text("Powered by")
+                        .font(.footnote)
+                    Image(systemName: "swift")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.orange)
+                }
+                .scaleEffect(x: animateGradient ? 1 : 0.7, y: animateGradient ? 1 : 0.7, anchor: .center)
+                .opacity(hideSplash ? 0 : 1)
+                .animation(.easeInOut, value: hideSplash)
+
+            }
         }
         .onAppear {
             withAnimation(.easeInOut(duration: 2.0)) {

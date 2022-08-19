@@ -51,7 +51,12 @@ struct TagView: View {
             Text("Tag name")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
-            TextEditorView(placeholder: "Enter tag name", string:  $vm.tagName, textEditorHeight: 48)
+            TextEditorView(
+                placeholder: "Enter tag name",
+                shortPlaceholder: "Name",
+                string: $vm.tagName,
+                textEditorHeight: 48
+            )
             
             ColorPicker("Select Color", selection: $vm.colorPickerColor)
                 .frame(height: 36)

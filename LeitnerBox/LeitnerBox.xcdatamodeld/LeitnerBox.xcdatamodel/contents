@@ -25,7 +25,11 @@
         <attribute name="passTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="question" attributeType="String" defaultValueString=""/>
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="questions" inverseEntity="Level"/>
+        <relationship name="synonyms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Synonym" inverseName="question" inverseEntity="Synonym"/>
         <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="question" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Synonym" representedClassName="Synonym" syncable="YES" codeGenerationType="class">
+        <relationship name="question" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="synonyms" inverseEntity="Question"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="UIColorValueTransformer"/>
@@ -36,7 +40,8 @@
     <elements>
         <element name="Leitner" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="Level" positionX="175.49609375" positionY="11.60546875" width="128" height="104"/>
-        <element name="Question" positionX="-120.17578125" positionY="180.99609375" width="128" height="179"/>
+        <element name="Question" positionX="-120.17578125" positionY="180.99609375" width="128" height="194"/>
+        <element name="Synonym" positionX="27" positionY="144" width="128" height="44"/>
         <element name="Tag" positionX="27" positionY="144" width="128" height="89"/>
     </elements>
 </model>

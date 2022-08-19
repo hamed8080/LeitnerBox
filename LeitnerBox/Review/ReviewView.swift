@@ -34,7 +34,10 @@ struct ReviewView: View {
                                 headers
                             }
                             questionView
-                            tags
+                            VStack(alignment:.leading, spacing: 4){
+                                tags
+                                synonyms
+                            }
                             controls
                             answersAndDetails
                         }
@@ -47,9 +50,7 @@ struct ReviewView: View {
             .padding()
             .background( Color(named: "dialogBackground"))
             .toolbar {
-                
-                ToolbarItem {
-                    
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink{
                         let levels = vm.level.leitner?.levels
                         let firstLevel = levels?.first(where: {$0.level == 1})
@@ -57,10 +58,7 @@ struct ReviewView: View {
                     } label: {
                         Label("Add Item", systemImage: "plus.square")
                     }
-                }
-                
-                ToolbarItem {
-                    
+
                     if let leitner = vm.level.leitner{
                         NavigationLink{
                             SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
@@ -128,7 +126,7 @@ struct ReviewView: View {
     var ipadHeader:some View{
         HStack{
             LinearGradient(colors: [.mint.opacity(0.8), .mint.opacity(0.5), .blue.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
-                Text("\(vm.passCount)")
+                Text(verbatim: "\(vm.passCount)")
                     .fontWeight(.semibold)
                     .font(.system(size: 96, weight: .bold, design: .rounded))
             }
@@ -138,7 +136,7 @@ struct ReviewView: View {
                 .font( sizeClass == .compact ? .body.bold() : .title3.bold())
             Spacer()
             LinearGradient(colors: [.yellow.opacity(0.8), .yellow.opacity(0.5) , .orange.opacity(0.3)], startPoint: .top, endPoint: .bottom).mask {
-                Text("\(vm.failedCount)")
+                Text(verbatim: "\(vm.failedCount)")
                     .fontWeight(.semibold)
                     .font(.system(size: 96, weight: .bold, design: .rounded))
             }
@@ -213,10 +211,16 @@ struct ReviewView: View {
     
     @ViewBuilder
     var tags:some View{
-        if let selectedQuestion = vm.selectedQuestion, let tags = selectedQuestion.tagsArray{
-            QuestionTagsView(tags: tags) { tag in
-                vm.removeTagForQuestion(tag)
-            }.frame(maxWidth: sizeClass == .compact ? .infinity : 350)
+        if let selectedQuestion = vm.selectedQuestion, let leitner = vm.level.leitner {
+            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                .frame(maxWidth: sizeClass == .compact ? .infinity : 350)
+        }
+    }
+
+    @ViewBuilder
+    var synonyms: some View {
+        if let question = vm.selectedQuestion{
+            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question))
         }
     }
     
@@ -263,26 +267,6 @@ struct ReviewView: View {
         }
     }
     
-    var addTagsView:some View{
-        Menu {
-            ForEach(vm.tags){ tag in
-                Button {
-                    withAnimation {
-                        vm.addTagToQuestion(tag)
-                    }
-                } label: {
-                    Label( "\(tag.name ?? "")", systemImage: "tag")
-                }
-            }
-        } label: {
-            Image(systemName: "tag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 32, height: 32)
-                .foregroundColor(.accentColor)
-        }
-    }
-    
     var controls:some View{
         HStack(spacing: sizeClass == .compact ? 26 : 48){
             
@@ -321,9 +305,7 @@ struct ReviewView: View {
                     .frame(width: 32, height: 32)
                     .foregroundColor(.accentColor)
             }
-            
-            addTagsView
-            
+
             Button {
                 vm.pronounce()
             } label: {

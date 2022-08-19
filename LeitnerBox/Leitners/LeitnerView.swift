@@ -113,7 +113,12 @@ struct LeitnerView: View {
             Text("Leitner name")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
-            TextEditorView(placeholder: "Enter leitner name", string:  $vm.leitnerTitle, textEditorHeight: 48)
+            TextEditorView(
+                placeholder: "Enter leitner name",
+                shortPlaceholder: "Name",
+                string: $vm.leitnerTitle,
+                textEditorHeight: 48
+            )
             
             Toggle(isOn: $vm.backToTopLevel) {
                 Label("Back to top level", systemImage: "arrow.up.to.line")

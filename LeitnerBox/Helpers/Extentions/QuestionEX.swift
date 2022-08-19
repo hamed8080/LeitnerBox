@@ -44,4 +44,8 @@ extension Question{
     var tagsArray:[Tag]?{
         return tag?.allObjects as? [Tag]
     }
+
+    var synonymsArray:[Synonym]?{
+        return synonyms?.allObjects as? [Synonym]
+    }
 }
