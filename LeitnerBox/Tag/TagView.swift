@@ -21,7 +21,7 @@ struct TagView: View {
             List {
                 ForEach(vm.tags) { tag in
                     NavigationLink {
-                        QuestionsInsideTagView(tag: tag)
+                        QuestionsInsideTagView(tag: tag, tagViewModel: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
                     } label: {
                         TagRowView(tag: tag, vm: vm)
                     }

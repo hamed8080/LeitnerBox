@@ -10,12 +10,17 @@ import SwiftUI
 struct QuestionsInsideTagView: View {
     
     var tag:Tag
-    
+
+    @ObservedObject
+    var tagViewModel:TagViewModel
+
     var body: some View {
         ZStack{
             List {
                 ForEach(tag.questions) { question in
-                  row(question)
+                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
                 }
             }
             .animation(.easeInOut, value: tag.questions)
@@ -23,27 +28,14 @@ struct QuestionsInsideTagView: View {
         }
         .navigationTitle("\(tag.name ?? "")")
     }
-    
-    @ViewBuilder
-    func row(_ question:Question)->some View{
-        VStack(alignment:.leading,spacing: 8){
-            Text(question.question ?? "")
-                .font(.body)
-            Text(question.answer ?? "")
-                .font(.footnote)
-                .foregroundColor(.gray)
-            Text(question.detailDescription ?? "")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-        }
-        .padding()
-    }
 }
 
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     
     static var previews: some View {
-        QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag())
+        let leitner  = LeitnerView_Previews.leitner
+        let vm = TagViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
+        QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag(), tagViewModel: vm)
             .preferredColorScheme(.light)
     }
 }

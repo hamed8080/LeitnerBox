@@ -71,6 +71,7 @@
 		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
+		05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */; };
 		05B0891728466F7500BFE778 /* StringEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B0891628466F7500BFE778 /* StringEX.swift */; };
 		05B80B642836979600390EF9 /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B80B632836979600390EF9 /* LevelsView.swift */; };
 		05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE2142837BA480043FAEB /* LevelRow.swift */; };
@@ -203,6 +204,7 @@
 		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalQuestionRow.swift; sourceTree = "<group>"; };
 		05B0891628466F7500BFE778 /* StringEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEX.swift; sourceTree = "<group>"; };
 		05B80B632836979600390EF9 /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 		05BAE21128379B820043FAEB /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				053666DD28377B5B002F899F /* CheckBoxView.swift */,
 				058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */,
 				0531A605283FEEF70051EB13 /* TextEditorView.swift */,
+				05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */,
 				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
 				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
+				05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */,
 				05867E71283A469000F4A413 /* LevelEX.swift in Sources */,
 				053666DC2837758F002F899F /* ViewExtension.swift in Sources */,
 				05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */,

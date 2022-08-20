@@ -30,7 +30,7 @@ struct AddOrEditQuestionView: View {
                         TextEditorView(
                             placeholder: "Enter your question here...",
                             shortPlaceholder: "Question",
-                            string: $vm.question,
+                            string: $vm.questionString,
                             textEditorHeight: 48
                         )
                         CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
@@ -71,13 +71,9 @@ struct AddOrEditQuestionView: View {
                         }
 
                         VStack {
-                            if let question = vm.editQuestion, let leitner = vm.level.leitner{
-                                QuestionTagsView(question: question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
-                            }
-
-                            if let question = vm.editQuestion {
-                                QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question))
-                            }
+                            let leitner = vm.level.leitner!
+                            QuestionTagsView(question: vm.question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.question))
                         }
                         
                         Button {
@@ -115,7 +111,7 @@ struct AddOrEditQuestionView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text((vm.editQuestion == nil ? "Add question" : "Edit question").uppercased())
+                    Text((vm.isInEditMode ? "Edit question" : "Add question").uppercased())
                         .font(.body.weight(.bold))
                         .foregroundColor(.accentColor)
                 }

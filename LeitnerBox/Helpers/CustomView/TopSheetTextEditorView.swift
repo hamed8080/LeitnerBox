@@ -14,39 +14,55 @@ struct TopSheetTextEditorView: View {
     let placeholder: String
 
     var body: some View {
-        TextEditor(text: $searchText)
-            .padding([.leading, .trailing], 4)
-            .font(.system(.body))
-            .frame(height: 48)
-            .foregroundColor(Color(named: "textColor"))
-            .overlay(
-                HStack{
-                    HStack {
-                        if searchText.isEmpty {
-                            Image(systemName: "magnifyingglass")
-                        }
-                        Text("\(searchText.isEmpty ? placeholder : "")")
-                    }
-                    .foregroundColor(.gray)
-                    .disabled(true)
-                    .allowsHitTesting(false)
-
-                    Spacer()
-
-                    if searchText.isEmpty == false {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 16, height: 16)
-                            .foregroundColor(.gray.opacity(0.8))
-                            .onTapGesture {
-                                searchText = ""
+        VStack {
+            TextEditor(text: $searchText)
+                .padding([.leading, .trailing], 4)
+                .font(.system(.body))
+                .frame(height: 48)
+                .foregroundColor(Color(named: "textColor"))
+                .overlay(
+                    HStack{
+                        HStack {
+                            if searchText.isEmpty {
+                                Image(systemName: "magnifyingglass")
                             }
-                    }
-                }
-                    .padding([.leading, .trailing], 12)
-            )
+                            Text("\(searchText.isEmpty ? placeholder : "")")
+                        }
+                        .foregroundColor(.gray)
+                        .disabled(true)
+                        .allowsHitTesting(false)
 
-        Divider()
+                        Spacer()
+
+                        if searchText.isEmpty == false {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(8)
+                                .frame(width: 36, height: 36)
+                                .foregroundColor(.gray.opacity(0.8))
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    searchText = ""
+                                }
+                        }
+                    }
+                        .padding([.leading, .trailing], 12)
+                )
+
+            Divider()
+        }
     }
 }
+
+
+struct TopSheetTextEditorView_Previews: PreviewProvider {
+
+    @State
+    static var searchText: String = "Test"
+
+    static var previews: some View {
+        TopSheetTextEditorView(searchText: $searchText, placeholder: "Short")
+    }
+}
+

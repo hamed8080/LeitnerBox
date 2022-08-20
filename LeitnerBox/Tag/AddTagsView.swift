@@ -26,6 +26,8 @@ struct AddTagsView: View{
             List{
                 ForEach(viewModel.filtered) { tag in
                     Label(tag.name ?? "", systemImage: "tag")
+                        .padding(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             viewModel.addToTag(tag, question)

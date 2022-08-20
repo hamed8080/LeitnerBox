@@ -32,6 +32,7 @@ class SynonymViewModel: ObservableObject{
     var filtered:[Question]{
         return leitner.allQuestions.filter({
             $0.question?.lowercased().contains( searchText.lowercased()) ?? false ||
+            $0.detailDescription?.lowercased().contains( searchText.lowercased()) ?? false ||
             $0.answer?.lowercased().contains( searchText.lowercased()) ?? false ||
             $0.detailDescription?.lowercased().contains( searchText.lowercased()) ?? false
         })

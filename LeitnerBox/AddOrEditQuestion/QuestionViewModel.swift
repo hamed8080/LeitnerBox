@@ -16,9 +16,6 @@ class QuestionViewModel:ObservableObject{
     
     @Published
     var level:Level
-
-    @Published
-    var editQuestion:Question? = nil
     
     @Published
     var isManual = true
@@ -36,7 +33,7 @@ class QuestionViewModel:ObservableObject{
     var descriptionDetail:String = ""
     
     @Published
-    var question:String = ""
+    var questionString:String = ""
     
     @Published
     var tags:[Tag] = []
@@ -46,12 +43,21 @@ class QuestionViewModel:ObservableObject{
     
     @Published
     var isFavorite:Bool = false
+
+    @Published
+    var question: Question
+
+    @Published
+    var isInEditMode: Bool
     
     init(viewContext:NSManagedObjectContext, level:Level, editQuestion:Question? = nil){
         self.viewContext = viewContext
-        self.editQuestion = editQuestion
+        self.isInEditMode = editQuestion != nil
+        let insertQuestion = Question(context: viewContext)
+        insertQuestion.level = level
+        self.question = editQuestion ?? insertQuestion
         if let editQuestion = editQuestion {
-            question          = editQuestion.question ?? ""
+            questionString    = editQuestion.question ?? ""
             answer            = editQuestion.answer ?? ""
             isCompleted       = editQuestion.completed
             descriptionDetail = editQuestion.detailDescription ?? ""
@@ -63,18 +69,18 @@ class QuestionViewModel:ObservableObject{
     }
     
     func saveEdit(){
-        editQuestion?.question = self.question
-        editQuestion?.answer = self.answer
-        editQuestion?.detailDescription = self.descriptionDetail
-        editQuestion?.completed         = isCompleted
+        question.question = self.questionString
+        question.answer = self.answer
+        question.detailDescription = self.descriptionDetail
+        question.completed         = isCompleted
         
-        if editQuestion?.favorite == false && isFavorite {
-            editQuestion?.favoriteDate = Date()
+        if question.favorite == false && isFavorite {
+            question.favoriteDate = Date()
         }
-        editQuestion?.favorite          = isFavorite
+        question.favorite          = isFavorite
         addedTags.forEach { tag in
-            if let editQuestion = editQuestion {
-                tag.addToQuestion(editQuestion)
+            if isInEditMode {
+                tag.addToQuestion(question)
             }
         }
         PersistenceController.saveDB(viewContext: viewContext)
@@ -82,8 +88,7 @@ class QuestionViewModel:ObservableObject{
     
     func insert() {
         withAnimation {
-            let question               = Question(context : viewContext)
-            question.question          = self.question
+            question.question          = self.questionString
             question.answer            = answer
             question.detailDescription = self.descriptionDetail
             question.level             = level
@@ -110,7 +115,7 @@ class QuestionViewModel:ObservableObject{
     }
     
     func save() {
-        if editQuestion != nil {
+        if isInEditMode {
             saveEdit()
         }else{
             insert()
@@ -118,9 +123,9 @@ class QuestionViewModel:ObservableObject{
     }
     
     func clear(){
-        editQuestion = nil
+
         answer = ""
-        question = ""
+        questionString = ""
         addedTags = []
         isCompleted = false
         isManual = true
@@ -144,8 +149,8 @@ class QuestionViewModel:ObservableObject{
     func removeTagForQuestio(_ tag:Tag){
         withAnimation {
             addedTags.removeAll(where: {$0 == tag})
-            if let editQuestion = editQuestion {
-                tag.removeFromQuestion(editQuestion)
+            if isInEditMode {
+                tag.removeFromQuestion(question)
             }
         }
     }
