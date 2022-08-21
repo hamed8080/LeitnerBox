@@ -13,9 +13,6 @@ struct SearchView: View {
     @ObservedObject
     var vm:SearchViewModel
 
-    @State
-    var editQuestion: Question?
-
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {

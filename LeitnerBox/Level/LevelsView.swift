@@ -27,7 +27,7 @@ struct LevelsView: View {
                 }else{
                     header
                     ForEach(vm.levels) { level in
-                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: PersistenceController.shared.container.viewContext, level: level))
+                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: vm.viewContext, level: level))
                     }
                 }
             }
@@ -78,26 +78,26 @@ struct LevelsView: View {
         }
         .listRowSeparator(.hidden)
     }
-    
+
     @ViewBuilder
     var toolbars:some View{
-        
+
         NavigationLink {
             if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst))
+                AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: levelFirst))
             }
         } label: {
             Label("Add Item", systemImage: "plus.square")
         }
         
         NavigationLink {
-            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
+            SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
         } label: {
             Label("Search View", systemImage: "square.text.square")
         }
         
         NavigationLink{
-            TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
+            TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
         } label: {
             Label("Tags", systemImage: "tag.square")
         }

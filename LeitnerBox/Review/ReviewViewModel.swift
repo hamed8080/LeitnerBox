@@ -178,7 +178,7 @@ class ReviewViewModel:ObservableObject{
     }
     
     var partOfspeech:String?{
-        let text = String((selectedQuestion?.question ?? "").split(separator: "\n").first!)
+        let text = String((selectedQuestion?.question ?? "").split(separator: "\n").first ?? "")
         let tagger = NLTagger(tagSchemes: [.lexicalClass])
         tagger.string = text
         let options: NLTagger.Options = [.omitPunctuation, .omitWhitespace]

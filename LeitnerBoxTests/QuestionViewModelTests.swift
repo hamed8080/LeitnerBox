@@ -22,7 +22,7 @@ final class QuestionViewModelTests: XCTestCase {
 
     func test_save_edit(){
         let question = vm.level.allQuestions.first!
-        vm.question = question
+        vm.editQuestion = question
         vm.saveEdit()
         XCTAssertEqual(question.completed, vm.isCompleted)
         XCTAssertEqual(question.answer, vm.answer)
@@ -32,7 +32,7 @@ final class QuestionViewModelTests: XCTestCase {
         
         
         let questionWithFav = vm.level.allQuestions.first!
-        vm.question = questionWithFav
+        vm.editQuestion = questionWithFav
         vm.isFavorite = true
         vm.saveEdit()
         XCTAssertEqual(questionWithFav.favorite, true)
@@ -64,12 +64,13 @@ final class QuestionViewModelTests: XCTestCase {
     
     func test_save(){
         let question = vm.level.allQuestions.first!
-        vm.question = question
+        vm.editQuestion = question
         vm.answer = "Updated answer"
+        vm.isInEditMode = true
         vm.save()
         XCTAssertEqual(question.answer, "Updated answer")
+        vm.clear()
         let beforeCount = vm.level.leitner?.allQuestions.count ?? 0
-        vm.question = Question(context: vm.viewContext)
         vm.answer = "New Question"
         vm.save()
         let afterCount = vm.level.leitner?.allQuestions.count ?? 0
@@ -80,7 +81,7 @@ final class QuestionViewModelTests: XCTestCase {
         let question = vm.level.allQuestions.first!
         vm.questionString = "New Question"
         vm.answer = "Answer"
-        vm.question = question
+        vm.editQuestion = question
         vm.descriptionDetail  = "Descrition"
         vm.clear()
 
@@ -90,6 +91,7 @@ final class QuestionViewModelTests: XCTestCase {
         XCTAssertTrue(vm.answer == "")
         XCTAssertTrue(vm.questionString == "")
         XCTAssertTrue(vm.descriptionDetail == "")
+        XCTAssertNil(vm.editQuestion)
     }
 }
 

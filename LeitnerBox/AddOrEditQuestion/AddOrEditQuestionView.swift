@@ -72,12 +72,14 @@ struct AddOrEditQuestionView: View {
 
                         VStack {
                             let leitner = vm.level.leitner!
-                            QuestionTagsView(question: vm.question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
-                            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.question))
+                            if let editQuestion = vm.editQuestion{
+                                QuestionTagsView(question: editQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                                QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: editQuestion))
+                            }
                         }
-                        
+
                         Button {
-                            let _ = vm.save()
+                            vm.save()
                             vm.clear()
                             dissmiss()
                         } label: {
