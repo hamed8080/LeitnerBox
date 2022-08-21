@@ -91,7 +91,6 @@ final class QuestionViewModelTests: XCTestCase {
         XCTAssertTrue(vm.answer == "")
         XCTAssertTrue(vm.questionString == "")
         XCTAssertTrue(vm.descriptionDetail == "")
-        XCTAssertNil(vm.editQuestion)
     }
 }
 
