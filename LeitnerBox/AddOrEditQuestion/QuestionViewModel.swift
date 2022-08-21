@@ -36,12 +36,6 @@ class QuestionViewModel:ObservableObject{
     var questionString:String = ""
     
     @Published
-    var tags:[Tag] = []
-    
-    @Published
-    var addedTags:[Tag] = []
-    
-    @Published
     var isFavorite:Bool = false
 
     @Published
@@ -64,8 +58,6 @@ class QuestionViewModel:ObservableObject{
             isFavorite        = editQuestion.favorite
         }
         self.level        = level
-        
-        loadTags()
     }
     
     func saveEdit(){
@@ -78,11 +70,6 @@ class QuestionViewModel:ObservableObject{
             question.favoriteDate = Date()
         }
         question.favorite          = isFavorite
-        addedTags.forEach { tag in
-            if isInEditMode {
-                tag.addToQuestion(question)
-            }
-        }
         PersistenceController.saveDB(viewContext: viewContext)
     }
     
@@ -107,9 +94,6 @@ class QuestionViewModel:ObservableObject{
             if question.favorite {
                 question.favoriteDate = Date()
             }
-            addedTags.forEach { tag in
-                tag.addToQuestion(question)
-            }
             PersistenceController.saveDB(viewContext: viewContext)
         }
     }
@@ -123,35 +107,10 @@ class QuestionViewModel:ObservableObject{
     }
     
     func clear(){
-
         answer = ""
         questionString = ""
-        addedTags = []
         isCompleted = false
         isManual = true
         descriptionDetail = ""
-    }
-    
-    func loadTags(){
-        guard let leitnerId = level.leitner?.id else{return}
-        let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
-        let req = Tag.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-        req.predicate = predicate
-        self.tags = (try? viewContext.fetch(req)) ?? []
-    }
-    
-    
-    func addTagToQuestion(_ tag:Tag){
-        addedTags.append(tag)
-    }
-    
-    func removeTagForQuestio(_ tag:Tag){
-        withAnimation {
-            addedTags.removeAll(where: {$0 == tag})
-            if isInEditMode {
-                tag.removeFromQuestion(question)
-            }
-        }
     }
 }
