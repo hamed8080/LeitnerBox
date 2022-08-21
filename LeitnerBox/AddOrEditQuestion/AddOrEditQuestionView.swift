@@ -72,10 +72,8 @@ struct AddOrEditQuestionView: View {
 
                         VStack {
                             let leitner = vm.level.leitner!
-                            if let editQuestion = vm.editQuestion{
-                                QuestionTagsView(question: editQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
-                                QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: editQuestion))
-                            }
+                            QuestionTagsView(question: vm.question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.question))
                         }
 
                         Button {
@@ -129,14 +127,36 @@ struct AddOrEditQuestionView: View {
             }
         }
         .contentShape(Rectangle())
+        .onDisappear {
+            if vm.isInEditMode == false {
+                /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+                vm.viewContext.rollback()
+            }
+        }
     }
 }
 
 struct AddQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!))
-            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-            .preferredColorScheme(.dark)
+        let question = LeitnerView_Previews.leitner.allQuestions.first!
+
+        AddOrEditQuestionView(vm: .init(
+            viewContext: PersistenceController.preview.container.viewContext,
+            level: LeitnerView_Previews.leitner.levels.first!,
+            question: question,
+            isInEditMode:  true)
+        )
+        .previewDevice("iPad Pro (12.9-inch) (5th generation)")
+        .preferredColorScheme(.dark)
+
+        AddOrEditQuestionView(vm: .init(
+            viewContext: PersistenceController.preview.container.viewContext,
+            level: LeitnerView_Previews.leitner.levels.first!,
+            question: Question(context: PersistenceController.preview.container.viewContext),
+            isInEditMode:  false)
+        )
+        .previewDevice("iPad Pro (12.9-inch) (5th generation)")
+        .preferredColorScheme(.dark)
     }
 }
 

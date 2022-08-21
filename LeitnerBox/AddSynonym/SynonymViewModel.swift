@@ -43,7 +43,6 @@ class SynonymViewModel: ObservableObject{
             let synonym = baseQuestion.synonymsArray?.first ?? quesiton.synonymsArray?.first ?? Synonym(context: viewContext)
             synonym.addToQuestion(quesiton)
             synonym.addToQuestion(baseQuestion)
-            PersistenceController.saveDB(viewContext: viewContext)
             objectWillChange.send()
         }
     }
@@ -54,7 +53,6 @@ class SynonymViewModel: ObservableObject{
             question.synonymsArray?.forEach{ synonym in
                 synonym.removeFromQuestion(question)
             }
-            PersistenceController.saveDB(viewContext: viewContext)
             objectWillChange.send()
         }
     }

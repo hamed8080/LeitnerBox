@@ -15,14 +15,15 @@ final class QuestionViewModelTests: XCTestCase {
     
     override func setUp() {
         PersistenceController.generateAndFillLeitner()
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext).leitners.first!
-        let level = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner).levels.first(where: {$0.level == 1})!
-        vm = QuestionViewModel(viewContext: PersistenceController.preview.container.viewContext, level: level)
+        let viewContext = PersistenceController.preview.container.viewContext
+        let leitner = LeitnerViewModel(viewContext: viewContext).leitners.first!
+        let level = LevelsViewModel(viewContext: viewContext, leitner: leitner).levels.first(where: {$0.level == 1})!
+        vm = QuestionViewModel(viewContext: viewContext, level: level, question: Question(context: viewContext), isInEditMode: false)
     }
 
     func test_save_edit(){
         let question = vm.level.allQuestions.first!
-        vm.editQuestion = question
+        vm.question = question
         vm.saveEdit()
         XCTAssertEqual(question.completed, vm.isCompleted)
         XCTAssertEqual(question.answer, vm.answer)
@@ -32,7 +33,7 @@ final class QuestionViewModelTests: XCTestCase {
         
         
         let questionWithFav = vm.level.allQuestions.first!
-        vm.editQuestion = questionWithFav
+        vm.question = questionWithFav
         vm.isFavorite = true
         vm.saveEdit()
         XCTAssertEqual(questionWithFav.favorite, true)
@@ -52,8 +53,7 @@ final class QuestionViewModelTests: XCTestCase {
         XCTAssertTrue(question?.detailDescription == "Descrition")
         XCTAssertEqual(question?.favorite, true)
         XCTAssertEqual(question?.level?.level, 13)
-        
-        
+
         vm.isCompleted = false
         vm.questionString = "TestNewQuestionCompletedFalse"
         vm.insert()
@@ -63,12 +63,6 @@ final class QuestionViewModelTests: XCTestCase {
     }
     
     func test_save(){
-        let question = vm.level.allQuestions.first!
-        vm.editQuestion = question
-        vm.answer = "Updated answer"
-        vm.isInEditMode = true
-        vm.save()
-        XCTAssertEqual(question.answer, "Updated answer")
         vm.clear()
         let beforeCount = vm.level.leitner?.allQuestions.count ?? 0
         vm.answer = "New Question"
@@ -76,12 +70,21 @@ final class QuestionViewModelTests: XCTestCase {
         let afterCount = vm.level.leitner?.allQuestions.count ?? 0
         XCTAssertLessThan(beforeCount, afterCount)
     }
+
+    func test_save_update(){
+        let question = vm.level.allQuestions.first!
+        vm.question = question
+        vm.answer = "Updated answer"
+        vm.isInEditMode = true
+        vm.save()
+        XCTAssertEqual(question.answer, "Updated answer")
+    }
     
     func test_clear(){
         let question = vm.level.allQuestions.first!
         vm.questionString = "New Question"
         vm.answer = "Answer"
-        vm.editQuestion = question
+        vm.question = question
         vm.descriptionDetail  = "Descrition"
         vm.clear()
 

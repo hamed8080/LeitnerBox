@@ -39,33 +39,36 @@ class QuestionViewModel:ObservableObject{
     var isFavorite:Bool = false
 
     @Published
-    var editQuestion: Question? = nil
+    var question: Question
 
     @Published
     var isInEditMode: Bool = false
     
-    init(viewContext:NSManagedObjectContext, level:Level, editQuestion:Question? = nil){
+    init(viewContext: NSManagedObjectContext, level: Level, question: Question, isInEditMode: Bool){
         self.viewContext = viewContext
         self.level = level
-        self.setEditQuestionProperties(editQuestion: editQuestion)
+        self.question = question
+        self.isInEditMode = isInEditMode
+        if isInEditMode {
+            setEditQuestionProperties(editQuestion: question)
+        }
     }
     
     func saveEdit(){
-        editQuestion?.question = self.questionString
-        editQuestion?.answer = self.answer
-        editQuestion?.detailDescription = self.descriptionDetail
-        editQuestion?.completed         = isCompleted
+        question.question = self.questionString
+        question.answer = self.answer
+        question.detailDescription = self.descriptionDetail
+        question.completed         = isCompleted
         
-        if editQuestion?.favorite == false && isFavorite {
-            editQuestion?.favoriteDate = Date()
+        if question.favorite == false && isFavorite {
+            question.favoriteDate = Date()
         }
-        editQuestion?.favorite          = isFavorite
+        question.favorite          = isFavorite
         PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func insert() {
         withAnimation {
-            let question               = Question(context: viewContext)
             question.question          = self.questionString
             question.answer            = answer
             question.detailDescription = self.descriptionDetail
@@ -93,7 +96,17 @@ class QuestionViewModel:ObservableObject{
         if isInEditMode {
             saveEdit()
         }else{
+            clearUnsavedContextObjetcs()
             insert()
+        }
+    }
+
+    /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+    func clearUnsavedContextObjetcs() {
+        viewContext.insertedObjects.forEach { object in
+            if object != question{
+                viewContext.delete(object)
+            }
         }
     }
     
@@ -109,7 +122,7 @@ class QuestionViewModel:ObservableObject{
     func setEditQuestionProperties(editQuestion: Question?){
         if let editQuestion = editQuestion {
             self.isInEditMode = true
-            self.editQuestion = editQuestion
+            self.question     = editQuestion
             questionString    = editQuestion.question ?? ""
             answer            = editQuestion.answer ?? ""
             isCompleted       = editQuestion.completed

@@ -15,6 +15,8 @@ struct AddTagsView: View{
     @StateObject
     var viewModel: TagViewModel
 
+    var completion: (()->())? = nil
+
     @Environment(\.dismiss)
     var dismiss
 
@@ -31,6 +33,7 @@ struct AddTagsView: View{
                         .contentShape(Rectangle())
                         .onTapGesture {
                             viewModel.addToTag(tag, question)
+                            completion?()
                             dismiss()
                         }
                 }

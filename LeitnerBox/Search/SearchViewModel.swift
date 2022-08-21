@@ -63,7 +63,7 @@ class SearchViewModel:ObservableObject{
         }
     }
     
-    func delete(_ question:Question){
+    func delete(_ question: Question){
         viewContext.delete(question)
         sorted.removeAll(where: {$0 == question})
         PersistenceController.saveDB(viewContext: viewContext)
@@ -258,7 +258,11 @@ class SearchViewModel:ObservableObject{
             playReview()
         }
     }
-    
+
+    func reload(){
+        sort(selectedSort)
+    }
+
     var filtered:[Question]{
         if searchText.isEmpty || searchText == "#"{
             return sorted

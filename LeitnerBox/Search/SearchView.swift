@@ -24,6 +24,12 @@ struct SearchView: View {
                 }
                 .onDelete(perform: vm.deleteItems)
             }
+            .if(.iOS){ view in
+                view.refreshable {
+                    vm.viewContext.rollback()
+                    vm.reload()
+                }
+            }
             .animation(.easeInOut, value: vm.filtered)
             .listStyle(.plain)
             .searchable(text: $vm.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
@@ -48,11 +54,14 @@ struct SearchView: View {
             
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 HStack{
-                    NavigationLink {
-                        let levels = vm.leitner.levels
-                        let firstLevel = levels.first(where: {$0.level == 1})
-                        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
-                    } label: {
+                    NavigationLink(destination: LazyView(AddOrEditQuestionView(vm:
+                            .init(
+                                viewContext: vm.viewContext,
+                                level: insertQuestion.level!,
+                                question: insertQuestion,
+                                isInEditMode: false
+                            )
+                    ))) {
                         Label("Add", systemImage: "plus.square")
                     }
 
@@ -111,7 +120,14 @@ struct SearchView: View {
 
         }
     }
-    
+
+    var insertQuestion: Question{
+        let firstLevel = vm.leitner.firstLevel
+        let question = Question(context: vm.viewContext)
+        question.level = firstLevel
+        return question
+    }
+
     @ViewBuilder
     var pronunceWordsView:some View{
         if vm.isSpeaking{

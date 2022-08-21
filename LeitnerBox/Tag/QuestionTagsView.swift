@@ -20,6 +20,8 @@ struct QuestionTagsView: View {
     let viewModel: TagViewModel
 
     var addPadding = false
+
+    var tagCompletion:(()->())? = nil
     
     var body: some View {
         VStack(alignment: .leading){
@@ -50,6 +52,7 @@ struct QuestionTagsView: View {
                             .onTapGesture {  } //do not remove this line it'll stop scrolling
                             .onLongPressGesture {
                                 viewModel.deleteTagFromQuestion(tag, question)
+                                tagCompletion?()
                             }
                     }
                 }
@@ -59,7 +62,9 @@ struct QuestionTagsView: View {
         }
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner{
-                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner))
+                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)){
+                    tagCompletion?()
+                }
             }
         })
     }

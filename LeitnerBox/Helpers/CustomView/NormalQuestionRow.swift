@@ -17,7 +17,7 @@ struct NormalQuestionRow: View {
 
     @ObservedObject
     var searchViewModel: SearchViewModel
-
+    
     var showControls = false
 
     @Environment(\.horizontalSizeClass)
@@ -26,12 +26,15 @@ struct NormalQuestionRow: View {
     @Environment(\.dynamicTypeSize)
     var typeSize
 
-    public init (question: Question, tagsViewModel: TagViewModel, searchViewModel: SearchViewModel? = nil, showControls: Bool = false) {
+    var tagCompletion:(()->())? = nil
+
+    public init (question: Question, tagsViewModel: TagViewModel, searchViewModel: SearchViewModel? = nil, showControls: Bool = false, tagCompletion:(()->())? = nil) {
         self.question = question
         self.tagsViewModel = tagsViewModel
         self.showControls = showControls
         self.searchViewModel = searchViewModel ?? SearchViewModel(viewContext: tagsViewModel.viewContext, leitner: tagsViewModel.leitner)
         self.showControls = showControls
+        self.tagCompletion = tagCompletion
     }
 
     var body: some View {
@@ -62,7 +65,9 @@ struct NormalQuestionRow: View {
                 showAddButton: showControls,
                 viewModel: tagsViewModel,
                 addPadding: true
-            )
+            ){
+                tagCompletion?()
+            }
         }
     }
 
@@ -83,7 +88,9 @@ struct NormalQuestionRow: View {
                 showAddButton: showControls,
                 viewModel: tagsViewModel,
                 addPadding: true
-            )
+            ){
+                tagCompletion?()
+            }
         }
     }
 
@@ -237,17 +244,19 @@ struct NormalQuestionRow: View {
             set: { value in }
         )
 
-        NavigationLink(isActive:binding) {
-            let level = question.level ?? searchViewModel.leitner.firstLevel
-            AddOrEditQuestionView(vm: .init(viewContext: searchViewModel.viewContext, level: level!, editQuestion: searchViewModel.editQuestion))
-                .onDisappear {
-                    searchViewModel.editQuestion = nil
-                }
-        } label: {
-            EmptyView()
-                .frame(width: 0, height: 0)
+        if let question = searchViewModel.editQuestion {
+            NavigationLink(isActive:binding) {
+                let level = question.level ?? searchViewModel.leitner.firstLevel
+                AddOrEditQuestionView(vm: .init(viewContext: searchViewModel.viewContext, level: level!, question: question, isInEditMode: true))
+                    .onDisappear {
+                        searchViewModel.editQuestion = nil
+                    }
+            } label: {
+                EmptyView()
+                    .frame(width: 0, height: 0)
+            }
+            .hidden()
         }
-        .hidden()
     }
 }
 

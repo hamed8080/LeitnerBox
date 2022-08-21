@@ -59,6 +59,7 @@ struct QuestionSynonymsView: View {
         })
     }
 
+    @ViewBuilder
     var navigateToEditQuestion: some View{
 
         let binding = Binding(
@@ -66,17 +67,19 @@ struct QuestionSynonymsView: View {
             set: { value in }
         )
 
-        return NavigationLink(isActive:binding) {
-            let level = selectedQuestion?.level ?? viewModel.leitner.firstLevel
-            AddOrEditQuestionView(vm: .init(viewContext: viewModel.viewContext, level: level!, editQuestion: selectedQuestion))
-                .onDisappear {
-                    selectedQuestion = nil
-                }
-        } label: {
-            EmptyView()
-                .frame(width: 0, height: 0)
+        if let selectedQuestion = selectedQuestion {
+            NavigationLink(isActive:binding) {
+                let level = selectedQuestion.level ?? viewModel.leitner.firstLevel
+                AddOrEditQuestionView(vm: .init(viewContext: viewModel.viewContext, level: level!, question: selectedQuestion, isInEditMode: true))
+                    .onDisappear {
+                        self.selectedQuestion = nil
+                    }
+            } label: {
+                EmptyView()
+                    .frame(width: 0, height: 0)
+            }
+            .hidden()
         }
-        .hidden()
     }
 }
 

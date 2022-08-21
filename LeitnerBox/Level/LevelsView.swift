@@ -34,10 +34,11 @@ struct LevelsView: View {
             .listStyle(.plain)
             .if(.iOS){ view in
                 view.refreshable {
+                    vm.viewContext.rollback()
                     vm.load()
                 }
             }
-            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")            
+            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
         }
         .animation(.easeInOut, value: vm.searchWord)
         .navigationTitle(vm.levels.first?.leitner?.name ?? "")
@@ -79,32 +80,28 @@ struct LevelsView: View {
         .listRowSeparator(.hidden)
     }
 
+    var insertQuestion:Question{
+        let question = Question(context: vm.viewContext)
+        question.level = vm.leitner.firstLevel
+        return question
+    }
+
     @ViewBuilder
     var toolbars:some View{
 
-        NavigationLink {
-            if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: levelFirst))
-            }
-        } label: {
+        NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
             Label("Add Item", systemImage: "plus.square")
         }
-        
-        NavigationLink {
-            SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
-        } label: {
+
+        NavigationLink(destination: LazyView(SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))) {
             Label("Search View", systemImage: "square.text.square")
         }
         
-        NavigationLink{
-            TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
-        } label: {
+        NavigationLink(destination: LazyView(TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))) {
             Label("Tags", systemImage: "tag.square")
         }
 
-        NavigationLink{
-            SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!))
-        } label: {
+        NavigationLink(destination: LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))){
             Label("Synonyms", systemImage: "arrow.left.and.right.square")
         }
     }
@@ -151,6 +148,16 @@ struct LevelsView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+public struct LazyView<Content: View>: View {
+    private let build: () -> Content
+    public init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    public var body: Content {
+        build()
     }
 }
 
