@@ -37,7 +37,7 @@ struct SplashScreen: View {
                 Spacer()
                 HStack(spacing: 4){
                     Text("Powered by")
-                        .font(.footnote)
+                        .font(.subheadline.bold())
                     Image(systemName: "swift")
                         .resizable()
                         .frame(width: 18, height: 18)

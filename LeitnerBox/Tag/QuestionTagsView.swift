@@ -15,18 +15,25 @@ struct QuestionTagsView: View {
     @State
     private var showAddTags = false
 
+    var showAddButton = true
+
     let viewModel: TagViewModel
 
     var addPadding = false
+
+    var tagCompletion:(()->())? = nil
     
     var body: some View {
         VStack(alignment: .leading){
-            Button {
-                showAddTags.toggle()
-            } label: {
-                Label("Tags", systemImage: "plus.circle")
+            if showAddButton {
+                Button {
+                    showAddTags.toggle()
+                } label: {
+                    Label("Tags", systemImage: "plus.circle")
+                }
+                .buttonStyle(.borderless)
+                .padding(addPadding ? [.leading, .trailing] : [])
             }
-            .padding(addPadding ? [.leading, .trailing] : [])
 
             ScrollView(.horizontal){
                 HStack(spacing:12){
@@ -45,6 +52,7 @@ struct QuestionTagsView: View {
                             .onTapGesture {  } //do not remove this line it'll stop scrolling
                             .onLongPressGesture {
                                 viewModel.deleteTagFromQuestion(tag, question)
+                                tagCompletion?()
                             }
                     }
                 }
@@ -52,10 +60,11 @@ struct QuestionTagsView: View {
                 .padding(.bottom)
             }
         }
-
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner{
-                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner))
+                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)){
+                    tagCompletion?()
+                }
             }
         })
     }

@@ -18,6 +18,8 @@ struct ReviewView: View {
     
     @Environment(\.horizontalSizeClass)
     var sizeClass
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         if vm.isFinished{
@@ -51,19 +53,21 @@ struct ReviewView: View {
             .background( Color(named: "dialogBackground"))
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink{
-                        let levels = vm.level.leitner?.levels
-                        let firstLevel = levels?.first(where: {$0.level == 1})
-                        AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: firstLevel!))
-                    } label: {
+                    NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
                         Label("Add Item", systemImage: "plus.square")
+                            .font(.title3)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                     }
 
                     if let leitner = vm.level.leitner{
                         NavigationLink{
                             SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
                         } label: {
-                            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+                            Label("Search View", systemImage: "square.text.square")
+                                .font(.title3)
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                         }
                     }
                 }
@@ -74,6 +78,12 @@ struct ReviewView: View {
         }else{
             NotAnyToReviewView()
         }
+    }
+
+    var insertQuestion:Question{
+        let question = Question(context: vm.viewContext)
+        question.level = vm.level.leitner?.firstLevel
+        return question
     }
     
     var deleteDialog:some View{
@@ -120,8 +130,6 @@ struct ReviewView: View {
                 .font( sizeClass == .compact ? .body.bold() : .title3.bold())
         }
     }
-    
-    
     
     var ipadHeader:some View{
         HStack{
@@ -283,17 +291,19 @@ struct ReviewView: View {
                     .frame(width: 32, height: 32)
                     .foregroundColor(.orange)
             }
-            
-            NavigationLink{
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, editQuestion: vm.selectedQuestion))
-            } label: {
-                Image(systemName: "pencil")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.accentColor)
+
+            if let question = vm.selectedQuestion {
+                NavigationLink{
+                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, question: question, isInEditMode: true))
+                } label: {
+                    Image(systemName: "pencil")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(.accentColor)
+                }
             }
-            
+
             Button {
                 withAnimation {
                     vm.toggleFavorite()

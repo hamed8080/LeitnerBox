@@ -55,14 +55,12 @@ class TagViewModel:ObservableObject{
         withAnimation {
             offsets.map { tags[$0] }.forEach(viewContext.delete)
             tags.remove(atOffsets: offsets)
-            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
 
     func deleteTagFromQuestion(_ tag: Tag, _ question: Question) {
         withAnimation {
             tag.removeFromQuestion(question)
-            PersistenceController.saveDB(viewContext: viewContext)
         }
     }
     
@@ -78,7 +76,6 @@ class TagViewModel:ObservableObject{
         withAnimation {
             if let tag = tags.first(where: {$0.objectID == tag.objectID}){
                 tag.addToQuestion(question)
-                PersistenceController.saveDB(viewContext: viewContext)
             }
         }
     }
@@ -96,7 +93,6 @@ class TagViewModel:ObservableObject{
         if let cgColor = colorPickerColor.cgColor{
             selectedTag?.color = UIColor(cgColor: cgColor)
         }
-        PersistenceController.saveDB(viewContext: viewContext)
         showAddOrEditTagDialog.toggle()
     }
     
@@ -110,7 +106,6 @@ class TagViewModel:ObservableObject{
                 newItem.color = UIColor(cgColor: cgColor)
             }
             tags.append(newItem)
-            PersistenceController.saveDB(viewContext: viewContext)
             showAddOrEditTagDialog.toggle()
             clear()
         }

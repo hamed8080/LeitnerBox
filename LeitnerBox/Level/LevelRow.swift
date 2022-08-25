@@ -11,22 +11,20 @@ struct LevelRow:View{
     
     @ObservedObject
     var vm:LevelsViewModel
-    
-    /// Do not move this to view it cause view reload in review
+
     @ObservedObject
-    var reviewViewModel:ReviewViewModel
-    
-    
+    var level: Level
+
     @Environment(\.horizontalSizeClass)
     var sizeClass
     
     var body: some View{
         NavigationLink {
-            ReviewView(vm: reviewViewModel)
+            ReviewView(vm: ReviewViewModel(viewContext: vm.viewContext, level: level))
         } label: {
             HStack{
                 HStack{
-                    Text(verbatim: "\(reviewViewModel.level.level)")
+                    Text(verbatim: "\(level.level)")
                         .foregroundColor(.white)
                         .font(.title.weight(.bold))
                         .frame(width: 48, height: 48)
@@ -35,7 +33,7 @@ struct LevelRow:View{
                             Circle()
                                 .fill(Color.blue)
                         )
-                    let favCount = reviewViewModel.level.allQuestions.filter({ $0.favorite == true }).count
+                    let favCount = level.allQuestions.filter({ $0.favorite == true }).count
   
                     HStack(alignment:.firstTextBaseline, spacing: 4){
                         Image(systemName: "star.fill")
@@ -49,17 +47,17 @@ struct LevelRow:View{
        
                 VStack{
                     HStack(spacing:0){
-                        Text(verbatim: "\(reviewViewModel.level.reviewableCountInsideLevel)")
+                        Text(verbatim: "\(level.reviewableCountInsideLevel)")
                             .foregroundColor(.accentColor.opacity(1))
                         Spacer()
-                        Text(verbatim: "\(reviewViewModel.level.notCompletdCount)")
+                        Text(verbatim: "\(level.notCompletdCount)")
                             .foregroundColor(.primary.opacity(1))
                     }
                     .font(.footnote)
                     
                     ProgressView(
-                        value: Float(reviewViewModel.level.reviewableCountInsideLevel),
-                        total: Float(reviewViewModel.level.notCompletdCount)
+                        value: Float(level.reviewableCountInsideLevel),
+                        total: Float(level.notCompletdCount)
                     )
                     .progressViewStyle(.linear)
                 }
@@ -68,8 +66,8 @@ struct LevelRow:View{
             }
             .contextMenu{
                 Button {
-                    vm.selectedLevel = reviewViewModel.level
-                    vm.daysToRecommend = Int(reviewViewModel.level.daysToRecommend)
+                    vm.selectedLevel = level
+                    vm.daysToRecommend = Int(level.daysToRecommend)
                     vm.showDaysAfterDialog.toggle()
                 } label: {
                     Label("Days to recommend", systemImage: "calendar")
@@ -83,6 +81,12 @@ struct LevelRow:View{
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner), reviewViewModel: ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!))
+        LevelRow(
+            vm: LevelsViewModel(
+                viewContext: PersistenceController.preview.container.viewContext,
+                leitner: LeitnerView_Previews.leitner
+            ),
+            level: LeitnerView_Previews.leitner.levels.first!
+        )
     }
 }

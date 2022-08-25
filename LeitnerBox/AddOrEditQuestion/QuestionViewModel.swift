@@ -16,9 +16,6 @@ class QuestionViewModel:ObservableObject{
     
     @Published
     var level:Level
-
-    @Published
-    var editQuestion:Question? = nil
     
     @Published
     var isManual = true
@@ -36,54 +33,43 @@ class QuestionViewModel:ObservableObject{
     var descriptionDetail:String = ""
     
     @Published
-    var question:String = ""
-    
-    @Published
-    var tags:[Tag] = []
-    
-    @Published
-    var addedTags:[Tag] = []
+    var questionString:String = ""
     
     @Published
     var isFavorite:Bool = false
+
+    @Published
+    var question: Question
+
+    @Published
+    var isInEditMode: Bool = false
     
-    init(viewContext:NSManagedObjectContext, level:Level, editQuestion:Question? = nil){
+    init(viewContext: NSManagedObjectContext, level: Level, question: Question, isInEditMode: Bool){
         self.viewContext = viewContext
-        self.editQuestion = editQuestion
-        if let editQuestion = editQuestion {
-            question          = editQuestion.question ?? ""
-            answer            = editQuestion.answer ?? ""
-            isCompleted       = editQuestion.completed
-            descriptionDetail = editQuestion.detailDescription ?? ""
-            isFavorite        = editQuestion.favorite
+        self.level = level
+        self.question = question
+        self.isInEditMode = isInEditMode
+        if isInEditMode {
+            setEditQuestionProperties(editQuestion: question)
         }
-        self.level        = level
-        
-        loadTags()
     }
     
     func saveEdit(){
-        editQuestion?.question = self.question
-        editQuestion?.answer = self.answer
-        editQuestion?.detailDescription = self.descriptionDetail
-        editQuestion?.completed         = isCompleted
+        question.question = self.questionString
+        question.answer = self.answer
+        question.detailDescription = self.descriptionDetail
+        question.completed         = isCompleted
         
-        if editQuestion?.favorite == false && isFavorite {
-            editQuestion?.favoriteDate = Date()
+        if question.favorite == false && isFavorite {
+            question.favoriteDate = Date()
         }
-        editQuestion?.favorite          = isFavorite
-        addedTags.forEach { tag in
-            if let editQuestion = editQuestion {
-                tag.addToQuestion(editQuestion)
-            }
-        }
+        question.favorite          = isFavorite
         PersistenceController.saveDB(viewContext: viewContext)
     }
     
     func insert() {
         withAnimation {
-            let question               = Question(context : viewContext)
-            question.question          = self.question
+            question.question          = self.questionString
             question.answer            = answer
             question.detailDescription = self.descriptionDetail
             question.level             = level
@@ -102,51 +88,46 @@ class QuestionViewModel:ObservableObject{
             if question.favorite {
                 question.favoriteDate = Date()
             }
-            addedTags.forEach { tag in
-                tag.addToQuestion(question)
-            }
             PersistenceController.saveDB(viewContext: viewContext)
         }
     }
 
     func save() {
-        if editQuestion != nil {
+        if isInEditMode {
             saveEdit()
         }else{
+            clearUnsavedContextObjetcs()
             insert()
+        }
+    }
+
+    /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+    func clearUnsavedContextObjetcs() {
+        viewContext.insertedObjects.forEach { object in
+            if object != question{
+                viewContext.delete(object)
+            }
         }
     }
     
     func clear(){
-        editQuestion = nil
         answer = ""
-        question = ""
-        addedTags = []
+        questionString = ""
         isCompleted = false
         isManual = true
         descriptionDetail = ""
+        isInEditMode = false
     }
-    
-    func loadTags(){
-        guard let leitnerId = level.leitner?.id else{return}
-        let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
-        let req = Tag.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-        req.predicate = predicate
-        self.tags = (try? viewContext.fetch(req)) ?? []
-    }
-    
-    
-    func addTagToQuestion(_ tag:Tag){
-        addedTags.append(tag)
-    }
-    
-    func removeTagForQuestio(_ tag:Tag){
-        withAnimation {
-            addedTags.removeAll(where: {$0 == tag})
-            if let editQuestion {
-                tag.removeFromQuestion(editQuestion)
-            }
+
+    func setEditQuestionProperties(editQuestion: Question?){
+        if let editQuestion = editQuestion {
+            self.isInEditMode = true
+            self.question     = editQuestion
+            questionString    = editQuestion.question ?? ""
+            answer            = editQuestion.answer ?? ""
+            isCompleted       = editQuestion.completed
+            descriptionDetail = editQuestion.detailDescription ?? ""
+            isFavorite        = editQuestion.favorite
         }
     }
 }

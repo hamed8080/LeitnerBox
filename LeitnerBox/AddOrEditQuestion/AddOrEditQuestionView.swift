@@ -17,6 +17,8 @@ struct AddOrEditQuestionView: View {
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         GeometryReader{ reader in
@@ -28,7 +30,7 @@ struct AddOrEditQuestionView: View {
                         TextEditorView(
                             placeholder: "Enter your question here...",
                             shortPlaceholder: "Question",
-                            string: $vm.question,
+                            string: $vm.questionString,
                             textEditorHeight: 48
                         )
                         CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
@@ -69,17 +71,13 @@ struct AddOrEditQuestionView: View {
                         }
 
                         VStack {
-                            if let question = vm.editQuestion, let leitner = vm.level.leitner{
-                                QuestionTagsView(question: question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
-                            }
-
-                            if let question = vm.editQuestion {
-                                QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question))
-                            }
+                            let leitner = vm.level.leitner!
+                            QuestionTagsView(question: vm.question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+                            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.question))
                         }
-                        
+
                         Button {
-                            let _ = vm.save()
+                            vm.save()
                             vm.clear()
                             dissmiss()
                         } label: {
@@ -105,12 +103,15 @@ struct AddOrEditQuestionView: View {
             .toolbar {
                 ToolbarItem {
                     Button(action: vm.clear) {
-                        Label("clear", systemImage: "trash")
+                        Label("clear", systemImage: "trash.square")
+                            .font(.title3)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                     }
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text((vm.editQuestion == nil ? "Add question" : "Edit question").uppercased())
+                    Text((vm.isInEditMode ? "Edit question" : "Add question").uppercased())
                         .font(.body.weight(.bold))
                         .foregroundColor(.accentColor)
                 }
@@ -126,6 +127,12 @@ struct AddOrEditQuestionView: View {
             }
         }
         .contentShape(Rectangle())
+        .onDisappear {
+            if vm.isInEditMode == false {
+                /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+                vm.viewContext.rollback()
+            }
+        }
     }
 }
 
@@ -134,7 +141,12 @@ struct AddQuestionView_Previews: PreviewProvider {
     struct Preview:View{
         
         @StateObject
-        var vm = QuestionViewModel(viewContext: PersistenceController.preview.container.viewContext, level: LeitnerView_Previews.leitner.levels.first!)
+        var vm = QuestionViewModel(
+            viewContext: PersistenceController.preview.container.viewContext,
+            level: LeitnerView_Previews.leitner.levels.first!,
+            question: LeitnerView_Previews.leitner.allQuestions.first!,
+            isInEditMode: true
+        )
         var body: some View{
             AddOrEditQuestionView(vm: vm)
         }

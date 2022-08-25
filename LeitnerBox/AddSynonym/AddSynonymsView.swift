@@ -22,22 +22,8 @@ struct AddSynonymsView: View{
 
             List{
                 ForEach(viewModel.filtered) { question in
-                    VStack(alignment: .leading, spacing: 4){
-                        Text(question.question ?? "")
-                            .font(.title2.bold())
-                        if let answer = question.answer, !answer.isEmpty {
-                            Text(answer.uppercased())
-                                .foregroundColor(.gray)
-                                .font(.headline.bold())
-                                .padding()
-                        }
-
-                        if let detailDescription = question.detailDescription, !detailDescription.isEmpty{
-                            Text(detailDescription.uppercased())
-                                .foregroundColor(.gray)
-                                .font(.headline.bold())
-                        }
-                    }
+                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner))
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         viewModel.addAsSynonym(question)
@@ -54,7 +40,11 @@ struct AddSynonymsView: View{
 struct AddSynonymsView_Previews: PreviewProvider {
     static var previews: some View {
         let firstQuestion = LeitnerView_Previews.leitner.allQuestions.first!
-        AddSynonymsView(viewModel: .init(viewContext: PersistenceController.preview.container.viewContext, question: firstQuestion))
+        let vm = SynonymViewModel(viewContext: PersistenceController.preview.container.viewContext, question: firstQuestion)
+        AddSynonymsView(viewModel: vm)
+            .onAppear {
+                vm.searchText = "t"
+            }
             .preferredColorScheme(.dark)
     }
 }

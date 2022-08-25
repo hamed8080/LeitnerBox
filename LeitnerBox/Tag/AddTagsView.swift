@@ -15,6 +15,8 @@ struct AddTagsView: View{
     @StateObject
     var viewModel: TagViewModel
 
+    var completion: (()->())? = nil
+
     @Environment(\.dismiss)
     var dismiss
 
@@ -26,9 +28,12 @@ struct AddTagsView: View{
             List{
                 ForEach(viewModel.filtered) { tag in
                     Label(tag.name ?? "", systemImage: "tag")
+                        .padding(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             viewModel.addToTag(tag, question)
+                            completion?()
                             dismiss()
                         }
                 }

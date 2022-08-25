@@ -15,6 +15,8 @@ struct LevelsView: View {
     
     @ObservedObject
     var searchViewModel:SearchViewModel
+
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -25,18 +27,26 @@ struct LevelsView: View {
                 }else{
                     header
                     ForEach(vm.levels) { level in
-                        LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: PersistenceController.shared.container.viewContext, level: level))
+                        LevelRow(vm: vm, level: level)
                     }
                 }
             }
             .listStyle(.plain)
+            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
             .if(.iOS){ view in
                 view.refreshable {
+                    vm.viewContext.rollback()
                     vm.load()
                 }
             }
-            .searchable(text: $vm.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                searchResult
+            .navigationDestination(isPresented: Binding(get: {return searchViewModel.editQuestion != nil}, set: {_ in})) {
+                if let editQuestion = searchViewModel.editQuestion {
+                    let level = editQuestion.level ?? searchViewModel.leitner.firstLevel
+                    AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true))
+                        .onDisappear {
+                            searchViewModel.editQuestion = nil
+                        }
+                }
             }
         }
         .animation(.easeInOut, value: vm.searchWord)
@@ -44,6 +54,9 @@ struct LevelsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 toolbars
+                    .font(.title3)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
             }
         }
         .customDialog(isShowing: $vm.showDaysAfterDialog) {
@@ -75,34 +88,40 @@ struct LevelsView: View {
         }
         .listRowSeparator(.hidden)
     }
-    
+
+    var insertQuestion:Question{
+        let question = Question(context: vm.viewContext)        
+        question.level = vm.leitner.firstLevel
+        return question
+    }
+
     @ViewBuilder
     var toolbars:some View{
-        
-        NavigationLink {
-            if let levelFirst = vm.levels.first(where: {$0.level == 1}){
-                AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: levelFirst))
-            }
-        } label: {
+
+        NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
             Label("Add Item", systemImage: "plus.square")
         }
         
         NavigationLink {
-            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
+            SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
         } label: {
             Label("Search View", systemImage: "list.bullet.rectangle.portrait")
         }
         
         NavigationLink{
-            TagView(vm: TagViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: vm.leitner))
+            TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
         } label: {
-            Label("Tags", systemImage: "tag")
+            Label("Tags", systemImage: "tag.square")
         }
-        
+
         NavigationLink{
             StatisticsView(vm: .init())
         } label: {
             Label("Statictics", systemImage: "chart.xyaxis.line")
+        }
+
+        NavigationLink(destination: LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))){
+            Label("Synonyms", systemImage: "arrow.left.and.right.square")
         }
     }
     
@@ -148,6 +167,16 @@ struct LevelsView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+public struct LazyView<Content: View>: View {
+    private let build: () -> Content
+    public init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    public var body: Content {
+        build()
     }
 }
 

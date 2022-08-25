@@ -32,6 +32,7 @@ class SynonymViewModel: ObservableObject{
     var filtered:[Question]{
         return leitner.allQuestions.filter({
             $0.question?.lowercased().contains( searchText.lowercased()) ?? false ||
+            $0.detailDescription?.lowercased().contains( searchText.lowercased()) ?? false ||
             $0.answer?.lowercased().contains( searchText.lowercased()) ?? false ||
             $0.detailDescription?.lowercased().contains( searchText.lowercased()) ?? false
         })
@@ -42,7 +43,6 @@ class SynonymViewModel: ObservableObject{
             let synonym = baseQuestion.synonymsArray?.first ?? quesiton.synonymsArray?.first ?? Synonym(context: viewContext)
             synonym.addToQuestion(quesiton)
             synonym.addToQuestion(baseQuestion)
-            PersistenceController.saveDB(viewContext: viewContext)
             objectWillChange.send()
         }
     }
@@ -53,8 +53,12 @@ class SynonymViewModel: ObservableObject{
             question.synonymsArray?.forEach{ synonym in
                 synonym.removeFromQuestion(question)
             }
-            PersistenceController.saveDB(viewContext: viewContext)
             objectWillChange.send()
         }
+    }
+
+    var allSynonymsInLeitner: [Synonym]{
+        let req = Synonym.fetchRequest()
+        return (try? viewContext.fetch(req)) ?? []
     }
 }

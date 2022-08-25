@@ -28,7 +28,16 @@ struct LeitnerView: View {
         } detail: {
             NavigationStack{
                 if let leitner = selectedLeitner{
-                    LevelsView(vm: LevelsViewModel(viewContext:  PersistenceController.preview.container.viewContext, leitner: leitner), searchViewModel: SearchViewModel(viewContext:  PersistenceController.preview.container.viewContext, leitner: leitner))
+                    LevelsView(
+                        vm: LevelsViewModel(
+                            viewContext:  vm.viewContext,
+                            leitner: leitner
+                        ),
+                        searchViewModel: SearchViewModel(
+                            viewContext:  vm.viewContext,
+                            leitner: leitner
+                        )
+                    )
                 }
             }
         }

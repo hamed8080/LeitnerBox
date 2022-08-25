@@ -56,7 +56,9 @@ struct QuestionSynonymsView: View {
         }
         .navigationDestination(isPresented: Binding(get: {return selectedQuestion != nil}, set: {vlaue in})){
             let level = selectedQuestion?.level ?? viewModel.leitner.firstLevel
-            AddOrEditQuestionView(vm: .init(viewContext: viewModel.viewContext, level: level!, editQuestion: selectedQuestion))
+            if let selectedQuestion {
+                AddOrEditQuestionView(vm: .init(viewContext: viewModel.viewContext, level: level!, question: selectedQuestion, isInEditMode: true))
+            }
         }
         .sheet(isPresented: $showAddSynonyms, onDismiss: nil, content: {
             AddSynonymsView(viewModel: viewModel)
