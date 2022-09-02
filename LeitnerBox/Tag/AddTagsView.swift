@@ -1,31 +1,28 @@
 //
-//  AddTagsView.swift
-//  LeitnerBox
+// AddTagsView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 8/18/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
-struct AddTagsView: View{
-
+struct AddTagsView: View {
     @ObservedObject
     var question: Question
 
     @StateObject
     var viewModel: TagViewModel
 
-    var completion: (()->())? = nil
+    var completion: (() -> Void)?
 
     @Environment(\.dismiss)
     var dismiss
 
-    var body: some View{
-        VStack(spacing: 0){
-
+    var body: some View {
+        VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $viewModel.searchText, placeholder: "Search for tags...")
 
-            List{
+            List {
                 ForEach(viewModel.filtered) { tag in
                     Label(tag.name ?? "", systemImage: "tag")
                         .padding(8)

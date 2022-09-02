@@ -1,16 +1,15 @@
 //
-//  SynonymsView.swift
-//  LeitnerBox
+// SynonymsView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 8/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct SynonymsView: View {
-
     @ObservedObject
     var viewModel: SynonymViewModel
+    var accessControls: [AccessControls] = [.showSynonyms, .removeSynonym]
 
     var body: some View {
         List(viewModel.allSynonymsInLeitner) { synonym in
@@ -20,9 +19,9 @@ struct SynonymsView: View {
                 Text(firstQuestion?.question ?? "")
                     .font(.title3.bold())
 
-                let allQuestions = synonym.allQuestions.filter({$0 != firstQuestion})
-                ScrollView(.horizontal){
-                    HStack(spacing:4){
+                let allQuestions = synonym.allQuestions.filter { $0 != firstQuestion }
+                ScrollView(.horizontal) {
+                    HStack(spacing: 4) {
                         ForEach(allQuestions) { question in
                             Text("\(String(question.question?.split(separator: "\n").first ?? ""))")
                                 .foregroundColor(.accentColor)
@@ -33,6 +32,11 @@ struct SynonymsView: View {
                                 .cornerRadius(6)
                                 .transition(.asymmetric(insertion: .slide, removal: .scale))
                                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                                .onLongPressGesture {
+                                    if accessControls.contains(.removeSynonym) {
+                                        viewModel.deleteFromSynonym(question)
+                                    }
+                                }
                         }
                     }
                 }

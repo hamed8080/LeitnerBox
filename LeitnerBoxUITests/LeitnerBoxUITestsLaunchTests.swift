@@ -1,14 +1,12 @@
 //
-//  LeitnerBoxUITestsLaunchTests.swift
-//  LeitnerBoxUITests
+// LeitnerBoxUITestsLaunchTests.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 7/3/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import XCTest
 
 class LeitnerBoxUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         false
     }
@@ -20,14 +18,14 @@ class LeitnerBoxUITestsLaunchTests: XCTestCase {
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
-        
+
         let ttgc7swiftui19uihostingNavigationBar = app.navigationBars["_TtGC7SwiftUI19UIHosting"]
         ttgc7swiftui19uihostingNavigationBar.buttons["Back"].tap()
-        
+
         let tables = app.tables
         tables.staticTexts.element(boundBy: 0).tap()
         tables.staticTexts.matching(identifier: "levelRow").element(boundBy: 0).tap()
-        
+
         app.scrollViews.otherElements.staticTexts["Tap to show answer"].tap()
         ttgc7swiftui19uihostingNavigationBar.buttons["English"].tap()
 

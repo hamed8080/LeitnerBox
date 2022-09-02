@@ -1,31 +1,28 @@
 //
-//  WidgetQuestion.swift
-//  LeitnerBox
+// WidgetQuestion.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 7/22/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import Foundation
-class WidgetQuestionTag:Codable, Identifiable{
+class WidgetQuestionTag: Codable, Identifiable {
+    let name: String
 
-    let name:String
-    
     internal init(name: String) {
         self.name = name
     }
 }
 
-class WidgetQuestion:Codable{
+class WidgetQuestion: Codable {
+    let question: String?
+    let answer: String?
+    let detailedDescription: String?
+    let level: Int
+    let isFavorite: Bool
+    let isCompleted: Bool
+    let tags: [WidgetQuestionTag]
 
-    let question:String?
-    let answer:String?
-    let detailedDescription:String?
-    let level:Int
-    let isFavorite:Bool
-    let isCompleted:Bool
-    let tags:[WidgetQuestionTag]
-
-    internal init(question: String?, answer: String?, tags:[WidgetQuestionTag], detailedDescription: String?, level: Int, isFavorite: Bool, isCompleted: Bool) {
+    internal init(question: String?, answer: String?, tags: [WidgetQuestionTag], detailedDescription: String?, level: Int, isFavorite: Bool, isCompleted: Bool) {
         self.question = question
         self.answer = answer
         self.detailedDescription = detailedDescription
@@ -34,5 +31,4 @@ class WidgetQuestion:Codable{
         self.isCompleted = isCompleted
         self.tags = tags
     }
-
 }

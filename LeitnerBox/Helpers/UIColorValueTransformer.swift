@@ -1,26 +1,23 @@
 //
-//  UIColorValueTransformer.swift
-//  LeitnerBox
+// UIColorValueTransformer.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 6/3/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
-import Foundation
 import CoreData
+import Foundation
 import UIKit
 
 @objc(UIColorValueTransformer)
-class UIColorValueTransformer:ValueTransformer{
-    
-    
+class UIColorValueTransformer: ValueTransformer {
     override class func transformedValueClass() -> AnyClass {
-        return UIColor.self
+        UIColor.self
     }
-    
+
     override class func allowsReverseTransformation() -> Bool {
-        return true
+        true
     }
-    
+
     override func transformedValue(_ value: Any?) -> Any? {
         guard let color = value as? UIColor else { return nil }
         do {
@@ -31,10 +28,10 @@ class UIColorValueTransformer:ValueTransformer{
             return nil
         }
     }
-    
+
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let data = value as? NSData else { return nil }
-        
+
         do {
             let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data as Data)
             return color

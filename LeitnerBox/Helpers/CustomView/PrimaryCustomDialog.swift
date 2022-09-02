@@ -1,42 +1,40 @@
 //
-//  PrimaryCustomDialog.swift
-//  ChatApplication
+// PrimaryCustomDialog.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by Hamed on 1/15/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct PrimaryCustomDialog: View {
-    
-    var title           :String
-    var message         :String?           = nil
-    var systemImageName :String?           = nil
-    var textBinding     :Binding<String>?  = nil
+    var title: String
+    var message: String?
+    var systemImageName: String?
+    var textBinding: Binding<String>?
     @Binding
-    var hideDialog      :Bool
-    var textPlaceholder :String?           = nil
-    var submitTitle     :String            = "Submit"
-    var cancelTitle     :String            = "Cancel"
-    var onSubmit        :((String)->())?   = nil
-    var onClose         :(()->())?         = nil
-    
+    var hideDialog: Bool
+    var textPlaceholder: String?
+    var submitTitle: String = "Submit"
+    var cancelTitle: String = "Cancel"
+    var onSubmit: ((String) -> Void)?
+    var onClose: (() -> Void)?
+
     @Environment(\.colorScheme) var colorScheme
-    
-    var body: some View{
-        VStack(spacing:2){
+
+    var body: some View {
+        VStack(spacing: 2) {
             if let systemImageName {
                 Image(systemName: systemImageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth:72)
+                    .frame(maxWidth: 72)
                     .padding()
-                    .foregroundColor(colorScheme == .dark ? Color.gray : Color.gray )
+                    .foregroundColor(colorScheme == .dark ? Color.gray : Color.gray)
             }
-            
+
             Text(title)
                 .fontWeight(.bold)
-                .padding([.top,.bottom])
+                .padding([.top, .bottom])
             if let message {
                 Text(message)
                     .fontWeight(.medium)
@@ -49,20 +47,17 @@ struct PrimaryCustomDialog: View {
                                  textBinding: textBinding,
                                  isEditing: true,
                                  keyboardType: .alphabet,
-                                 backgroundColor: .black.opacity(0.05)
-                ){
-                    
-                }
-                .padding([.top,.bottom])
-                .padding(.bottom)
+                                 backgroundColor: .black.opacity(0.05)) {}
+                    .padding([.top, .bottom])
+                    .padding(.bottom)
             }
-            
-            Button(submitTitle){
+
+            Button(submitTitle) {
                 onSubmit?(textBinding?.wrappedValue ?? "")
                 hideDialog.toggle()
             }
-            
-            Button(cancelTitle){
+
+            Button(cancelTitle) {
                 withAnimation {
                     hideDialog.toggle()
                     onClose?()

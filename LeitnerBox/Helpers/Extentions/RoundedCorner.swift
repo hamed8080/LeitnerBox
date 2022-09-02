@@ -1,14 +1,12 @@
 //
-//  RoundedCorner.swift
-//  LeitnerBox
+// RoundedCorner.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/22/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct RoundedCorner: Shape {
-
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
 
@@ -17,6 +15,7 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
 struct RoundedCorner_Previews: PreviewProvider {
     static var previews: some View {
         RoundedCorner()

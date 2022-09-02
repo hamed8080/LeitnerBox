@@ -1,26 +1,24 @@
 //
-//  LeitnerBox.swift
-//  ChatApplication
+// ViewExtension.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 extension View {
-    
-    var isIpad:Bool{
-        return UIDevice.current.userInterfaceIdiom == .pad
+    var isIpad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
     }
-    
-    func hideKeyboard(){
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-    
+
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
-    
+
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.

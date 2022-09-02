@@ -1,29 +1,27 @@
 //
-//  LevelRow.swift
-//  LeitnerBox
+// LevelRow.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/20/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
-struct LevelRow:View{
-    
+struct LevelRow: View {
     @ObservedObject
-    var vm:LevelsViewModel
+    var vm: LevelsViewModel
 
     @ObservedObject
     var level: Level
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
-    
-    var body: some View{
+
+    var body: some View {
         NavigationLink {
             ReviewView(vm: ReviewViewModel(viewContext: vm.viewContext, level: level))
         } label: {
-            HStack{
-                HStack{
+            HStack {
+                HStack {
                     Text(verbatim: "\(level.level)")
                         .foregroundColor(.white)
                         .font(.title.weight(.bold))
@@ -33,20 +31,20 @@ struct LevelRow:View{
                             Circle()
                                 .fill(Color.blue)
                         )
-                    let favCount = level.allQuestions.filter({ $0.favorite == true }).count
-  
-                    HStack(alignment:.firstTextBaseline, spacing: 4){
+                    let favCount = level.allQuestions.filter { $0.favorite == true }.count
+
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Image(systemName: "star.fill")
                             .foregroundColor(.accentColor)
                         Text(verbatim: "\(favCount)")
                             .foregroundColor(.gray)
                     }
                 }
-                
+
                 Spacer()
-       
-                VStack{
-                    HStack(spacing:0){
+
+                VStack {
+                    HStack(spacing: 0) {
                         Text(verbatim: "\(level.reviewableCountInsideLevel)")
                             .foregroundColor(.accentColor.opacity(1))
                         Spacer()
@@ -54,7 +52,7 @@ struct LevelRow:View{
                             .foregroundColor(.primary.opacity(1))
                     }
                     .font(.footnote)
-                    
+
                     ProgressView(
                         value: Float(level.reviewableCountInsideLevel),
                         total: Float(level.notCompletdCount)
@@ -62,9 +60,8 @@ struct LevelRow:View{
                     .progressViewStyle(.linear)
                 }
                 .frame(maxWidth: sizeClass == .regular ? 192 : 128)
-                
             }
-            .contextMenu{
+            .contextMenu {
                 Button {
                     vm.selectedLevel = level
                     vm.daysToRecommend = Int(level.daysToRecommend)
@@ -73,11 +70,10 @@ struct LevelRow:View{
                     Label("Days to recommend", systemImage: "calendar")
                 }
             }
-            .padding([.leading, .top, .bottom] , 8)
+            .padding([.leading, .top, .bottom], 8)
         }
     }
 }
-
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,40 +1,38 @@
 //
-//  LeitnerView.swift
-//  LeitnerBox
+// LeitnerView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct LeitnerView: View {
-    
     @ObservedObject
-    var vm:LeitnerViewModel = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
-    
+    var vm: LeitnerViewModel = .init(viewContext: PersistenceController.shared.container.viewContext)
+
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
-    
+
     @State
     var navigationVisibility = true
-    
+
     @State
-    var selectedLeitner:Leitner? = nil
-    
+    var selectedLeitner: Leitner? = nil
+
     var body: some View {
-        NavigationSplitView{
+        NavigationSplitView {
             leitnerSidebarList
         } detail: {
-            NavigationStack{
-                if let leitner = selectedLeitner{
+            NavigationStack {
+                if let leitner = selectedLeitner {
                     LevelsView(
                         vm: LevelsViewModel(
-                            viewContext:  vm.viewContext,
+                            viewContext: vm.viewContext,
                             leitner: leitner
                         ),
                         searchViewModel: SearchViewModel(
-                            viewContext:  vm.viewContext,
+                            viewContext: vm.viewContext,
                             leitner: leitner
                         )
                     )
@@ -42,13 +40,13 @@ struct LeitnerView: View {
             }
         }
         .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
-            if .iOS == true{
+            if .iOS == true {
                 try? vm.backupFile?.deleteDirectory()
             }
-        }, content:{
-            if let fileUrl = vm.backupFile?.fileURL{
+        }, content: {
+            if let fileUrl = vm.backupFile?.fileURL {
                 ActivityViewControllerWrapper(activityItems: [fileUrl])
-            }else{
+            } else {
                 EmptyView()
             }
         })
@@ -56,31 +54,31 @@ struct LeitnerView: View {
             editOrAddLeitnerView
         })
     }
-    
-    var toolbarView:some View{
-        HStack{
+
+    var toolbarView: some View {
+        HStack {
             Button {
                 vm.exportDB()
             } label: {
                 Label("Export", systemImage: "square.and.arrow.up")
             }
-            
+
             Button {
                 vm.clear()
                 vm.showEditOrAddLeitnerAlert.toggle()
             } label: {
                 Label("Add Item", systemImage: "plus")
             }
-            
-            Menu{
+
+            Menu {
                 Toggle(isOn: $pronounceDetailAnswer) {
                     Label("Prononce \ndetails answer ", systemImage: "mic")
                 }
-                
+
                 Divider()
-                
-                Menu{
-                    ForEach(vm.voices, id:\.self){ voice in
+
+                Menu {
+                    ForEach(vm.voices, id: \.self) { voice in
                         let isSelected = vm.selectedVoiceIdentifire == voice.identifier
                         Button {
                             vm.setSelectedVoice(voice)
@@ -89,18 +87,18 @@ struct LeitnerView: View {
                         }
                     }
                     Divider()
-                    
+
                 } label: {
                     Label("Pronounce Voice", systemImage: "waveform")
                 }
-                
+
             } label: {
                 Label("More", systemImage: "gear")
             }
         }
     }
-    
-    var leitnerSidebarList:some View{
+
+    var leitnerSidebarList: some View {
         List(vm.leitners, selection: $selectedLeitner.animation()) { leitner in
             NavigationLink(value: leitner) {
                 LeitnerRowView(leitner: leitner, vm: vm)
@@ -123,9 +121,9 @@ struct LeitnerView: View {
         }
         .listStyle(.plain)
     }
-    
-    var editOrAddLeitnerView:some View{
-        VStack(spacing:24){
+
+    var editOrAddLeitnerView: some View {
+        VStack(spacing: 24) {
             Text("Leitner name")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
@@ -135,15 +133,15 @@ struct LeitnerView: View {
                 string: $vm.leitnerTitle,
                 textEditorHeight: 48
             )
-            
+
             Toggle(isOn: $vm.backToTopLevel) {
                 Label("Back to top level", systemImage: "arrow.up.to.line")
             }
-            
+
             Button {
                 vm.editOrAddLeitner()
             } label: {
-                HStack{
+                HStack {
                     Spacer()
                     Text("SAVE")
                         .foregroundColor(.accentColor)
@@ -154,12 +152,11 @@ struct LeitnerView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
             .tint(.accentColor)
-            
-            
+
             Button {
                 vm.showEditOrAddLeitnerAlert.toggle()
             } label: {
-                HStack{
+                HStack {
                     Spacer()
                     Text("Cancel")
                         .foregroundColor(.red)
@@ -173,26 +170,25 @@ struct LeitnerView: View {
         }
     }
 }
+
 struct LeitnerView_Previews: PreviewProvider {
-    
-    static var leitner:Leitner{
+    static var leitner: Leitner {
         let req = Leitner.fetchRequest()
         req.fetchLimit = 1
         let leitner = (try! PersistenceController.preview.container.viewContext.fetch(req)).first!
         return leitner
     }
-    
-    struct Preview:View{
-        
+
+    struct Preview: View {
         @StateObject
-        var vm =  LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
-        var body: some View{
+        var vm = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
+        var body: some View {
             LeitnerView(vm: vm)
         }
     }
-    
+
     static var previews: some View {
-        NavigationStack{
+        NavigationStack {
             Preview()
         }
     }

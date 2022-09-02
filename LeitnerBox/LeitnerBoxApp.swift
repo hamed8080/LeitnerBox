@@ -1,24 +1,22 @@
 //
-//  LeitnerBoxApp.swift
-//  LeitnerBox
+// LeitnerBoxApp.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 @main
 struct LeitnerBoxApp: App, DropDelegate {
-    
     @Environment(\.scenePhase) var scenePhase
-    
+
     @ObservedObject
     var persistenceController = PersistenceController.shared
-    
+
     @State private var dragOver = false
     @State
     var hideSplash = false
-    
+
     var body: some Scene {
         WindowGroup {
             if hideSplash == false {
@@ -29,7 +27,7 @@ struct LeitnerBoxApp: App, DropDelegate {
                             hideSplash = true
                         }
                     }
-            }else{
+            } else {
                 LeitnerView()
                     .onDrop(of: [.fileURL, .data], delegate: self)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
@@ -46,12 +44,12 @@ struct LeitnerBoxApp: App, DropDelegate {
             }
         }
     }
-    
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        let proposal = DropProposal.init(operation: .copy)
+
+    func dropUpdated(info _: DropInfo) -> DropProposal? {
+        let proposal = DropProposal(operation: .copy)
         return proposal
     }
-    
+
     func performDrop(info: DropInfo) -> Bool {
         PersistenceController.shared.dropDatabase(info)
         return true

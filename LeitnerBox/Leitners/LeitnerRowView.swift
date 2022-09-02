@@ -1,29 +1,27 @@
 //
-//  LeitnerRowView.swift
-//  LeitnerBox
+// LeitnerRowView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/21/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct LeitnerRowView: View {
-    
     @ObservedObject
-    var leitner:Leitner
-    
+    var leitner: Leitner
+
     @ObservedObject
-    var vm:LeitnerViewModel
-    
+    var vm: LeitnerViewModel
+
     var body: some View {
-        HStack{
+        HStack {
             Text(leitner.name ?? "")
             Spacer()
             Text(verbatim: "\(leitner.totalQuestionCount)")
                 .foregroundColor(.gray)
                 .font(.footnote.bold())
         }
-        .contextMenu{
+        .contextMenu {
             Button {
                 vm.selectedLeitner = leitner
                 vm.leitnerTitle = vm.selectedLeitner?.name ?? ""

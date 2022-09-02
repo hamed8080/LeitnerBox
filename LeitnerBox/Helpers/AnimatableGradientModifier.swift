@@ -1,27 +1,25 @@
 //
-//  AnimatableGradientModifier.swift
-//  LeitnerBox
+// AnimatableGradientModifier.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 8/12/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import Foundation
 import SwiftUI
 
-struct AnimatableGradientModifier: ViewModifier, Animatable{
-
-    var from:[UIColor]
-    var to:[UIColor]
+struct AnimatableGradientModifier: ViewModifier, Animatable {
+    var from: [UIColor]
+    var to: [UIColor]
     var progress: CGFloat = 0
 
-    var animatableData: CGFloat{
-        get { return progress }
+    var animatableData: CGFloat {
+        get { progress }
         set { progress = newValue }
     }
 
-    func body(content: Content) -> some View {
+    func body(content _: Content) -> some View {
         var gColors = [Color]()
-        for i in 0..<from.count {
+        for i in 0 ..< from.count {
             gColors.append(colorMixer(c1: from[i], c2: to[i], progress: progress))
         }
         return LinearGradient(gradient: Gradient(colors: gColors),
@@ -41,9 +39,8 @@ struct AnimatableGradientModifier: ViewModifier, Animatable{
     }
 }
 
-extension View{
-
+extension View {
     func animatableGradient(from: [UIColor], to: [UIColor], progress: CGFloat) -> some View {
-        self.modifier(AnimatableGradientModifier(from: from, to: to, progress: progress))
+        modifier(AnimatableGradientModifier(from: from, to: to, progress: progress))
     }
 }

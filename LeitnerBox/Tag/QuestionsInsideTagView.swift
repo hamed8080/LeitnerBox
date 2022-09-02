@@ -1,24 +1,22 @@
 //
-//  QuestionsInsideTagView.swift
-//  LeitnerBox
+// QuestionsInsideTagView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct QuestionsInsideTagView: View {
-    
-    var tag:Tag
+    var tag: Tag
 
     @ObservedObject
-    var tagViewModel:TagViewModel
+    var tagViewModel: TagViewModel
 
     var body: some View {
-        ZStack{
+        ZStack {
             List {
                 ForEach(tag.questions) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel)
+                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, accessControls: AccessControls.normal + [.trailingControls, .microphone])
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                 }
@@ -31,9 +29,8 @@ struct QuestionsInsideTagView: View {
 }
 
 struct QuestionsInsideTagView_Previews: PreviewProvider {
-    
     static var previews: some View {
-        let leitner  = LeitnerView_Previews.leitner
+        let leitner = LeitnerView_Previews.leitner
         let vm = TagViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
         QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag(), tagViewModel: vm)
             .preferredColorScheme(.light)

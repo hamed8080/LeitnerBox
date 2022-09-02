@@ -1,9 +1,8 @@
 //
-//  SequenceEX.swift
-//  LeitnerBox
+// SequenceEX.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 6/15/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import Foundation
 

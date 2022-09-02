@@ -1,32 +1,30 @@
 //
-//  AddOrEditQuestionView.swift
-//  LeitnerBox
+// AddOrEditQuestionView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct AddOrEditQuestionView: View {
-    
     @ObservedObject
-    var vm:QuestionViewModel
-    
+    var vm: QuestionViewModel
+
     @Environment(\.dismiss) var dissmiss
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
-        GeometryReader{ reader in
-            
-            HStack(spacing:0){
+        GeometryReader { reader in
+
+            HStack(spacing: 0) {
                 Spacer()
-                ScrollView{
-                    VStack(spacing:36){
+                ScrollView {
+                    VStack(spacing: 36) {
                         TextEditorView(
                             placeholder: "Enter your question here...",
                             shortPlaceholder: "Question",
@@ -50,13 +48,13 @@ struct AddOrEditQuestionView: View {
                         }
                         CheckBoxView(isActive: $vm.isCompleted, text: "Complete Answer")
 
-                        HStack{
+                        HStack {
                             Button {
                                 withAnimation {
                                     vm.isFavorite.toggle()
                                 }
                             } label: {
-                                HStack{
+                                HStack {
                                     Image(systemName: vm.isFavorite == true ? "star.fill" : "star")
                                         .resizable()
                                         .scaledToFit()
@@ -66,7 +64,7 @@ struct AddOrEditQuestionView: View {
                                         .font(.body.weight(.semibold))
                                 }
                             }
-                            
+
                             Spacer()
                         }
 
@@ -81,7 +79,7 @@ struct AddOrEditQuestionView: View {
                             vm.clear()
                             dissmiss()
                         } label: {
-                            HStack{
+                            HStack {
                                 Spacer()
                                 Label("Save", systemImage: "checkmark.square.fill")
                                 Spacer()
@@ -90,12 +88,12 @@ struct AddOrEditQuestionView: View {
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                         .tint(.accentColor)
-                        
+
                         Spacer()
                     }
                     .padding()
                 }
-                .frame(width: sizeClass == .regular ? reader.size.width * (60/100) : reader.size.width)
+                .frame(width: sizeClass == .regular ? reader.size.width * (60 / 100) : reader.size.width)
                 Spacer()
             }
             .frame(width: reader.size.width)
@@ -109,18 +107,18 @@ struct AddOrEditQuestionView: View {
                             .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                     }
                 }
-                
+
                 ToolbarItem(placement: .principal) {
                     Text((vm.isInEditMode ? "Edit question" : "Add question").uppercased())
                         .font(.body.weight(.bold))
                         .foregroundColor(.accentColor)
                 }
-                
+
                 ToolbarItemGroup(placement: .keyboard) {
-                    HStack{
+                    HStack {
                         Spacer()
                         Button("Done") {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }
                     }
                 }
@@ -137,9 +135,7 @@ struct AddOrEditQuestionView: View {
 }
 
 struct AddQuestionView_Previews: PreviewProvider {
-    
-    struct Preview:View{
-        
+    struct Preview: View {
         @StateObject
         var vm = QuestionViewModel(
             viewContext: PersistenceController.preview.container.viewContext,
@@ -147,15 +143,14 @@ struct AddQuestionView_Previews: PreviewProvider {
             question: LeitnerView_Previews.leitner.allQuestions.first!,
             isInEditMode: true
         )
-        var body: some View{
+        var body: some View {
             AddOrEditQuestionView(vm: vm)
         }
     }
-    
+
     static var previews: some View {
-        NavigationStack{
+        NavigationStack {
             Preview()
         }
     }
 }
-

@@ -1,22 +1,20 @@
 //
-//  TagRowView.swift
-//  LeitnerBox
+// TagRowView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/21/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct TagRowView: View {
-    
     @ObservedObject
-    var tag:Tag
-    
+    var tag: Tag
+
     @ObservedObject
-    var vm:TagViewModel
-    
+    var vm: TagViewModel
+
     var body: some View {
-        HStack{
+        HStack {
             Text("\(tag.name ?? "")")
             Spacer()
             Text(verbatim: "\(tag.questions.count)")
@@ -40,7 +38,6 @@ struct TagRowView: View {
 }
 
 struct TagRowView_Previews: PreviewProvider {
-    
     static var previews: some View {
         TagRowView(tag: Tag(context: PersistenceController.preview.container.viewContext), vm: TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

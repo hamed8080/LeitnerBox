@@ -1,16 +1,14 @@
 //
-//  NotAnyToReviewView.swift
-//  LeitnerBox
+// NotAnyToReviewView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 6/17/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
-struct NotAnyToReviewView:View{
-    
-    var body: some View{
-        VStack{
+struct NotAnyToReviewView: View {
+    var body: some View {
+        VStack {
             Image(systemName: "rectangle.and.text.magnifyingglass")
                 .resizable()
                 .scaledToFit()

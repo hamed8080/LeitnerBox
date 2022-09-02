@@ -1,16 +1,14 @@
 //
-//  TopSheetTextEditorView.swift
-//  LeitnerBox
+// TopSheetTextEditorView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/26/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
 
 struct TopSheetTextEditorView: View {
-
     @Binding
-    var searchText:String
+    var searchText: String
     let placeholder: String
 
     var body: some View {
@@ -21,7 +19,7 @@ struct TopSheetTextEditorView: View {
                 .frame(height: 48)
                 .foregroundColor(Color(named: "textColor"))
                 .overlay(
-                    HStack{
+                    HStack {
                         HStack {
                             if searchText.isEmpty {
                                 Image(systemName: "magnifyingglass")
@@ -47,7 +45,7 @@ struct TopSheetTextEditorView: View {
                                 }
                         }
                     }
-                        .padding([.leading, .trailing], 12)
+                    .padding([.leading, .trailing], 12)
                 )
 
             Divider()
@@ -55,9 +53,7 @@ struct TopSheetTextEditorView: View {
     }
 }
 
-
 struct TopSheetTextEditorView_Previews: PreviewProvider {
-
     @State
     static var searchText: String = "Test"
 
@@ -65,4 +61,3 @@ struct TopSheetTextEditorView_Previews: PreviewProvider {
         TopSheetTextEditorView(searchText: $searchText, placeholder: "Short")
     }
 }
-

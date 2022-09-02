@@ -1,60 +1,58 @@
 //
-//  ReviewWidget.swift
-//  ReviewWidget
+// ReviewWidget.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 7/22/22.
-//
+// Created by Hamed Hosseini on 9/2/22.
 
-import WidgetKit
-import SwiftUI
-import Intents
 import AVFoundation
 import CoreData
+import Intents
+import SwiftUI
+import WidgetKit
 
-var previewQuestion:WidgetQuestion{
-    return WidgetQuestion(question: "Insomnia",
-                          answer: "کم خونی",
-                          tags: [.init(name:"Health"), .init(name: "Sport")],
-                          detailedDescription: "Detailed answer",
-                          level: 1,
-                          isFavorite: true,
-                          isCompleted: true)
+var previewQuestion: WidgetQuestion {
+    WidgetQuestion(question: "Insomnia",
+                   answer: "کم خونی",
+                   tags: [.init(name: "Health"), .init(name: "Sport")],
+                   detailedDescription: "Detailed answer",
+                   level: 1,
+                   isFavorite: true,
+                   isCompleted: true)
 }
 
 struct Provider: IntentTimelineProvider {
-
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group)
-    var topQuestionsData:Data?
+    var topQuestionsData: Data?
 
-    var allQuestion:[WidgetQuestion]{
-        if let topQuestionsData = topQuestionsData, let questions  = try? JSONDecoder().decode([WidgetQuestion].self, from: topQuestionsData){
+    var allQuestion: [WidgetQuestion] {
+        if let topQuestionsData = topQuestionsData, let questions = try? JSONDecoder().decode([WidgetQuestion].self, from: topQuestionsData) {
             return questions
-        }else{
+        } else {
             return []
         }
     }
 
-    func placeholder(in context: Context) -> SimpleEntry {
-        return SimpleEntry(date: Date(), question: previewQuestion, configuration: ConfigurationIntent())
+    func placeholder(in _: Context) -> SimpleEntry {
+        SimpleEntry(date: Date(), question: previewQuestion, configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry:Entry
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
+        let entry: Entry
         if context.isPreview {
             entry = SimpleEntry(date: Date(), question: previewQuestion, configuration: configuration)
-        }else{
+        } else {
             let first = allQuestion.first ?? previewQuestion
             entry = SimpleEntry(date: Date(), question: first, configuration: configuration)
         }
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         var currentDate = Date()
-        for index in 1..<allQuestion.count{
+        for index in 1 ..< allQuestion.count {
             let question = allQuestion[index]
             let entryDate = Calendar.current.date(byAdding: .minute, value: index + 10, to: currentDate)!
             currentDate = entryDate
@@ -69,34 +67,34 @@ struct Provider: IntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let question:WidgetQuestion
+    let question: WidgetQuestion
     let configuration: ConfigurationIntent
 }
 
-struct ReviewWidgetEntryView : View {
+struct ReviewWidgetEntryView: View {
     var entry: Provider.Entry
 
     @Environment(\.widgetFamily) var widgetFamily
 
     @ViewBuilder
     var body: some View {
-        switch widgetFamily{
+        switch widgetFamily {
         case .systemExtraLarge:
             large
         case .systemLarge:
             large
-        case .systemSmall, .systemMedium, .accessoryInline, .accessoryCircular,.accessoryRectangular:
+        case .systemSmall, .systemMedium, .accessoryInline, .accessoryCircular, .accessoryRectangular:
             medium
         @unknown default:
             medium
         }
     }
 
-    var medium: some View{
-        ZStack{
+    var medium: some View {
+        ZStack {
             Color("WidgetBackground")
-            VStack(alignment:.leading, spacing:4){
-                HStack{
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
                     Image(systemName: "square.stack.3d.forward.dottedline.fill")
                         .resizable()
                         .frame(width: 16, height: 16)
@@ -126,17 +124,17 @@ struct ReviewWidgetEntryView : View {
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                 Spacer()
-           }
+            }
             .padding()
         }
     }
 
     var large: some View {
-        ZStack{
+        ZStack {
             Color("WidgetBackground")
 
-            VStack{
-                HStack{
+            VStack {
+                HStack {
                     Image(systemName: "square.stack.3d.forward.dottedline.fill")
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -150,7 +148,7 @@ struct ReviewWidgetEntryView : View {
                 Spacer()
             }.padding()
 
-            HStack(spacing:24){
+            HStack(spacing: 24) {
                 if entry.question.isCompleted {
                     Image(systemName: "star.fill")
                         .resizable()
@@ -159,7 +157,7 @@ struct ReviewWidgetEntryView : View {
                         .foregroundColor(.yellow)
                 }
 
-                VStack(alignment:.leading, spacing:16){
+                VStack(alignment: .leading, spacing: 16) {
                     Text(entry.question.question ?? "")
                         .font(.system(.title2, design: .rounded))
                         .fontWeight(.bold)
@@ -182,8 +180,8 @@ struct ReviewWidgetEntryView : View {
                         .fontWeight(.semibold)
                         .foregroundColor(.yellow)
 
-                    let colors:[Color] = [.mint, .red, .brown, .orange, .cyan]
-                    HStack{
+                    let colors: [Color] = [.mint, .red, .brown, .orange, .cyan]
+                    HStack {
                         ForEach(entry.question.tags) { tag in
                             Text(tag.name)
                                 .font(.system(.subheadline, design: .rounded))

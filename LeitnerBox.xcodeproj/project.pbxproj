@@ -24,6 +24,7 @@
 		05266AC128367DAA004693BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266AC028367DAA004693BC /* Preview Assets.xcassets */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
 		05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
+		052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052AEE7328C1BB8600D41BB5 /* AccessControls.swift */; };
 		052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManagerEX.swift */; };
 		052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */; };
 		052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
@@ -72,6 +73,7 @@
 		0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */; };
 		058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39328AF520E0080BDDF /* AddTagsView.swift */; };
 		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
+		0591796128C149F100228D7F /* ArrayEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0591796028C149F100228D7F /* ArrayEX.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
 		05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */; };
@@ -158,6 +160,7 @@
 		05266AC028367DAA004693BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
+		052AEE7328C1BB8600D41BB5 /* AccessControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessControls.swift; sourceTree = "<group>"; };
 		052CA6A9283C944200376E79 /* FileManagerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerEX.swift; sourceTree = "<group>"; };
 		052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewControllerWrapper.swift; sourceTree = "<group>"; };
 		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -212,6 +215,7 @@
 		0589EA5528538D1400354C8C /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		058EA39328AF520E0080BDDF /* AddTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsView.swift; sourceTree = "<group>"; };
 		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
+		0591796028C149F100228D7F /* ArrayEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayEX.swift; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalQuestionRow.swift; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 				058343C02875DBA200AD0FF3 /* MyError.swift */,
 				051B7DAD288B02C300465C24 /* WidgetQuestion.swift */,
 				05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */,
+				052AEE7328C1BB8600D41BB5 /* AccessControls.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				054E771F284A523E006BCDEF /* TagEX.swift */,
 				05219C092859F6DB00D3ECF5 /* SequenceEX.swift */,
 				051B7DAA288B00BC00465C24 /* UserDefaults.swift */,
+				0591796028C149F100228D7F /* ArrayEX.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -722,6 +728,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				052CA6AA283C944200376E79 /* FileManagerEX.swift in Sources */,
+				0591796128C149F100228D7F /* ArrayEX.swift in Sources */,
 				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
 				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
 				05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */,
@@ -744,6 +751,7 @@
 				058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */,
 				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
+				052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
 				053666E428378918002F899F /* ColorEx.swift in Sources */,
 				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
