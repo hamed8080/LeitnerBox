@@ -1,13 +1,12 @@
 //
-//  MyError.swift
-//  LeitnerBox
+// MyError.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 7/6/22.
-//
+// Created by Hamed Hosseini on 8/14/22.
 
 import Foundation
 
-enum MyError : Error{
+enum MyError: Error {
     case FAIL_TO_SAVE
     case FAILED_LOAD_DATA
     case FAIL_TO_DELETE

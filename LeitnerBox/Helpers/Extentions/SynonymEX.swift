@@ -1,14 +1,12 @@
 //
-//  SynonymEX.swift
-//  LeitnerBox
+// SynonymEX.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/21/22.
-//
+// Created by Hamed Hosseini on 8/19/22.
 
 import Foundation
-extension Synonym{
-
-    var allQuestions:[Question]{
-        return question?.allObjects as? [Question] ?? []
+extension Synonym {
+    var allQuestions: [Question] {
+        question?.allObjects as? [Question] ?? []
     }
 }

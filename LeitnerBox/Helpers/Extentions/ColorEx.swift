@@ -1,20 +1,18 @@
 //
-//  ColorEx.swift
-//  ChatApplication
+// ColorEx.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by Hamed Hosseini on 11/30/21.
-//
+// Created by Hamed Hosseini on 8/5/22.
 
 import Foundation
 import SwiftUI
 
-extension Color{
-    
-    init(named:String){
+extension Color {
+    init(named: String) {
         self = Color(UIColor(named: named)!)
     }
-    
-    static var random:Color{
-        return Color(uiColor: UIColor.random())
+
+    static var random: Color {
+        Color(uiColor: UIColor.random())
     }
 }

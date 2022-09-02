@@ -1,20 +1,18 @@
 //
-//  TagEX.swift
-//  LeitnerBox
+// TagEX.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 6/3/22.
-//
+// Created by Hamed Hosseini on 8/14/22.
 
 import Foundation
 import SwiftUI
-extension Tag{
-    
-    var tagSwiftUIColor:Color?{
-        guard let uicColor = color as? UIColor else{return nil}
+extension Tag {
+    var tagSwiftUIColor: Color? {
+        guard let uicColor = color as? UIColor else { return nil }
         return Color(uiColor: uicColor)
     }
-   
-    var questions:[Question]{
-        return question?.allObjects as? [Question] ?? []
+
+    var questions: [Question] {
+        question?.allObjects as? [Question] ?? []
     }
 }

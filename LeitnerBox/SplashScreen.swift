@@ -1,15 +1,13 @@
 //
-//  SplashScreen.swift
-//  LeitnerBox
+// SplashScreen.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 8/11/22.
-//
+// Created by Hamed Hosseini on 8/24/22.
 
 import Foundation
 import SwiftUI
 
 struct SplashScreen: View {
-
     @State
     var animateGradient = false
 
@@ -17,25 +15,25 @@ struct SplashScreen: View {
     var hideSplash = false
 
     @State private var progress: CGFloat = 0
-    let colors1:[UIColor] = [.green, .cyan, .blue]
-    let colors2:[UIColor] = [.blue, .purple, .systemPink, .red]
+    let colors1: [UIColor] = [.green, .cyan, .blue]
+    let colors2: [UIColor] = [.blue, .purple, .systemPink, .red]
 
     var body: some View {
-        ZStack{
+        ZStack {
             Rectangle()
                 .animatableGradient(from: colors1, to: colors2, progress: progress)
                 .mask {
                     Text("Leitner Box".uppercased())
-                        .font(.system(size: 52, weight: .heavy, design: .rounded ))
+                        .font(.system(size: 52, weight: .heavy, design: .rounded))
                         .opacity(hideSplash ? 0.0 : 1)
                         .scaleEffect(x: hideSplash ? 10 : 1, y: hideSplash ? 10 : 1, anchor: .center)
                         .rotation3DEffect(.degrees(animateGradient ? 45 : 0), axis: (x: 0, y: 1, z: 0))
                         .animation(.interpolatingSpring(stiffness: 1, damping: 1).speed(3), value: hideSplash)
                 }
 
-            VStack{
+            VStack {
                 Spacer()
-                HStack(spacing: 4){
+                HStack(spacing: 4) {
                     Text("Powered by")
                         .font(.subheadline.bold())
                     Image(systemName: "swift")
@@ -46,7 +44,6 @@ struct SplashScreen: View {
                 .scaleEffect(x: animateGradient ? 1 : 0.7, y: animateGradient ? 1 : 0.7, anchor: .center)
                 .opacity(hideSplash ? 0 : 1)
                 .animation(.easeInOut, value: hideSplash)
-
             }
         }
         .onAppear {

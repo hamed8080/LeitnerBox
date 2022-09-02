@@ -1,48 +1,40 @@
 //
-//  LeitnerRowView.swift
-//  LeitnerBox
+// LeitnerRowView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/21/22.
-//
+// Created by Hamed Hosseini on 8/28/22.
 
 import SwiftUI
 
 struct LeitnerRowView: View {
-    
     @ObservedObject
-    var leitner:Leitner
-    
+    var leitner: Leitner
+
     @ObservedObject
-    var vm:LeitnerViewModel
-    
+    var vm: LeitnerViewModel
+
     var body: some View {
-        NavigationLink {
-            LevelsView(vm: LevelsViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner), searchViewModel: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext,leitner: leitner))
-        } label: {
-            HStack{
-                Text(leitner.name ?? "")
-                Spacer()
-                Text(verbatim: "\(leitner.totalQuestionCount)")
-                    .foregroundColor(.gray)
-                    .font(.footnote.bold())
+        HStack {
+            Text(leitner.name ?? "")
+            Spacer()
+            Text(verbatim: "\(leitner.totalQuestionCount)")
+                .foregroundColor(.gray)
+                .font(.footnote.bold())
+        }
+        .contextMenu {
+            Button {
+                vm.selectedLeitner = leitner
+                vm.leitnerTitle = vm.selectedLeitner?.name ?? ""
+                vm.backToTopLevel = leitner.backToTopLevel
+                vm.showEditOrAddLeitnerAlert.toggle()
+            } label: {
+                Label("Rename and Edit", systemImage: "gear")
             }
-            .contextMenu{
-                Button {
-                    vm.selectedLeitner = leitner
-                    vm.leitnerTitle = vm.selectedLeitner?.name ?? ""
-                    vm.backToTopLevel = leitner.backToTopLevel
-                    vm.showEditOrAddLeitnerAlert.toggle()
-                } label: {
-                    Label("Rename and Edit", systemImage: "gear")
-                }
-                
-                Button {
-                    withAnimation {
-                        vm.selectedLeitner = leitner
-                    }
-                } label: {
-                    Label("Manage Tags", systemImage: "tag")
-                }
+
+            Button {
+                vm.selectedLeitner = leitner
+            } label: {
+                Label("Manage Tags", systemImage: "tag")
             }
         }
     }

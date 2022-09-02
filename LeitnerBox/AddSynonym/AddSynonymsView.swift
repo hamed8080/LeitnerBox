@@ -1,34 +1,31 @@
 //
-//  AddSynonymsView.swift
-//  LeitnerBox
+// AddSynonymsView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 8/18/22.
-//
+// Created by Hamed Hosseini on 8/24/22.
 
 import SwiftUI
 
-struct AddSynonymsView: View{
-
+struct AddSynonymsView: View {
     @ObservedObject
     var viewModel: SynonymViewModel
 
     @Environment(\.dismiss)
     var dismiss
 
-    var body: some View{
-        VStack(spacing: 0){
-
+    var body: some View {
+        VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $viewModel.searchText, placeholder: "Search for synonyms...")
 
-            List{
+            List {
                 ForEach(viewModel.filtered) { question in
                     NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        viewModel.addAsSynonym(question)
-                        dismiss()
-                    }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.addAsSynonym(question)
+                            dismiss()
+                        }
                 }
             }
             .animation(.easeInOut, value: viewModel.filtered)

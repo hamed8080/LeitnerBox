@@ -1,25 +1,20 @@
 //
-//  TextEditorView.swift
-//  LeitnerBox
+// TextEditorView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/26/22.
-//
+// Created by Hamed Hosseini on 8/19/22.
 
 import SwiftUI
 
-
-
 struct TextEditorView: View {
-    
-    var placeholder : String = ""
-    var shortPlaceholder : String = ""
+    var placeholder: String = ""
+    var shortPlaceholder: String = ""
     @Binding var string: String
-    @State var textEditorHeight : CGFloat = 20
+    @State var textEditorHeight: CGFloat = 20
     @FocusState private var isFocused: Bool
     var cornerRadius = 10.0
-    
+
     var body: some View {
-        
         ZStack(alignment: .leading) {
             Text(string)
                 .font(.system(.body))
@@ -29,18 +24,18 @@ struct TextEditorView: View {
                     Color.clear.preference(key: ViewHeightKey.self,
                                            value: $0.frame(in: .local).size.height)
                 })
-            
+
             TextEditor(text: $string)
                 .font(.system(.body))
-                .frame(height: max(40,textEditorHeight))
+                .frame(height: max(40, textEditorHeight))
                 .cornerRadius(cornerRadius)
                 .foregroundColor(Color(named: "textColor"))
                 .multilineTextAlignment(string.isContainPersianCharacter ? .trailing : .leading)
                 .focused($isFocused)
                 .overlay(
-                    ZStack{
-                        if !string.isEmpty{
-                            GeometryReader{ reader in
+                    ZStack {
+                        if !string.isEmpty {
+                            GeometryReader { _ in
                                 Text(shortPlaceholder.uppercased())
                                     .font(.footnote)
                                     .foregroundColor(isFocused ? .accentColor : Color.primary.opacity(0.5))
@@ -51,29 +46,28 @@ struct TextEditorView: View {
                     }.animation(.easeInOut, value: string.isEmpty)
                 )
                 .overlay(
-                    HStack{
+                    HStack {
                         Text(verbatim: string.isEmpty ? placeholder : "")
                             .foregroundColor(.gray)
                             .disabled(true)
                             .allowsHitTesting(false)
                         Spacer()
                     }
-                        .padding(.leading, 4)
+                    .padding(.leading, 4)
                 )
                 .background(
                     Color.primary
                         .opacity(0.1)
                         .cornerRadius(cornerRadius)
                 )
-        }        
+        }
         .onAppear {
             UITextView.appearance().backgroundColor = .clear
         }
         .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
     }
 }
-                            
-                            
+
 struct ViewHeightKey: PreferenceKey {
     static var defaultValue: CGFloat { 0 }
     static func reduce(value: inout Value, nextValue: () -> Value) {

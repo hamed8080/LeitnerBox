@@ -1,31 +1,29 @@
 //
-//  QuestionTagsView.swift
-//  LeitnerBox
+// QuestionTagsView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 6/4/22.
-//
+// Created by Hamed Hosseini on 8/24/22.
 
 import SwiftUI
 
 struct QuestionTagsView: View {
-
     @ObservedObject
     var question: Question
 
     @State
     private var showAddTags = false
 
-    var showAddButton = true
-
     let viewModel: TagViewModel
 
     var addPadding = false
 
-    var tagCompletion:(()->())? = nil
-    
+    var accessControls: [AccessControls] = [.showTags, .addTag]
+
+    var tagCompletion: (() -> Void)?
+
     var body: some View {
-        VStack(alignment: .leading){
-            if showAddButton {
+        VStack(alignment: .leading) {
+            if accessControls.contains(.addTag) {
                 Button {
                     showAddTags.toggle()
                 } label: {
@@ -35,34 +33,38 @@ struct QuestionTagsView: View {
                 .padding(addPadding ? [.leading, .trailing] : [])
             }
 
-            ScrollView(.horizontal){
-                HStack(spacing:12){
-                    let tags = question.tagsArray ?? []
-                    ForEach(tags) { tag in
-                        Text("\(tag.name ?? "")")
-                            .foregroundColor( ((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
-                            .font(.footnote.weight(.semibold))
-                            .padding([.top, .bottom], 4)
-                            .padding([.trailing, .leading], 8)
-                            .background(
-                                (tag.tagSwiftUIColor ?? .gray)
-                            )
-                            .cornerRadius(6)
-                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
-                            .onTapGesture {  } //do not remove this line it'll stop scrolling
-                            .onLongPressGesture {
-                                viewModel.deleteTagFromQuestion(tag, question)
-                                tagCompletion?()
-                            }
+            if accessControls.contains(.showTags) {
+                ScrollView(.horizontal) {
+                    HStack(spacing: 12) {
+                        let tags = question.tagsArray ?? []
+                        ForEach(tags) { tag in
+                            Text("\(tag.name ?? "")")
+                                .foregroundColor(((tag.color as? UIColor)?.isLight() ?? false) ? .black : .white)
+                                .font(.footnote.weight(.semibold))
+                                .padding([.top, .bottom], 4)
+                                .padding([.trailing, .leading], 8)
+                                .background(
+                                    tag.tagSwiftUIColor ?? .gray
+                                )
+                                .cornerRadius(6)
+                                .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                                .onTapGesture {} // do not remove this line it'll stop scrolling
+                                .onLongPressGesture {
+                                    if accessControls.contains(.removeTag) {
+                                        viewModel.deleteTagFromQuestion(tag, question)
+                                        tagCompletion?()
+                                    }
+                                }
+                        }
                     }
+                    .padding(addPadding ? [.leading, .trailing] : [])
+                    .padding(.bottom)
                 }
-                .padding(addPadding ? [.leading, .trailing] : [])
-                .padding(.bottom)
             }
         }
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
-            if let leitner = viewModel.leitner{
-                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)){
+            if let leitner = viewModel.leitner {
+                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)) {
                     tagCompletion?()
                 }
             }

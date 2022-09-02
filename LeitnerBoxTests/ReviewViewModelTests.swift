@@ -1,26 +1,24 @@
 //
-//  ReviewViewModelTests.swift
-//  ReviewViewModelTests
+// ReviewViewModelTests.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 7/2/22.
-//
+// Created by Hamed Hosseini on 8/14/22.
 
-import XCTest
-import SwiftUI
 @testable import LeitnerBox
+import SwiftUI
+import XCTest
 
 final class ReviewViewModelTests: XCTestCase {
-    
-    var vm:ReviewViewModel!
-    
+    var vm: ReviewViewModel!
+
     override func setUp() {
         PersistenceController.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext).leitners.first!
-        let level = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner).levels.first(where: {$0.level == 1})!
+        let level = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
         vm = ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: level)
     }
 
-    func test_delete_question(){
+    func test_delete_question() {
         let question = vm.questions.first!
         vm.toggleDeleteDialog()
         XCTAssertEqual(vm.showDelete, true)
@@ -28,7 +26,7 @@ final class ReviewViewModelTests: XCTestCase {
         vm.selectedQuestion = question
         vm.deleteQuestion()
         XCTAssertEqual(vm.showDelete, false)
-        XCTAssertFalse(vm.questions.contains(where: {$0.objectID == question.objectID}))
+        XCTAssertFalse(vm.questions.contains(where: { $0.objectID == question.objectID }))
 
         let lastQuestion = vm.questions.last!
         vm.questions.removeAll()
@@ -39,17 +37,16 @@ final class ReviewViewModelTests: XCTestCase {
         XCTAssertTrue(vm.isFinished)
     }
 
-    func test_toggle_favorite(){
+    func test_toggle_favorite() {
         let question = vm.questions.first
         let beforeState = question?.favorite
         vm.selectedQuestion = question
         vm.toggleFavorite()
-        let updated = vm.questions.first(where: {$0.objectID == question?.objectID})
+        let updated = vm.questions.first(where: { $0.objectID == question?.objectID })
         XCTAssertNotEqual(updated?.favorite, beforeState, "toggle favorite not worked!")
     }
-    
-    func test_pass_tapped(){
 
+    func test_pass_tapped() {
         let beforeQuestion = vm.questions.first
         let beforeDate = beforeQuestion?.passTime
         let beforePassCount = vm.passCount
@@ -62,13 +59,13 @@ final class ReviewViewModelTests: XCTestCase {
         let updated = leitner?.findQuestion(objectID: beforeQuestion?.objectID)
         XCTAssertGreaterThan(updated?.passTime?.timeIntervalSince1970 ?? -1, beforeDate?.timeIntervalSince1970 ?? -1)
 
-        let lastLevel = vm.level.leitner?.levels.first(where: {$0.level == 13})
+        let lastLevel = vm.level.leitner?.levels.first(where: { $0.level == 13 })
         let completedQuestion = vm.questions.first!
         completedQuestion.level = lastLevel
         vm.selectedQuestion = completedQuestion
         vm.pass()
 
-        let fetchAgainCompleted = lastLevel?.allQuestions.first(where: {$0.objectID == completedQuestion.objectID})
+        let fetchAgainCompleted = lastLevel?.allQuestions.first(where: { $0.objectID == completedQuestion.objectID })
         XCTAssertEqual(fetchAgainCompleted?.completed ?? false, true)
 
         let lastQuestion = vm.questions.last
@@ -78,8 +75,8 @@ final class ReviewViewModelTests: XCTestCase {
         vm.pass()
         XCTAssertEqual(vm.isFinished, true)
     }
-    
-    func test_fail_tapped(){
+
+    func test_fail_tapped() {
         let beforeQuestion = vm.questions.first
         let beforeDate = beforeQuestion?.passTime
         let beforePassCount = vm.passCount
@@ -93,7 +90,7 @@ final class ReviewViewModelTests: XCTestCase {
         XCTAssertEqual(newStateOfQuestion?.passTime?.timeIntervalSince1970 ?? -1, beforeDate?.timeIntervalSince1970 ?? -1)
 
         vm.level.leitner?.backToTopLevel = true
-        let questionToBackTop = vm.level.leitner?.allQuestions.first(where: {$0.level?.level ?? 0 > 1})
+        let questionToBackTop = vm.level.leitner?.allQuestions.first(where: { $0.level?.level ?? 0 > 1 })
         vm.selectedQuestion = questionToBackTop
         vm.fail()
         let newStateOfQuestionTop = vm.level.leitner?.findQuestion(objectID: questionToBackTop?.objectID)
@@ -106,26 +103,25 @@ final class ReviewViewModelTests: XCTestCase {
         vm.fail()
         XCTAssertEqual(vm.isFinished, true)
     }
-    
-    func test_add_tag_to_question(){
+
+    func test_add_tag_to_question() {
         let beforeQuestion = vm.questions.first
         let tag = vm.level.leitner!.tagsArray.first!
         vm.selectedQuestion = beforeQuestion
         vm.addTagToQuestion(tag)
-        let after = vm.level.leitner?.tagsArray.first(where: {$0.objectID == tag.objectID})
-        let question = after?.questions.first(where: {$0.objectID == beforeQuestion?.objectID})
+        let after = vm.level.leitner?.tagsArray.first(where: { $0.objectID == tag.objectID })
+        let question = after?.questions.first(where: { $0.objectID == beforeQuestion?.objectID })
         XCTAssertNotNil(question)
     }
-    
-    func test_remove_tag_for_question(){
+
+    func test_remove_tag_for_question() {
         let beforeQuestion = vm.questions.first
         XCTAssertNotNil(beforeQuestion)
         let tag = vm.level.leitner!.tagsArray.first!
         vm.selectedQuestion = beforeQuestion
         vm.removeTagForQuestion(tag)
-        let after = vm.level.leitner?.tagsArray.first(where: {$0.objectID == tag.objectID})
-        let question = after?.questions.first(where: {$0.objectID == beforeQuestion?.objectID})
+        let after = vm.level.leitner?.tagsArray.first(where: { $0.objectID == tag.objectID })
+        let question = after?.questions.first(where: { $0.objectID == beforeQuestion?.objectID })
         XCTAssertNil(question)
     }
 }
-

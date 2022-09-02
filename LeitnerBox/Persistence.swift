@@ -1,21 +1,19 @@
 //
-//  Persistence.swift
-//  LeitnerBox
+// Persistence.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 8/28/22.
 
 import CoreData
 import SwiftUI
 
-class PersistenceController:ObservableObject {
-
+class PersistenceController: ObservableObject {
     static var shared = PersistenceController()
-    
+
     static let previewPS = PersistenceController(inMemory: true)
 
-    static var previewVC:NSManagedObjectContext{
-        return previewPS.container.viewContext
+    static var previewVC: NSManagedObjectContext {
+        previewPS.container.viewContext
     }
 
     static var preview: PersistenceController = {
@@ -23,12 +21,12 @@ class PersistenceController:ObservableObject {
         return previewPS
     }()
 
-    static func generateAndFillLeitner(){
+    static func generateAndFillLeitner() {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
                 let questions = generateQuestions(5, level)
-                generateTags(Int.random(in: 1...5),leitner).forEach { tag in
+                generateTags(Int.random(in: 1 ... 5), leitner).forEach { tag in
                     questions.forEach { question in
                         tag.addToQuestion(question)
                     }
@@ -43,9 +41,9 @@ class PersistenceController:ObservableObject {
         }
     }
 
-    static func generateLevels(leitner:Leitner)->[Level]{
-        var levels:[Level] = []
-        for index in 1...13 {
+    static func generateLevels(leitner: Leitner) -> [Level] {
+        var levels: [Level] = []
+        for index in 1 ... 13 {
             let level = Level(context: previewVC)
             level.level = Int16(index)
             level.leitner = leitner
@@ -55,9 +53,9 @@ class PersistenceController:ObservableObject {
         return levels
     }
 
-    static func generateLeitner(_ count:Int)->[Leitner]{
-        var leitners:[Leitner] = []
-        for index in 0..<count {
+    static func generateLeitner(_ count: Int) -> [Leitner] {
+        var leitners: [Leitner] = []
+        for index in 0 ..< count {
             let leitner = Leitner(context: previewVC)
             leitner.createDate = Date()
             leitner.name = "English"
@@ -67,9 +65,9 @@ class PersistenceController:ObservableObject {
         return leitners
     }
 
-    static func generateTags(_ count:Int, _ leitner:Leitner)->[Tag]{
-        var tags:[Tag] = []
-        for index in 0..<count {
+    static func generateTags(_ count: Int, _ leitner: Leitner) -> [Tag] {
+        var tags: [Tag] = []
+        for index in 0 ..< count {
             let tag = Tag(context: previewVC)
             tag.name = "Tag \(index)"
             tag.color = UIColor.random()
@@ -79,9 +77,9 @@ class PersistenceController:ObservableObject {
         return tags
     }
 
-    static func generateQuestions(_ count:Int, _ level:Level)->[Question]{
-        var questions:[Question] = []
-        for index in 0..<count {
+    static func generateQuestions(_ count: Int, _ level: Level) -> [Question] {
+        var questions: [Question] = []
+        for index in 0 ..< count {
             let question = Question(context: previewVC)
             question.question = "Quesiton \(index)"
             question.answer = "Answer with long text to test how it looks like on small screen we want to sure that the text is perfectly fit on the screen on smart phones and computers even with huge large screen \(index)"
@@ -104,100 +102,98 @@ class PersistenceController:ObservableObject {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        Task{
+        Task {
             _ = try await container.loadPersistentStores
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 
     @MainActor
-    func replaceDBIfExistFromShareExtension(){
+    func replaceDBIfExistFromShareExtension() {
         let appSuppportFile = moveAppGroupFileToAppSupportFolder()
         if let appSuppportFile = appSuppportFile {
             replaceDatabase(appSuppportFile: appSuppportFile)
         }
     }
 
-    func moveAppGroupFileToAppSupportFolder()->URL?{
+    func moveAppGroupFileToAppSupportFolder() -> URL? {
         let fm = FileManager.default
-        guard let appGroupDBFolder = fm.appGroupDBFolder else{return nil}
-        if let contents = try? fm.contentsOfDirectory(atPath: appGroupDBFolder.path).filter({$0.contains(".sqlite")}), contents.count > 0 {
-
+        guard let appGroupDBFolder = fm.appGroupDBFolder else { return nil }
+        if let contents = try? fm.contentsOfDirectory(atPath: appGroupDBFolder.path).filter({ $0.contains(".sqlite") }), contents.count > 0 {
             let appSupportDirectory = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             let appGroupFile = appGroupDBFolder.appendingPathComponent(contents.first!)
             let appSuppportFile = appSupportDirectory!.appendingPathComponent(contents.first!)
-            do{
-                if fm.fileExists(atPath: appSuppportFile.path){
-                    try fm.removeItem(at: appSuppportFile)//to first delete old file and again replace with new one
+            do {
+                if fm.fileExists(atPath: appSuppportFile.path) {
+                    try fm.removeItem(at: appSuppportFile) // to first delete old file and again replace with new one
                 }
-                try fm.moveItem(atPath: appGroupFile.path , toPath:  appSuppportFile.path)
+                try fm.moveItem(atPath: appGroupFile.path, toPath: appSuppportFile.path)
                 return appSuppportFile
-            }catch{
+            } catch {
                 print("Error to move appgroup file to app support folder\(error.localizedDescription)")
                 return nil
             }
-        }else{
+        } else {
             return nil
         }
     }
 
-
     @MainActor
-    func replaceDatabase(appSuppportFile:URL){
-        do{
+    func replaceDatabase(appSuppportFile: URL) {
+        do {
             let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
-            guard let oldStore = persistentCordinator.persistentStores.first , let oldStoreUrl = oldStore.url else{return}
+            guard let oldStore = persistentCordinator.persistentStores.first, let oldStoreUrl = oldStore.url else { return }
             try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
-            Task{
+            Task {
                 _ = try await container.loadPersistentStores
                 self.objectWillChange.send()
             }
             container.viewContext.automaticallyMergesChangesFromParent = true
-        }catch{
+        } catch {
             print("error in restoring back up file\(error.localizedDescription)")
         }
     }
 
     @MainActor
-    func dropDatabase(_ info:DropInfo){
+    func dropDatabase(_ info: DropInfo) {
         info.itemProviders(for: [.fileURL, .data]).forEach { item in
-            item.loadItem(forTypeIdentifier: item.registeredTypeIdentifiers.first!,options: nil){ data,error in
+            item.loadItem(forTypeIdentifier: item.registeredTypeIdentifiers.first!, options: nil) { data, error in
                 do {
                     if let url = data as? URL,
-                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent){
-                        if FileManager.default.fileExists(atPath: newFileLocation.path){
+                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent)
+                    {
+                        if FileManager.default.fileExists(atPath: newFileLocation.path) {
                             try FileManager.default.removeItem(atPath: newFileLocation.path)
                         }
                         let fileData = try Data(contentsOf: url)
                         try fileData.write(to: newFileLocation)
                         PersistenceController.shared.replaceDatabase(appSuppportFile: newFileLocation)
                     }
-                }catch{
+                } catch {
                     print("error happend\(error.localizedDescription)")
                 }
             }
         }
     }
 
-    class func saveDB(viewContext:NSManagedObjectContext, completionHandler:((MyError)->())? = nil){
-        do{
+    class func saveDB(viewContext: NSManagedObjectContext, completionHandler: ((MyError) -> Void)? = nil) {
+        do {
             try viewContext.save()
-        }catch{
+        } catch {
             completionHandler?(.FAIL_TO_SAVE)
         }
     }
 }
 
-extension NSPersistentCloudKitContainer{
-
-    var loadPersistentStores:NSPersistentStoreDescription{
-        get async throws{
+extension NSPersistentCloudKitContainer {
+    var loadPersistentStores: NSPersistentStoreDescription {
+        get async throws {
             typealias LoadStoreContinuation = CheckedContinuation<NSPersistentStoreDescription, Error>
-            return try await withCheckedThrowingContinuation{ (continuation:LoadStoreContinuation) in
-                loadPersistentStores(completionHandler: { (storeDescription, error) in
+            return try await withCheckedThrowingContinuation { (continuation: LoadStoreContinuation) in
+                loadPersistentStores(completionHandler: { storeDescription, error in
                     if let error = error as NSError? {
                         continuation.resume(throwing: error)
-                    }else{
+                    } else {
                         continuation.resume(returning: storeDescription)
                     }
                 })

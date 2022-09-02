@@ -1,24 +1,22 @@
 //
-//  CheckBoxView.swift
-//  LeitnerBox
+// CheckBoxView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/20/22.
-//
+// Created by Hamed Hosseini on 8/5/22.
 
 import SwiftUI
 
-struct CheckBoxView:View{
-    
+struct CheckBoxView: View {
     @Binding
-    var isActive:Bool
-    
-    let text:String
-    
-    var body: some View{
+    var isActive: Bool
+
+    let text: String
+
+    var body: some View {
         Button {
             isActive.toggle()
         } label: {
-            HStack{
+            HStack {
                 Image(systemName: isActive ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .frame(width: 24, height: 24)
@@ -26,6 +24,5 @@ struct CheckBoxView:View{
                 Spacer()
             }
         }
-
     }
 }

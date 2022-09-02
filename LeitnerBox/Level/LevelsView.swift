@@ -1,30 +1,27 @@
 //
-//  LevelsView.swift
-//  LeitnerBox
+// LevelsView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 8/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct LevelsView: View {
-    
     @ObservedObject
-    var vm:LevelsViewModel
-    
+    var vm: LevelsViewModel
+
     @ObservedObject
-    var searchViewModel:SearchViewModel
+    var searchViewModel: SearchViewModel
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
-        
-        ZStack{
+        ZStack {
             List {
                 if vm.filtered.count >= 1 {
                     searchResult
-                }else{
+                } else {
                     header
                     ForEach(vm.levels) { level in
                         LevelRow(vm: vm, reviewViewModel: ReviewViewModel(viewContext: vm.viewContext, level: level))
@@ -32,7 +29,7 @@ struct LevelsView: View {
                 }
             }
             .listStyle(.plain)
-            .if(.iOS){ view in
+            .if(.iOS) { view in
                 view.refreshable {
                     vm.viewContext.rollback()
                     vm.load()
@@ -54,25 +51,25 @@ struct LevelsView: View {
             daysToRecommendDialogView
         }
     }
-    
+
     @ViewBuilder
-    var header:some View{
-        VStack(alignment:.leading, spacing: 4){
-            let totalCount = vm.levels.map{$0.questions?.count ?? 0}.reduce(0,+)
-            
-            let completedCount = vm.levels.map{ level in
-                let completedCount = level.allQuestions.filter({
-                    return $0.completed == true
-                })
+    var header: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            let totalCount = vm.levels.map { $0.questions?.count ?? 0 }.reduce(0,+)
+
+            let completedCount = vm.levels.map { level in
+                let completedCount = level.allQuestions.filter {
+                    $0.completed == true
+                }
                 return completedCount.count
             }.reduce(0,+)
-            
-            let reviewableCount = vm.levels.map{ level in
+
+            let reviewableCount = vm.levels.map { level in
                 level.reviewableCountInsideLevel
             }.reduce(0,+)
-            
+
             let text = "\(totalCount) total, \(completedCount) completed, \(reviewableCount) reviewable".uppercased()
-            
+
             Text(text)
                 .font(.footnote.weight(.bold))
                 .foregroundColor(.gray)
@@ -80,15 +77,14 @@ struct LevelsView: View {
         .listRowSeparator(.hidden)
     }
 
-    var insertQuestion:Question{
+    var insertQuestion: Question {
         let question = Question(context: vm.viewContext)
         question.level = vm.leitner.firstLevel
         return question
     }
 
     @ViewBuilder
-    var toolbars:some View{
-
+    var toolbars: some View {
         NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
             Label("Add Item", systemImage: "plus.square")
         }
@@ -96,24 +92,24 @@ struct LevelsView: View {
         NavigationLink(destination: LazyView(SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))) {
             Label("Search View", systemImage: "square.text.square")
         }
-        
+
         NavigationLink(destination: LazyView(TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))) {
             Label("Tags", systemImage: "tag.square")
         }
 
-        NavigationLink(destination: LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))){
+        NavigationLink(destination: LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))) {
             Label("Synonyms", systemImage: "arrow.left.and.right.square")
         }
     }
-    
+
     @ViewBuilder
-    var searchResult:some View{
-        if vm.filtered.count > 0 || vm.searchWord.isEmpty{
-            ForEach(vm.filtered){ suggestion in
+    var searchResult: some View {
+        if vm.filtered.count > 0 || vm.searchWord.isEmpty {
+            ForEach(vm.filtered) { suggestion in
                 SearchRowView(question: suggestion, vm: searchViewModel)
             }
-        }else{
-            HStack{
+        } else {
+            HStack {
                 Image(systemName: "doc.text.magnifyingglass")
                     .foregroundColor(.gray.opacity(0.8))
                 Text("Nothind has found.")
@@ -121,23 +117,23 @@ struct LevelsView: View {
             }
         }
     }
-    
-    var daysToRecommendDialogView:some View{
-        VStack(spacing:24){
+
+    var daysToRecommendDialogView: some View {
+        VStack(spacing: 24) {
             Text(verbatim: "Level \(vm.selectedLevel?.level ?? 0)")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
-            
-            Stepper(value: $vm.daysToRecommend, in: 1...365,step: 1) {
+
+            Stepper(value: $vm.daysToRecommend, in: 1 ... 365, step: 1) {
                 Text(verbatim: "Days to recommend: \(vm.daysToRecommend)")
-            }.onChange(of: vm.daysToRecommend) { newValue in
+            }.onChange(of: vm.daysToRecommend) { _ in
                 vm.saveDaysToRecommned()
             }
-            
+
             Button {
                 vm.showDaysAfterDialog.toggle()
             } label: {
-                HStack{
+                HStack {
                     Spacer()
                     Text("Close")
                         .foregroundColor(.accentColor)
@@ -156,6 +152,7 @@ public struct LazyView<Content: View>: View {
     public init(_ build: @autoclosure @escaping () -> Content) {
         self.build = build
     }
+
     public var body: Content {
         build()
     }
@@ -163,7 +160,7 @@ public struct LazyView<Content: View>: View {
 
 struct LevelsView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelsView(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner),searchViewModel: SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
+        LevelsView(vm: LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner), searchViewModel: SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
             .previewDevice("iPhone 13 Pro Max")
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .previewInterfaceOrientation(.portrait)

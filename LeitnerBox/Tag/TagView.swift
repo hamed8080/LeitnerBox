@@ -1,23 +1,20 @@
 //
-//  TagView.swift
-//  LeitnerBox
+// TagView.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 5/19/22.
-//
+// Created by Hamed Hosseini on 8/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct TagView: View {
-    
     @ObservedObject
-    var vm:TagViewModel
+    var vm: TagViewModel
 
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        ZStack{
-            
+        ZStack {
             List {
                 ForEach(vm.tags) { tag in
                     NavigationLink {
@@ -48,11 +45,10 @@ struct TagView: View {
             addOrEditTagDialog
         }
     }
-    
-    
+
     @ViewBuilder
-    var addOrEditTagDialog:some View{
-        VStack(spacing:24){
+    var addOrEditTagDialog: some View {
+        VStack(spacing: 24) {
             Text("Tag name")
                 .foregroundColor(.accentColor)
                 .font(.title2.bold())
@@ -62,14 +58,14 @@ struct TagView: View {
                 string: $vm.tagName,
                 textEditorHeight: 48
             )
-            
+
             ColorPicker("Select Color", selection: $vm.colorPickerColor)
                 .frame(height: 36)
-            
+
             Button {
                 vm.editOrAddTag()
             } label: {
-                HStack{
+                HStack {
                     Spacer()
                     Text("SAVE")
                         .foregroundColor(.accentColor)
@@ -80,12 +76,11 @@ struct TagView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
             .tint(.accentColor)
-            
-            
+
             Button {
                 vm.showAddOrEditTagDialog.toggle()
             } label: {
-                HStack{
+                HStack {
                     Spacer()
                     Text("Cancel")
                         .foregroundColor(.red)
@@ -101,12 +96,11 @@ struct TagView: View {
 }
 
 struct TagView_Previews: PreviewProvider {
-    
-    static var vm:TagViewModel{
+    static var vm: TagViewModel {
         let vm = TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         return vm
     }
-    
+
     static var previews: some View {
         TagView(vm: vm)
             .preferredColorScheme(.light)
