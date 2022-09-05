@@ -217,7 +217,7 @@ struct ReviewView: View {
     @ViewBuilder
     var tags: some View {
         if let selectedQuestion = vm.selectedQuestion, let leitner = vm.level.leitner {
-            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
+            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner), accessControls: [.addTag, .showTags, .removeTag])
                 .frame(maxWidth: sizeClass == .compact ? .infinity : 350)
         }
     }
@@ -225,7 +225,7 @@ struct ReviewView: View {
     @ViewBuilder
     var synonyms: some View {
         if let question = vm.selectedQuestion {
-            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question))
+            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
         }
     }
 
