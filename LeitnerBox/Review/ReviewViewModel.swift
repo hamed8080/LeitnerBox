@@ -144,6 +144,14 @@ class ReviewViewModel: ObservableObject {
         synthesizer.speak(utterance)
     }
 
+    func copyQuestionToClipboard() {
+        guard let selectedQuestion = selectedQuestion else { return }
+        UIPasteboard.general.string = [selectedQuestion.question, selectedQuestion.answer, selectedQuestion.detailDescription]
+            .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: "\n")
+    }
+
     func toggleAnswer() {
         isShowingAnswer.toggle()
     }

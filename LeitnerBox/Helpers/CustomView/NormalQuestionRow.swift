@@ -26,10 +26,10 @@ struct NormalQuestionRow: View {
 
     var ac: [AccessControls]
 
-    public init(question: Question, tagsViewModel: TagViewModel, searchViewModel: SearchViewModel? = nil, accessControls: [AccessControls] = AccessControls.full, tagCompletion: (() -> Void)? = nil) {
+    public init(question: Question, tagsViewModel: TagViewModel, searchViewModel: SearchViewModel, accessControls: [AccessControls] = AccessControls.full, tagCompletion: (() -> Void)? = nil) {
         self.question = question
         self.tagsViewModel = tagsViewModel
-        self.searchViewModel = searchViewModel ?? SearchViewModel(viewContext: tagsViewModel.viewContext, leitner: tagsViewModel.leitner)
+        self.searchViewModel = searchViewModel
         self.tagCompletion = tagCompletion
         ac = accessControls
     }

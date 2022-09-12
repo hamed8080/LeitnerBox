@@ -322,6 +322,17 @@ struct ReviewView: View {
                     .foregroundColor(.accentColor)
             }
 
+            Button {
+                withAnimation {
+                    vm.copyQuestionToClipboard()
+                }
+            } label: {
+                Image(systemName: "doc.on.doc")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(.orange)
+            }
             Spacer()
         }
     }
