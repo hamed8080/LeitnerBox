@@ -26,6 +26,7 @@ struct QuestionSynonymsView: View {
                 } label: {
                     Label("Synonyms", systemImage: "plus.circle")
                 }
+                .keyboardShortcut("s", modifiers: [.command])
                 .buttonStyle(.borderless)
             }
             if accessControls.contains(.showSynonyms) {

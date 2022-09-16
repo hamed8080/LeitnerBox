@@ -17,8 +17,6 @@ struct ReviewView: View {
     @Environment(\.horizontalSizeClass)
     var sizeClass
 
-    @Environment(\.colorScheme) var colorScheme
-
     var body: some View {
         if vm.isFinished {
             NotAnyToReviewView()
@@ -50,22 +48,16 @@ struct ReviewView: View {
             .background(Color(named: "dialogBackground"))
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
-                        Label("Add Item", systemImage: "plus.square")
-                            .font(.title3)
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
+                    ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
+                        LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))
                     }
+                    .keyboardShortcut("a", modifiers: [.command, .option])
 
                     if let leitner = vm.level.leitner {
-                        NavigationLink {
+                        ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
                             SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
-                        } label: {
-                            Label("Search View", systemImage: "square.text.square")
-                                .font(.title3)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                         }
+                        .keyboardShortcut("s", modifiers: [.command, .option])
                     }
                 }
             }
@@ -111,6 +103,7 @@ struct ReviewView: View {
                     Spacer()
                 }
             }
+            .keyboardShortcut("d", modifiers: [.command])
             .controlSize(.large)
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
@@ -163,6 +156,7 @@ struct ReviewView: View {
                     Spacer()
                 }
             }
+            .keyboardShortcut(.return, modifiers: [.command])
             .controlSize(.large)
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
@@ -179,6 +173,7 @@ struct ReviewView: View {
                     Spacer()
                 }
             }
+            .keyboardShortcut(.return, modifiers: [.command, .shift])
             .controlSize(.large)
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
@@ -281,23 +276,19 @@ struct ReviewView: View {
                     vm.toggleDeleteDialog()
                 }
             } label: {
-                Image(systemName: "trash")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.orange)
+                IconButtonKeyboardShortcut(title: "Delete", systemImageName: "trash")
             }
+            .reviewIconStyle(accent: false)
+            .keyboardShortcut(.delete, modifiers: [.command])
 
             if let question = vm.selectedQuestion {
                 NavigationLink {
                     AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, question: question, isInEditMode: true))
                 } label: {
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32, height: 32)
-                        .foregroundColor(.accentColor)
+                    IconButtonKeyboardShortcut(title: "Edit", systemImageName: "pencil")
                 }
+                .reviewIconStyle()
+                .keyboardShortcut("e", modifiers: [.command])
             }
 
             Button {
@@ -305,34 +296,28 @@ struct ReviewView: View {
                     vm.toggleFavorite()
                 }
             } label: {
-                Image(systemName: vm.selectedQuestion?.favorite == true ? "star.fill" : "star")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.accentColor)
+                IconButtonKeyboardShortcut(title: "Favorite", systemImageName: vm.selectedQuestion?.favorite == true ? "star.fill" : "star")
             }
+            .reviewIconStyle()
+            .keyboardShortcut("f", modifiers: [.command])
 
             Button {
                 vm.pronounce()
             } label: {
-                Image(systemName: "mic.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.accentColor)
+                IconButtonKeyboardShortcut(title: "Pronounce", systemImageName: "mic.fill")
             }
+            .reviewIconStyle()
+            .keyboardShortcut("p", modifiers: [.command])
 
             Button {
                 withAnimation {
                     vm.copyQuestionToClipboard()
                 }
             } label: {
-                Image(systemName: "doc.on.doc")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.orange)
+                IconButtonKeyboardShortcut(title: "Copy To Clipbaord", systemImageName: "doc.on.doc")
             }
+            .reviewIconStyle(accent: false)
+            .keyboardShortcut("c", modifiers: [.command])
             Spacer()
         }
     }

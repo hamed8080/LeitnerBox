@@ -50,16 +50,16 @@ struct SearchView: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                HStack {
-                    NavigationLink(destination: LazyView(AddOrEditQuestionView(vm:
-                        .init(
-                            viewContext: vm.viewContext,
-                            level: insertQuestion.level!,
-                            question: insertQuestion,
-                            isInEditMode: false
-                        )
-                    ))) {
-                        Label("Add", systemImage: "plus.square")
+
+                    ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
+                        LazyView(AddOrEditQuestionView(vm:
+                                .init(
+                                    viewContext: vm.viewContext,
+                                    level: insertQuestion.level!,
+                                    question: insertQuestion,
+                                    isInEditMode: false
+                                )
+                        ))
                     }
 
                     Button {
@@ -67,41 +67,49 @@ struct SearchView: View {
                             vm.stopReview()
                         }
                     } label: {
-                        Label("Stop", systemImage: "stop.circle")
+                        IconButtonKeyboardShortcut(title: "Stop", systemImageName: "stop.circle")
                     }
+                    .toobarNavgationButtonStyle()
                     .disabled(vm.reviewStatus != .isPlaying)
                     .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                    .keyboardShortcut("s", modifiers: [.command, .option])
 
                     Button {
                         withAnimation {
                             vm.pauseReview()
                         }
                     } label: {
-                        Label("Pause", systemImage: "pause.circle")
+                        IconButtonKeyboardShortcut(title: "Pause", systemImageName: "pause.circle")
                     }
+                    .toobarNavgationButtonStyle()
                     .disabled(vm.reviewStatus != .isPlaying)
                     .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                    .keyboardShortcut("p", modifiers: [.command, .option])
 
                     Button {
                         withAnimation {
                             vm.playReview()
                         }
                     } label: {
-                        Label("Play", systemImage: "play.square")
+                        IconButtonKeyboardShortcut(title: "Play", systemImageName: "play.square")
                     }
+                    .toobarNavgationButtonStyle()
                     .disabled(vm.reviewStatus == .isPlaying)
                     .opacity(vm.reviewStatus == .isPlaying ? 0.7 : 1)
+                    .keyboardShortcut("p", modifiers: [.command, .option])
 
                     Button {
                         withAnimation {
                             vm.playNextImmediately()
                         }
                     } label: {
-                        Label("Next", systemImage: "forward.end")
+                        IconButtonKeyboardShortcut(title: "Next", systemImageName: "forward.end")
                             .foregroundStyle(Color.accentColor)
                     }
+                    .toobarNavgationButtonStyle()
                     .disabled(vm.reviewStatus != .isPlaying)
                     .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                    .keyboardShortcut("n", modifiers: [.command, .option])
 
                     Menu {
                         Text("Sort By")
@@ -121,10 +129,7 @@ struct SearchView: View {
                     } label: {
                         Label("More", systemImage: "ellipsis.circle")
                     }
-                }
-                .font(.title3)
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
+                    .toobarNavgationButtonStyle()
             }
         }
     }
@@ -189,11 +194,8 @@ struct SearchView: View {
                 }
                 .padding()
                 .padding(.bottom, 24)
-                .background(
-                    Color(named: "reviewBackground")
-                        .cornerRadius(24, corners: [.topLeft, .topRight])
-                        .shadow(radius: 5)
-                )
+                .background(.thinMaterial)
+                .cornerRadius(24, corners: [.topLeft, .topRight])
             }
             .animation(.easeInOut, value: vm.lastPlayedQuestion)
             .transition(.move(edge: .bottom))
@@ -205,12 +207,12 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var vm: SearchViewModel {
         let vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
+        vm.lastPlayedQuestion = vm.leitner.allQuestions.first
         vm.reviewStatus = .isPlaying
         return vm
     }
 
     static var previews: some View {
         SearchView(vm: vm)
-            .preferredColorScheme(.light)
     }
 }

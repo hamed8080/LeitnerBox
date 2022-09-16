@@ -14,6 +14,11 @@ struct LeitnerView: View {
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
 
+    @State
+    var isAnimating:Bool = false
+
+    @State private var progress: CGFloat = 0
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -42,6 +47,39 @@ struct LeitnerView: View {
                     }
                 }
                 .listStyle(.plain)
+
+                if vm.leitners.count == 0 {
+
+                    ZStack {
+                        Rectangle()
+                            .animatableGradient(from: [.purple, .green], to: [.yellow, .red], progress: progress)
+                            .opacity(0.8)
+                        ZStack {
+
+                            VStack{
+                                Image(systemName: "tray")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundStyle(.gray)
+                                    .frame(width: 64, height: 64)
+                                Text("Leitner is empty.")
+                                    .foregroundColor(.gray)
+                                    .font(.system(.subheadline, design: .rounded))
+                            }
+                        }
+                        .frame(width: 256, height: 256)
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(24)
+                    }
+                    .frame(width: 256, height: 256)
+                    .cornerRadius(24)
+                    .onAppear {
+                        withAnimation(.easeOut(duration: 5).repeatForever(autoreverses: true))  {
+                            isAnimating = true
+                            progress = 1
+                        }
+                    }
+                }
 
                 NavigationLink(isActive: Binding(get: { vm.selectedLeitner != nil }, set: { _ in })) {
                     if let selectedLeitner = vm.selectedLeitner {
@@ -145,7 +183,10 @@ struct LeitnerView: View {
             .tint(.accentColor)
 
             Button {
-                vm.showEditOrAddLeitnerAlert.toggle()
+                withAnimation {
+                    vm.showEditOrAddLeitnerAlert.toggle()
+                }
+
             } label: {
                 HStack {
                     Spacer()
@@ -158,6 +199,7 @@ struct LeitnerView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
             .tint(.red)
+            .animation(.easeInOut, value: vm.showEditOrAddLeitnerAlert)
         }
     }
 }
