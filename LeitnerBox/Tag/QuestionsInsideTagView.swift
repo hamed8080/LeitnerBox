@@ -12,11 +12,21 @@ struct QuestionsInsideTagView: View {
     @ObservedObject
     var tagViewModel: TagViewModel
 
+    /// It'll prevent the searchVM create multiple times
+    @ObservedObject
+    var serachVM: SearchViewModel
+
+    init(tag: Tag, tagViewModel: TagViewModel) {
+        self.tag = tag
+        self.tagViewModel = tagViewModel
+        serachVM = SearchViewModel(viewContext: tagViewModel.viewContext, leitner: tagViewModel.leitner)
+    }
+
     var body: some View {
         ZStack {
             List {
                 ForEach(tag.questions) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, accessControls: AccessControls.normal + [.trailingControls, .microphone])
+                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, searchViewModel: serachVM, accessControls: AccessControls.normal + [.trailingControls, .microphone])
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                 }

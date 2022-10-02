@@ -147,7 +147,6 @@ class PersistenceController: ObservableObject {
         }
     }
 
-    @MainActor
     func replaceDatabase(appSuppportFile: URL) {
         do {
             let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
@@ -155,7 +154,9 @@ class PersistenceController: ObservableObject {
             try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
             Task {
                 _ = try await container.loadPersistentStores
-                self.objectWillChange.send()
+                await MainActor.run {
+                    self.objectWillChange.send()
+                }
             }
             container.viewContext.automaticallyMergesChangesFromParent = true
         } catch {

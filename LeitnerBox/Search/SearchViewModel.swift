@@ -142,6 +142,7 @@ class SearchViewModel: ObservableObject {
     }
 
     func pronounceOnce(_ question: Question) {
+        synthesizer.stopSpeaking(at: .immediate)
         pronounce(question)
         reviewStatus = .unInitialized
     }

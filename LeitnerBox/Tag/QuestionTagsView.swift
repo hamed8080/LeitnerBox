@@ -29,6 +29,7 @@ struct QuestionTagsView: View {
                 } label: {
                     Label("Tags", systemImage: "plus.circle")
                 }
+                .keyboardShortcut("t", modifiers: [.command])
                 .buttonStyle(.borderless)
                 .padding(addPadding ? [.leading, .trailing] : [])
             }

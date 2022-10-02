@@ -35,10 +35,8 @@ struct CustomDialog<DialogContent: View>: ViewModifier {
                 }
                 .transition(.scale)
                 .padding(40)
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .foregroundColor(Color(named: "dialogBackground"))
-                )
+                .background(.thinMaterial)
+                .cornerRadius(24)
             }
         }
         .animation(.spring(response: 0.5, dampingFraction: isShowing ? 0.6 : 1, blendDuration: isShowing ? 1 : 0.2).speed(isShowing ? 1 : 3), value: isShowing)

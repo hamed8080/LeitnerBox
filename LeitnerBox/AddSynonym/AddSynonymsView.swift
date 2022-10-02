@@ -10,6 +10,14 @@ struct AddSynonymsView: View {
     @ObservedObject
     var viewModel: SynonymViewModel
 
+    @ObservedObject
+    var searchVM: SearchViewModel
+
+    init(viewModel: SynonymViewModel) {
+        self.viewModel = viewModel
+        searchVM = SearchViewModel(viewContext: viewModel.viewContext, leitner: viewModel.leitner)
+    }
+
     @Environment(\.dismiss)
     var dismiss
 
@@ -19,7 +27,7 @@ struct AddSynonymsView: View {
 
             List {
                 ForEach(viewModel.filtered) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner))
+                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner), searchViewModel: searchVM)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {

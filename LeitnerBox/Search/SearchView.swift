@@ -59,81 +59,85 @@ struct SearchView: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                HStack {
-                    NavigationLink(destination: LazyView(AddOrEditQuestionView(vm:
+                ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
+                    LazyView(AddOrEditQuestionView(vm:
                         .init(
                             viewContext: vm.viewContext,
                             level: insertQuestion.level!,
                             question: insertQuestion,
                             isInEditMode: false
                         )
-                    ))) {
-                        Label("Add", systemImage: "plus.square")
-                    }
-
-                    Button {
-                        withAnimation {
-                            vm.stopReview()
-                        }
-                    } label: {
-                        Label("Stop", systemImage: "stop.circle")
-                    }
-                    .disabled(vm.reviewStatus != .isPlaying)
-                    .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
-
-                    Button {
-                        withAnimation {
-                            vm.pauseReview()
-                        }
-                    } label: {
-                        Label("Pause", systemImage: "pause.circle")
-                    }
-                    .disabled(vm.reviewStatus != .isPlaying)
-                    .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
-
-                    Button {
-                        withAnimation {
-                            vm.playReview()
-                        }
-                    } label: {
-                        Label("Play", systemImage: "play.square")
-                    }
-                    .disabled(vm.reviewStatus == .isPlaying)
-                    .opacity(vm.reviewStatus == .isPlaying ? 0.7 : 1)
-
-                    Button {
-                        withAnimation {
-                            vm.playNextImmediately()
-                        }
-                    } label: {
-                        Label("Next", systemImage: "forward.end")
-                            .foregroundStyle(Color.accentColor)
-                    }
-                    .disabled(vm.reviewStatus != .isPlaying)
-                    .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
-
-                    Menu {
-                        Text("Sort By")
-
-                        ForEach(searchSorts, id: \.self) { sortItem in
-                            Button {
-                                withAnimation {
-                                    vm.sort(sortItem.sortType)
-                                }
-                            } label: {
-                                let favoriteCount = vm.leitner.allQuestions.filter { $0.favorite == true }.count
-                                let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
-                                Label("\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
-                            }
-                        }
-
-                    } label: {
-                        Label("More", systemImage: "ellipsis.circle")
-                    }
+                    ))
                 }
-                .font(.title3)
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
+
+                Button {
+                    withAnimation {
+                        vm.stopReview()
+                    }
+                } label: {
+                    IconButtonKeyboardShortcut(title: "Stop", systemImageName: "stop.circle")
+                }
+                .toobarNavgationButtonStyle()
+                .disabled(vm.reviewStatus != .isPlaying)
+                .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                .keyboardShortcut("s", modifiers: [.command, .option])
+
+                Button {
+                    withAnimation {
+                        vm.pauseReview()
+                    }
+                } label: {
+                    IconButtonKeyboardShortcut(title: "Pause", systemImageName: "pause.circle")
+                }
+                .toobarNavgationButtonStyle()
+                .disabled(vm.reviewStatus != .isPlaying)
+                .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                .keyboardShortcut("p", modifiers: [.command, .option])
+
+                Button {
+                    withAnimation {
+                        vm.playReview()
+                    }
+                } label: {
+                    IconButtonKeyboardShortcut(title: "Play", systemImageName: "play.square")
+                }
+                .toobarNavgationButtonStyle()
+                .disabled(vm.reviewStatus == .isPlaying)
+                .opacity(vm.reviewStatus == .isPlaying ? 0.7 : 1)
+                .keyboardShortcut("p", modifiers: [.command, .option])
+
+                Button {
+                    withAnimation {
+                        vm.playNextImmediately()
+                    }
+                } label: {
+                    IconButtonKeyboardShortcut(title: "Next", systemImageName: "forward.end")
+                        .foregroundStyle(Color.accentColor)
+                }
+                .toobarNavgationButtonStyle()
+                .disabled(vm.reviewStatus != .isPlaying)
+                .opacity(vm.reviewStatus == .isPlaying ? 1 : 0.7)
+                .keyboardShortcut("n", modifiers: [.command, .option])
+
+                Menu {
+                    Text("Sort By")
+
+                    ForEach(searchSorts, id: \.self) { sortItem in
+                        Button {
+                            withAnimation {
+                                vm.sort(sortItem.sortType)
+                            }
+                        } label: {
+                            let favoriteCount = vm.leitner.allQuestions.filter { $0.favorite == true }.count
+                            let countText = sortItem.sortType == .FAVORITE ? " (\(favoriteCount))" : ""
+                            Label("\(vm.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
+                        }
+                    }
+
+                } label: {
+                    Label("More", systemImage: "ellipsis.circle")
+                }
+                .toobarNavgationButtonStyle()
             }
         }
     }
@@ -198,11 +202,8 @@ struct SearchView: View {
                 }
                 .padding()
                 .padding(.bottom, 24)
-                .background(
-                    Color(named: "reviewBackground")
-                        .cornerRadius(24, corners: [.topLeft, .topRight])
-                        .shadow(radius: 5)
-                )
+                .background(.thinMaterial)
+                .cornerRadius(24, corners: [.topLeft, .topRight])
             }
             .animation(.easeInOut, value: vm.lastPlayedQuestion)
             .transition(.move(edge: .bottom))

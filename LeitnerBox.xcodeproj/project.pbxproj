@@ -73,6 +73,8 @@
 		0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */; };
 		058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39328AF520E0080BDDF /* AddTagsView.swift */; };
 		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
+		058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */; };
+		058EB56D28CF9ADA00622B76 /* ToolbarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */; };
 		0591796128C149F100228D7F /* ArrayEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0591796028C149F100228D7F /* ArrayEX.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
@@ -215,6 +217,8 @@
 		0589EA5528538D1400354C8C /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		058EA39328AF520E0080BDDF /* AddTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsView.swift; sourceTree = "<group>"; };
 		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
+		058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonKeyboardShortcut.swift; sourceTree = "<group>"; };
+		058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarNavigation.swift; sourceTree = "<group>"; };
 		0591796028C149F100228D7F /* ArrayEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayEX.swift; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -381,6 +385,8 @@
 				051B7DAD288B02C300465C24 /* WidgetQuestion.swift */,
 				05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */,
 				052AEE7328C1BB8600D41BB5 /* AccessControls.swift */,
+				058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */,
+				058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -753,6 +759,7 @@
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
 				052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
+				058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */,
 				053666E428378918002F899F /* ColorEx.swift in Sources */,
 				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor.swift in Sources */,
@@ -765,6 +772,7 @@
 				05219C0A2859F6DB00D3ECF5 /* SequenceEX.swift in Sources */,
 				058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */,
 				051B7DAE288B02C300465C24 /* WidgetQuestion.swift in Sources */,
+				058EB56D28CF9ADA00622B76 /* ToolbarNavigation.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
 				05747BFC28AE82ED00868CC6 /* SynonymEX.swift in Sources */,
 				059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */,

@@ -14,8 +14,6 @@ struct LevelsView: View {
     @ObservedObject
     var searchViewModel: SearchViewModel
 
-    @Environment(\.colorScheme) var colorScheme
-
     var body: some View {
         ZStack {
             List {
@@ -51,9 +49,6 @@ struct LevelsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 toolbars
-                    .font(.title3)
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
             }
         }
         .customDialog(isShowing: $vm.showDaysAfterDialog) {
@@ -94,31 +89,29 @@ struct LevelsView: View {
 
     @ViewBuilder
     var toolbars: some View {
-        NavigationLink(destination: LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))) {
-            Label("Add Item", systemImage: "plus.square")
+        ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
+            LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))
         }
+        .keyboardShortcut("a", modifiers: [.command, .option])
 
-        NavigationLink {
-            SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
-        } label: {
-            Label("Search View", systemImage: "list.bullet.rectangle.portrait")
+        ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
+            LazyView(SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))
         }
+        .keyboardShortcut("f", modifiers: [.command, .option])
 
-        NavigationLink {
-            TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
-        } label: {
-            Label("Tags", systemImage: "tag.square")
+        ToolbarNavigation(title: "Tags", systemImageName: "tag.square") {
+            LazyView(TagView(vm: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))
         }
+        .keyboardShortcut("t", modifiers: [.command, .option])
 
-        NavigationLink {
+        ToolbarNavigation(title: "Statictics", systemImageName: "chart.xyaxis.line") {
             StatisticsView(vm: .init())
-        } label: {
-            Label("Statictics", systemImage: "chart.xyaxis.line")
         }
 
-        NavigationLink(destination: LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))) {
-            Label("Synonyms", systemImage: "arrow.left.and.right.square")
+        ToolbarNavigation(title: "Synonyms", systemImageName: "arrow.left.and.right.square") {
+            LazyView(SynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.leitner.allQuestions.first!)))
         }
+        .keyboardShortcut("s", modifiers: [.command, .option])
     }
 
     @ViewBuilder
