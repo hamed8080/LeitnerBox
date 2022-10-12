@@ -18,6 +18,15 @@ struct AddOrEditQuestionView: View {
 
     @Environment(\.colorScheme) var colorScheme
 
+    private var synonymsVM: SynonymViewModel
+    private var tagVM: TagViewModel
+
+    init(vm: QuestionViewModel) {
+        self.vm = vm
+        self.synonymsVM = .init(viewContext: vm.viewContext, question: vm.question)
+        self.tagVM = .init(viewContext: vm.viewContext, leitner: vm.level.leitner!)
+    }
+
     var body: some View {
         GeometryReader { reader in
 
@@ -69,9 +78,8 @@ struct AddOrEditQuestionView: View {
                         }
 
                         VStack {
-                            let leitner = vm.level.leitner!
-                            QuestionTagsView(question: vm.question, viewModel: .init(viewContext: vm.viewContext, leitner: leitner))
-                            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: vm.question))
+                            QuestionTagsView(question: vm.question, viewModel: tagVM)
+                            QuestionSynonymsView(viewModel: synonymsVM)
                         }
 
                         Button {
