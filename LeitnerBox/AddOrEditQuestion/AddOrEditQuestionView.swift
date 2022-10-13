@@ -78,8 +78,8 @@ struct AddOrEditQuestionView: View {
                         }
 
                         VStack {
-                            QuestionTagsView(question: vm.question, viewModel: tagVM)
-                            QuestionSynonymsView(viewModel: synonymsVM)
+                            QuestionTagsView(question: vm.question, viewModel: tagVM, accessControls: [.showTags, .addTag, .removeTag])
+                            QuestionSynonymsView(viewModel: synonymsVM, accessControls: [.showSynonyms, .addSynonym, .removeSynonym])
                         }
 
                         Button {
