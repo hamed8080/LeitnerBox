@@ -13,6 +13,12 @@ struct LeitnerBoxApp: App, DropDelegate {
     @ObservedObject
     var persistenceController = PersistenceController.shared
 
+    @ObservedObject
+    var leitnerVM = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
+
+    @ObservedObject
+    var statVM = StatisticsViewModel()
+
     @State private var dragOver = false
     @State
     var hideSplash = false
@@ -31,6 +37,8 @@ struct LeitnerBoxApp: App, DropDelegate {
                 LeitnerView()
                     .onDrop(of: [.fileURL, .data], delegate: self)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environmentObject(leitnerVM)
+                    .environmentObject(statVM)
                     .onChange(of: scenePhase) { newPhase in
                         if newPhase == .active {
                             PersistenceController.shared.replaceDBIfExistFromShareExtension()

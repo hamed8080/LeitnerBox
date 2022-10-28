@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct LevelRow: View {
-    @ObservedObject
+    @EnvironmentObject
     var vm: LevelsViewModel
 
-    @ObservedObject
+    @EnvironmentObject
     var level: Level
 
     @Environment(\.horizontalSizeClass)
@@ -18,7 +18,8 @@ struct LevelRow: View {
 
     var body: some View {
         NavigationLink {
-            ReviewView(vm: ReviewViewModel(viewContext: vm.viewContext, level: level))
+            LazyView(ReviewView())
+                .environmentObject(ReviewViewModel(viewContext: vm.viewContext, level: level))
         } label: {
             HStack {
                 HStack {
@@ -77,12 +78,11 @@ struct LevelRow: View {
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(
-            vm: LevelsViewModel(
-                viewContext: PersistenceController.preview.container.viewContext,
-                leitner: LeitnerView_Previews.leitner
-            ),
-            level: LeitnerView_Previews.leitner.levels.first!
-        )
+        LevelRow()
+        .environmentObject(LevelsViewModel(
+            viewContext: PersistenceController.preview.container.viewContext,
+            leitner: LeitnerView_Previews.leitner
+        ))
+        .environmentObject(LeitnerView_Previews.leitner.levels.first!)
     }
 }

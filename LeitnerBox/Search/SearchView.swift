@@ -8,7 +8,7 @@ import CoreData
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject
+    @EnvironmentObject
     var vm: SearchViewModel
 
     @Environment(\.colorScheme) var colorScheme
@@ -217,7 +217,8 @@ struct SearchView_Previews: PreviewProvider {
         @ObservedObject
         var vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         var body: some View {
-            SearchView(vm: vm)
+            SearchView()
+                .environmentObject(vm)
         }
     }
 

@@ -8,10 +8,10 @@ import CoreData
 import SwiftUI
 
 struct LevelsView: View {
-    @ObservedObject
+    @EnvironmentObject
     var vm: LevelsViewModel
 
-    @ObservedObject
+    @EnvironmentObject
     var searchViewModel: SearchViewModel
 
     var body: some View {
@@ -22,7 +22,8 @@ struct LevelsView: View {
                 } else {
                     header
                     ForEach(vm.levels) { level in
-                        LevelRow(vm: vm, level: level)
+                        LevelRow()
+                            .environmentObject(level)
                     }
                 }
             }
@@ -95,7 +96,10 @@ struct LevelsView: View {
         .keyboardShortcut("a", modifiers: [.command, .option])
 
         ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
-            LazyView(SearchView(vm: SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner)))
+            LazyView(
+                SearchView()
+                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
+            )
         }
         .keyboardShortcut("f", modifiers: [.command, .option])
 
@@ -105,7 +109,7 @@ struct LevelsView: View {
         .keyboardShortcut("t", modifiers: [.command, .option])
 
         ToolbarNavigation(title: "Statictics", systemImageName: "chart.xyaxis.line") {
-            StatisticsView(vm: .init())
+            StatisticsView()
         }
 
         ToolbarNavigation(title: "Synonyms", systemImageName: "arrow.left.and.right.square") {
@@ -179,7 +183,9 @@ struct LevelsView_Previews: PreviewProvider {
         var searchViewModel = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
 
         var body: some View {
-            LevelsView(vm: vm, searchViewModel: searchViewModel)
+            LevelsView()
+                .environmentObject(vm)
+                .environmentObject(searchViewModel)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }

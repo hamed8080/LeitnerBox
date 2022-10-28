@@ -8,7 +8,7 @@ import CoreData
 import SwiftUI
 
 struct ReviewView: View {
-    @ObservedObject
+    @EnvironmentObject
     var vm: ReviewViewModel
 
     @State
@@ -55,7 +55,8 @@ struct ReviewView: View {
 
                     if let leitner = vm.level.leitner {
                         ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
-                            SearchView(vm: SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
+                            SearchView()
+                                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
                         }
                         .keyboardShortcut("s", modifiers: [.command, .option])
                     }
@@ -195,9 +196,6 @@ struct ReviewView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color("subtitleTextColor"))
                     .transition(.scale)
-                    .onTapGesture {
-                        vm.toggleAnswer()
-                    }
                 if let ps = vm.partOfspeech {
                     Text(ps)
                         .font(.title3.weight(.semibold))
@@ -370,8 +368,8 @@ struct ReviewView_Previews: PreviewProvider {
         @StateObject
         var vm = ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: level!)
         var body: some View {
-            ReviewView(vm: vm)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            ReviewView()
+                .environmentObject(vm)
         }
     }
 

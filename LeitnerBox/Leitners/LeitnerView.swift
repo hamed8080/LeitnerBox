@@ -8,8 +8,8 @@ import CoreData
 import SwiftUI
 
 struct LeitnerView: View {
-    @ObservedObject
-    var vm: LeitnerViewModel = .init(viewContext: PersistenceController.shared.container.viewContext)
+    @EnvironmentObject
+    var vm: LeitnerViewModel
 
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
@@ -31,16 +31,9 @@ struct LeitnerView: View {
         } detail: {
             NavigationStack {
                 if let leitner = selectedLeitner {
-                    LevelsView(
-                        vm: LevelsViewModel(
-                            viewContext: vm.viewContext,
-                            leitner: leitner
-                        ),
-                        searchViewModel: SearchViewModel(
-                            viewContext: vm.viewContext,
-                            leitner: leitner
-                        )
-                    )
+                    LevelsView()
+                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: leitner))
+                    .environmentObject(LevelsViewModel(viewContext: vm.viewContext, leitner: leitner))
                 }
             }
         }
@@ -226,7 +219,8 @@ struct LeitnerView_Previews: PreviewProvider {
         @StateObject
         var vm = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
         var body: some View {
-            LeitnerView(vm: vm)
+            LeitnerView()
+                .environmentObject(vm)
         }
     }
 

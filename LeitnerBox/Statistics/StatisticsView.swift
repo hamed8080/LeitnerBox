@@ -8,7 +8,7 @@ import Charts
 import SwiftUI
 
 struct StatisticsView: View {
-    @ObservedObject
+    @EnvironmentObject
     var vm: StatisticsViewModel
 
     var body: some View {
@@ -68,7 +68,8 @@ struct StatisticsView_Previews: PreviewProvider {
         @ObservedObject
         var vm = StatisticsViewModel(isPreview: true)
         var body: some View {
-            StatisticsView(vm: vm)
+            StatisticsView()
+                .environmentObject(vm)
         }
     }
 
