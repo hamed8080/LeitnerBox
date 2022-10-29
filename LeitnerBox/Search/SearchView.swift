@@ -61,9 +61,13 @@ struct SearchView: View {
         .animation(.easeInOut, value: vm.filtered)
         .animation(.easeInOut, value: vm.reviewStatus)
         .navigationTitle("Advance Search in \(vm.leitner.name ?? "")")
-        .onAppear(perform: {
+        .onAppear {
             vm.viewDidAppear()
-        })
+            vm.resumeSpeaking()
+        }
+        .onDisappear {
+            vm.pauseSpeaking()
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {

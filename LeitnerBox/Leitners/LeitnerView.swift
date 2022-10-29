@@ -41,7 +41,7 @@ struct LeitnerView: View {
                 }
             }
         }
-        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(language: vm.selectedVoiceIdentifire ?? "en-GB") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
+        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: vm.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
         .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
             if .iOS == true {
                 try? vm.backupFile?.deleteDirectory()

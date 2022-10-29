@@ -51,7 +51,7 @@ class ReviewViewModel: ObservableObject {
 
     private var voiceSpeech :AVSpeechSynthesisVoice
 
-    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech :AVSpeechSynthesisVoice) {
+    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech: AVSpeechSynthesisVoice) {
         self.level = level
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
@@ -207,5 +207,9 @@ class ReviewViewModel: ObservableObject {
             return true
         }
         return tags.joined(separator: ", ")
+    }
+
+    func stopPronounce() {
+        synthesizer.stopSpeaking(at: .immediate)
     }
 }

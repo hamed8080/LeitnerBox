@@ -78,6 +78,10 @@ struct ReviewView: View {
             .customDialog(isShowing: $vm.showDelete, content: {
                 deleteDialog
             })
+            .onDisappear {
+                vm.stopPronounce()
+            }
+
         } else {
             NotAnyToReviewView()
         }

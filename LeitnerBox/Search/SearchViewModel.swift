@@ -250,12 +250,12 @@ class SearchViewModel: ObservableObject {
 
     func viewDidAppear() {
         commandCenter = MPRemoteCommandCenter.shared()
-        commandCenter?.playCommand.addTarget { _ -> MPRemoteCommandHandlerStatus in
-            self.togglePlayPauseReview()
+        commandCenter?.playCommand.addTarget { [weak self] _ -> MPRemoteCommandHandlerStatus in
+            self?.togglePlayPauseReview()
             return .success
         }
-        commandCenter?.pauseCommand.addTarget { _ -> MPRemoteCommandHandlerStatus in
-            self.togglePlayPauseReview()
+        commandCenter?.pauseCommand.addTarget { [weak self] _ -> MPRemoteCommandHandlerStatus in
+            self?.togglePlayPauseReview()
             return .success
         }
     }
@@ -298,6 +298,16 @@ class SearchViewModel: ObservableObject {
             PersistenceController.saveDB(viewContext: viewContext)
         }
     }
+
+    func pauseSpeaking() {
+        synthesizer.pauseSpeaking(at: .immediate)
+    }
+
+    func resumeSpeaking() {
+        if synthesizer.isPaused && reviewStatus == .isPlaying {
+            playReview()
+        }
+    }
 }
 
 class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
@@ -313,12 +323,12 @@ class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
     }
 
     func timerTask() {
-        task = Task {
+        task = Task { [weak self] in
             guard !Task.isCancelled else { return }
             try await Task.sleep(nanoseconds: 2_000_000_000)
 
-            await MainActor.run {
-                self.viewModel?.playNext()
+            await MainActor.run { [weak self] in
+                self?.viewModel?.playNext()
             }
         }
     }
