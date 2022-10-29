@@ -65,8 +65,8 @@ struct StatisticsView: View {
 
 struct StatisticsView_Previews: PreviewProvider {
     struct Preview: View {
-        @ObservedObject
-        var vm = StatisticsViewModel(isPreview: true)
+        @StateObject
+        var vm = StatisticsViewModel(viewContext: PersistenceController.previewVC)
         var body: some View {
             StatisticsView()
                 .environmentObject(vm)

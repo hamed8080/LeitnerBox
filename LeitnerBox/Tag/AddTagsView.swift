@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AddTagsView: View {
-    @ObservedObject
+    @StateObject
     var question: Question
 
     @StateObject
@@ -44,9 +44,8 @@ struct AddTagsView: View {
 struct AddTagsView_Previews: PreviewProvider {
     static var previews: some View {
         let leitner = LeitnerView_Previews.leitner
-        let viewContext = PersistenceController.preview.container.viewContext
         let question = leitner.allQuestions.first!
-        AddTagsView(question: question, viewModel: .init(viewContext: viewContext, leitner: leitner))
+        AddTagsView(question: question, viewModel: .init(viewContext: PersistenceController.previewVC, leitner: leitner))
             .preferredColorScheme(.dark)
     }
 }

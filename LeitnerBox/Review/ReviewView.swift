@@ -6,6 +6,7 @@
 
 import CoreData
 import SwiftUI
+import AVFoundation
 
 struct ReviewView: View {
     @EnvironmentObject
@@ -16,6 +17,12 @@ struct ReviewView: View {
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
+
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
+    @Environment(\.avSpeechSynthesisVoice)
+    var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         if vm.isFinished {
@@ -49,14 +56,20 @@ struct ReviewView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
-                        LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))
+                        LazyView(
+                            AddOrEditQuestionView(
+                                vm: .init(viewContext: context, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false),
+                                synonymsVM: SynonymViewModel(viewContext: context, question: insertQuestion),
+                                tagVM: TagViewModel(viewContext: context, leitner: vm.level.leitner!)
+                            )
+                        )
                     }
                     .keyboardShortcut("a", modifiers: [.command, .option])
 
                     if let leitner = vm.level.leitner {
                         ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
                             SearchView()
-                                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.container.viewContext, leitner: leitner))
+                                .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: voiceSpeech))
                         }
                         .keyboardShortcut("s", modifiers: [.command, .option])
                     }
@@ -210,15 +223,15 @@ struct ReviewView: View {
     @ViewBuilder
     var tags: some View {
         if let selectedQuestion = vm.selectedQuestion, let leitner = vm.level.leitner {
-            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: vm.viewContext, leitner: leitner), accessControls: [.addTag, .showTags, .removeTag])
-                .frame(maxWidth: sizeClass == .compact ? .infinity : 350)
+            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: context, leitner: leitner), accessControls: [.addTag, .showTags, .removeTag])
+//                .frame(maxWidth: sizeClass == .compact ? .infinity : 350)
         }
     }
 
     @ViewBuilder
     var synonyms: some View {
         if let question = vm.selectedQuestion {
-            QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
+            QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
         }
     }
 
@@ -281,7 +294,11 @@ struct ReviewView: View {
 
             if let question = vm.selectedQuestion {
                 NavigationLink {
-                    AddOrEditQuestionView(vm: .init(viewContext: PersistenceController.shared.container.viewContext, level: vm.level, question: question, isInEditMode: true))
+                    AddOrEditQuestionView(
+                        vm: .init(viewContext: context, level: vm.level, question: question, isInEditMode: true),
+                        synonymsVM: SynonymViewModel(viewContext: context, question: question),
+                        tagVM: TagViewModel(viewContext: context, leitner: vm.level.leitner!)
+                    )
                 } label: {
                     IconButtonKeyboardShortcut(title: "Edit", systemImageName: "pencil")
                 }
@@ -366,9 +383,11 @@ struct ReviewView_Previews: PreviewProvider {
     struct Preview: View {
         static let level = (LeitnerView_Previews.leitner.levels).filter { $0.level == 1 }.first
         @StateObject
-        var vm = ReviewViewModel(viewContext: PersistenceController.preview.container.viewContext, level: level!)
+        var vm = ReviewViewModel(viewContext: PersistenceController.previewVC, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             ReviewView()
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
                 .environmentObject(vm)
         }
     }

@@ -43,18 +43,18 @@ class ReviewViewModel: ObservableObject {
     @Published
     var isFinished = false
 
-    @AppStorage("selectedVoiceIdentifire")
-    var selectedVoiceIdentifire = ""
-
     @AppStorage("pronounceDetailAnswer")
     private var pronounceDetailAnswer = false
 
     @Published
     var tags: [Tag] = []
 
-    init(viewContext: NSManagedObjectContext, level: Level) {
+    private var voiceSpeech :AVSpeechSynthesisVoice
+
+    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech :AVSpeechSynthesisVoice) {
         self.level = level
         self.viewContext = viewContext
+        self.voiceSpeech = voiceSpeech
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", level.level, level.leitner?.id ?? 0)
         questions = ((try? viewContext.fetch(req)) ?? []).filter(\.isReviewable).shuffled()
@@ -148,9 +148,7 @@ class ReviewViewModel: ObservableObject {
         guard let question = selectedQuestion else { return }
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")")
-        if !selectedVoiceIdentifire.isEmpty {
-            utterance.voice = AVSpeechSynthesisVoice(identifier: selectedVoiceIdentifire)
-        }
+        utterance.voice = voiceSpeech
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier = 1
         utterance.postUtteranceDelay = 0

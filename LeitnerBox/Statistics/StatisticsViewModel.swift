@@ -9,8 +9,7 @@ import Foundation
 import SwiftUI
 
 class StatisticsViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    var viewContext: NSManagedObjectContext
 
     @Published
     var statistics: [Statistic] = []
@@ -21,8 +20,8 @@ class StatisticsViewModel: ObservableObject {
     @Published
     var timeframe: Timeframe = .week
 
-    init(isPreview: Bool = false) {
-        viewContext = isPreview ? PersistenceController.preview.container.viewContext : PersistenceController.shared.container.viewContext
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
         load()
     }
 

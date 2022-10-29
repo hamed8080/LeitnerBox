@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct QuestionTagsView: View {
-    @ObservedObject
+    @StateObject
     var question: Question
 
     @State
@@ -63,6 +63,7 @@ struct QuestionTagsView: View {
                 }
             }
         }
+        .animation(.easeInOut, value: question.tag?.count)
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner {
                 AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)) {

@@ -17,7 +17,7 @@ struct SearchView: View {
         ZStack {
             List {
                 ForEach(vm.filtered) { item in
-                    SearchRowView(question: item, vm: vm)
+                    SearchRowView(question: item, leitner: vm.leitner)
                         .listRowInsets(EdgeInsets())
                 }
                 .onDelete(perform: vm.deleteItems)
@@ -31,7 +31,11 @@ struct SearchView: View {
             .navigationDestination(isPresented: Binding(get: { vm.editQuestion != nil }, set: { _ in })) {
                 if let editQuestion = vm.editQuestion {
                     let level = editQuestion.level ?? vm.leitner.firstLevel
-                    AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true))
+                    AddOrEditQuestionView(
+                        vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true),
+                        synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: editQuestion),
+                        tagVM: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
+                    )
                         .onDisappear {
                             vm.editQuestion = nil
                         }
@@ -60,14 +64,13 @@ struct SearchView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
-                    LazyView(AddOrEditQuestionView(vm:
-                        .init(
-                            viewContext: vm.viewContext,
-                            level: insertQuestion.level!,
-                            question: insertQuestion,
-                            isInEditMode: false
+                    LazyView(
+                        AddOrEditQuestionView(
+                            vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion,isInEditMode: false),
+                            synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: insertQuestion),
+                            tagVM: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
                         )
-                    ))
+                    )
                 }
 
                 Button {
@@ -214,10 +217,12 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
-        @ObservedObject
-        var vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
+        @StateObject
+        var vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             SearchView()
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
                 .environmentObject(vm)
         }
     }

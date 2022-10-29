@@ -8,7 +8,7 @@ import CoreData
 import SwiftUI
 
 struct AddOrEditQuestionView: View {
-    @ObservedObject
+    @StateObject
     var vm: QuestionViewModel
 
     @Environment(\.dismiss) var dissmiss
@@ -16,16 +16,14 @@ struct AddOrEditQuestionView: View {
     @Environment(\.horizontalSizeClass)
     var sizeClass
 
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
 
-    private var synonymsVM: SynonymViewModel
-    private var tagVM: TagViewModel
+    @StateObject
+    var synonymsVM: SynonymViewModel
 
-    init(vm: QuestionViewModel) {
-        self.vm = vm
-        self.synonymsVM = .init(viewContext: vm.viewContext, question: vm.question)
-        self.tagVM = .init(viewContext: vm.viewContext, leitner: vm.level.leitner!)
-    }
+    @StateObject
+    var tagVM: TagViewModel
 
     var body: some View {
         GeometryReader { reader in
@@ -144,15 +142,24 @@ struct AddOrEditQuestionView: View {
 
 struct AddQuestionView_Previews: PreviewProvider {
     struct Preview: View {
+        static let question = LeitnerView_Previews.leitner.allQuestions.first!
+        static let context = PersistenceController.preview.container.viewContext
         @StateObject
         var vm = QuestionViewModel(
-            viewContext: PersistenceController.preview.container.viewContext,
+            viewContext: context,
             level: LeitnerView_Previews.leitner.levels.first!,
-            question: LeitnerView_Previews.leitner.allQuestions.first!,
+            question: question,
             isInEditMode: true
         )
+
+        @StateObject
+        var synonymVM = SynonymViewModel(viewContext: context, question: question)
+
+        @StateObject
+        var tagVm = TagViewModel(viewContext: context, leitner: question.level!.leitner!)
+
         var body: some View {
-            AddOrEditQuestionView(vm: vm)
+            AddOrEditQuestionView(vm: vm, synonymsVM: synonymVM , tagVM: tagVm)
         }
     }
 

@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import AVFoundation
 
 struct LevelRow: View {
     @EnvironmentObject
@@ -16,10 +17,13 @@ struct LevelRow: View {
     @Environment(\.horizontalSizeClass)
     var sizeClass
 
+    @Environment(\.avSpeechSynthesisVoice)
+    var voiceSpeech: AVSpeechSynthesisVoice
+
     var body: some View {
         NavigationLink {
             LazyView(ReviewView())
-                .environmentObject(ReviewViewModel(viewContext: vm.viewContext, level: level))
+                .environmentObject(ReviewViewModel(viewContext: vm.viewContext, level: level, voiceSpeech: voiceSpeech))
         } label: {
             HStack {
                 HStack {
@@ -80,7 +84,7 @@ struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
         LevelRow()
         .environmentObject(LevelsViewModel(
-            viewContext: PersistenceController.preview.container.viewContext,
+            viewContext: PersistenceController.previewVC,
             leitner: LeitnerView_Previews.leitner
         ))
         .environmentObject(LeitnerView_Previews.leitner.levels.first!)

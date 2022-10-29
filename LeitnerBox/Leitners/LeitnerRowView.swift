@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct LeitnerRowView: View {
-    @ObservedObject
+    @StateObject
     var leitner: Leitner
 
-    @ObservedObject
+    @StateObject
     var vm: LeitnerViewModel
 
     var body: some View {
@@ -44,6 +44,6 @@ struct LeitnerRowView: View {
 
 struct LeitnerRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext))
+        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.previewVC))
     }
 }

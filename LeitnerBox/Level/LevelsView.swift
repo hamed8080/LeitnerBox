@@ -6,6 +6,7 @@
 
 import CoreData
 import SwiftUI
+import AVFoundation
 
 struct LevelsView: View {
     @EnvironmentObject
@@ -13,6 +14,9 @@ struct LevelsView: View {
 
     @EnvironmentObject
     var searchViewModel: SearchViewModel
+
+    @Environment(\.avSpeechSynthesisVoice)
+    var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         ZStack {
@@ -38,7 +42,11 @@ struct LevelsView: View {
             .navigationDestination(isPresented: Binding(get: { searchViewModel.editQuestion != nil }, set: { _ in })) {
                 if let editQuestion = searchViewModel.editQuestion {
                     let level = editQuestion.level ?? searchViewModel.leitner.firstLevel
-                    AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true))
+                    AddOrEditQuestionView(
+                        vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true),
+                        synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: editQuestion),
+                        tagVM: TagViewModel(viewContext: vm.viewContext, leitner: level!.leitner!)
+                    )
                         .onDisappear {
                             searchViewModel.editQuestion = nil
                         }
@@ -91,14 +99,20 @@ struct LevelsView: View {
     @ViewBuilder
     var toolbars: some View {
         ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
-            LazyView(AddOrEditQuestionView(vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false)))
+            LazyView(
+                AddOrEditQuestionView(
+                    vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false),
+                    synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: insertQuestion),
+                    tagVM: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
+                )
+            )
         }
         .keyboardShortcut("a", modifiers: [.command, .option])
 
         ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
             LazyView(
                 SearchView()
-                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
+                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: vm.leitner, voiceSpeech: voiceSpeech))
             )
         }
         .keyboardShortcut("f", modifiers: [.command, .option])
@@ -122,7 +136,7 @@ struct LevelsView: View {
     var searchResult: some View {
         if vm.filtered.count > 0 || vm.searchWord.isEmpty {
             ForEach(vm.filtered) { suggestion in
-                SearchRowView(question: suggestion, vm: searchViewModel)
+                SearchRowView(question: suggestion, leitner: searchViewModel.leitner)
             }
         } else {
             HStack {
@@ -176,11 +190,11 @@ public struct LazyView<Content: View>: View {
 
 struct LevelsView_Previews: PreviewProvider {
     struct Preview: View {
-        @ObservedObject
+        @StateObject
         var vm = LevelsViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
 
-        @ObservedObject
-        var searchViewModel = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
+        @StateObject
+        var searchViewModel = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
         var body: some View {
             LevelsView()

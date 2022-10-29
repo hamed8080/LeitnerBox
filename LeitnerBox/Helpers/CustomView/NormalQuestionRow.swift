@@ -5,15 +5,16 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import CoreData
 
 struct NormalQuestionRow: View {
-    @ObservedObject
+    @StateObject
     var question: Question
 
-    @ObservedObject
+    @StateObject
     var tagsViewModel: TagViewModel
 
-    @ObservedObject
+    @EnvironmentObject
     var searchViewModel: SearchViewModel
 
     @Environment(\.horizontalSizeClass)
@@ -22,17 +23,12 @@ struct NormalQuestionRow: View {
     @Environment(\.dynamicTypeSize)
     var typeSize
 
-    var tagCompletion: (() -> Void)?
+    var tagCompletion: (() -> Void)? = nil
 
-    var ac: [AccessControls]
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
 
-    public init(question: Question, tagsViewModel: TagViewModel, searchViewModel: SearchViewModel, accessControls: [AccessControls] = AccessControls.full, tagCompletion: (() -> Void)? = nil) {
-        self.question = question
-        self.tagsViewModel = tagsViewModel
-        self.searchViewModel = searchViewModel
-        self.tagCompletion = tagCompletion
-        ac = accessControls
-    }
+    var ac: [AccessControls] = AccessControls.full
 
     var body: some View {
         HStack {
@@ -222,7 +218,7 @@ struct NormalQuestionRow: View {
 
                         if ac.contains(.move) {
                             Menu("Move") {
-                                let vm = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
+                                let vm = LeitnerViewModel(viewContext: context)
                                 ForEach(vm.leitners) { leitner in
                                     Button {
                                         withAnimation {
@@ -250,11 +246,19 @@ struct NormalQuestionRow: View {
 }
 
 struct NormalQuestionRow_Previews: PreviewProvider {
-    static var previews: some View {
-        let leitner = LeitnerView_Previews.leitner
+    struct Preview: View {
+        static let leitner = LeitnerView_Previews.leitner
         let question = leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
         let tagVM = TagViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
-        let searchVM = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
-        NormalQuestionRow(question: question!, tagsViewModel: tagVM, searchViewModel: searchVM)
+        let searchVM = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        var body: some View {
+            NormalQuestionRow(question: question!, tagsViewModel: tagVM)
+                .environmentObject(searchVM)
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
+        }
+    }
+
+    static var previews: some View {
+        Preview()
     }
 }

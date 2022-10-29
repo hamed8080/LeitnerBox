@@ -7,16 +7,8 @@
 import SwiftUI
 
 struct AddSynonymsView: View {
-    @ObservedObject
+    @StateObject
     var viewModel: SynonymViewModel
-
-    @ObservedObject
-    var searchVM: SearchViewModel
-
-    init(viewModel: SynonymViewModel) {
-        self.viewModel = viewModel
-        searchVM = SearchViewModel(viewContext: viewModel.viewContext, leitner: viewModel.leitner)
-    }
 
     @Environment(\.dismiss)
     var dismiss
@@ -27,7 +19,7 @@ struct AddSynonymsView: View {
 
             List {
                 ForEach(viewModel.filtered) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner), searchViewModel: searchVM)
+                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -43,13 +35,25 @@ struct AddSynonymsView: View {
 }
 
 struct AddSynonymsView_Previews: PreviewProvider {
+
+    struct Preview: View {
+        @StateObject
+        var vm = SynonymViewModel(viewContext: PersistenceController.previewVC, question: LeitnerView_Previews.leitner.allQuestions.first!)
+
+        var body: some View {
+            AddSynonymsView(viewModel: vm)
+                .onAppear {
+                    vm.searchText = "t"
+                }
+                .environmentObject(SearchViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .preferredColorScheme(.dark)
+        }
+    }
+
     static var previews: some View {
-        let firstQuestion = LeitnerView_Previews.leitner.allQuestions.first!
-        let vm = SynonymViewModel(viewContext: PersistenceController.preview.container.viewContext, question: firstQuestion)
-        AddSynonymsView(viewModel: vm)
-            .onAppear {
-                vm.searchText = "t"
-            }
-            .preferredColorScheme(.dark)
+        NavigationStack {
+            Preview()
+        }
     }
 }

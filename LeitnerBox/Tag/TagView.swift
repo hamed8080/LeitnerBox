@@ -8,7 +8,7 @@ import CoreData
 import SwiftUI
 
 struct TagView: View {
-    @ObservedObject
+    @StateObject
     var vm: TagViewModel
 
     @Environment(\.colorScheme) var colorScheme
@@ -18,7 +18,10 @@ struct TagView: View {
             List {
                 ForEach(vm.tags) { tag in
                     NavigationLink {
-                        QuestionsInsideTagView(tag: tag, tagViewModel: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner))
+                        QuestionsInsideTagView(
+                            tag: tag,
+                            tagViewModel: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)                            
+                        )
                     } label: {
                         TagRowView(tag: tag, vm: vm)
                     }
@@ -97,7 +100,7 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
-        @ObservedObject
+        @StateObject
         var vm = TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
         var body: some View {
             TagView(vm: vm)

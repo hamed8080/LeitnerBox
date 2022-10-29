@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct QuestionSynonymsView: View {
-    @ObservedObject
+    @StateObject
     var viewModel: SynonymViewModel
 
     var accessControls: [AccessControls] = [.showSynonyms, .addSynonym]
@@ -63,7 +63,11 @@ struct QuestionSynonymsView: View {
         .navigationDestination(isPresented: Binding(get: { selectedQuestion != nil }, set: { _ in })) {
             let level = selectedQuestion?.level ?? viewModel.leitner.firstLevel
             if let selectedQuestion {
-                AddOrEditQuestionView(vm: .init(viewContext: viewModel.viewContext, level: level!, question: selectedQuestion, isInEditMode: true))
+                AddOrEditQuestionView(
+                    vm: .init(viewContext: viewModel.viewContext, level: level!, question: selectedQuestion, isInEditMode: true),
+                    synonymsVM: SynonymViewModel(viewContext: viewModel.viewContext, question: selectedQuestion),
+                    tagVM: TagViewModel(viewContext: viewModel.viewContext, leitner: level!.leitner!)
+                )
             }
         }
         .sheet(isPresented: $showAddSynonyms, onDismiss: nil, content: {

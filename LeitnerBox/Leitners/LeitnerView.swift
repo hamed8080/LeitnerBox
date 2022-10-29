@@ -6,6 +6,18 @@
 
 import CoreData
 import SwiftUI
+import AVFoundation
+
+private struct MyEnvironmentKey: EnvironmentKey {
+    static let defaultValue: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice(language: "en-GB")!
+}
+
+extension EnvironmentValues {
+    var avSpeechSynthesisVoice: AVSpeechSynthesisVoice {
+        get { self[MyEnvironmentKey.self] }
+        set { self[MyEnvironmentKey.self] = newValue }
+    }
+}
 
 struct LeitnerView: View {
     @EnvironmentObject
@@ -32,11 +44,12 @@ struct LeitnerView: View {
             NavigationStack {
                 if let leitner = selectedLeitner {
                     LevelsView()
-                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: leitner))
+                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
                     .environmentObject(LevelsViewModel(viewContext: vm.viewContext, leitner: leitner))
                 }
             }
         }
+        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(language: vm.selectedVoiceIdentifire ?? "en-GB") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
         .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
             if .iOS == true {
                 try? vm.backupFile?.deleteDirectory()

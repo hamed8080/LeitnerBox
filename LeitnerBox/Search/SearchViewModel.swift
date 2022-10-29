@@ -51,8 +51,11 @@ class SearchViewModel: ObservableObject {
 
     var commandCenter: MPRemoteCommandCenter?
 
-    init(viewContext: NSManagedObjectContext, leitner: Leitner) {
+    private var voiceSpeech: AVSpeechSynthesisVoice
+
+    init(viewContext: NSManagedObjectContext, leitner: Leitner, voiceSpeech: AVSpeechSynthesisVoice) {
         self.viewContext = viewContext
+        self.voiceSpeech = voiceSpeech
         speechDelegate = SpeechDelegate()
         synthesizer.delegate = speechDelegate
         self.leitner = leitner
@@ -151,7 +154,7 @@ class SearchViewModel: ObservableObject {
         reviewStatus = .isPlaying
         let pronounceString = "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")"
         let utterance = AVSpeechUtterance(string: pronounceString)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        utterance.voice = voiceSpeech
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier = 1
         if !selectedVoiceIdentifire.isEmpty {

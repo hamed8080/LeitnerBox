@@ -8,16 +8,6 @@ import SwiftUI
 
 @main
 struct LeitnerBoxApp: App, DropDelegate {
-    @Environment(\.scenePhase) var scenePhase
-
-    @ObservedObject
-    var persistenceController = PersistenceController.shared
-
-    @ObservedObject
-    var leitnerVM = LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext)
-
-    @ObservedObject
-    var statVM = StatisticsViewModel()
 
     @State private var dragOver = false
     @State
@@ -34,21 +24,16 @@ struct LeitnerBoxApp: App, DropDelegate {
                         }
                     }
             } else {
-                LeitnerView()
-                    .onDrop(of: [.fileURL, .data], delegate: self)
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(leitnerVM)
-                    .environmentObject(statVM)
-                    .onChange(of: scenePhase) { newPhase in
-                        if newPhase == .active {
-                            PersistenceController.shared.replaceDBIfExistFromShareExtension()
-                        } else if newPhase == .inactive {
-                            print("Inactive")
-                        } else if newPhase == .background {
-                            print("Background")
-                        }
-                    }
-                    .animation(.easeInOut, value: hideSplash)
+                ZStack {
+                    LeitnerView()
+                        .onDrop(of: [.fileURL, .data], delegate: self)
+                        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                        .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
+                        .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
+                        .animation(.easeInOut, value: hideSplash)
+
+                    UpdateDatabaseInBackground()
+                }
             }
         }
     }
@@ -61,5 +46,22 @@ struct LeitnerBoxApp: App, DropDelegate {
     func performDrop(info: DropInfo) -> Bool {
         PersistenceController.shared.dropDatabase(info)
         return true
+    }
+}
+
+struct UpdateDatabaseInBackground: View {
+    @Environment(\.scenePhase) var scenePhase
+
+    var body: some View{
+        EmptyView()
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    PersistenceController.shared.replaceDBIfExistFromShareExtension()
+                } else if newPhase == .inactive {
+                    print("Inactive")
+                } else if newPhase == .background {
+                    print("Background")
+                }
+            }
     }
 }

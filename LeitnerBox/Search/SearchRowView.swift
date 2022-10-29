@@ -5,13 +5,17 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import CoreData
 
 struct SearchRowView: View {
-    @ObservedObject
+    @StateObject
     var question: Question
 
-    @ObservedObject
-    var vm: SearchViewModel
+    @StateObject
+    var leitner: Leitner
+
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
@@ -20,27 +24,28 @@ struct SearchRowView: View {
     var typeSize
 
     var body: some View {
-        let tagsVM = TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
-        NormalQuestionRow(question: question, tagsViewModel: tagsVM, searchViewModel: vm) {
+        let tagsVM = TagViewModel(viewContext: context, leitner: leitner)
+        NormalQuestionRow(question: question, tagsViewModel: tagsVM) {
             withAnimation {
-                PersistenceController.saveDB(viewContext: vm.viewContext)
+                PersistenceController.saveDB(viewContext: context)
             }
         }
     }
 }
 
 struct SearchRowView_Previews: PreviewProvider {
-    static var tag: Tag {
-        let req = Tag.fetchRequest()
-        req.fetchLimit = 1
-        let tag = (try! PersistenceController.preview.container.viewContext.fetch(req)).first!
-        return tag
+    struct Preview: View {
+        let leitner = LeitnerView_Previews.leitner
+        let question = LeitnerView_Previews.leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
+
+        var body: some View {
+            SearchRowView(question: question ?? Question(context: PersistenceController.previewVC), leitner: leitner)
+                .environmentObject(SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice ))
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
+        }
     }
 
     static var previews: some View {
-        let leitner = LeitnerView_Previews.leitner
-        let question = leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
-        SearchRowView(question: question ?? Question(context: PersistenceController.preview.container.viewContext), vm: SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner))
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        Preview()
     }
 }

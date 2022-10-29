@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct TagRowView: View {
-    @ObservedObject
+    @StateObject
     var tag: Tag
 
-    @ObservedObject
+    @StateObject
     var vm: TagViewModel
 
     var body: some View {
