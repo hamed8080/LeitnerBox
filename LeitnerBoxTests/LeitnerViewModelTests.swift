@@ -11,7 +11,7 @@ final class LeitnerViewModelTests: XCTestCase {
     var vm: LeitnerViewModel!
 
     override func setUp() {
-        vm = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
+        vm = LeitnerViewModel(viewContext: PersistenceController.previewVC)
     }
 
     func test_load_method() {

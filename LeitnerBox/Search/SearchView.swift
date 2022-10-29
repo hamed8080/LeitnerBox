@@ -13,6 +13,9 @@ struct SearchView: View {
 
     @Environment(\.colorScheme) var colorScheme
 
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
     var body: some View {
         ZStack {
             List {
@@ -24,7 +27,7 @@ struct SearchView: View {
             }
             .if(.iOS) { view in
                 view.refreshable {
-                    vm.viewContext.rollback()
+                    context.rollback()
                     vm.reload()
                 }
             }
@@ -32,9 +35,9 @@ struct SearchView: View {
                 if let editQuestion = vm.editQuestion {
                     let level = editQuestion.level ?? vm.leitner.firstLevel
                     AddOrEditQuestionView(
-                        vm: .init(viewContext: vm.viewContext, level: level!, question: editQuestion, isInEditMode: true),
-                        synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: editQuestion),
-                        tagVM: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
+                        vm: .init(viewContext: context, level: level!, question: editQuestion, isInEditMode: true),
+                        synonymsVM: SynonymViewModel(viewContext: context, question: editQuestion),
+                        tagVM: TagViewModel(viewContext: context, leitner: vm.leitner)
                     )
                         .onDisappear {
                             vm.editQuestion = nil
@@ -66,9 +69,9 @@ struct SearchView: View {
                 ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
                     LazyView(
                         AddOrEditQuestionView(
-                            vm: .init(viewContext: vm.viewContext, level: insertQuestion.level!, question: insertQuestion,isInEditMode: false),
-                            synonymsVM: SynonymViewModel(viewContext: vm.viewContext, question: insertQuestion),
-                            tagVM: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)
+                            vm: .init(viewContext: context, level: insertQuestion.level!, question: insertQuestion,isInEditMode: false),
+                            synonymsVM: SynonymViewModel(viewContext: context, question: insertQuestion),
+                            tagVM: TagViewModel(viewContext: context, leitner: vm.leitner)
                         )
                     )
                 }
@@ -147,7 +150,7 @@ struct SearchView: View {
 
     var insertQuestion: Question {
         let firstLevel = vm.leitner.firstLevel
-        let question = Question(context: vm.viewContext)
+        let question = Question(context: context)
         question.level = firstLevel
         return question
     }
@@ -190,12 +193,12 @@ struct SearchView: View {
                             if let question = question {
                                 QuestionTagsView(
                                     question: question,
-                                    viewModel: .init(viewContext: vm.viewContext, leitner: vm.leitner),
+                                    viewModel: .init(viewContext: context, leitner: vm.leitner),
                                     accessControls: [.showTags]
                                 )
                                 .frame(maxHeight: 64)
                                 if question.synonyms?.count ?? 0 > 0 {
-                                    QuestionSynonymsView(viewModel: .init(viewContext: vm.viewContext, question: question), accessControls: [.showSynonyms])
+                                    QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.showSynonyms])
                                         .frame(maxHeight: 64)
                                 }
                             }
@@ -218,7 +221,7 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        var vm = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             SearchView()
                 .environment(\.managedObjectContext, PersistenceController.previewVC)

@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import CoreData
 
 struct QuestionTagsView: View {
     @StateObject
@@ -20,6 +21,9 @@ struct QuestionTagsView: View {
     var accessControls: [AccessControls] = [.showTags, .addTag]
 
     var tagCompletion: (() -> Void)?
+
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -48,7 +52,6 @@ struct QuestionTagsView: View {
                                     tag.tagSwiftUIColor ?? .gray
                                 )
                                 .cornerRadius(6)
-                                .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
                                 .onTapGesture {} // do not remove this line it'll stop scrolling
                                 .onLongPressGesture {
                                     if accessControls.contains(.removeTag) {
@@ -63,10 +66,11 @@ struct QuestionTagsView: View {
                 }
             }
         }
+        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
         .animation(.easeInOut, value: question.tag?.count)
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner {
-                AddTagsView(question: question, viewModel: .init(viewContext: viewModel.viewContext, leitner: leitner)) {
+                AddTagsView(question: question, viewModel: .init(viewContext: context, leitner: leitner)) {
                     tagCompletion?()
                 }
             }

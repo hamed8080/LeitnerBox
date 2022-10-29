@@ -12,8 +12,8 @@ final class SearchViewModelTests: XCTestCase {
     var vm: SearchViewModel!
 
     override func setUp() {
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext).leitners.first!
-        vm = SearchViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: leitner)
+        let leitner = LeitnerViewModel(viewContext: PersistenceController.previewVC).leitners.first!
+        vm = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
     }
 
     func test_delete_items_with_offset() {

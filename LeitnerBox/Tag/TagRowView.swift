@@ -39,7 +39,10 @@ struct TagRowView: View {
 
 struct TagRowView_Previews: PreviewProvider {
     static var previews: some View {
-        TagRowView(tag: Tag(context: PersistenceController.preview.container.viewContext), vm: TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner))
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        TagRowView(
+            tag: Tag(context: PersistenceController.previewVC),
+            vm: TagViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner)
+        )
+        .environment(\.managedObjectContext, PersistenceController.previewVC)
     }
 }

@@ -84,7 +84,7 @@ struct ReviewView: View {
     }
 
     var insertQuestion: Question {
-        let question = Question(context: vm.viewContext)
+        let question = Question(context: context)
         question.level = vm.level.leitner?.firstLevel
         return question
     }
@@ -224,7 +224,6 @@ struct ReviewView: View {
     var tags: some View {
         if let selectedQuestion = vm.selectedQuestion, let leitner = vm.level.leitner {
             QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: context, leitner: leitner), accessControls: [.addTag, .showTags, .removeTag])
-//                .frame(maxWidth: sizeClass == .compact ? .infinity : 350)
         }
     }
 

@@ -25,6 +25,9 @@ struct AddOrEditQuestionView: View {
     @StateObject
     var tagVM: TagViewModel
 
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
     var body: some View {
         GeometryReader { reader in
 
@@ -133,8 +136,8 @@ struct AddOrEditQuestionView: View {
         .contentShape(Rectangle())
         .onDisappear {
             if vm.isInEditMode == false {
-                /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
-                vm.viewContext.rollback()
+                /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: context)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+                context.rollback()
             }
         }
     }
@@ -143,7 +146,7 @@ struct AddOrEditQuestionView: View {
 struct AddQuestionView_Previews: PreviewProvider {
     struct Preview: View {
         static let question = LeitnerView_Previews.leitner.allQuestions.first!
-        static let context = PersistenceController.preview.container.viewContext
+        static let context = PersistenceController.previewVC
         @StateObject
         var vm = QuestionViewModel(
             viewContext: context,

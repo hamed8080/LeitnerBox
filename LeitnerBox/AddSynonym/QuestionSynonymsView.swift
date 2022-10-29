@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import CoreData
 
 struct QuestionSynonymsView: View {
     @StateObject
@@ -17,6 +18,9 @@ struct QuestionSynonymsView: View {
 
     @State
     private var selectedQuestion: Question? = nil
+
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
 
     var body: some View {
         NavigationStack {
@@ -64,9 +68,9 @@ struct QuestionSynonymsView: View {
             let level = selectedQuestion?.level ?? viewModel.leitner.firstLevel
             if let selectedQuestion {
                 AddOrEditQuestionView(
-                    vm: .init(viewContext: viewModel.viewContext, level: level!, question: selectedQuestion, isInEditMode: true),
-                    synonymsVM: SynonymViewModel(viewContext: viewModel.viewContext, question: selectedQuestion),
-                    tagVM: TagViewModel(viewContext: viewModel.viewContext, leitner: level!.leitner!)
+                    vm: .init(viewContext: context, level: level!, question: selectedQuestion, isInEditMode: true),
+                    synonymsVM: SynonymViewModel(viewContext: context, question: selectedQuestion),
+                    tagVM: TagViewModel(viewContext: context, leitner: level!.leitner!)
                 )
             }
         }

@@ -8,17 +8,6 @@ import CoreData
 import SwiftUI
 import AVFoundation
 
-private struct MyEnvironmentKey: EnvironmentKey {
-    static let defaultValue: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice(language: "en-GB")!
-}
-
-extension EnvironmentValues {
-    var avSpeechSynthesisVoice: AVSpeechSynthesisVoice {
-        get { self[MyEnvironmentKey.self] }
-        set { self[MyEnvironmentKey.self] = newValue }
-    }
-}
-
 struct LeitnerView: View {
     @EnvironmentObject
     var vm: LeitnerViewModel
@@ -37,6 +26,9 @@ struct LeitnerView: View {
 
     @State private var progress: CGFloat = 0
 
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
     var body: some View {
         NavigationSplitView {
             leitnerSidebarList
@@ -44,8 +36,8 @@ struct LeitnerView: View {
             NavigationStack {
                 if let leitner = selectedLeitner {
                     LevelsView()
-                    .environmentObject(SearchViewModel(viewContext: vm.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                    .environmentObject(LevelsViewModel(viewContext: vm.viewContext, leitner: leitner))
+                    .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                    .environmentObject(LevelsViewModel(viewContext: context, leitner: leitner))
                 }
             }
         }
@@ -224,13 +216,13 @@ struct LeitnerView_Previews: PreviewProvider {
     static var leitner: Leitner {
         let req = Leitner.fetchRequest()
         req.fetchLimit = 1
-        let leitner = (try! PersistenceController.preview.container.viewContext.fetch(req)).first!
+        let leitner = (try! PersistenceController.previewVC.fetch(req)).first!
         return leitner
     }
 
     struct Preview: View {
         @StateObject
-        var vm = LeitnerViewModel(viewContext: PersistenceController.preview.container.viewContext)
+        var vm = LeitnerViewModel(viewContext: PersistenceController.previewVC)
         var body: some View {
             LeitnerView()
                 .environmentObject(vm)

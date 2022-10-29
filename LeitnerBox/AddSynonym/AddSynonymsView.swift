@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import CoreData
 
 struct AddSynonymsView: View {
     @StateObject
@@ -13,13 +14,16 @@ struct AddSynonymsView: View {
     @Environment(\.dismiss)
     var dismiss
 
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
     var body: some View {
         VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $viewModel.searchText, placeholder: "Search for synonyms...")
 
             List {
                 ForEach(viewModel.filtered) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: viewModel.viewContext, leitner: viewModel.leitner))
+                    NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: context, leitner: viewModel.leitner))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {

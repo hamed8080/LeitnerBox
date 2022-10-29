@@ -6,6 +6,7 @@
 
 import SwiftUI
 import AVFoundation
+import CoreData
 
 struct LevelRow: View {
     @EnvironmentObject
@@ -20,10 +21,13 @@ struct LevelRow: View {
     @Environment(\.avSpeechSynthesisVoice)
     var voiceSpeech: AVSpeechSynthesisVoice
 
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
     var body: some View {
         NavigationLink {
             LazyView(ReviewView())
-                .environmentObject(ReviewViewModel(viewContext: vm.viewContext, level: level, voiceSpeech: voiceSpeech))
+                .environmentObject(ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech))
         } label: {
             HStack {
                 HStack {

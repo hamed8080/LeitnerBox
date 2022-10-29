@@ -12,6 +12,9 @@ struct TagView: View {
     var vm: TagViewModel
 
     @Environment(\.colorScheme) var colorScheme
+    
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
 
     var body: some View {
         ZStack {
@@ -20,7 +23,7 @@ struct TagView: View {
                     NavigationLink {
                         QuestionsInsideTagView(
                             tag: tag,
-                            tagViewModel: TagViewModel(viewContext: vm.viewContext, leitner: vm.leitner)                            
+                            tagViewModel: TagViewModel(viewContext: context, leitner: vm.leitner)
                         )
                     } label: {
                         TagRowView(tag: tag, vm: vm)
@@ -101,7 +104,7 @@ struct TagView: View {
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = TagViewModel(viewContext: PersistenceController.preview.container.viewContext, leitner: LeitnerView_Previews.leitner)
+        var vm = TagViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner)
         var body: some View {
             TagView(vm: vm)
         }
