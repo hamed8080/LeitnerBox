@@ -17,6 +17,9 @@ struct NormalQuestionRow: View {
     @EnvironmentObject
     var searchViewModel: SearchViewModel
 
+    @EnvironmentObject
+    var leitnersVM: LeitnerViewModel
+
     @Environment(\.horizontalSizeClass)
     var sizeClass
 
@@ -218,8 +221,7 @@ struct NormalQuestionRow: View {
 
                         if ac.contains(.move) {
                             Menu("Move") {
-                                let vm = LeitnerViewModel(viewContext: context)
-                                ForEach(vm.leitners) { leitner in
+                                ForEach(leitnersVM.leitners) { leitner in
                                     Button {
                                         withAnimation {
                                             self.searchViewModel.moveQuestionTo(question, leitner: leitner)

@@ -23,13 +23,7 @@ class LevelsViewModel: ObservableObject {
     var levels: [Level] = []
 
     @Published
-    var showDaysAfterDialog = false
-
-    @Published
     var selectedLevel: Level? = nil
-
-    @Published
-    var daysToRecommend = 0
 
     var filtered: [Question] {
         if searchWord.isEmpty || searchWord == "#" {
@@ -52,11 +46,6 @@ class LevelsViewModel: ObservableObject {
         self.viewContext = viewContext
         self.leitner = leitner
         load()
-    }
-
-    func saveDaysToRecommned() {
-        selectedLevel?.daysToRecommend = Int32(daysToRecommend)
-        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func load() {

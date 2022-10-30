@@ -14,6 +14,25 @@ struct TextEditorView: View {
     @FocusState private var isFocused: Bool
     var cornerRadius = 10.0
 
+
+    init(placeholder: String, shortPlaceholder: String, string: Binding<String?>, textEditorHeight: CGFloat, isFocused: Bool = false, cornerRadius: Double = 10.0) {
+        self.placeholder = placeholder
+        self.shortPlaceholder = shortPlaceholder
+        self._string = Binding(get: { string.wrappedValue ?? "" }, set: {newValue in string.wrappedValue = newValue })
+        self.textEditorHeight = textEditorHeight
+        self.isFocused = isFocused
+        self.cornerRadius = cornerRadius
+    }
+
+    init(placeholder: String, shortPlaceholder: String, string: Binding<String>, textEditorHeight: CGFloat, isFocused: Bool = false, cornerRadius: Double = 10.0) {
+        self.placeholder = placeholder
+        self.shortPlaceholder = shortPlaceholder
+        self._string = string
+        self.textEditorHeight = textEditorHeight
+        self.isFocused = isFocused
+        self.cornerRadius = cornerRadius
+    }
+
     var body: some View {
         ZStack(alignment: .leading) {
             Text(string)

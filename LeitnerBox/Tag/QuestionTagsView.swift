@@ -8,8 +8,8 @@ import SwiftUI
 import CoreData
 
 struct QuestionTagsView: View {
-    @StateObject
-    var question: Question
+
+    let question: Question
 
     @State
     private var showAddTags = false
@@ -67,7 +67,7 @@ struct QuestionTagsView: View {
             }
         }
         .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
-        .animation(.easeInOut, value: question.tag?.count)
+        .animation(.easeInOut, value: question.tagsArray?.count)
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner {
                 AddTagsView(question: question, viewModel: .init(viewContext: context, leitner: leitner)) {

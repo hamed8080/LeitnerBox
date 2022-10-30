@@ -10,16 +10,11 @@ import SwiftUI
 class PersistenceController: ObservableObject {
     static var shared = PersistenceController()
 
-    static let previewPS = PersistenceController(inMemory: true)
+    private static let previewPS = PersistenceController(inMemory: true)
 
     static var previewVC: NSManagedObjectContext {
         previewPS.container.viewContext
     }
-
-    static var preview: PersistenceController = {
-        generateAndFillLeitner()
-        return previewPS
-    }()
 
     static func generateAndFillLeitner() {
         let leitners = generateLeitner(5)
@@ -109,6 +104,7 @@ class PersistenceController: ObservableObject {
         UIColorValueTransformer.register()
         container = NSPersistentCloudKitContainer(name: "LeitnerBox")
         if inMemory {
+            PersistenceController.generateAndFillLeitner()
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
         Task {

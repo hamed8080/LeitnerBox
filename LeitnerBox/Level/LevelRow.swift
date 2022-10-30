@@ -9,11 +9,11 @@ import AVFoundation
 import CoreData
 
 struct LevelRow: View {
-    @EnvironmentObject
-    var vm: LevelsViewModel
-
-    @EnvironmentObject
+    @StateObject
     var level: Level
+
+    @State
+    var showDaysAfterDialog: Bool = false
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
@@ -26,8 +26,7 @@ struct LevelRow: View {
 
     var body: some View {
         NavigationLink {
-            LazyView(ReviewView())
-                .environmentObject(ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech))
+            LazyView(ReviewView(vm: ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech)))
         } label: {
             HStack {
                 HStack {
@@ -72,25 +71,53 @@ struct LevelRow: View {
             }
             .contextMenu {
                 Button {
-                    vm.selectedLevel = level
-                    vm.daysToRecommend = Int(level.daysToRecommend)
-                    vm.showDaysAfterDialog.toggle()
+                    showDaysAfterDialog.toggle()
                 } label: {
                     Label("Days to recommend", systemImage: "calendar")
                 }
             }
             .padding([.leading, .top, .bottom], 8)
         }
+        .popover(isPresented: $showDaysAfterDialog,attachmentAnchor: .point(UnitPoint(x: 2000, y: 20)) ) {
+            LevelConfigView(level: level)
+        }
+    }
+}
+
+struct LevelConfigView: View {
+    @StateObject
+    var level: Level
+
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
+    var body: some View {
+        VStack(spacing: 24) {
+            VStackLayout(spacing: 24) {
+                Text(verbatim: "Level \(level.level)")
+                    .foregroundColor(.accentColor)
+                    .font(.title2.bold())
+
+                Stepper(value: $level.daysToRecommend, in: 1 ... 365, step: 1) {
+                    Text(verbatim: "Days to recommend: \(level.daysToRecommend)")
+                }.onChange(of: level.daysToRecommend) { value in
+                    level.daysToRecommend = Int32(value)
+                    PersistenceController.saveDB(viewContext: context)
+                }
+            }
+            .padding()
+            .listStyle(.inset)
+            .cornerRadius(12)
+            Spacer()
+        }
+        .padding()
     }
 }
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow()
-        .environmentObject(LevelsViewModel(
-            viewContext: PersistenceController.previewVC,
-            leitner: LeitnerView_Previews.leitner
-        ))
-        .environmentObject(LeitnerView_Previews.leitner.levels.first!)
+        LevelRow(level: Level(context: PersistenceController.previewVC))
+            .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
+            .environment(\.managedObjectContext, PersistenceController.previewVC)
     }
 }

@@ -19,49 +19,45 @@ class QuestionViewModel: ObservableObject {
     var isManual = true
 
     @Published
-    var isCompleted = false
-
-    @Published
-    var questions: [Question] = []
+    var completed = false
 
     @Published
     var answer: String = ""
 
     @Published
-    var descriptionDetail: String = ""
+    var detailDescription: String = ""
 
     @Published
     var questionString: String = ""
 
     @Published
-    var isFavorite: Bool = false
+    var favorite: Bool = false
 
-    @Published
     var question: Question
 
-    @Published
-    var isInEditMode: Bool = false
-
-    init(viewContext: NSManagedObjectContext, level: Level, question: Question, isInEditMode: Bool) {
+    init(viewContext: NSManagedObjectContext, leitner: Leitner, question: Question? = nil) {
         self.viewContext = viewContext
-        self.level = level
-        self.question = question
-        self.isInEditMode = isInEditMode
-        if isInEditMode {
-            setEditQuestionProperties(editQuestion: question)
+        self.level = question == nil ? leitner.firstLevel! : question!.level!
+        self.question = question ?? Question(context: viewContext)
+        /// Insert
+        if question == nil {
+            self.question.level = level
+        } else {
+            /// Update
+            setEditQuestionProperties(editQuestion: self.question)
         }
     }
 
     func saveEdit() {
         question.question = questionString
         question.answer = answer
-        question.detailDescription = descriptionDetail
-        question.completed = isCompleted
+        question.detailDescription = detailDescription
+        question.completed = completed
 
-        if question.favorite == false, isFavorite {
+        if question.favorite == false, favorite {
             question.favoriteDate = Date()
         }
-        question.favorite = isFavorite
+        question.favorite = favorite
         PersistenceController.saveDB(viewContext: viewContext)
     }
 
@@ -69,9 +65,9 @@ class QuestionViewModel: ObservableObject {
         withAnimation {
             question.question = self.questionString
             question.answer = answer
-            question.detailDescription = self.descriptionDetail
+            question.detailDescription = self.detailDescription
             question.level = level
-            question.completed = isCompleted
+            question.completed = completed
 
             if question.completed {
                 if let lastLevel = level.leitner?.levels.first(where: { $0.level == 13 }) {
@@ -82,7 +78,7 @@ class QuestionViewModel: ObservableObject {
             }
 
             question.createTime = Date()
-            question.favorite = isFavorite
+            question.favorite = favorite
             if question.favorite {
                 question.favoriteDate = Date()
             }
@@ -91,41 +87,27 @@ class QuestionViewModel: ObservableObject {
     }
 
     func save() {
-        if isInEditMode {
+        if question.isInserted == false {
             saveEdit()
         } else {
-            clearUnsavedContextObjetcs()
             insert()
-        }
-    }
-
-    /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: vm.viewContext)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
-    func clearUnsavedContextObjetcs() {
-        viewContext.insertedObjects.forEach { object in
-            if object != question {
-                viewContext.delete(object)
-            }
         }
     }
 
     func clear() {
         answer = ""
         questionString = ""
-        isCompleted = false
+        completed = false
         isManual = true
-        descriptionDetail = ""
-        isInEditMode = false
+        detailDescription = ""
     }
 
-    func setEditQuestionProperties(editQuestion: Question?) {
-        if let editQuestion = editQuestion {
-            isInEditMode = true
-            question = editQuestion
-            questionString = editQuestion.question ?? ""
-            answer = editQuestion.answer ?? ""
-            isCompleted = editQuestion.completed
-            descriptionDetail = editQuestion.detailDescription ?? ""
-            isFavorite = editQuestion.favorite
-        }
+    func setEditQuestionProperties(editQuestion: Question) {
+        question = editQuestion
+        questionString = editQuestion.question ?? ""
+        answer = editQuestion.answer ?? ""
+        completed = editQuestion.completed
+        detailDescription = editQuestion.detailDescription ?? ""
+        favorite = editQuestion.favorite
     }
 }

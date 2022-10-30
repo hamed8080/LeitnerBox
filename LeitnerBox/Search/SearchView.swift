@@ -33,12 +33,7 @@ struct SearchView: View {
             }
             .navigationDestination(isPresented: Binding(get: { vm.editQuestion != nil }, set: { _ in })) {
                 if let editQuestion = vm.editQuestion {
-                    let level = editQuestion.level ?? vm.leitner.firstLevel
-                    AddOrEditQuestionView(
-                        vm: .init(viewContext: context, level: level!, question: editQuestion, isInEditMode: true),
-                        synonymsVM: SynonymViewModel(viewContext: context, question: editQuestion),
-                        tagVM: TagViewModel(viewContext: context, leitner: vm.leitner)
-                    )
+                    AddOrEditQuestionView(vm: .init(viewContext: context, leitner: vm.leitner, question: editQuestion))
                         .onDisappear {
                             vm.editQuestion = nil
                         }
@@ -72,11 +67,7 @@ struct SearchView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
                     LazyView(
-                        AddOrEditQuestionView(
-                            vm: .init(viewContext: context, level: insertQuestion.level!, question: insertQuestion,isInEditMode: false),
-                            synonymsVM: SynonymViewModel(viewContext: context, question: insertQuestion),
-                            tagVM: TagViewModel(viewContext: context, leitner: vm.leitner)
-                        )
+                        AddOrEditQuestionView(vm: .init(viewContext: context, leitner: vm.leitner))
                     )
                 }
 
@@ -150,13 +141,6 @@ struct SearchView: View {
                 .toobarNavgationButtonStyle()
             }
         }
-    }
-
-    var insertQuestion: Question {
-        let firstLevel = vm.leitner.firstLevel
-        let question = Question(context: context)
-        question.level = firstLevel
-        return question
     }
 
     @State

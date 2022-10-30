@@ -12,32 +12,25 @@ struct LeitnerView: View {
     @EnvironmentObject
     var vm: LeitnerViewModel
 
-    @AppStorage("pronounceDetailAnswer")
-    private var pronounceDetailAnswer = false
-
-    @State
-    var navigationVisibility = true
-
-    @State
-    var selectedLeitner: Leitner? = nil
-
-    @State
-    var isAnimating: Bool = false
-
-    @State private var progress: CGFloat = 0
-
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
+    @State
+    var selectedLeitnrId: Leitner.ID?
+
     var body: some View {
         NavigationSplitView {
-            leitnerSidebarList
+            if vm.leitners.count == 0 {
+                EmptyLeitnerAnimation()
+            } else {
+                SidebarListView(selectedLeitnrId: $selectedLeitnrId)
+            }
         } detail: {
             NavigationStack {
-                if let leitner = selectedLeitner {
+                if let leitner = vm.leitners.first(where: {$0.id == selectedLeitnrId}) {
                     LevelsView()
-                    .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                    .environmentObject(LevelsViewModel(viewContext: context, leitner: leitner))
+                        .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                        .environmentObject(LevelsViewModel(viewContext: context, leitner: leitner))
                 }
             }
         }
@@ -56,73 +49,11 @@ struct LeitnerView: View {
         .customDialog(isShowing: $vm.showEditOrAddLeitnerAlert, content: {
             editOrAddLeitnerView
         })
-    }
-
-    var toolbarView: some View {
-        HStack {
-            Button {
-                vm.exportDB()
-            } label: {
-                Label("Export", systemImage: "square.and.arrow.up")
-            }
-
-            Button {
-                vm.clear()
-                vm.showEditOrAddLeitnerAlert.toggle()
-            } label: {
-                Label("Add Item", systemImage: "plus")
-            }
-
-            Menu {
-                Toggle(isOn: $pronounceDetailAnswer) {
-                    Label("Prononce \ndetails answer ", systemImage: "mic")
-                }
-
-                Divider()
-
-                Menu {
-                    ForEach(vm.voices, id: \.self) { voice in
-                        let isSelected = vm.selectedVoiceIdentifire == voice.identifier
-                        Button {
-                            vm.setSelectedVoice(voice)
-                        } label: {
-                            Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
-                        }
-                    }
-                    Divider()
-
-                } label: {
-                    Label("Pronounce Voice", systemImage: "waveform")
-                }
-
-            } label: {
-                Label("More", systemImage: "gear")
+        .onAppear {
+            if selectedLeitnrId == nil {
+                selectedLeitnrId = vm.leitners.first?.id
             }
         }
-    }
-
-    var leitnerSidebarList: some View {
-        List(vm.leitners, selection: $selectedLeitner.animation()) { leitner in
-            NavigationLink(value: leitner) {
-                LeitnerRowView(leitner: leitner, vm: vm)
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .destructive) {
-                            vm.delete(leitner)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
-            }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                toolbarView
-            }
-        }
-        .refreshable {
-            vm.load()
-        }
-        .listStyle(.plain)
     }
 
     var editOrAddLeitnerView: some View {
@@ -176,9 +107,99 @@ struct LeitnerView: View {
             .animation(.easeInOut, value: vm.showEditOrAddLeitnerAlert)
         }
     }
+}
 
-    @ViewBuilder
-    var emptyLeitner: some View {
+struct SidebarListView: View {
+
+    @AppStorage("pronounceDetailAnswer")
+    private var pronounceDetailAnswer = false
+
+
+    @Binding
+    var selectedLeitnrId: Leitner.ID?
+
+    @EnvironmentObject
+    var vm: LeitnerViewModel
+
+    var body: some View {
+        List(vm.leitners, selection: $selectedLeitnrId.animation()) { leitner in
+            LeitnerRowView(leitner: leitner, vm: vm)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        vm.delete(leitner)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                toolbarView
+            }
+        }
+        .refreshable {
+            vm.load()
+        }
+        .listStyle(.plain)
+    }
+
+    var toolbarView: some View {
+        HStack {
+            Button {
+                vm.exportDB()
+            } label: {
+                Label("Export", systemImage: "square.and.arrow.up")
+            }
+
+            Button {
+                vm.clear()
+                vm.showEditOrAddLeitnerAlert.toggle()
+            } label: {
+                Label("Add Item", systemImage: "plus")
+            }
+
+            Menu {
+                Toggle(isOn: $pronounceDetailAnswer) {
+                    Label("Prononce \ndetails answer ", systemImage: "mic")
+                }
+
+                Divider()
+
+                Menu {
+                    ForEach(vm.voices, id: \.self) { voice in
+                        let isSelected = vm.selectedVoiceIdentifire == voice.identifier
+                        Button {
+                            vm.setSelectedVoice(voice)
+                        } label: {
+                            Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
+                        }
+                    }
+                    Divider()
+
+                } label: {
+                    Label("Pronounce Voice", systemImage: "waveform")
+                }
+
+            } label: {
+                Label("More", systemImage: "gear")
+            }
+        }
+    }
+}
+
+/// It has animation so it's better to separate it from the main view.
+struct EmptyLeitnerAnimation: View {
+
+    @EnvironmentObject
+    var vm: LeitnerViewModel
+
+    @State
+    var isAnimating: Bool = false
+
+    @State
+    private var progress: CGFloat = 0
+
+    var body: some View {
         if vm.leitners.count == 0 {
             ZStack {
                 Rectangle()
@@ -191,9 +212,10 @@ struct LeitnerView: View {
                             .scaledToFit()
                             .foregroundStyle(.gray)
                             .frame(width: 64, height: 64)
-                        Text("Leitner is empty.")
+                        Text("Leitner is empty.\nTap to add new Leitner.")
                             .foregroundColor(.gray)
                             .font(.system(.subheadline, design: .rounded))
+                            .multilineTextAlignment(.center)
                     }
                 }
                 .frame(width: 256, height: 256)
@@ -208,6 +230,9 @@ struct LeitnerView: View {
                     progress = 1
                 }
             }
+            .onTapGesture {
+                vm.showEditOrAddLeitnerAlert.toggle()
+            }
         }
     }
 }
@@ -221,17 +246,26 @@ struct LeitnerView_Previews: PreviewProvider {
     }
 
     struct Preview: View {
-        @StateObject
-        var vm = LeitnerViewModel(viewContext: PersistenceController.previewVC)
         var body: some View {
             LeitnerView()
+                .environmentObject(LeitnerViewModel(viewContext: PersistenceController.previewVC))
+        }
+    }
+
+    struct EmptyLeitnerAnimationViewPreview: View {
+        @StateObject
+        var vm = LeitnerViewModel(viewContext: PersistenceController.previewVC)
+
+        var body: some View {
+            EmptyLeitnerAnimation()
                 .environmentObject(vm)
         }
     }
 
     static var previews: some View {
-        NavigationStack {
-            Preview()
-        }
+//        NavigationStack {
+//            Preview()
+            EmptyLeitnerAnimationViewPreview()
+//        }
     }
 }

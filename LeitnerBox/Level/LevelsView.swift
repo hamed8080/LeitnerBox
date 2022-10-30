@@ -29,8 +29,7 @@ struct LevelsView: View {
                 } else {
                     header
                     ForEach(vm.levels) { level in
-                        LevelRow()
-                            .environmentObject(level)
+                        LevelRow(level: level)
                     }
                 }
             }
@@ -44,12 +43,7 @@ struct LevelsView: View {
             }
             .navigationDestination(isPresented: Binding(get: { searchViewModel.editQuestion != nil }, set: { _ in })) {
                 if let editQuestion = searchViewModel.editQuestion {
-                    let level = editQuestion.level ?? searchViewModel.leitner.firstLevel
-                    AddOrEditQuestionView(
-                        vm: .init(viewContext: context, level: level!, question: editQuestion, isInEditMode: true),
-                        synonymsVM: SynonymViewModel(viewContext: context, question: editQuestion),
-                        tagVM: TagViewModel(viewContext: context, leitner: level!.leitner!)
-                    )
+                    AddOrEditQuestionView(vm: .init(viewContext: context, leitner: searchViewModel.leitner, question: editQuestion))
                         .onDisappear {
                             searchViewModel.editQuestion = nil
                         }
@@ -62,9 +56,6 @@ struct LevelsView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 toolbars
             }
-        }
-        .customDialog(isShowing: $vm.showDaysAfterDialog) {
-            daysToRecommendDialogView
         }
     }
 
@@ -93,21 +84,11 @@ struct LevelsView: View {
         .listRowSeparator(.hidden)
     }
 
-    var insertQuestion: Question {
-        let question = Question(context: context)
-        question.level = vm.leitner.firstLevel
-        return question
-    }
-
     @ViewBuilder
     var toolbars: some View {
         ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
             LazyView(
-                AddOrEditQuestionView(
-                    vm: .init(viewContext: context, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false),
-                    synonymsVM: SynonymViewModel(viewContext: context, question: insertQuestion),
-                    tagVM: TagViewModel(viewContext: context, leitner: vm.leitner)
-                )
+                AddOrEditQuestionView(vm: .init(viewContext: context, leitner: vm.leitner))
             )
         }
         .keyboardShortcut("a", modifiers: [.command, .option])
@@ -150,34 +131,6 @@ struct LevelsView: View {
             }
         }
     }
-
-    var daysToRecommendDialogView: some View {
-        VStack(spacing: 24) {
-            Text(verbatim: "Level \(vm.selectedLevel?.level ?? 0)")
-                .foregroundColor(.accentColor)
-                .font(.title2.bold())
-
-            Stepper(value: $vm.daysToRecommend, in: 1 ... 365, step: 1) {
-                Text(verbatim: "Days to recommend: \(vm.daysToRecommend)")
-            }.onChange(of: vm.daysToRecommend) { _ in
-                vm.saveDaysToRecommned()
-            }
-
-            Button {
-                vm.showDaysAfterDialog.toggle()
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Close")
-                        .foregroundColor(.accentColor)
-                    Spacer()
-                }
-            }
-            .controlSize(.large)
-            .buttonStyle(.bordered)
-            .frame(maxWidth: .infinity)
-        }
-    }
 }
 
 public struct LazyView<Content: View>: View {
@@ -201,9 +154,10 @@ struct LevelsView_Previews: PreviewProvider {
 
         var body: some View {
             LevelsView()
+                .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
+                .environment(\.managedObjectContext, PersistenceController.previewVC)
                 .environmentObject(vm)
                 .environmentObject(searchViewModel)
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
         }
     }
 

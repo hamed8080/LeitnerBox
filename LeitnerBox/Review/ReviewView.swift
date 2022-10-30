@@ -9,11 +9,8 @@ import SwiftUI
 import AVFoundation
 
 struct ReviewView: View {
-    @EnvironmentObject
+    @StateObject
     var vm: ReviewViewModel
-
-    @State
-    private var isAnimationShowAnswer = false
 
     @Environment(\.horizontalSizeClass)
     var sizeClass
@@ -32,22 +29,24 @@ struct ReviewView: View {
                 VStack {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 48) {
-                            if sizeClass == .regular {
-                                ipadHeader
+                            ReviewHeader(vm: vm)
+                            ReviewQuestion(vm: vm)
+                            if let question = vm.selectedQuestion {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    QuestionTagsView(question: question, viewModel: .init(viewContext: context, leitner: vm.level.leitner!), accessControls: [.addTag, .showTags, .removeTag])
+                                    QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
+                                }
+                            }
+                            ReviewControls(vm: vm)
+                            if vm.isShowingAnswer {
+                                ReviewAnswer(vm: vm)
                             } else {
-                                headers
+                                TapToAnswerView(vm: vm)
                             }
-                            questionView
-                            VStack(alignment: .leading, spacing: 4) {
-                                tags
-                                synonyms
-                            }
-                            controls
-                            answersAndDetails
                         }
                     }
                     Spacer()
-                    reviewControls
+                    PassOrFailButtons(vm: vm)
                 }
             }
             .animation(.easeInOut, value: vm.isShowingAnswer)
@@ -56,13 +55,7 @@ struct ReviewView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
-                        LazyView(
-                            AddOrEditQuestionView(
-                                vm: .init(viewContext: context, level: insertQuestion.level!, question: insertQuestion, isInEditMode: false),
-                                synonymsVM: SynonymViewModel(viewContext: context, question: insertQuestion),
-                                tagVM: TagViewModel(viewContext: context, leitner: vm.level.leitner!)
-                            )
-                        )
+                        LazyView(AddOrEditQuestionView(vm: .init(viewContext: context, leitner: vm.level.leitner!)))
                     }
                     .keyboardShortcut("a", modifiers: [.command, .option])
 
@@ -76,7 +69,7 @@ struct ReviewView: View {
                 }
             }
             .customDialog(isShowing: $vm.showDelete, content: {
-                deleteDialog
+                DeleteDialog(vm: vm)
             })
             .onDisappear {
                 vm.stopPronounce()
@@ -86,45 +79,73 @@ struct ReviewView: View {
             NotAnyToReviewView()
         }
     }
+}
 
-    var insertQuestion: Question {
-        let question = Question(context: context)
-        question.level = vm.level.leitner?.firstLevel
-        return question
-    }
+struct ReviewQuestion: View {
+    @StateObject
+    var vm: ReviewViewModel
 
-    var deleteDialog: some View {
-        VStack {
-            Text(attributedText(text: "Are you sure you want to delete \(vm.selectedQuestion?.question ?? "") question?", textRange: vm.selectedQuestion?.question ?? ""))
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
 
-            Button {
-                vm.showDelete.toggle()
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Cancel")
+    var body: some View {
+        HStack {
+            Spacer()
+            VStack(spacing: 16) {
+                Text(vm.selectedQuestion?.question ?? "")
+                    .multilineTextAlignment(.center)
+                    .font(sizeClass == .compact ? .title2.weight(.semibold) : .largeTitle.weight(.bold))
+
+                Text(vm.selectedQuestion?.detailDescription ?? "")
+                    .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color("subtitleTextColor"))
+                    .transition(.scale)
+                if let ps = vm.partOfspeech {
+                    Text(ps)
+                        .font(.title3.weight(.semibold))
                         .foregroundColor(.accentColor)
-                    Spacer()
                 }
             }
-            .controlSize(.large)
-            .buttonStyle(.bordered)
-            .frame(maxWidth: .infinity)
+            Spacer()
+        }
+    }
+}
 
-            Button {
-                vm.deleteQuestion()
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Delete")
-                        .foregroundColor(.red)
-                    Spacer()
-                }
-            }
-            .keyboardShortcut("d", modifiers: [.command])
-            .controlSize(.large)
-            .buttonStyle(.bordered)
-            .frame(maxWidth: .infinity)
+struct ReviewAnswer: View {
+    @StateObject
+    var vm: ReviewViewModel
+
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(vm.selectedQuestion?.answer ?? "")
+                .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .onTapGesture {
+            vm.toggleAnswer()
+        }
+        .transition(.scale)
+    }
+}
+
+struct ReviewHeader: View {
+    @StateObject
+    var vm: ReviewViewModel
+
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+
+    var body: some View {
+        if sizeClass == .regular {
+            ipadHeader
+        } else {
+            headers
         }
     }
 
@@ -160,8 +181,16 @@ struct ReviewView: View {
         .frame(height: 128)
         .padding([.leading, .trailing], 64)
     }
+}
 
-    var reviewControls: some View {
+struct PassOrFailButtons: View {
+    @StateObject
+    var vm: ReviewViewModel
+
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
+
+    var body: some View{
         HStack(spacing: sizeClass == .regular ? 48 : 8) {
             Button {
                 withAnimation {
@@ -199,46 +228,66 @@ struct ReviewView: View {
         }
         .padding([.leading, .trailing])
     }
+}
 
-    var questionView: some View {
-        HStack {
-            Spacer()
-            VStack(spacing: 16) {
-                Text(vm.selectedQuestion?.question ?? "")
-                    .multilineTextAlignment(.center)
-                    .font(sizeClass == .compact ? .title2.weight(.semibold) : .largeTitle.weight(.bold))
+struct DeleteDialog: View {
+    @StateObject
+    var vm: ReviewViewModel
 
-                Text(vm.selectedQuestion?.detailDescription ?? "")
-                    .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Color("subtitleTextColor"))
-                    .transition(.scale)
-                if let ps = vm.partOfspeech {
-                    Text(ps)
-                        .font(.title3.weight(.semibold))
+    var body: some View{
+        VStack {
+            Text(attributedText(text: "Are you sure you want to delete \(vm.selectedQuestion?.question ?? "") question?", textRange: vm.selectedQuestion?.question ?? ""))
+
+            Button {
+                vm.showDelete.toggle()
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("Cancel")
                         .foregroundColor(.accentColor)
+                    Spacer()
                 }
             }
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
 
-            Spacer()
+            Button {
+                vm.deleteQuestion()
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("Delete")
+                        .foregroundColor(.red)
+                    Spacer()
+                }
+            }
+            .keyboardShortcut("d", modifiers: [.command])
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
         }
     }
 
-    @ViewBuilder
-    var tags: some View {
-        if let selectedQuestion = vm.selectedQuestion, let leitner = vm.level.leitner {
-            QuestionTagsView(question: selectedQuestion, viewModel: .init(viewContext: context, leitner: leitner), accessControls: [.addTag, .showTags, .removeTag])
+    func attributedText(text: String, textRange: String) -> AttributedString {
+        var text = AttributedString(text)
+        if let range = text.range(of: textRange) {
+            text[range].foregroundColor = .purple
+            text[range].font = .title2.bold()
         }
+        return text
     }
+}
 
-    @ViewBuilder
-    var synonyms: some View {
-        if let question = vm.selectedQuestion {
-            QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
-        }
-    }
+/// Animation causes multiple resest in review, it's better stay separate from other views.
+struct TapToAnswerView: View {
+    @StateObject
+    var vm: ReviewViewModel
 
-    var tapToAnswerView: some View {
+    @State
+    private var isAnimationShowAnswer = false
+
+    var body: some View {
         Text("Tap to show answer")
             .foregroundColor(.accentColor)
             .colorMultiply(isAnimationShowAnswer ? .accentColor : .accentColor.opacity(0.5))
@@ -256,32 +305,19 @@ struct ReviewView: View {
                 vm.toggleAnswer()
             }
     }
+}
 
-    @ViewBuilder
-    var answerView: some View {
-        HStack {
-            Spacer()
-            Text(vm.selectedQuestion?.answer ?? "")
-                .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
-                .multilineTextAlignment(.center)
-            Spacer()
-        }
-        .onTapGesture {
-            vm.toggleAnswer()
-        }
-        .transition(.scale)
-    }
+struct ReviewControls: View {
+    @StateObject
+    var vm: ReviewViewModel
 
-    @ViewBuilder
-    var answersAndDetails: some View {
-        if vm.isShowingAnswer {
-            answerView
-        } else {
-            tapToAnswerView
-        }
-    }
+    @Environment(\.horizontalSizeClass)
+    var sizeClass
 
-    var controls: some View {
+    @Environment(\.managedObjectContext)
+    var context: NSManagedObjectContext
+
+    var body: some View {
         HStack(spacing: sizeClass == .compact ? 26 : 48) {
             Spacer()
 
@@ -297,11 +333,7 @@ struct ReviewView: View {
 
             if let question = vm.selectedQuestion {
                 NavigationLink {
-                    AddOrEditQuestionView(
-                        vm: .init(viewContext: context, level: vm.level, question: question, isInEditMode: true),
-                        synonymsVM: SynonymViewModel(viewContext: context, question: question),
-                        tagVM: TagViewModel(viewContext: context, leitner: vm.level.leitner!)
-                    )
+                    AddOrEditQuestionView(vm: .init(viewContext: context, leitner: vm.level.leitner!, question: question))
                 } label: {
                     IconButtonKeyboardShortcut(title: "Edit", systemImageName: "pencil")
                 }
@@ -338,15 +370,6 @@ struct ReviewView: View {
             .keyboardShortcut("c", modifiers: [.command])
             Spacer()
         }
-    }
-
-    func attributedText(text: String, textRange: String) -> AttributedString {
-        var text = AttributedString(text)
-        if let range = text.range(of: textRange) {
-            text[range].foregroundColor = .purple
-            text[range].font = .title2.bold()
-        }
-        return text
     }
 }
 
@@ -388,10 +411,9 @@ struct ReviewView_Previews: PreviewProvider {
         @StateObject
         var vm = ReviewViewModel(viewContext: PersistenceController.previewVC, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
-            ReviewView()
+            ReviewView(vm: vm)
                 .environment(\.managedObjectContext, PersistenceController.previewVC)
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
-                .environmentObject(vm)
         }
     }
 
