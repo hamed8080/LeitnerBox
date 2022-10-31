@@ -34,6 +34,7 @@ struct LeitnerView: View {
                 }
             }
         }
+        .animation(.easeInOut, value: selectedLeitnrId)
         .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: vm.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
         .sheet(isPresented: $vm.showBackupFileShareSheet, onDismiss: {
             if .iOS == true {
@@ -241,20 +242,20 @@ struct LeitnerView_Previews: PreviewProvider {
     static var leitner: Leitner {
         let req = Leitner.fetchRequest()
         req.fetchLimit = 1
-        let leitner = (try! PersistenceController.previewVC.fetch(req)).first!
+        let leitner = (try! PersistenceController.shared.viewContext.fetch(req)).first!
         return leitner
     }
 
     struct Preview: View {
         var body: some View {
             LeitnerView()
-                .environmentObject(LeitnerViewModel(viewContext: PersistenceController.previewVC))
+                .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))
         }
     }
 
     struct EmptyLeitnerAnimationViewPreview: View {
         @StateObject
-        var vm = LeitnerViewModel(viewContext: PersistenceController.previewVC)
+        var vm = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
 
         var body: some View {
             EmptyLeitnerAnimation()
@@ -263,9 +264,18 @@ struct LeitnerView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
+        NavigationStack {
+            Preview()
+        }
+        .previewDisplayName("LeitnerView")
+
 //        NavigationStack {
-//            Preview()
-            EmptyLeitnerAnimationViewPreview()
+//            EmptyLeitnerAnimationViewPreview()
+//        }
+//        .previewDisplayName("EmptyLeitnerAnimationViewPreview")
+
+//        NavigationStack{
+//            Text("\(LeitnerView_Previews.leitner.name!)")
 //        }
     }
 }

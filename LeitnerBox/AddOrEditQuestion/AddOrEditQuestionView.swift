@@ -126,9 +126,9 @@ struct AddOrEditQuestionView: View {
         .contentShape(Rectangle())
         .onDisappear {
             /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: context)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
-            if vm.question.isInserted {
-                context.rollback()
-            }
+            /// It's essential to set tag to nil on question, because tag will be deleted completely.
+            vm.question.tag = nil
+            context.rollback()
         }
     }
 }
@@ -136,7 +136,7 @@ struct AddOrEditQuestionView: View {
 struct AddQuestionView_Previews: PreviewProvider {
     struct Preview: View {
         static let question = LeitnerView_Previews.leitner.allQuestions.first!
-        static let context = PersistenceController.previewVC
+        static let context = PersistenceController.shared.viewContext
         @StateObject
         var vm = QuestionViewModel(
             viewContext: context,

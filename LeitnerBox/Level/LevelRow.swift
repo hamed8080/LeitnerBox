@@ -24,6 +24,9 @@ struct LevelRow: View {
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
+    @State
+    var progress: Int = 0
+
     var body: some View {
         NavigationLink {
             LazyView(ReviewView(vm: ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech)))
@@ -62,10 +65,16 @@ struct LevelRow: View {
                     .font(.footnote)
 
                     ProgressView(
-                        value: Float(level.reviewableCountInsideLevel),
+                        value: Float(progress),
                         total: Float(level.notCompletdCount)
                     )
                     .progressViewStyle(.linear)
+                    .animation(.easeInOut, value: progress)
+                    .onAppear {
+                        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                            progress = level.reviewableCountInsideLevel
+                        }
+                    }
                 }
                 .frame(maxWidth: sizeClass == .regular ? 192 : 128)
             }
@@ -92,32 +101,32 @@ struct LevelConfigView: View {
     var context: NSManagedObjectContext
 
     var body: some View {
-        VStack(spacing: 24) {
-            VStackLayout(spacing: 24) {
-                Text(verbatim: "Level \(level.level)")
-                    .foregroundColor(.accentColor)
-                    .font(.title2.bold())
+        Form {
+            VStack(spacing: 24) {
+                VStackLayout(spacing: 24) {
+                    Text(verbatim: "Level \(level.level)")
+                        .font(.title2.bold())
 
-                Stepper(value: $level.daysToRecommend, in: 1 ... 365, step: 1) {
-                    Text(verbatim: "Days to recommend: \(level.daysToRecommend)")
-                }.onChange(of: level.daysToRecommend) { value in
-                    level.daysToRecommend = Int32(value)
-                    PersistenceController.saveDB(viewContext: context)
+                    Stepper(value: $level.daysToRecommend, in: 1 ... 365, step: 1) {
+                        Text(verbatim: "Days to recommend: \(level.daysToRecommend)")
+                    }.onChange(of: level.daysToRecommend) { value in
+                        level.daysToRecommend = Int32(value)
+                        PersistenceController.saveDB(viewContext: context)
+                    }
+
                 }
+                .padding()
+                .cornerRadius(12)
+                Spacer()
             }
-            .padding()
-            .listStyle(.inset)
-            .cornerRadius(12)
-            Spacer()
         }
-        .padding()
     }
 }
 
 struct LevelRow_Previews: PreviewProvider {
     static var previews: some View {
-        LevelRow(level: Level(context: PersistenceController.previewVC))
+        LevelRow(level: LeitnerView_Previews.leitner.firstLevel!)
             .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
-            .environment(\.managedObjectContext, PersistenceController.previewVC)
+            .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
     }
 }

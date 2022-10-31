@@ -33,7 +33,11 @@ struct ReviewView: View {
                             ReviewQuestion(vm: vm)
                             if let question = vm.selectedQuestion {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    QuestionTagsView(question: question, viewModel: .init(viewContext: context, leitner: vm.level.leitner!), accessControls: [.addTag, .showTags, .removeTag])
+                                    QuestionTagsView(question: question, viewModel: .init(viewContext: context, leitner: vm.level.leitner!), accessControls: [.addTag, .showTags, .removeTag]){
+                                        withAnimation {
+                                            PersistenceController.saveDB(viewContext: context)
+                                        }
+                                    }
                                     QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
                                 }
                             }
@@ -409,10 +413,10 @@ struct ReviewView_Previews: PreviewProvider {
     struct Preview: View {
         static let level = (LeitnerView_Previews.leitner.levels).filter { $0.level == 1 }.first
         @StateObject
-        var vm = ReviewViewModel(viewContext: PersistenceController.previewVC, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        var vm = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             ReviewView(vm: vm)
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
         }
     }

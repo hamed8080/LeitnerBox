@@ -13,7 +13,7 @@ final class QuestionViewModelTests: XCTestCase {
 
     override func setUp() {
         PersistenceController.generateAndFillLeitner()
-        let viewContext = PersistenceController.previewVC
+        let viewContext = PersistenceController.shared.viewContext
         let leitner = LeitnerViewModel(viewContext: viewContext).leitners.first!
         let level = LevelsViewModel(viewContext: viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
         vm = QuestionViewModel(viewContext: viewContext, level: level, question: Question(context: viewContext), isInEditMode: false)

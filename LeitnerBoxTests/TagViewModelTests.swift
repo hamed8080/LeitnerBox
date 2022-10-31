@@ -12,8 +12,8 @@ final class TagViewModelTests: XCTestCase {
     var vm: TagViewModel!
 
     override func setUp() {
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.previewVC).leitners.first!
-        vm = TagViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
+        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
+        vm = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
     }
 
     func test_delete_tag() {

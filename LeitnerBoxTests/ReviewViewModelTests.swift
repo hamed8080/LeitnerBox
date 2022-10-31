@@ -13,9 +13,9 @@ final class ReviewViewModelTests: XCTestCase {
 
     override func setUp() {
         PersistenceController.generateAndFillLeitner()
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.previewVC).leitners.first!
-        let level = LevelsViewModel(viewContext: PersistenceController.previewVC, leitner: leitner).levels.first(where: { $0.level == 1 })!
-        vm = ReviewViewModel(viewContext: PersistenceController.previewVC, level: level)
+        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
+        let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
+        vm = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level)
     }
 
     func test_delete_question() {

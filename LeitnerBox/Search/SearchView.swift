@@ -168,14 +168,18 @@ struct SearchView: View {
                                 .foregroundColor(.primary)
                                 .font(.title.weight(.bold))
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            Text(verbatim: question?.answer ?? "")
-                                .foregroundColor(.primary)
-                                .font(.body.weight(.medium))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            Text(verbatim: question?.detailDescription ?? "")
-                                .foregroundColor(.primary)
-                                .font(.body.weight(.medium))
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            if let answer = question?.answer, !answer.isEmpty {
+                                Text(verbatim: answer)
+                                    .foregroundColor(.primary)
+                                    .font(.body.weight(.medium))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            if let description = question?.detailDescription, !description.isEmpty {
+                                Text(verbatim: description)
+                                    .foregroundColor(.primary)
+                                    .font(.body.weight(.medium))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                             Text(verbatim: "\(vm.reviewdCount) / \(vm.leitner.allQuestions.count)")
                                 .font(.footnote.bold())
                             if let question = question {
@@ -209,10 +213,10 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        var vm = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             SearchView()
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
                 .environmentObject(vm)
         }

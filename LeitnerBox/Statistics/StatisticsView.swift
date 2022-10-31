@@ -60,13 +60,14 @@ struct StatisticsView: View {
                 }
             }
         }
+        .navigationTitle("Statistics")
     }
 }
 
 struct StatisticsView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = StatisticsViewModel(viewContext: PersistenceController.previewVC)
+        var vm = StatisticsViewModel(viewContext: PersistenceController.shared.viewContext)
         var body: some View {
             StatisticsView()
                 .environmentObject(vm)

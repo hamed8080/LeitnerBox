@@ -44,6 +44,6 @@ struct LeitnerRowView: View {
 
 struct LeitnerRowView_Previews: PreviewProvider {
     static var previews: some View {
-        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.previewVC))
+        LeitnerRowView(leitner: LeitnerView_Previews.leitner, vm: LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))
     }
 }

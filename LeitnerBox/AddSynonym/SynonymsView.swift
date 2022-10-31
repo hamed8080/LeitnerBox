@@ -51,8 +51,8 @@ struct SynonymsView: View {
 struct SynonymsView_Previews: PreviewProvider {
     struct Preview: View {
         var body: some View {
-            SynonymsView(viewModel: .init(viewContext: PersistenceController.previewVC, question: LeitnerView_Previews.leitner.allQuestions.first!))
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+            SynonymsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!))
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 

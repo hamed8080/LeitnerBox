@@ -42,15 +42,15 @@ struct AddSynonymsView_Previews: PreviewProvider {
 
     struct Preview: View {
         @StateObject
-        var vm = SynonymViewModel(viewContext: PersistenceController.previewVC, question: LeitnerView_Previews.leitner.allQuestions.first!)
+        var vm = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!)
 
         var body: some View {
             AddSynonymsView(viewModel: vm)
                 .onAppear {
                     vm.searchText = "t"
                 }
-                .environmentObject(SearchViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .preferredColorScheme(.dark)
         }
     }

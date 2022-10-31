@@ -45,7 +45,7 @@ struct AddTagsView_Previews: PreviewProvider {
     static var previews: some View {
         let leitner = LeitnerView_Previews.leitner
         let question = leitner.allQuestions.first!
-        AddTagsView(question: question, viewModel: .init(viewContext: PersistenceController.previewVC, leitner: leitner))
+        AddTagsView(question: question, viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
             .preferredColorScheme(.dark)
     }
 }

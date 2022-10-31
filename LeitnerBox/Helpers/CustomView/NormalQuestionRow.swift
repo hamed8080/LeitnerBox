@@ -251,12 +251,12 @@ struct NormalQuestionRow_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = LeitnerView_Previews.leitner
         let question = leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
-        let tagVM = TagViewModel(viewContext: PersistenceController.previewVC, leitner: leitner)
-        let searchVM = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        let tagVM = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
+        let searchVM = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             NormalQuestionRow(question: question!, tagsViewModel: tagVM)
                 .environmentObject(searchVM)
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 

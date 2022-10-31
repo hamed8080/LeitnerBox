@@ -104,7 +104,7 @@ struct TagView: View {
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = TagViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner)
+        var vm = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
         var body: some View {
             TagView(vm: vm)
         }

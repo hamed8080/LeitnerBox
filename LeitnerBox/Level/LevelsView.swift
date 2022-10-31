@@ -147,15 +147,15 @@ public struct LazyView<Content: View>: View {
 struct LevelsView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = LevelsViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner)
+        var vm = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
 
         @StateObject
-        var searchViewModel = SearchViewModel(viewContext: PersistenceController.previewVC, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
         var body: some View {
             LevelsView()
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environmentObject(vm)
                 .environmentObject(searchViewModel)
         }

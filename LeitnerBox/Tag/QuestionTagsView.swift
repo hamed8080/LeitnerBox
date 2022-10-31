@@ -9,7 +9,8 @@ import CoreData
 
 struct QuestionTagsView: View {
 
-    let question: Question
+    @StateObject
+    var question: Question
 
     @State
     private var showAddTags = false
@@ -82,6 +83,6 @@ struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
         let leitner = LeitnerView_Previews.leitner
         let question = leitner.allQuestions.first!
-        QuestionTagsView(question: question, viewModel: .init(viewContext: PersistenceController.previewVC, leitner: leitner))
+        QuestionTagsView(question: question, viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
     }
 }

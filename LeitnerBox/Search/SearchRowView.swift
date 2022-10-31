@@ -39,9 +39,9 @@ struct SearchRowView_Previews: PreviewProvider {
         let question = LeitnerView_Previews.leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
 
         var body: some View {
-            SearchRowView(question: question ?? Question(context: PersistenceController.previewVC), leitner: leitner)
-                .environmentObject(SearchViewModel(viewContext: PersistenceController.previewVC, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice ))
-                .environment(\.managedObjectContext, PersistenceController.previewVC)
+            SearchRowView(question: question ?? Question(context: PersistenceController.shared.viewContext), leitner: leitner)
+                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice ))
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 

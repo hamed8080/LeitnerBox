@@ -31,7 +31,7 @@ struct QuestionsInsideTagView: View {
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = LeitnerView_Previews.leitner
-        static let context = PersistenceController.previewVC
+        static let context = PersistenceController.shared.viewContext
 
         @StateObject
         var vm = TagViewModel(viewContext: context, leitner: leitner)

@@ -76,7 +76,6 @@ class TagViewModel: ObservableObject {
                 tag.addToQuestion(question)
             }
         }
-        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func editOrAddTag() {
