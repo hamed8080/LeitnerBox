@@ -24,12 +24,7 @@ struct SearchRowView: View {
     var typeSize
 
     var body: some View {
-        let tagsVM = TagViewModel(viewContext: context, leitner: leitner)
-        NormalQuestionRow(question: question, tagsViewModel: tagsVM) {
-            withAnimation {
-                PersistenceController.saveDB(viewContext: context)
-            }
-        }
+        NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: context, leitner: leitner))
     }
 }
 

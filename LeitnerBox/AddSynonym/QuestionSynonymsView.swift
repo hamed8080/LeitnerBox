@@ -8,7 +8,7 @@ import SwiftUI
 import CoreData
 
 struct QuestionSynonymsView: View {
-    @StateObject
+    @EnvironmentObject
     var viewModel: SynonymViewModel
 
     var accessControls: [AccessControls] = [.showSynonyms, .addSynonym]
@@ -53,6 +53,7 @@ struct QuestionSynonymsView: View {
                                     .onLongPressGesture {
                                         if accessControls.contains(.removeSynonym) {
                                             viewModel.deleteFromSynonym(question)
+                                            saveDirectlyIfHasAccess()
                                         }
                                     }
                                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
@@ -70,7 +71,17 @@ struct QuestionSynonymsView: View {
             }
         }
         .sheet(isPresented: $showAddSynonyms, onDismiss: nil, content: {
-            AddSynonymsView(viewModel: viewModel)
+            AddSynonymsView(viewModel: viewModel) {
+               saveDirectlyIfHasAccess()
+            }
         })
+    }
+
+    func saveDirectlyIfHasAccess() {
+        if accessControls.contains(.saveDirectly) {
+            withAnimation {
+                PersistenceController.saveDB(viewContext: context)
+            }
+        }
     }
 }

@@ -27,10 +27,11 @@ enum AccessControls: CaseIterable, Comparable {
     case move
     case more
     case trailingControls
+    case saveDirectly
 }
 
 extension AccessControls {
-    static let full: [AccessControls] = AccessControls.allCases
+    static let full: [AccessControls] = AccessControls.allCases.filter{$0 != .saveDirectly}
     static let normal: [AccessControls] = [.question, .detail, .answer, .level, .showTags, .showSynonyms]
     static let normalWithoutTagsAndSynonyms: [AccessControls] = [.question, .detail, .answer, .level]
 }

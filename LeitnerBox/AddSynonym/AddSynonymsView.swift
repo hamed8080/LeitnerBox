@@ -17,6 +17,8 @@ struct AddSynonymsView: View {
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
+    var completion: (() -> Void)? = nil
+
     var body: some View {
         VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $viewModel.searchText, placeholder: "Search for synonyms...")
@@ -28,6 +30,7 @@ struct AddSynonymsView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             viewModel.addAsSynonym(question)
+                            completion?()
                             dismiss()
                         }
                 }

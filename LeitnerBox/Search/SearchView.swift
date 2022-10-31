@@ -184,13 +184,14 @@ struct SearchView: View {
                                 .font(.footnote.bold())
                             if let question = question {
                                 QuestionTagsView(
-                                    question: question,
                                     viewModel: .init(viewContext: context, leitner: vm.leitner),
                                     accessControls: [.showTags]
                                 )
+                                .environmentObject(question)
                                 .frame(maxHeight: 64)
                                 if question.synonyms?.count ?? 0 > 0 {
-                                    QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.showSynonyms])
+                                    QuestionSynonymsView(accessControls: [.showSynonyms])
+                                        .environmentObject(SynonymViewModel(viewContext: context, question: question))
                                         .frame(maxHeight: 64)
                                 }
                             }

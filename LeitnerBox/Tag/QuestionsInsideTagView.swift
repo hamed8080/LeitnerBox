@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 9/2/22.
 
 import SwiftUI
+import AVFoundation
 
 struct QuestionsInsideTagView: View {
     var tag: Tag
@@ -12,11 +13,15 @@ struct QuestionsInsideTagView: View {
     @StateObject
     var tagViewModel: TagViewModel
 
+    @Environment(\.avSpeechSynthesisVoice)
+    var voiceSpeech: AVSpeechSynthesisVoice
+
     var body: some View {
         ZStack {
             List {
                 ForEach(tag.questions) { question in
                     NormalQuestionRow(question: question, tagsViewModel: tagViewModel, ac: AccessControls.normal + [.trailingControls, .microphone])
+                        .environmentObject(SearchViewModel(viewContext: tagViewModel.viewContext, leitner: tagViewModel.leitner, voiceSpeech: voiceSpeech))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                 }

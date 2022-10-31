@@ -26,12 +26,14 @@ struct NormalQuestionRow: View {
     @Environment(\.dynamicTypeSize)
     var typeSize
 
-    var tagCompletion: (() -> Void)? = nil
-
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
-    var ac: [AccessControls] = AccessControls.full
+    var ac: [AccessControls] = {
+        var acc = AccessControls.full
+        acc.append(.saveDirectly)
+        return acc
+    }()
 
     var body: some View {
         HStack {
@@ -57,13 +59,11 @@ struct NormalQuestionRow: View {
             .padding([.leading, .trailing])
 
             QuestionTagsView(
-                question: question,
                 viewModel: tagsViewModel,
                 addPadding: true,
                 accessControls: ac
-            ) {
-                tagCompletion?()
-            }
+            )
+            .environmentObject(question)
         }
     }
 
@@ -80,13 +80,11 @@ struct NormalQuestionRow: View {
             }.padding()
 
             QuestionTagsView(
-                question: question,
                 viewModel: tagsViewModel,
                 addPadding: true,
                 accessControls: ac
-            ) {
-                tagCompletion?()
-            }
+            )
+            .environmentObject(question)
         }
     }
 

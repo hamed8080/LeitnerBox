@@ -33,12 +33,12 @@ struct ReviewView: View {
                             ReviewQuestion(vm: vm)
                             if let question = vm.selectedQuestion {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    QuestionTagsView(question: question, viewModel: .init(viewContext: context, leitner: vm.level.leitner!), accessControls: [.addTag, .showTags, .removeTag]){
-                                        withAnimation {
-                                            PersistenceController.saveDB(viewContext: context)
-                                        }
-                                    }
-                                    QuestionSynonymsView(viewModel: .init(viewContext: context, question: question), accessControls: [.addSynonym, .showSynonyms, .removeSynonym])
+                                    QuestionTagsView(
+                                        viewModel: .init(viewContext: context, leitner: vm.level.leitner!),
+                                        accessControls: [.addTag, .showTags, .removeTag, .saveDirectly])
+                                    .environmentObject(question)
+                                    QuestionSynonymsView(accessControls: [.addSynonym, .showSynonyms, .removeSynonym, .saveDirectly])
+                                    .environmentObject(SynonymViewModel(viewContext: context, question: question))
                                 }
                             }
                             ReviewControls(vm: vm)
@@ -126,9 +126,19 @@ struct ReviewAnswer: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(vm.selectedQuestion?.answer ?? "")
-                .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
-                .multilineTextAlignment(.center)
+            VStack {
+                Text("Tap to hide answer")
+                    .foregroundColor(.accentColor)
+                    .colorMultiply(.accentColor)
+                    .font(.title2.weight(.medium))
+                    .onTapGesture {
+                        vm.toggleAnswer()
+                    }
+
+                Text(vm.selectedQuestion?.answer ?? "")
+                    .font(sizeClass == .compact ? .title3.weight(.semibold) : .title2.weight(.medium))
+                    .multilineTextAlignment(.center)
+            }
             Spacer()
         }
         .onTapGesture {

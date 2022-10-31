@@ -9,7 +9,7 @@ import CoreData
 
 struct QuestionTagsView: View {
 
-    @StateObject
+    @EnvironmentObject
     var question: Question
 
     @State
@@ -20,8 +20,6 @@ struct QuestionTagsView: View {
     var addPadding = false
 
     var accessControls: [AccessControls] = [.showTags, .addTag]
-
-    var tagCompletion: (() -> Void)?
 
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
@@ -57,7 +55,7 @@ struct QuestionTagsView: View {
                                 .onLongPressGesture {
                                     if accessControls.contains(.removeTag) {
                                         viewModel.deleteTagFromQuestion(tag, question)
-                                        tagCompletion?()
+                                        saveDirectlyIfHasAccess()
                                     }
                                 }
                         }
@@ -72,10 +70,18 @@ struct QuestionTagsView: View {
         .sheet(isPresented: $showAddTags, onDismiss: nil, content: {
             if let leitner = viewModel.leitner {
                 AddTagsView(question: question, viewModel: .init(viewContext: context, leitner: leitner)) {
-                    tagCompletion?()
+                    saveDirectlyIfHasAccess()
                 }
             }
         })
+    }
+
+    func saveDirectlyIfHasAccess() {
+        if accessControls.contains(.saveDirectly) {
+            withAnimation {
+                PersistenceController.saveDB(viewContext: context)
+            }
+        }
     }
 }
 
@@ -83,6 +89,7 @@ struct QuestionTagsView_Previews: PreviewProvider {
     static var previews: some View {
         let leitner = LeitnerView_Previews.leitner
         let question = leitner.allQuestions.first!
-        QuestionTagsView(question: question, viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
+        QuestionTagsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
+            .environmentObject(question)
     }
 }
