@@ -2,7 +2,7 @@
 // ReviewViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -32,7 +32,7 @@ class ReviewViewModel: ObservableObject {
     var synthesizer = AVSpeechSynthesizer()
 
     @Published
-    var selectedQuestion: Question? = nil
+    var selectedQuestion: Question?
 
     @Published
     var isShowingAnswer = false
@@ -49,7 +49,7 @@ class ReviewViewModel: ObservableObject {
     @Published
     var tags: [Tag] = []
 
-    private var voiceSpeech :AVSpeechSynthesisVoice
+    private var voiceSpeech: AVSpeechSynthesisVoice
 
     init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech: AVSpeechSynthesisVoice) {
         self.level = level

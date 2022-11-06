@@ -2,7 +2,7 @@
 // TextEditorView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import SwiftUI
 
@@ -14,11 +14,10 @@ struct TextEditorView: View {
     @FocusState private var isFocused: Bool
     var cornerRadius = 10.0
 
-
     init(placeholder: String, shortPlaceholder: String, string: Binding<String?>, textEditorHeight: CGFloat, isFocused: Bool = false, cornerRadius: Double = 10.0) {
         self.placeholder = placeholder
         self.shortPlaceholder = shortPlaceholder
-        self._string = Binding(get: { string.wrappedValue ?? "" }, set: {newValue in string.wrappedValue = newValue })
+        _string = Binding(get: { string.wrappedValue ?? "" }, set: { newValue in string.wrappedValue = newValue })
         self.textEditorHeight = textEditorHeight
         self.isFocused = isFocused
         self.cornerRadius = cornerRadius
@@ -27,7 +26,7 @@ struct TextEditorView: View {
     init(placeholder: String, shortPlaceholder: String, string: Binding<String>, textEditorHeight: CGFloat, isFocused: Bool = false, cornerRadius: Double = 10.0) {
         self.placeholder = placeholder
         self.shortPlaceholder = shortPlaceholder
-        self._string = string
+        _string = string
         self.textEditorHeight = textEditorHeight
         self.isFocused = isFocused
         self.cornerRadius = cornerRadius
@@ -90,6 +89,6 @@ struct TextEditorView: View {
 struct ViewHeightKey: PreferenceKey {
     static var defaultValue: CGFloat { 0 }
     static func reduce(value: inout Value, nextValue: () -> Value) {
-        value = value + nextValue()
+        value += nextValue()
     }
 }

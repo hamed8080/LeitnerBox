@@ -2,7 +2,7 @@
 // TagRowView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import SwiftUI
 
@@ -11,7 +11,7 @@ struct TagRowView: View {
     var tag: Tag
 
     @StateObject
-    var vm: TagViewModel
+    var viewModel: TagViewModel
 
     var body: some View {
         HStack {
@@ -26,10 +26,10 @@ struct TagRowView: View {
         }
         .contextMenu {
             Button {
-                vm.selectedTag = tag
-                vm.tagName = tag.name ?? ""
-                vm.colorPickerColor = tag.tagSwiftUIColor ?? .gray
-                vm.showAddOrEditTagDialog.toggle()
+                viewModel.selectedTag = tag
+                viewModel.tagName = tag.name ?? ""
+                viewModel.colorPickerColor = tag.tagSwiftUIColor ?? .gray
+                viewModel.showAddOrEditTagDialog.toggle()
             } label: {
                 Label("Edit", systemImage: "pencil")
             }
@@ -41,7 +41,7 @@ struct TagRowView_Previews: PreviewProvider {
     static var previews: some View {
         TagRowView(
             tag: Tag(context: PersistenceController.shared.viewContext),
-            vm: TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
+            viewModel: TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
         )
         .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
     }

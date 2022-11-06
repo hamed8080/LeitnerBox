@@ -2,7 +2,7 @@
 // TagViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import Foundation
@@ -22,7 +22,7 @@ class TagViewModel: ObservableObject {
     var showAddOrEditTagDialog: Bool = false
 
     @Published
-    var selectedTag: Tag? = nil
+    var selectedTag: Tag?
 
     @Published
     var tagName: String = ""

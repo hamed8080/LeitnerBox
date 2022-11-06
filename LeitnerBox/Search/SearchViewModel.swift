@@ -2,7 +2,7 @@
 // SearchViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -32,10 +32,10 @@ class SearchViewModel: ObservableObject {
     var leitner: Leitner
 
     @Published
-    var editQuestion: Question? = nil
+    var editQuestion: Question?
 
     @Published
-    var selectedSort: SearchSort = .LEVEL
+    var selectedSort: SearchSort = .level
 
     private(set) var sorted: [Question] = []
 
@@ -59,7 +59,7 @@ class SearchViewModel: ObservableObject {
         speechDelegate = SpeechDelegate()
         synthesizer.delegate = speechDelegate
         self.leitner = leitner
-        sort(.DATE)
+        sort(.date)
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -90,35 +90,35 @@ class SearchViewModel: ObservableObject {
         selectedSort = sort
         let all = leitner.allQuestions
         switch sort {
-        case .LEVEL:
+        case .level:
             sorted = all.sorted(by: {
                 ($0.level?.level ?? 0, $1.createTime?.timeIntervalSince1970 ?? -1) < ($1.level?.level ?? 0, $0.createTime?.timeIntervalSince1970 ?? -1)
             })
-        case .COMPLETED:
+        case .completed:
             sorted = all.sorted(by: { first, second in
                 (first.completed ? 1 : 0, first.passTime?.timeIntervalSince1970 ?? -1) > (second.completed ? 1 : 0, second.passTime?.timeIntervalSince1970 ?? -1)
             })
-        case .ALPHABET:
+        case .alphabet:
             sorted = all.sorted(by: {
                 ($0.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") < ($1.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
             })
-        case .FAVORITE:
+        case .favorite:
             sorted = all.sorted(by: {
                 ($0.favorite ? 1 : 0, $0.favoriteDate?.timeIntervalSince1970 ?? -1) > ($1.favorite ? 1 : 0, $1.favoriteDate?.timeIntervalSince1970 ?? -1)
             })
-        case .DATE:
+        case .date:
             sorted = all.sorted(by: {
                 ($0.createTime?.timeIntervalSince1970 ?? -1) > ($1.createTime?.timeIntervalSince1970 ?? -1)
             })
-        case .PASSED_TIME:
+        case .passedTime:
             sorted = all.sorted(by: {
                 ($0.passTime?.timeIntervalSince1970 ?? -1) > ($1.passTime?.timeIntervalSince1970 ?? -1)
             })
-        case .NO_TAGS:
+        case .noTags:
             sorted = all.sorted(by: {
                 ($0.tagsArray?.count ?? 0) < ($1.tagsArray?.count ?? 0)
             })
-        case .TAGS:
+        case .tags:
             sorted = all.sorted(by: {
                 ($0.tagsArray?.count ?? 0) > ($1.tagsArray?.count ?? 0)
             })
@@ -304,7 +304,7 @@ class SearchViewModel: ObservableObject {
     }
 
     func resumeSpeaking() {
-        if synthesizer.isPaused && reviewStatus == .isPlaying {
+        if synthesizer.isPaused, reviewStatus == .isPlaying {
             playReview()
         }
     }
@@ -335,14 +335,14 @@ class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
 }
 
 var searchSorts: [SortModel] = [
-    .init(iconName: "textformat.abc", title: "Alphabet", sortType: .ALPHABET),
-    .init(iconName: "arrow.up.arrow.down.square", title: "Level", sortType: .LEVEL),
-    .init(iconName: "calendar.badge.clock", title: "Create Date", sortType: .DATE),
-    .init(iconName: "calendar.badge.clock", title: "Passed Date", sortType: .PASSED_TIME),
-    .init(iconName: "star", title: "Favorite", sortType: .FAVORITE),
-    .init(iconName: "flag.2.crossed", title: "Completed", sortType: .COMPLETED),
-    .init(iconName: "tag", title: "Tags", sortType: .TAGS),
-    .init(iconName: "tag.slash", title: "Without Tags", sortType: .NO_TAGS),
+    .init(iconName: "textformat.abc", title: "Alphabet", sortType: .alphabet),
+    .init(iconName: "arrow.up.arrow.down.square", title: "Level", sortType: .level),
+    .init(iconName: "calendar.badge.clock", title: "Create Date", sortType: .date),
+    .init(iconName: "calendar.badge.clock", title: "Passed Date", sortType: .passedTime),
+    .init(iconName: "star", title: "Favorite", sortType: .favorite),
+    .init(iconName: "flag.2.crossed", title: "Completed", sortType: .completed),
+    .init(iconName: "tag", title: "Tags", sortType: .tags),
+    .init(iconName: "tag.slash", title: "Without Tags", sortType: .noTags)
 ]
 
 struct SortModel: Hashable {
@@ -352,12 +352,12 @@ struct SortModel: Hashable {
 }
 
 enum SearchSort {
-    case LEVEL
-    case COMPLETED
-    case ALPHABET
-    case FAVORITE
-    case DATE
-    case PASSED_TIME
-    case TAGS
-    case NO_TAGS
+    case level
+    case completed
+    case alphabet
+    case favorite
+    case date
+    case passedTime
+    case tags
+    case noTags
 }

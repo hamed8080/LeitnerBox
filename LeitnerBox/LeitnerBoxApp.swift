@@ -2,13 +2,12 @@
 // LeitnerBoxApp.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import SwiftUI
 
 @main
 struct LeitnerBoxApp: App, DropDelegate {
-
     @State private var dragOver = false
     @State
     var hideSplash = false
@@ -52,7 +51,7 @@ struct LeitnerBoxApp: App, DropDelegate {
 struct UpdateDatabaseInBackground: View {
     @Environment(\.scenePhase) var scenePhase
 
-    var body: some View{
+    var body: some View {
         EmptyView()
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {

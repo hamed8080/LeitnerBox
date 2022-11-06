@@ -17,6 +17,14 @@
 		051B7DAC288B00BC00465C24 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051B7DAA288B00BC00465C24 /* UserDefaults+.swift */; };
 		051B7DAE288B02C300465C24 /* WidgetQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051B7DAD288B02C300465C24 /* WidgetQuestion.swift */; };
 		051B7DAF288B02C300465C24 /* WidgetQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051B7DAD288B02C300465C24 /* WidgetQuestion.swift */; };
+		051E106E291136F200F990BD /* ReviewQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E106D291136F200F990BD /* ReviewQuestion.swift */; };
+		051E10702911376500F990BD /* ReviewAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E106F2911376500F990BD /* ReviewAnswer.swift */; };
+		051E10722911379800F990BD /* ReviewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E10712911379800F990BD /* ReviewHeader.swift */; };
+		051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1073291137B400F990BD /* PassOrFailButtons.swift */; };
+		051E1076291137D100F990BD /* DeleteDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1075291137D100F990BD /* DeleteDialog.swift */; };
+		051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1077291137EC00F990BD /* TapToAnswerView.swift */; };
+		051E107A2911380A00F990BD /* ReviewControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E10792911380A00F990BD /* ReviewControls.swift */; };
+		051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E107B2911383000F990BD /* FinishedReviewView.swift */; };
 		05219C0A2859F6DB00D3ECF5 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05219C092859F6DB00D3ECF5 /* Sequence+.swift */; };
 		05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AB928367DA9004693BC /* LeitnerBoxApp.swift */; };
 		05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266ABB28367DA9004693BC /* LeitnerView.swift */; };
@@ -154,6 +162,14 @@
 		050D6DD32879EB220020BCDB /* QuestionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModelTests.swift; sourceTree = "<group>"; };
 		051B7DAA288B00BC00465C24 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		051B7DAD288B02C300465C24 /* WidgetQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetQuestion.swift; sourceTree = "<group>"; };
+		051E106D291136F200F990BD /* ReviewQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewQuestion.swift; sourceTree = "<group>"; };
+		051E106F2911376500F990BD /* ReviewAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAnswer.swift; sourceTree = "<group>"; };
+		051E10712911379800F990BD /* ReviewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHeader.swift; sourceTree = "<group>"; };
+		051E1073291137B400F990BD /* PassOrFailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassOrFailButtons.swift; sourceTree = "<group>"; };
+		051E1075291137D100F990BD /* DeleteDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDialog.swift; sourceTree = "<group>"; };
+		051E1077291137EC00F990BD /* TapToAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToAnswerView.swift; sourceTree = "<group>"; };
+		051E10792911380A00F990BD /* ReviewControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewControls.swift; sourceTree = "<group>"; };
+		051E107B2911383000F990BD /* FinishedReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedReviewView.swift; sourceTree = "<group>"; };
 		05219C092859F6DB00D3ECF5 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		05266AB628367DA9004693BC /* LeitnerBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeitnerBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05266AB928367DA9004693BC /* LeitnerBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerBoxApp.swift; sourceTree = "<group>"; };
@@ -289,6 +305,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051E106C291136C700F990BD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				051E106D291136F200F990BD /* ReviewQuestion.swift */,
+				051E106F2911376500F990BD /* ReviewAnswer.swift */,
+				051E10712911379800F990BD /* ReviewHeader.swift */,
+				051E1073291137B400F990BD /* PassOrFailButtons.swift */,
+				051E1075291137D100F990BD /* DeleteDialog.swift */,
+				051E1077291137EC00F990BD /* TapToAnswerView.swift */,
+				051E10792911380A00F990BD /* ReviewControls.swift */,
+				051E107B2911383000F990BD /* FinishedReviewView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		05266AAD28367DA9004693BC = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +497,7 @@
 		054AB5C528395214008BC840 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				051E106C291136C700F990BD /* Views */,
 				053666D1283769A1002F899F /* ReviewView.swift */,
 				05867E74283A63AA00F4A413 /* ReviewViewModel.swift */,
 				0508152F285C719000CF632E /* NotAnyToReviewView.swift */,
@@ -554,6 +586,7 @@
 				05266AB328367DA9004693BC /* Frameworks */,
 				05266AB428367DA9004693BC /* Resources */,
 				052CA6BF283C9A9500376E79 /* Embed Foundation Extensions */,
+				051E106B2911292900F990BD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -730,6 +763,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		051E106B2911292900F990BD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		05266AB228367DA9004693BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -737,11 +791,13 @@
 			files = (
 				052CA6AA283C944200376E79 /* FileManager+.swift in Sources */,
 				0591796128C149F100228D7F /* Array+.swift in Sources */,
+				051E10722911379800F990BD /* ReviewHeader.swift in Sources */,
 				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
 				054E771E284A4C7D006BCDEF /* UIColorValueTransformer.swift in Sources */,
 				05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */,
 				05867E71283A469000F4A413 /* Level+.swift in Sources */,
 				053666DC2837758F002F899F /* View+.swift in Sources */,
+				051E10702911376500F990BD /* ReviewAnswer.swift in Sources */,
 				05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */,
 				052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */,
 				05E8AA9828565DBD00F2A855 /* PercentageView.swift in Sources */,
@@ -758,19 +814,23 @@
 				05D0329F2838DB2B00FE67D5 /* Date+.swift in Sources */,
 				058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */,
 				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
+				051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */,
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
 				052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */,
+				051E1076291137D100F990BD /* DeleteDialog.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
 				058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */,
 				053666E428378918002F899F /* Color+.swift in Sources */,
 				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor+.swift in Sources */,
+				051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05747C0328AED1EC00868CC6 /* QuestionSynonymsView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
+				051E107A2911380A00F990BD /* ReviewControls.swift in Sources */,
 				05219C0A2859F6DB00D3ECF5 /* Sequence+.swift in Sources */,
 				058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */,
 				051B7DAE288B02C300465C24 /* WidgetQuestion.swift in Sources */,
@@ -790,7 +850,9 @@
 				054E7720284A523E006BCDEF /* Tag+.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
 				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,
+				051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */,
 				051B7DAB288B00BC00465C24 /* UserDefaults+.swift in Sources */,
+				051E106E291136F200F990BD /* ReviewQuestion.swift in Sources */,
 				0531A606283FEEF70051EB13 /* TextEditorView.swift in Sources */,
 				058343C12875DBA200AD0FF3 /* MyError.swift in Sources */,
 				0545068F284A358C007EBAFA /* TagViewModel.swift in Sources */,
@@ -1079,7 +1141,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBoxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1098,7 +1160,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBoxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1116,7 +1178,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBoxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1134,7 +1196,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QN43D38LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ir.amozkade.LeitnerBoxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
