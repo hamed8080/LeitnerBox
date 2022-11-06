@@ -2,7 +2,7 @@
 // ReviewViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -11,50 +11,26 @@ import NaturalLanguage
 import SwiftUI
 
 class ReviewViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContext
+    @Published var questions: [Question] = []
+    @Published var showDelete = false
+    @Published var level: Level
+    @Published var failedCount = 0
+    @Published var passCount = 0
+    @Published var selectedQuestion: Question?
+    @Published var isShowingAnswer = false
+    @Published var totalCount = 0
+    @Published var isFinished = false
+    @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
+    @Published var tags: [Tag] = []
+    var synthesizer: AVSpeechSynthesizerProtocol
+    private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
 
-    @Published
-    var questions: [Question] = []
-
-    @Published
-    var showDelete = false
-
-    @Published
-    var level: Level
-
-    @Published
-    var failedCount = 0
-
-    @Published
-    var passCount = 0
-
-    var synthesizer = AVSpeechSynthesizer()
-
-    @Published
-    var selectedQuestion: Question? = nil
-
-    @Published
-    var isShowingAnswer = false
-
-    @Published
-    var totalCount = 0
-
-    @Published
-    var isFinished = false
-
-    @AppStorage("pronounceDetailAnswer")
-    private var pronounceDetailAnswer = false
-
-    @Published
-    var tags: [Tag] = []
-
-    private var voiceSpeech :AVSpeechSynthesisVoice
-
-    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech: AVSpeechSynthesisVoice) {
+    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech: AVSpeechSynthesisVoiceProtocol, synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()) {
         self.level = level
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
+        self.synthesizer = synthesizer
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", level.level, level.leitner?.id ?? 0)
         questions = ((try? viewContext.fetch(req)) ?? []).filter(\.isReviewable).shuffled()
@@ -146,9 +122,11 @@ class ReviewViewModel: ObservableObject {
 
     func pronounce() {
         guard let question = selectedQuestion else { return }
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")")
-        utterance.voice = voiceSpeech
+        if voiceSpeech is AVSpeechSynthesisVoice {
+            utterance.voice = voiceSpeech as? AVSpeechSynthesisVoice
+        }
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier = 1
         utterance.postUtteranceDelay = 0
@@ -210,6 +188,6 @@ class ReviewViewModel: ObservableObject {
     }
 
     func stopPronounce() {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
     }
 }

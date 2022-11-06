@@ -2,10 +2,10 @@
 // AddSynonymsView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct AddSynonymsView: View {
     @StateObject
@@ -17,7 +17,7 @@ struct AddSynonymsView: View {
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
-    var completion: (() -> Void)? = nil
+    var completion: (() -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -42,15 +42,14 @@ struct AddSynonymsView: View {
 }
 
 struct AddSynonymsView_Previews: PreviewProvider {
-
     struct Preview: View {
         @StateObject
-        var vm = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!)
+        var viewModel = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!)
 
         var body: some View {
-            AddSynonymsView(viewModel: vm)
+            AddSynonymsView(viewModel: viewModel)
                 .onAppear {
-                    vm.searchText = "t"
+                    viewModel.searchText = "t"
                 }
                 .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)

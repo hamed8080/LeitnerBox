@@ -2,10 +2,10 @@
 // SearchRowView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct SearchRowView: View {
     @StateObject
@@ -35,7 +35,7 @@ struct SearchRowView_Previews: PreviewProvider {
 
         var body: some View {
             SearchRowView(question: question ?? Question(context: PersistenceController.shared.viewContext), leitner: leitner)
-                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice ))
+                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }

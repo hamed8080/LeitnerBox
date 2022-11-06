@@ -2,7 +2,7 @@
 // LeitnerViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -20,7 +20,7 @@ class LeitnerViewModel: ObservableObject {
     var showEditOrAddLeitnerAlert = false
 
     @Published
-    var selectedLeitner: Leitner? = nil
+    var selectedLeitner: Leitner?
 
     @Published
     var leitnerTitle: String = ""
@@ -29,22 +29,22 @@ class LeitnerViewModel: ObservableObject {
     var backToTopLevel = false
 
     @Published
-    var showBackupFileShareSheet = false
+    var backupFile: TemporaryFile?
 
     @Published
-    var backupFile: TemporaryFile? = nil
-
-    @Published
-    var selectedVoiceIdentifire: String? = nil
+    var selectedVoiceIdentifire: String?
 
     @Published
     var voices: [AVSpeechSynthesisVoice] = []
 
+    @Published
+    var isBackuping = false
+
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
-    init(viewContext: NSManagedObjectContext) {
+    init(viewContext: NSManagedObjectContext, voices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })) {
         self.viewContext = viewContext
-        voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })
+        self.voices = voices
         selectedVoiceIdentifire = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
         load()
     }
@@ -56,14 +56,14 @@ class LeitnerViewModel: ObservableObject {
 
         let wqs = leitners.first?.allQuestions.prefix(200).map { question -> WidgetQuestion in
             let tags = question.tagsArray?.map { WidgetQuestionTag(name: $0.name ?? "") } ?? []
-            let wq = WidgetQuestion(question: question.question,
+            let widegetQuestion = WidgetQuestion(question: question.question,
                                     answer: question.answer,
                                     tags: tags,
                                     detailedDescription: question.detailDescription,
                                     level: Int(question.level?.level ?? 1),
                                     isFavorite: question.favorite,
                                     isCompleted: question.completed)
-            return wq
+            return widegetQuestion
         }
         if let wqs = wqs, let data = try? JSONEncoder().encode(wqs) {
             widgetQuestions = data
@@ -130,7 +130,16 @@ class LeitnerViewModel: ObservableObject {
         selectedLeitner = nil
     }
 
-    func exportDB() {
+    func deleteBackupFile() async {
+        try? backupFile?.deleteDirectory()
+        await MainActor.run {
+            backupFile = nil
+        }
+    }
+    func exportDB() async {
+        await MainActor.run {
+            isBackuping = true
+        }
         let backupStoreOptions: [AnyHashable: Any] = [
             NSReadOnlyPersistentStoreOption: true,
             // Disable write-ahead logging. Benefit: the entire store will be
@@ -138,16 +147,12 @@ class LeitnerViewModel: ObservableObject {
             // https://developer.apple.com/library/content/qa/qa1809/_index.html
             NSSQLitePragmasOption: ["journal_mode": "DELETE"],
             // Minimize file size
-            NSSQLiteManualVacuumOption: true,
+            NSSQLiteManualVacuumOption: true
         ]
-
         guard let sourcePersistentStore = PersistenceController.shared.container.persistentStoreCoordinator.persistentStores.first else { return }
-
         let managedObjectModel = PersistenceController.shared.container.managedObjectModel
-
         let backupPersistentContainer = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let intermediateStoreOptions = (sourcePersistentStore.options ?? [:]).merging([NSReadOnlyPersistentStoreOption: true], uniquingKeysWith: { $1 })
-
         do {
             let newPersistentStore = try backupPersistentContainer.addPersistentStore(
                 ofType: sourcePersistentStore.type,
@@ -158,10 +163,12 @@ class LeitnerViewModel: ObservableObject {
 
             let exportFile = makeFilename(sourcePersistentStore)
             let backupFile = try TemporaryFile(creatingTempDirectoryForFilename: exportFile)
-            self.backupFile = backupFile
             try backupPersistentContainer.migratePersistentStore(newPersistentStore, to: backupFile.fileURL, options: backupStoreOptions, withType: NSSQLiteStoreType)
+            await MainActor.run {
+                isBackuping = false
+                self.backupFile = backupFile
+            }
             print("file exported to\(backupFile.fileURL)")
-            showBackupFileShareSheet.toggle()
         } catch {
             print("failed to export: Error \(error.localizedDescription)")
         }

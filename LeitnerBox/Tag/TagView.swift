@@ -2,44 +2,44 @@
 // TagView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import SwiftUI
 
 struct TagView: View {
     @StateObject
-    var vm: TagViewModel
+    var viewModel: TagViewModel
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
     var body: some View {
         ZStack {
             List {
-                ForEach(vm.tags) { tag in
+                ForEach(viewModel.tags) { tag in
                     NavigationLink {
                         QuestionsInsideTagView(
                             tag: tag,
-                            tagViewModel: TagViewModel(viewContext: context, leitner: vm.leitner)
+                            tagViewModel: TagViewModel(viewContext: context, leitner: viewModel.leitner)
                         )
                     } label: {
-                        TagRowView(tag: tag, vm: vm)
+                        TagRowView(tag: tag, viewModel: viewModel)
                     }
                 }
-                .onDelete(perform: vm.deleteItems)
+                .onDelete(perform: viewModel.deleteItems)
             }
-            .animation(.easeInOut, value: vm.tags)
+            .animation(.easeInOut, value: viewModel.tags)
             .listStyle(.plain)
         }
-        .navigationTitle("Manage Tags for \(vm.leitner.name ?? "")")
+        .navigationTitle("Manage Tags for \(viewModel.leitner.name ?? "")")
         .toolbar {
             ToolbarItem {
                 Button {
-                    vm.clear()
-                    vm.showAddOrEditTagDialog.toggle()
+                    viewModel.clear()
+                    viewModel.showAddOrEditTagDialog.toggle()
                 } label: {
                     Label("Add", systemImage: "plus.square")
                         .font(.title3)
@@ -47,7 +47,7 @@ struct TagView: View {
                         .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                 }
             }
-        }.customDialog(isShowing: $vm.showAddOrEditTagDialog) {
+        }.customDialog(isShowing: $viewModel.showAddOrEditTagDialog) {
             addOrEditTagDialog
         }
     }
@@ -61,15 +61,15 @@ struct TagView: View {
             TextEditorView(
                 placeholder: "Enter tag name",
                 shortPlaceholder: "Name",
-                string: $vm.tagName,
+                string: $viewModel.tagName,
                 textEditorHeight: 48
             )
 
-            ColorPicker("Select Color", selection: $vm.colorPickerColor)
+            ColorPicker("Select Color", selection: $viewModel.colorPickerColor)
                 .frame(height: 36)
 
             Button {
-                vm.editOrAddTag()
+                viewModel.editOrAddTag()
             } label: {
                 HStack {
                     Spacer()
@@ -84,7 +84,7 @@ struct TagView: View {
             .tint(.accentColor)
 
             Button {
-                vm.showAddOrEditTagDialog.toggle()
+                viewModel.showAddOrEditTagDialog.toggle()
             } label: {
                 HStack {
                     Spacer()
@@ -104,9 +104,9 @@ struct TagView: View {
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
+        var viewModel = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
         var body: some View {
-            TagView(vm: vm)
+            TagView(viewModel: viewModel)
         }
     }
 

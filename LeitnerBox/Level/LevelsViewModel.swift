@@ -2,7 +2,7 @@
 // LevelsViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -23,7 +23,7 @@ class LevelsViewModel: ObservableObject {
     var levels: [Level] = []
 
     @Published
-    var selectedLevel: Level? = nil
+    var selectedLevel: Level?
 
     var filtered: [Question] {
         if searchWord.isEmpty || searchWord == "#" {

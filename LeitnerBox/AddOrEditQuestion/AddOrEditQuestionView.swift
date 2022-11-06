@@ -2,14 +2,14 @@
 // AddOrEditQuestionView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import SwiftUI
 
 struct AddOrEditQuestionView: View {
     @StateObject
-    var vm: QuestionViewModel
+    var viewModel: QuestionViewModel
 
     @Environment(\.dismiss)
     var dissmiss
@@ -31,34 +31,34 @@ struct AddOrEditQuestionView: View {
                     TextEditorView(
                         placeholder: "Enter your question here...",
                         shortPlaceholder: "Question",
-                        string: $vm.questionString,
+                        string: $viewModel.questionString,
                         textEditorHeight: 48
                     )
-                    CheckBoxView(isActive: $vm.isManual, text: "Manual Answer")
-                    if vm.isManual {
+                    CheckBoxView(isActive: $viewModel.isManual, text: "Manual Answer")
+                    if viewModel.isManual {
                         TextEditorView(
                             placeholder: "Enter your Answer here...",
                             shortPlaceholder: "Answer",
-                            string: $vm.answer,
+                            string: $viewModel.answer,
                             textEditorHeight: 48
                         )
                         TextEditorView(
                             placeholder: "Enter your description here...",
                             shortPlaceholder: "Description",
-                            string: $vm.detailDescription,
+                            string: $viewModel.detailDescription,
                             textEditorHeight: 48
                         )
                     }
-                    CheckBoxView(isActive: $vm.completed, text: "Complete Answer")
+                    CheckBoxView(isActive: $viewModel.completed, text: "Complete Answer")
 
                     HStack {
                         Button {
                             withAnimation {
-                                vm.favorite.toggle()
+                                viewModel.favorite.toggle()
                             }
                         } label: {
                             HStack {
-                                Image(systemName: vm.favorite == true ? "star.fill" : "star")
+                                Image(systemName: viewModel.favorite == true ? "star.fill" : "star")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 32, height: 32)
@@ -72,15 +72,15 @@ struct AddOrEditQuestionView: View {
                     }
 
                     VStack {
-                        QuestionTagsView(viewModel: .init(viewContext: context, leitner: vm.level.leitner!), accessControls: [.showTags, .addTag, .removeTag])
-                            .environmentObject(vm.question)
+                        QuestionTagsView(viewModel: .init(viewContext: context, leitner: viewModel.level.leitner!), accessControls: [.showTags, .addTag, .removeTag])
+                            .environmentObject(viewModel.question)
                         QuestionSynonymsView(accessControls: [.showSynonyms, .addSynonym, .removeSynonym])
-                            .environmentObject(SynonymViewModel(viewContext: context, question: vm.question))
+                            .environmentObject(SynonymViewModel(viewContext: context, question: viewModel.question))
                     }
 
                     Button {
-                        vm.save()
-                        vm.clear()
+                        viewModel.save()
+                        viewModel.clear()
                         dissmiss()
                     } label: {
                         HStack {
@@ -99,10 +99,10 @@ struct AddOrEditQuestionView: View {
             }
             Spacer()
         }
-        .animation(.easeInOut, value: vm.isManual)
+        .animation(.easeInOut, value: viewModel.isManual)
         .toolbar {
             ToolbarItem {
-                Button(action: vm.clear) {
+                Button(action: viewModel.clear) {
                     Label("clear", systemImage: "trash.square")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
@@ -111,7 +111,7 @@ struct AddOrEditQuestionView: View {
             }
 
             ToolbarItem(placement: .principal) {
-                Text((vm.question.isInserted == false ? "Edit question" : "Add question").uppercased())
+                Text((viewModel.question.isInserted == false ? "Edit question" : "Add question").uppercased())
                     .font(.body.weight(.bold))
                     .foregroundColor(.accentColor)
             }
@@ -127,9 +127,9 @@ struct AddOrEditQuestionView: View {
         }
         .contentShape(Rectangle())
         .onDisappear {
-            /// For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: context)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
-            /// It's essential to set tag to nil on question, because tag will be deleted completely.
-            vm.question.tag = nil
+            // For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: context)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
+            // It's essential to set tag to nil on question, because tag will be deleted completely.
+            viewModel.question.tag = nil
             context.rollback()
         }
     }
@@ -140,14 +140,14 @@ struct AddQuestionView_Previews: PreviewProvider {
         static let question = LeitnerView_Previews.leitner.allQuestions.first!
         static let context = PersistenceController.shared.viewContext
         @StateObject
-        var vm = QuestionViewModel(
+        var viewModel = QuestionViewModel(
             viewContext: context,
             leitner: LeitnerView_Previews.leitner,
             question: question
         )
-        
+
         var body: some View {
-            AddOrEditQuestionView(vm: vm)
+            AddOrEditQuestionView(viewModel: viewModel)
         }
     }
 

@@ -2,3 +2,7 @@
 xcuserdata/
 *.xccheckout
 *.afphoto
+.build/
+build/
+.build
+build

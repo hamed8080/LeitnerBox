@@ -2,7 +2,7 @@
 // QuestionViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import Foundation
@@ -37,13 +37,13 @@ class QuestionViewModel: ObservableObject {
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner, question: Question? = nil) {
         self.viewContext = viewContext
-        self.level = question == nil ? leitner.firstLevel! : question!.level!
+        level = question == nil ? leitner.firstLevel! : question!.level!
         self.question = question ?? Question(context: viewContext)
-        /// Insert
+        // Insert
         if question == nil {
             self.question.level = level
         } else {
-            /// Update
+            // Update
             setEditQuestionProperties(editQuestion: self.question)
         }
     }

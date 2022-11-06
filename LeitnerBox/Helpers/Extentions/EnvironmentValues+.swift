@@ -1,16 +1,15 @@
 //
-//  EnvironmentValues+.swift
-//  LeitnerBox
+// EnvironmentValues+.swift
+// Copyright (c) 2022 LeitnerBox
 //
-//  Created by hamed on 10/29/22.
-//
+// Created by Hamed Hosseini on 10/29/22.
 
-import Foundation
 import AVFoundation
+import Foundation
 import SwiftUI
 
 private struct AVSpeechEnvironmentKey: EnvironmentKey {
-    static let defaultValue: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice(language: "en-GB")!
+    static let defaultValue: AVSpeechSynthesisVoice = .init(language: "en-GB")!
 }
 
 extension EnvironmentValues {

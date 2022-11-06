@@ -2,7 +2,7 @@
 // FileManager+.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import Foundation
 
@@ -33,8 +33,8 @@ extension FileManager {
     }
 
     var appGroupFolederURL: URL? {
-        let fm = FileManager.default
-        return fm.containerURL(forSecurityApplicationGroupIdentifier: AppGroupLocalStorage.groupName)
+        let fileManager = FileManager.default
+        return fileManager.containerURL(forSecurityApplicationGroupIdentifier: AppGroupLocalStorage.groupName)
     }
 
     var appGroupDBFolder: URL? {

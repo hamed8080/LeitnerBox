@@ -12,10 +12,8 @@ extension Array where Element: Comparable {
 
     func isContainsArray(of other: [Element]) -> Bool {
         var isContainsSameItems = true
-        for item in self {
-            if other.contains(item) == false {
-                isContainsSameItems = false
-            }
+        for item in self where other.contains(item) == false {
+            isContainsSameItems = false
         }
         return isContainsSameItems
     }

@@ -2,11 +2,11 @@
 // LevelRow.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import AVFoundation
 import CoreData
+import SwiftUI
 
 struct LevelRow: View {
     @StateObject
@@ -29,7 +29,7 @@ struct LevelRow: View {
 
     var body: some View {
         NavigationLink {
-            LazyView(ReviewView(vm: ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech)))
+            LazyView(ReviewView(viewModel: ReviewViewModel(viewContext: context, level: level, voiceSpeech: voiceSpeech)))
         } label: {
             HStack {
                 HStack {
@@ -87,7 +87,7 @@ struct LevelRow: View {
             }
             .padding([.leading, .top, .bottom], 8)
         }
-        .popover(isPresented: $showDaysAfterDialog,attachmentAnchor: .point(UnitPoint(x: 2000, y: 20)) ) {
+        .popover(isPresented: $showDaysAfterDialog, attachmentAnchor: .point(UnitPoint(x: 2000, y: 20))) {
             LevelConfigView(level: level)
         }
     }
@@ -113,7 +113,6 @@ struct LevelConfigView: View {
                         level.daysToRecommend = Int32(value)
                         PersistenceController.saveDB(viewContext: context)
                     }
-
                 }
                 .padding()
                 .cornerRadius(12)

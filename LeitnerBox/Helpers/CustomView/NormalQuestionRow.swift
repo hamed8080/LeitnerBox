@@ -2,10 +2,10 @@
 // NormalQuestionRow.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct NormalQuestionRow: View {
     @StateObject
@@ -29,10 +29,10 @@ struct NormalQuestionRow: View {
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
 
-    var ac: [AccessControls] = {
-        var acc = AccessControls.full
-        acc.append(.saveDirectly)
-        return acc
+    var aceessControls: [AccessControls] = {
+        var aceessControls = AccessControls.full
+        aceessControls.append(.saveDirectly)
+        return aceessControls
     }()
 
     var body: some View {
@@ -61,7 +61,7 @@ struct NormalQuestionRow: View {
             QuestionTagsView(
                 viewModel: tagsViewModel,
                 addPadding: true,
-                accessControls: ac
+                accessControls: aceessControls
             )
             .environmentObject(question)
         }
@@ -82,7 +82,7 @@ struct NormalQuestionRow: View {
             QuestionTagsView(
                 viewModel: tagsViewModel,
                 addPadding: true,
-                accessControls: ac
+                accessControls: aceessControls
             )
             .environmentObject(question)
         }
@@ -128,11 +128,11 @@ struct NormalQuestionRow: View {
 
     @ViewBuilder
     var controls: some View {
-        if ac.contains(.trailingControls) {
+        if aceessControls.contains(.trailingControls) {
             let padding: CGFloat = sizeClass == .compact ? 4 : 8
             HStack(spacing: padding) {
                 let controlSize: CGFloat = 24
-                if ac.contains(.microphone) {
+                if aceessControls.contains(.microphone) {
                     Button {
                         searchViewModel.pronounceOnce(question)
                     } label: {
@@ -146,7 +146,7 @@ struct NormalQuestionRow: View {
                     .buttonStyle(.borderless)
                 }
 
-                if ac.contains(.favorite) {
+                if aceessControls.contains(.favorite) {
                     Button {
                         withAnimation {
                             searchViewModel.toggleFavorite(question)
@@ -162,9 +162,9 @@ struct NormalQuestionRow: View {
                     .buttonStyle(.borderless)
                 }
 
-                if ac.contains(.more) {
+                if aceessControls.contains(.more) {
                     Menu {
-                        if ac.contains(.delete) {
+                        if aceessControls.contains(.delete) {
                             Button(role: .destructive) {
                                 withAnimation {
                                     searchViewModel.delete(question)
@@ -176,7 +176,7 @@ struct NormalQuestionRow: View {
                             Divider()
                         }
 
-                        if ac.contains(.edit) {
+                        if aceessControls.contains(.edit) {
                             Button {
                                 searchViewModel.editQuestion = question
                             } label: {
@@ -184,7 +184,7 @@ struct NormalQuestionRow: View {
                             }
                         }
 
-                        if ac.contains(.copy) {
+                        if aceessControls.contains(.copy) {
                             Button {
                                 UIPasteboard.general.string = [question.question, question.answer, question.detailDescription]
                                     .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -195,7 +195,7 @@ struct NormalQuestionRow: View {
                             }
                         }
 
-                        if ac.contains(.reset) {
+                        if aceessControls.contains(.reset) {
                             Button {
                                 withAnimation {
                                     searchViewModel.resetToFirstLevel(question)
@@ -205,7 +205,7 @@ struct NormalQuestionRow: View {
                             }
                         }
 
-                        if ac.contains(.completed) {
+                        if aceessControls.contains(.completed) {
                             Button {
                                 withAnimation {
                                     searchViewModel.complete(question)
@@ -217,7 +217,7 @@ struct NormalQuestionRow: View {
                             Divider()
                         }
 
-                        if ac.contains(.move) {
+                        if aceessControls.contains(.move) {
                             Menu("Move") {
                                 ForEach(leitnersVM.leitners) { leitner in
                                     Button {

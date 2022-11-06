@@ -2,14 +2,14 @@
 // Persistence.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import SwiftUI
 
 class PersistenceController: ObservableObject {
-
-    static let inMemory = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    static let isTest: Bool = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_TEST"] == "1"
+    static let inMemory = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" || isTest
     static var shared = PersistenceController(inMemory: inMemory)
 
     var viewContext: NSManagedObjectContext {
@@ -26,9 +26,6 @@ class PersistenceController: ObservableObject {
         }
         Task {
             _ = try await container.loadPersistentStoresAsync
-            if inMemory {
-                await self.generateAndFillLeitner()
-            }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
@@ -42,17 +39,17 @@ class PersistenceController: ObservableObject {
     }
 
     func moveAppGroupFileToAppSupportFolder() -> URL? {
-        let fm = FileManager.default
-        guard let appGroupDBFolder = fm.appGroupDBFolder else { return nil }
-        if let contents = try? fm.contentsOfDirectory(atPath: appGroupDBFolder.path).filter({ $0.contains(".sqlite") }), contents.count > 0 {
-            let appSupportDirectory = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+        let fileManager = FileManager.default
+        guard let appGroupDBFolder = fileManager.appGroupDBFolder else { return nil }
+        if let contents = try? fileManager.contentsOfDirectory(atPath: appGroupDBFolder.path).filter({ $0.contains(".sqlite") }), contents.count > 0 {
+            let appSupportDirectory = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             let appGroupFile = appGroupDBFolder.appendingPathComponent(contents.first!)
             let appSuppportFile = appSupportDirectory!.appendingPathComponent(contents.first!)
             do {
-                if fm.fileExists(atPath: appSuppportFile.path) {
-                    try fm.removeItem(at: appSuppportFile) // to first delete old file and again replace with new one
+                if fileManager.fileExists(atPath: appSuppportFile.path) {
+                    try fileManager.removeItem(at: appSuppportFile) // to first delete old file and again replace with new one
                 }
-                try fm.moveItem(atPath: appGroupFile.path, toPath: appSuppportFile.path)
+                try fileManager.moveItem(atPath: appGroupFile.path, toPath: appSuppportFile.path)
                 return appSuppportFile
             } catch {
                 print("Error to move appgroup file to app support folder\(error.localizedDescription)")
@@ -86,8 +83,7 @@ class PersistenceController: ObservableObject {
             item.loadItem(forTypeIdentifier: item.registeredTypeIdentifiers.first!, options: nil) { data, error in
                 do {
                     if let url = data as? URL,
-                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent)
-                    {
+                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent) {
                         if FileManager.default.fileExists(atPath: newFileLocation.path) {
                             try FileManager.default.removeItem(atPath: newFileLocation.path)
                         }
@@ -106,7 +102,7 @@ class PersistenceController: ObservableObject {
         do {
             try viewContext.save()
         } catch {
-            completionHandler?(.FAIL_TO_SAVE)
+            completionHandler?(.failToSave)
         }
     }
 }
@@ -129,10 +125,9 @@ extension NSPersistentCloudKitContainer {
 }
 
 // MARK: Generate the mock datas.
-extension PersistenceController {
 
-    @MainActor
-    func generateAndFillLeitner() {
+extension PersistenceController {
+    func generateAndFillLeitner() throws {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
@@ -145,13 +140,7 @@ extension PersistenceController {
                 }
             }
         }
-
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        try viewContext.save()
     }
 
     func generateLevels(leitner: Leitner) -> [Level] {
@@ -213,5 +202,4 @@ extension PersistenceController {
         }
         return questions
     }
-
 }

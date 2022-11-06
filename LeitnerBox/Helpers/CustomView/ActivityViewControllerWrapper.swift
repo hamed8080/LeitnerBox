@@ -2,7 +2,7 @@
 // ActivityViewControllerWrapper.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import LinkPresentation
 import SwiftUI
@@ -12,8 +12,8 @@ struct ActivityViewControllerWrapper: UIViewControllerRepresentable {
     var applicationActivities: [UIActivity]?
 
     func makeUIViewController(context _: Context) -> some UIActivityViewController {
-        let vc = UIActivityViewController(activityItems: [LinkMetaDataManager(url: activityItems.first!)], applicationActivities: nil)
-        return vc
+        let activityVC = UIActivityViewController(activityItems: [LinkMetaDataManager(url: activityItems.first!)], applicationActivities: nil)
+        return activityVC
     }
 
     func updateUIViewController(_: UIViewControllerType, context _: Context) {}

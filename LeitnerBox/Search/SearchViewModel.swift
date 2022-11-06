@@ -2,7 +2,7 @@
 // SearchViewModel.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
 import CoreData
@@ -15,51 +15,34 @@ enum ReviewStatus {
     case unInitialized
 }
 
-class SearchViewModel: ObservableObject {
-    @AppStorage("pronounceDetailAnswer")
-    private var pronounceDetailAnswer = false
-
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var searchText: String = ""
-
-    @Published
-    var showLeitnersListDialog = false
-
-    @Published
-    var leitner: Leitner
-
-    @Published
-    var editQuestion: Question? = nil
-
-    @Published
-    var selectedSort: SearchSort = .LEVEL
-
+class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+    @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
+    @Published var viewContext: NSManagedObjectContext
+    @Published var searchText: String = ""
+    @Published var showLeitnersListDialog = false
+    @Published var leitner: Leitner
+    @Published var editQuestion: Question?
+    @Published var selectedSort: SearchSort = .level
+    @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
+    @Published var reviewStatus: ReviewStatus = .unInitialized
     private(set) var sorted: [Question] = []
-
-    var synthesizer = AVSpeechSynthesizer()
-
-    var speechDelegate: SpeechDelegate
-
-    @AppStorage("selectedVoiceIdentifire")
-    var selectedVoiceIdentifire = ""
-
-    @Published
-    var reviewStatus: ReviewStatus = .unInitialized
-
+    var synthesizer: AVSpeechSynthesizerProtocol
     var commandCenter: MPRemoteCommandCenter?
+    private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
+    var task: Task<Void, Error>?
 
-    private var voiceSpeech: AVSpeechSynthesisVoice
-
-    init(viewContext: NSManagedObjectContext, leitner: Leitner, voiceSpeech: AVSpeechSynthesisVoice) {
+    init(viewContext: NSManagedObjectContext,
+         leitner: Leitner,
+         voiceSpeech: AVSpeechSynthesisVoiceProtocol,
+         synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()
+    ) {
+        self.synthesizer = synthesizer
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
-        speechDelegate = SpeechDelegate()
-        synthesizer.delegate = speechDelegate
         self.leitner = leitner
-        sort(.DATE)
+        super.init()
+        self.synthesizer.delegate = self
+        sort(.date)
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -90,35 +73,35 @@ class SearchViewModel: ObservableObject {
         selectedSort = sort
         let all = leitner.allQuestions
         switch sort {
-        case .LEVEL:
+        case .level:
             sorted = all.sorted(by: {
                 ($0.level?.level ?? 0, $1.createTime?.timeIntervalSince1970 ?? -1) < ($1.level?.level ?? 0, $0.createTime?.timeIntervalSince1970 ?? -1)
             })
-        case .COMPLETED:
+        case .completed:
             sorted = all.sorted(by: { first, second in
                 (first.completed ? 1 : 0, first.passTime?.timeIntervalSince1970 ?? -1) > (second.completed ? 1 : 0, second.passTime?.timeIntervalSince1970 ?? -1)
             })
-        case .ALPHABET:
+        case .alphabet:
             sorted = all.sorted(by: {
                 ($0.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") < ($1.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
             })
-        case .FAVORITE:
+        case .favorite:
             sorted = all.sorted(by: {
                 ($0.favorite ? 1 : 0, $0.favoriteDate?.timeIntervalSince1970 ?? -1) > ($1.favorite ? 1 : 0, $1.favoriteDate?.timeIntervalSince1970 ?? -1)
             })
-        case .DATE:
+        case .date:
             sorted = all.sorted(by: {
                 ($0.createTime?.timeIntervalSince1970 ?? -1) > ($1.createTime?.timeIntervalSince1970 ?? -1)
             })
-        case .PASSED_TIME:
+        case .passedTime:
             sorted = all.sorted(by: {
                 ($0.passTime?.timeIntervalSince1970 ?? -1) > ($1.passTime?.timeIntervalSince1970 ?? -1)
             })
-        case .NO_TAGS:
+        case .noTags:
             sorted = all.sorted(by: {
                 ($0.tagsArray?.count ?? 0) < ($1.tagsArray?.count ?? 0)
             })
-        case .TAGS:
+        case .tags:
             sorted = all.sorted(by: {
                 ($0.tagsArray?.count ?? 0) > ($1.tagsArray?.count ?? 0)
             })
@@ -145,7 +128,7 @@ class SearchViewModel: ObservableObject {
     }
 
     func pronounceOnce(_ question: Question) {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         pronounce(question)
         reviewStatus = .unInitialized
     }
@@ -154,7 +137,9 @@ class SearchViewModel: ObservableObject {
         reviewStatus = .isPlaying
         let pronounceString = "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")"
         let utterance = AVSpeechUtterance(string: pronounceString)
-        utterance.voice = voiceSpeech
+        if voiceSpeech is AVSpeechSynthesisVoice {
+            utterance.voice = voiceSpeech as? AVSpeechSynthesisVoice
+        }
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier = 1
         if !selectedVoiceIdentifire.isEmpty {
@@ -168,12 +153,8 @@ class SearchViewModel: ObservableObject {
     var lastPlayedQuestion: Question?
     func playReview() {
         reviewStatus = .isPlaying
-        if speechDelegate.viewModel == nil {
-            speechDelegate.viewModel = self
-        }
-
         if synthesizer.isPaused {
-            synthesizer.continueSpeaking()
+            _ = synthesizer.continueSpeaking()
         } else if lastPlayedQuestion != nil {
             // this play because of pause method stop timer and at the result next not called anymore
             withAnimation {
@@ -197,9 +178,9 @@ class SearchViewModel: ObservableObject {
     }
 
     func playNextImmediately() {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         synthesizer = AVSpeechSynthesizer()
-        synthesizer.delegate = speechDelegate
+        synthesizer.delegate = self
         playNext()
     }
 
@@ -213,16 +194,16 @@ class SearchViewModel: ObservableObject {
 
     func pauseReview() {
         reviewStatus = .isPaused
-        speechDelegate.task?.cancel()
+        task?.cancel()
         if synthesizer.isSpeaking {
-            synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
+            _ = synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
         }
     }
 
     func stopReview() {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         reviewStatus = .unInitialized
-        speechDelegate.task?.cancel()
+        task?.cancel()
         lastPlayedQuestion = nil
     }
 
@@ -300,25 +281,20 @@ class SearchViewModel: ObservableObject {
     }
 
     func pauseSpeaking() {
-        synthesizer.pauseSpeaking(at: .immediate)
+        _ = synthesizer.pauseSpeaking(at: .immediate)
     }
 
     func resumeSpeaking() {
-        if synthesizer.isPaused && reviewStatus == .isPlaying {
+        if synthesizer.isPaused, reviewStatus == .isPlaying {
             playReview()
         }
     }
-}
-
-class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var viewModel: SearchViewModel?
-    var task: Task<Void, Error>?
 
     func speechSynthesizer(_: AVSpeechSynthesizer, didFinish _: AVSpeechUtterance) {
-        if viewModel?.hasNext() == true {
+        if hasNext() == true {
             timerTask()
         } else {
-            viewModel?.finished()
+            finished()
         }
     }
 
@@ -326,23 +302,22 @@ class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
         task = Task { [weak self] in
             guard !Task.isCancelled else { return }
             try await Task.sleep(nanoseconds: 2_000_000_000)
-
             await MainActor.run { [weak self] in
-                self?.viewModel?.playNext()
+                self?.playNext()
             }
         }
     }
 }
 
 var searchSorts: [SortModel] = [
-    .init(iconName: "textformat.abc", title: "Alphabet", sortType: .ALPHABET),
-    .init(iconName: "arrow.up.arrow.down.square", title: "Level", sortType: .LEVEL),
-    .init(iconName: "calendar.badge.clock", title: "Create Date", sortType: .DATE),
-    .init(iconName: "calendar.badge.clock", title: "Passed Date", sortType: .PASSED_TIME),
-    .init(iconName: "star", title: "Favorite", sortType: .FAVORITE),
-    .init(iconName: "flag.2.crossed", title: "Completed", sortType: .COMPLETED),
-    .init(iconName: "tag", title: "Tags", sortType: .TAGS),
-    .init(iconName: "tag.slash", title: "Without Tags", sortType: .NO_TAGS),
+    .init(iconName: "textformat.abc", title: "Alphabet", sortType: .alphabet),
+    .init(iconName: "arrow.up.arrow.down.square", title: "Level", sortType: .level),
+    .init(iconName: "calendar.badge.clock", title: "Create Date", sortType: .date),
+    .init(iconName: "calendar.badge.clock", title: "Passed Date", sortType: .passedTime),
+    .init(iconName: "star", title: "Favorite", sortType: .favorite),
+    .init(iconName: "flag.2.crossed", title: "Completed", sortType: .completed),
+    .init(iconName: "tag", title: "Tags", sortType: .tags),
+    .init(iconName: "tag.slash", title: "Without Tags", sortType: .noTags)
 ]
 
 struct SortModel: Hashable {
@@ -352,12 +327,12 @@ struct SortModel: Hashable {
 }
 
 enum SearchSort {
-    case LEVEL
-    case COMPLETED
-    case ALPHABET
-    case FAVORITE
-    case DATE
-    case PASSED_TIME
-    case TAGS
-    case NO_TAGS
+    case level
+    case completed
+    case alphabet
+    case favorite
+    case date
+    case passedTime
+    case tags
+    case noTags
 }

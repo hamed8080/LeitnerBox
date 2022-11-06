@@ -2,10 +2,10 @@
 // QuestionsInsideTagView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import AVFoundation
+import SwiftUI
 
 struct QuestionsInsideTagView: View {
     var tag: Tag
@@ -20,7 +20,7 @@ struct QuestionsInsideTagView: View {
         ZStack {
             List {
                 ForEach(tag.questions) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, ac: AccessControls.normal + [.trailingControls, .microphone])
+                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, aceessControls: AccessControls.normal + [.trailingControls, .microphone])
                         .environmentObject(SearchViewModel(viewContext: tagViewModel.viewContext, leitner: tagViewModel.leitner, voiceSpeech: voiceSpeech))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
@@ -39,13 +39,14 @@ struct QuestionsInsideTagView_Previews: PreviewProvider {
         static let context = PersistenceController.shared.viewContext
 
         @StateObject
-        var vm = TagViewModel(viewContext: context, leitner: leitner)
+        var viewModel = TagViewModel(viewContext: context, leitner: leitner)
 
         var body: some View {
-            QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag(), tagViewModel: vm)
+            QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag(), tagViewModel: viewModel)
                 .preferredColorScheme(.light)
         }
     }
+
     static var previews: some View {
         Preview()
     }

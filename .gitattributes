@@ -1,0 +1,3 @@
+*.html linguist-detectable=false
+*.d linguist-detectable=false
+Makefile linguist-generated=true

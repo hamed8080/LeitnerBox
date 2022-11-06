@@ -2,10 +2,10 @@
 // QuestionSynonymsView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct QuestionSynonymsView: View {
     @EnvironmentObject
@@ -17,7 +17,7 @@ struct QuestionSynonymsView: View {
     var showAddSynonyms = false
 
     @State
-    private var selectedQuestion: Question? = nil
+    private var selectedQuestion: Question?
 
     @Environment(\.managedObjectContext)
     var context: NSManagedObjectContext
@@ -66,13 +66,13 @@ struct QuestionSynonymsView: View {
             }
         }
         .navigationDestination(isPresented: Binding(get: { selectedQuestion != nil }, set: { _ in })) {
-            if let selectedQuestion {
-                AddOrEditQuestionView(vm: .init(viewContext: context, leitner: viewModel.leitner, question: selectedQuestion))
+            if let selectedQuestion = selectedQuestion {
+                AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.leitner, question: selectedQuestion))
             }
         }
         .sheet(isPresented: $showAddSynonyms, onDismiss: nil, content: {
             AddSynonymsView(viewModel: viewModel) {
-               saveDirectlyIfHasAccess()
+                saveDirectlyIfHasAccess()
             }
         })
     }

@@ -2,14 +2,14 @@
 // Leitner+.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import CoreData
 import Foundation
 extension Leitner {
     var totalQuestionCount: Int {
         guard let levels = level?.allObjects as? [Level] else { return 0 }
-        return levels.map { $0.questions?.count ?? 0 }.reduce(0,+)
+        return levels.map { $0.questions?.count ?? 0 }.reduce(0, +)
     }
 
     var tagsArray: [Tag] {
@@ -19,8 +19,8 @@ extension Leitner {
 
     var totalReviewableCount: Int {
         let levels = level?.allObjects as? [Level]
-        let levelCountsArray = levels?.map {
-            level in level.questions?.filter { ($0 as? Question)?.isReviewable ?? false }.count ?? 0
+        let levelCountsArray = levels?.map { level in
+            level.questions?.filter { ($0 as? Question)?.isReviewable ?? false }.count ?? 0
         }
         return levelCountsArray?.reduce(0, +) ?? 0
     }

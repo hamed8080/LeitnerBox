@@ -9,11 +9,21 @@ on:
 jobs:
   build:
     name: Build and Test Unit Tests
-    runs-on: macos-12
-
+    runs-on: macos-latest
+    env:
+      IS_CONTINUOUS_INTEGRATION: 1
     steps:
       - uses: actions/checkout@v3
       - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_13.4.app && /usr/bin/xcodebuild -version
+        run: sudo xcode-select -switch /Applications/Xcode_14.0.app && /usr/bin/xcodebuild -version
       - name: Run Unit Tests
-        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.5' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
+        run: >
+          xcodebuild
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          test
+          -project LeitnerBox.xcodeproj
+          -scheme LeitnerBox
+          -sdk iphonesimulator
+          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0'
+          -only-testing:LeitnerBoxTests
+          IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION | xcpretty && exit ${PIPESTATUS[0]}

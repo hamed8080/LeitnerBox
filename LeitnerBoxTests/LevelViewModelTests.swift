@@ -2,44 +2,54 @@
 // LevelViewModelTests.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 @testable import LeitnerBox
 import SwiftUI
 import XCTest
 
 final class LevelViewModelTests: XCTestCase {
-    var vm: LevelsViewModel!
+    var viewModel: LevelsViewModel!
 
     override func setUp() {
+        try? PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
-        vm = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
+        viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
     }
 
     func test_filter() {
-        vm.searchWord = ""
-        XCTAssertTrue(vm.filtered.count == 0, "filter count is not equal all question!")
+        viewModel.searchWord = ""
+        XCTAssertTrue(viewModel.filtered.count == 0, "filter count is not equal all question!")
 
-        vm.searchWord = "#"
-        XCTAssertTrue(vm.filtered.count == 0, "empty tag is not equal all question!")
+        viewModel.searchWord = "#"
+        XCTAssertTrue(viewModel.filtered.count == 0, "empty tag is not equal all question!")
 
-        vm.searchWord = "#Tag"
-        XCTAssertTrue(vm.filtered.count > 0, "couldn't find any tag!")
+        viewModel.searchWord = "#Tag"
+        XCTAssertTrue(viewModel.filtered.count > 0, "couldn't find any tag!")
 
-        vm.searchWord = "Quesiton"
-        XCTAssertTrue(vm.filtered.count > 0, "couldn't find any quetion!")
+        viewModel.searchWord = "Quesiton"
+        XCTAssertTrue(viewModel.filtered.count > 0, "couldn't find any quetion!")
     }
 
     func test_edit_days_to_recommend() {
-        vm.selectedLevel = vm.levels.first!
-        vm.daysToRecommend = 365
-        vm.saveDaysToRecommned()
-        XCTAssertEqual(vm.levels.first(where: { $0.objectID == vm.selectedLevel?.objectID })?.daysToRecommend, 365)
+        viewModel.selectedLevel = viewModel.levels.first!
+        viewModel.selectedLevel?.daysToRecommend = 365
+        PersistenceController.saveDB(viewContext: PersistenceController.shared.viewContext)
+        XCTAssertEqual(viewModel.levels.first(where: { $0.objectID == viewModel.selectedLevel?.objectID })?.daysToRecommend, 365)
+    }
+
+    override func tearDown() {
+        viewModel = nil
     }
 
     func test_performance() {
-        measure {
-            vm.load()
+        let isCI = ProcessInfo.processInfo.environment["IS_CONTINUOUS_INTEGRATION"] == "1"
+        if !isCI {
+            measure {
+                viewModel.load()
+            }
+        } else {
+            XCTAssertTrue(true)
         }
     }
 }

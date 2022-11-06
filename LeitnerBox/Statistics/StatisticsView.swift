@@ -2,19 +2,19 @@
 // StatisticsView.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import Charts
 import SwiftUI
 
 struct StatisticsView: View {
     @EnvironmentObject
-    var vm: StatisticsViewModel
+    var viewModel: StatisticsViewModel
 
     var body: some View {
         ScrollView {
             VStack {
-                Picker("Timeframe", selection: $vm.timeframe) {
+                Picker("Timeframe", selection: $viewModel.timeframe) {
                     Label("Week", systemImage: "calendar")
                         .tag(Timeframe.week)
 
@@ -28,7 +28,7 @@ struct StatisticsView: View {
                 .padding([.leading, .trailing, .bottom], 10)
 
                 Chart {
-                    ForEach(vm.plaotsForSelectedTime, id: \.self) { dayStatic in
+                    ForEach(viewModel.plaotsForSelectedTime, id: \.self) { dayStatic in
                         BarMark(
                             x: .value("Day", dayStatic.date, unit: .day),
                             y: .value("Count", dayStatic.count)
@@ -45,7 +45,7 @@ struct StatisticsView: View {
                 .padding()
 
                 PercentageView(
-                    percent: $vm.percentage,
+                    percent: $viewModel.percentage,
                     bottomText: Text("Total Percent")
                         .font(.title3.bold())
                         .foregroundColor(.gray)
@@ -53,8 +53,8 @@ struct StatisticsView: View {
                 .frame(width: 320, height: 320)
                 .onAppear {
                     withAnimation {
-                        if let leitner = vm.statistics.first?.question?.level?.leitner {
-                            vm.percentage = leitner.succcessPercentage
+                        if let leitner = viewModel.statistics.first?.question?.level?.leitner {
+                            viewModel.percentage = leitner.succcessPercentage
                         }
                     }
                 }
@@ -67,10 +67,10 @@ struct StatisticsView: View {
 struct StatisticsView_Previews: PreviewProvider {
     struct Preview: View {
         @StateObject
-        var vm = StatisticsViewModel(viewContext: PersistenceController.shared.viewContext)
+        var viewModel = StatisticsViewModel(viewContext: PersistenceController.shared.viewContext)
         var body: some View {
             StatisticsView()
-                .environmentObject(vm)
+                .environmentObject(viewModel)
         }
     }
 

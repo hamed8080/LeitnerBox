@@ -2,7 +2,7 @@
 // SplashScreen.swift
 // Copyright (c) 2022 LeitnerBox
 //
-// Created by Hamed Hosseini on 9/2/22.
+// Created by Hamed Hosseini on 10/28/22.
 
 import Foundation
 import SwiftUI
@@ -21,7 +21,7 @@ struct SplashScreen: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .animatableGradient(from: colors1, to: colors2, progress: progress)
+                .animatableGradient(from: colors1, toColor: colors2, progress: progress)
                 .mask {
                     Text("Leitner Box".uppercased())
                         .font(.system(size: 52, weight: .heavy, design: .rounded))
