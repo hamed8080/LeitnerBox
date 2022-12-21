@@ -15,5 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_14.2.app && /usr/bin/xcodebuild -version
+      - name: Clean build
+        run: xcodebuild clean
       - name: Run Unit Tests
         run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.2' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
