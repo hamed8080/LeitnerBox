@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and Test Unit Tests
-    runs-on: macos-12.3
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v3
