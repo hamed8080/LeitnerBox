@@ -51,7 +51,7 @@ final class LeitnerViewModelTests: XCTestCase {
     func test_delete_leitner() {
         let leitner = viewModel.leitners.first!
         viewModel.delete(leitner)
-        XCTAssertFalse(viewModel.leitners.contains(where: { $0.id == leitner.id }))
+        XCTAssertFalse(viewModel.leitners.contains(where: { $0 == leitner }))
     }
 
     func test_check_newId_for_leitner_added() {

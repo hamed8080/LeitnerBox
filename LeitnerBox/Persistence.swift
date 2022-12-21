@@ -129,8 +129,7 @@ extension NSPersistentCloudKitContainer {
 // MARK: Generate the mock datas.
 
 extension PersistenceController {
-    @MainActor
-    func generateAndFillLeitner() {
+    @MainActor func generateAndFillLeitner() {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in

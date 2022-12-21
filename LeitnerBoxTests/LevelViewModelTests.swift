@@ -11,7 +11,8 @@ import XCTest
 final class LevelViewModelTests: XCTestCase {
     var viewModel: LevelsViewModel!
 
-    override func setUp() {
+    override func setUp() async throws {
+        await PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
         viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
     }
@@ -32,8 +33,8 @@ final class LevelViewModelTests: XCTestCase {
 
     func test_edit_days_to_recommend() {
         viewModel.selectedLevel = viewModel.levels.first!
-        viewModel.daysToRecommend = 365
-        viewModel.saveDaysToRecommned()
+        viewModel.selectedLevel?.daysToRecommend = 365
+        PersistenceController.saveDB(viewContext: PersistenceController.shared.viewContext)
         XCTAssertEqual(viewModel.levels.first(where: { $0.objectID == viewModel.selectedLevel?.objectID })?.daysToRecommend, 365)
     }
 

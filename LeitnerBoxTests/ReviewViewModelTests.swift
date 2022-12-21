@@ -7,15 +7,16 @@
 @testable import LeitnerBox
 import SwiftUI
 import XCTest
+import AVFoundation
 
 final class ReviewViewModelTests: XCTestCase {
     var viewModel: ReviewViewModel!
 
-    override func setUp() {
-        PersistenceController.generateAndFillLeitner()
+    override func setUp() async throws {
+        await PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
         let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
-        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level)
+        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level, voiceSpeech: AVSpeechSynthesisVoice.speechVoices().first!)
     }
 
     func test_delete_question() {

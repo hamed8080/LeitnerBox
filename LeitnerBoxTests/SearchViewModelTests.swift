@@ -7,13 +7,15 @@
 @testable import LeitnerBox
 import SwiftUI
 import XCTest
+import AVFoundation
 
 final class SearchViewModelTests: XCTestCase {
     var viewModel: SearchViewModel!
 
-    override func setUp() {
+    override func setUp() async throws {
+        await PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
-        vm = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
+        viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: AVSpeechSynthesisVoice.speechVoices().first!)
     }
 
     func test_delete_items_with_offset() {
