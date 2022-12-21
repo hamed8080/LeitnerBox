@@ -38,6 +38,10 @@ final class LevelViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.levels.first(where: { $0.objectID == viewModel.selectedLevel?.objectID })?.daysToRecommend, 365)
     }
 
+    override func tearDown() {
+        viewModel = nil
+    }
+
     func test_performance() {
         measure {
             viewModel.load()

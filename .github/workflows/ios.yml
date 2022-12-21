@@ -16,4 +16,4 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_13.4.app && /usr/bin/xcodebuild -version
       - name: Run Unit Tests
-        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.5' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
+        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.2' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
