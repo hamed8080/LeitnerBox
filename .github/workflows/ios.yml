@@ -9,13 +9,13 @@ on:
 jobs:
   build:
     name: Build and Test Unit Tests
-    runs-on: macos-13.1
+    runs-on: macos-12.3
 
     steps:
       - uses: actions/checkout@v3
       - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_14.2.app && /usr/bin/xcodebuild -version
+        run: sudo xcode-select -switch /Applications/Xcode_14.0.app && /usr/bin/xcodebuild -version
       - name: Clean build
         run: xcodebuild clean
       - name: Run Unit Tests
-        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.2' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
+        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.0' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
