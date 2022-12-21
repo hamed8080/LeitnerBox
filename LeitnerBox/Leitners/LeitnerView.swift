@@ -36,20 +36,22 @@ struct LeitnerView: View {
         }
         .animation(.easeInOut, value: selectedLeitnrId)
         .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: viewModel.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
-        .sheet(isPresented: $viewModel.showBackupFileShareSheet, onDismiss: {
+        .sheet(isPresented: Binding(get: {viewModel.backupFile != nil}, set: {_ in})) {
             if .iOS == true {
-                try? viewModel.backupFile?.deleteDirectory()
+                Task {
+                    await viewModel.deleteBackupFile()
+                }
             }
-        }, content: {
+        } content: {
             if let fileUrl = viewModel.backupFile?.fileURL {
                 ActivityViewControllerWrapper(activityItems: [fileUrl])
             } else {
                 EmptyView()
             }
-        })
-        .customDialog(isShowing: $viewModel.showEditOrAddLeitnerAlert, content: {
+        }
+        .customDialog(isShowing: $viewModel.showEditOrAddLeitnerAlert) {
             editOrAddLeitnerView
-        })
+        }
         .onAppear {
             if selectedLeitnrId == nil {
                 selectedLeitnrId = viewModel.leitners.first?.id
@@ -145,9 +147,17 @@ struct SidebarListView: View {
     var toolbarView: some View {
         HStack {
             Button {
-                viewModel.exportDB()
+                Task {
+                    await viewModel.exportDB()
+                }
             } label: {
-                Label("Export", systemImage: "square.and.arrow.up")
+                if viewModel.isBackuping {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .tint(Color.accentColor)
+                } else {
+                    Label("Export", systemImage: "square.and.arrow.up")
+                }
             }
 
             Button {

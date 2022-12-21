@@ -6,8 +6,6 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>NSExtensionActivationSupportsFileWithMaxCount</key>
-			<true/>
 			<key>NSExtensionActivationRule</key>
 			<string>SUBQUERY (
                 extensionItems,
@@ -15,9 +13,11 @@
                 SUBQUERY (
                     $extensionItem.attachments,
                     $attachment,
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.file-url&quot;
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.file-url"
                 ).@count == $extensionItem.attachments.@count
             ).@count &gt; 0</string>
+			<key>NSExtensionActivationSupportsFileWithMaxCount</key>
+			<true/>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>

@@ -29,9 +29,6 @@ class LeitnerViewModel: ObservableObject {
     var backToTopLevel = false
 
     @Published
-    var showBackupFileShareSheet = false
-
-    @Published
     var backupFile: TemporaryFile?
 
     @Published
@@ -39,6 +36,9 @@ class LeitnerViewModel: ObservableObject {
 
     @Published
     var voices: [AVSpeechSynthesisVoice] = []
+
+    @Published
+    var isBackuping = false
 
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
@@ -130,7 +130,16 @@ class LeitnerViewModel: ObservableObject {
         selectedLeitner = nil
     }
 
-    func exportDB() {
+    func deleteBackupFile() async {
+        try? backupFile?.deleteDirectory()
+        await MainActor.run {
+            backupFile = nil
+        }
+    }
+    func exportDB() async {
+        await MainActor.run {
+            isBackuping = true
+        }
         let backupStoreOptions: [AnyHashable: Any] = [
             NSReadOnlyPersistentStoreOption: true,
             // Disable write-ahead logging. Benefit: the entire store will be
@@ -140,14 +149,10 @@ class LeitnerViewModel: ObservableObject {
             // Minimize file size
             NSSQLiteManualVacuumOption: true
         ]
-
         guard let sourcePersistentStore = PersistenceController.shared.container.persistentStoreCoordinator.persistentStores.first else { return }
-
         let managedObjectModel = PersistenceController.shared.container.managedObjectModel
-
         let backupPersistentContainer = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let intermediateStoreOptions = (sourcePersistentStore.options ?? [:]).merging([NSReadOnlyPersistentStoreOption: true], uniquingKeysWith: { $1 })
-
         do {
             let newPersistentStore = try backupPersistentContainer.addPersistentStore(
                 ofType: sourcePersistentStore.type,
@@ -158,10 +163,12 @@ class LeitnerViewModel: ObservableObject {
 
             let exportFile = makeFilename(sourcePersistentStore)
             let backupFile = try TemporaryFile(creatingTempDirectoryForFilename: exportFile)
-            self.backupFile = backupFile
             try backupPersistentContainer.migratePersistentStore(newPersistentStore, to: backupFile.fileURL, options: backupStoreOptions, withType: NSSQLiteStoreType)
+            await MainActor.run {
+                isBackuping = false
+                self.backupFile = backupFile
+            }
             print("file exported to\(backupFile.fileURL)")
-            showBackupFileShareSheet.toggle()
         } catch {
             print("failed to export: Error \(error.localizedDescription)")
         }
