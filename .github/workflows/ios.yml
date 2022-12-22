@@ -15,12 +15,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_14.0.app && /usr/bin/xcodebuild -version
-      - name: Clean build
-        run: xcodebuild clean
-      - name: Set Environment Values
-        run: export IS_CONTINUOUS_INTEGRATION="1" 
       - name: Run Unit Tests
         run: >
+          export IS_CONTINUOUS_INTEGRATION="1"
           xcodebuild
           test
           -project LeitnerBox.xcodeproj
