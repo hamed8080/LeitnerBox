@@ -17,5 +17,14 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode_14.0.app && /usr/bin/xcodebuild -version
       - name: Clean build
         run: xcodebuild clean
+      - name: Set Environment Values
+        run: export IS_CONTINUOUS_INTEGRATION="1" 
       - name: Run Unit Tests
-        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
+        run: xcodebuild \
+        test \
+        -project LeitnerBox.xcodeproj \
+        -scheme LeitnerBox \
+        -sdk iphonesimulator \
+        -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
+        -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]} \
+        IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION

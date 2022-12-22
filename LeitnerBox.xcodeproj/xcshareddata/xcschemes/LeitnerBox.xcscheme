@@ -28,10 +28,24 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "NO"
       codeCoverageEnabled = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0543D0EB2870B3AC005807ED"
+            BuildableName = "LeitnerBoxTests.xctest"
+            BlueprintName = "LeitnerBoxTests"
+            ReferencedContainer = "container:LeitnerBox.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "XCODE_RUNNING_FOR_TEST"
             value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "IS_CONTINUOUS_INTEGRATION"
+            value = "$(IS_CONTINUOUS_INTEGRATION)"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
