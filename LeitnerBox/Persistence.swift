@@ -8,7 +8,8 @@ import CoreData
 import SwiftUI
 
 class PersistenceController: ObservableObject {
-    static let inMemory = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    static let isTest: Bool = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_TEST"] == "1"
+    static let inMemory = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" || isTest
     static var shared = PersistenceController(inMemory: inMemory)
 
     var viewContext: NSManagedObjectContext {
@@ -25,9 +26,6 @@ class PersistenceController: ObservableObject {
         }
         Task {
             _ = try await container.loadPersistentStoresAsync
-            if inMemory {
-                await self.generateAndFillLeitner()
-            }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
@@ -129,7 +127,7 @@ extension NSPersistentCloudKitContainer {
 // MARK: Generate the mock datas.
 
 extension PersistenceController {
-    @MainActor func generateAndFillLeitner() {
+    func generateAndFillLeitner() throws {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
@@ -142,13 +140,7 @@ extension PersistenceController {
                 }
             }
         }
-
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        try viewContext.save()
     }
 
     func generateLevels(leitner: Leitner) -> [Level] {

@@ -11,8 +11,8 @@ import XCTest
 final class LevelViewModelTests: XCTestCase {
     var viewModel: LevelsViewModel!
 
-    override func setUp() async throws {
-        await PersistenceController.shared.generateAndFillLeitner()
+    override func setUp() {
+        try? PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
         viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
     }

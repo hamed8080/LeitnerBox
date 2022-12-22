@@ -9,14 +9,9 @@ import CoreData
 import SwiftUI
 
 struct LeitnerView: View {
-    @EnvironmentObject
-    var viewModel: LeitnerViewModel
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
-
-    @State
-    var selectedLeitnrId: Leitner.ID?
+    @EnvironmentObject var viewModel: LeitnerViewModel
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @State var selectedLeitnrId: Leitner.ID?
 
     var body: some View {
         NavigationSplitView {
@@ -247,16 +242,23 @@ struct EmptyLeitnerAnimation: View {
 
 struct LeitnerView_Previews: PreviewProvider {
     static var leitner: Leitner {
+        let context = PersistenceController.shared.viewContext
         let req = Leitner.fetchRequest()
         req.fetchLimit = 1
-        let leitner = (try? PersistenceController.shared.viewContext.fetch(req))?.first ?? Leitner(context: PersistenceController.shared.viewContext)
+        let leitner = (try? context.fetch(req))?.first ?? Leitner(context: context)
         return leitner
     }
 
     struct Preview: View {
+        var viewModel: LeitnerViewModel {
+            try? PersistenceController.shared.generateAndFillLeitner()
+            return LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
+        }
+
         var body: some View {
             LeitnerView()
-                .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+                .environmentObject(viewModel)
         }
     }
 

@@ -42,9 +42,9 @@ class LeitnerViewModel: ObservableObject {
 
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
-    init(viewContext: NSManagedObjectContext) {
+    init(viewContext: NSManagedObjectContext, voices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })) {
         self.viewContext = viewContext
-        voices = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })
+        self.voices = voices
         selectedVoiceIdentifire = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
         load()
     }

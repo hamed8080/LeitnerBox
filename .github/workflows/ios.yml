@@ -18,4 +18,4 @@ jobs:
       - name: Clean build
         run: xcodebuild clean
       - name: Run Unit Tests
-        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.0' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}
+        run: xcodebuild test -project LeitnerBox.xcodeproj -scheme LeitnerBox -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]}

@@ -15,50 +15,33 @@ enum ReviewStatus {
     case unInitialized
 }
 
-class SearchViewModel: ObservableObject {
-    @AppStorage("pronounceDetailAnswer")
-    private var pronounceDetailAnswer = false
-
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var searchText: String = ""
-
-    @Published
-    var showLeitnersListDialog = false
-
-    @Published
-    var leitner: Leitner
-
-    @Published
-    var editQuestion: Question?
-
-    @Published
-    var selectedSort: SearchSort = .level
-
+class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+    @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
+    @Published var viewContext: NSManagedObjectContext
+    @Published var searchText: String = ""
+    @Published var showLeitnersListDialog = false
+    @Published var leitner: Leitner
+    @Published var editQuestion: Question?
+    @Published var selectedSort: SearchSort = .level
+    @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
+    @Published var reviewStatus: ReviewStatus = .unInitialized
     private(set) var sorted: [Question] = []
-
-    var synthesizer = AVSpeechSynthesizer()
-
-    var speechDelegate: SpeechDelegate
-
-    @AppStorage("selectedVoiceIdentifire")
-    var selectedVoiceIdentifire = ""
-
-    @Published
-    var reviewStatus: ReviewStatus = .unInitialized
-
+    var synthesizer: AVSpeechSynthesizerProtocol
     var commandCenter: MPRemoteCommandCenter?
+    private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
+    var task: Task<Void, Error>?
 
-    private var voiceSpeech: AVSpeechSynthesisVoice
-
-    init(viewContext: NSManagedObjectContext, leitner: Leitner, voiceSpeech: AVSpeechSynthesisVoice) {
+    init(viewContext: NSManagedObjectContext,
+         leitner: Leitner,
+         voiceSpeech: AVSpeechSynthesisVoiceProtocol,
+         synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()
+    ) {
+        self.synthesizer = synthesizer
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
-        speechDelegate = SpeechDelegate()
-        synthesizer.delegate = speechDelegate
         self.leitner = leitner
+        super.init()
+        self.synthesizer.delegate = self
         sort(.date)
     }
 
@@ -145,7 +128,7 @@ class SearchViewModel: ObservableObject {
     }
 
     func pronounceOnce(_ question: Question) {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         pronounce(question)
         reviewStatus = .unInitialized
     }
@@ -154,7 +137,9 @@ class SearchViewModel: ObservableObject {
         reviewStatus = .isPlaying
         let pronounceString = "\(question.question ?? "") \(pronounceDetailAnswer ? (question.detailDescription ?? "") : "")"
         let utterance = AVSpeechUtterance(string: pronounceString)
-        utterance.voice = voiceSpeech
+        if voiceSpeech is AVSpeechSynthesisVoice {
+            utterance.voice = voiceSpeech as? AVSpeechSynthesisVoice
+        }
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance.pitchMultiplier = 1
         if !selectedVoiceIdentifire.isEmpty {
@@ -168,12 +153,8 @@ class SearchViewModel: ObservableObject {
     var lastPlayedQuestion: Question?
     func playReview() {
         reviewStatus = .isPlaying
-        if speechDelegate.viewModel == nil {
-            speechDelegate.viewModel = self
-        }
-
         if synthesizer.isPaused {
-            synthesizer.continueSpeaking()
+            _ = synthesizer.continueSpeaking()
         } else if lastPlayedQuestion != nil {
             // this play because of pause method stop timer and at the result next not called anymore
             withAnimation {
@@ -197,9 +178,9 @@ class SearchViewModel: ObservableObject {
     }
 
     func playNextImmediately() {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         synthesizer = AVSpeechSynthesizer()
-        synthesizer.delegate = speechDelegate
+        synthesizer.delegate = self
         playNext()
     }
 
@@ -213,16 +194,16 @@ class SearchViewModel: ObservableObject {
 
     func pauseReview() {
         reviewStatus = .isPaused
-        speechDelegate.task?.cancel()
+        task?.cancel()
         if synthesizer.isSpeaking {
-            synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
+            _ = synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
         }
     }
 
     func stopReview() {
-        synthesizer.stopSpeaking(at: .immediate)
+        _ = synthesizer.stopSpeaking(at: .immediate)
         reviewStatus = .unInitialized
-        speechDelegate.task?.cancel()
+        task?.cancel()
         lastPlayedQuestion = nil
     }
 
@@ -300,7 +281,7 @@ class SearchViewModel: ObservableObject {
     }
 
     func pauseSpeaking() {
-        synthesizer.pauseSpeaking(at: .immediate)
+        _ = synthesizer.pauseSpeaking(at: .immediate)
     }
 
     func resumeSpeaking() {
@@ -308,17 +289,12 @@ class SearchViewModel: ObservableObject {
             playReview()
         }
     }
-}
-
-class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var viewModel: SearchViewModel?
-    var task: Task<Void, Error>?
 
     func speechSynthesizer(_: AVSpeechSynthesizer, didFinish _: AVSpeechUtterance) {
-        if viewModel?.hasNext() == true {
+        if hasNext() == true {
             timerTask()
         } else {
-            viewModel?.finished()
+            finished()
         }
     }
 
@@ -326,9 +302,8 @@ class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
         task = Task { [weak self] in
             guard !Task.isCancelled else { return }
             try await Task.sleep(nanoseconds: 2_000_000_000)
-
             await MainActor.run { [weak self] in
-                self?.viewModel?.playNext()
+                self?.playNext()
             }
         }
     }

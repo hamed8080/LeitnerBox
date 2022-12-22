@@ -8,13 +8,9 @@ import CoreData
 import SwiftUI
 
 struct SearchView: View {
-    @EnvironmentObject
-    var viewModel: SearchViewModel
-
+    @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.colorScheme) var colorScheme
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         ZStack {
@@ -213,8 +209,16 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
-        @StateObject
-        var viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+
+        var viewModel: SearchViewModel {
+            try? PersistenceController.shared.generateAndFillLeitner()
+            return SearchViewModel(
+                viewContext: PersistenceController.shared.viewContext,
+                leitner: LeitnerView_Previews.leitner,
+                voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice
+            )
+        }
+
         var body: some View {
             SearchView()
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)

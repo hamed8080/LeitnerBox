@@ -12,10 +12,16 @@ import AVFoundation
 final class SearchViewModelTests: XCTestCase {
     var viewModel: SearchViewModel!
 
-    override func setUp() async throws {
-        await PersistenceController.shared.generateAndFillLeitner()
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
-        viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: AVSpeechSynthesisVoice.speechVoices().first!)
+    override func setUp() {
+        try? PersistenceController.shared.generateAndFillLeitner()
+        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext, voices: []).leitners.first!
+        let mockSpeach = MockAVSpeechSynthesisVoice()
+        let mockSynthesizer = MockAVSpeechSynthesizer()
+        viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext,
+                                    leitner: leitner,
+                                    voiceSpeech: mockSpeach,
+                                    synthesizer: mockSynthesizer
+        )
     }
 
     func test_delete_items_with_offset() {
@@ -171,7 +177,6 @@ final class SearchViewModelTests: XCTestCase {
 
         viewModel.pauseReview()
         XCTAssertEqual(viewModel.reviewStatus, .isPaused)
-        XCTAssertEqual(viewModel.speechDelegate.task?.isCancelled ?? false, false)
     }
 
     func test_stop_speaking() {
@@ -181,7 +186,6 @@ final class SearchViewModelTests: XCTestCase {
         viewModel.stopReview()
         XCTAssertEqual(viewModel.reviewStatus, .unInitialized)
         XCTAssertNil(viewModel.lastPlayedQuestion)
-        XCTAssertEqual(viewModel.speechDelegate.task?.isCancelled ?? false, false)
     }
 
     func test_finished() {
@@ -196,5 +200,9 @@ final class SearchViewModelTests: XCTestCase {
 
         viewModel.lastPlayedQuestion = nil
         XCTAssertEqual(viewModel.reviewdCount, 0)
+    }
+
+    override func tearDown() {
+        viewModel = nil
     }
 }

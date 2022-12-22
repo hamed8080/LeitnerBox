@@ -11,8 +11,8 @@ import XCTest
 final class QuestionViewModelTests: XCTestCase {
     var viewModel: QuestionViewModel!
 
-    override func setUp() async throws {
-        await PersistenceController.shared.generateAndFillLeitner()
+    override func setUp() {
+        try? PersistenceController.shared.generateAndFillLeitner()
         let viewContext = PersistenceController.shared.viewContext
         let leitner = LeitnerViewModel(viewContext: viewContext).leitners.first!
         let question = Question(context: viewContext)

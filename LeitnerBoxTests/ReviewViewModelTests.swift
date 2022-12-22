@@ -12,11 +12,13 @@ import AVFoundation
 final class ReviewViewModelTests: XCTestCase {
     var viewModel: ReviewViewModel!
 
-    override func setUp() async throws {
-        await PersistenceController.shared.generateAndFillLeitner()
+    override func setUp() {
+        try? PersistenceController.shared.generateAndFillLeitner()
         let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
         let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
-        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level, voiceSpeech: AVSpeechSynthesisVoice.speechVoices().first!)
+        let mockSpeech = MockAVSpeechSynthesisVoice()
+        let synthesizer = MockAVSpeechSynthesizer()
+        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level, voiceSpeech: mockSpeech, synthesizer: synthesizer)
     }
 
     func test_delete_question() {
