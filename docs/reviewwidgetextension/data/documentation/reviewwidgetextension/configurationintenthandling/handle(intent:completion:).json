@@ -1,0 +1,426 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentHandling"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentHandling\/handle(intent:completion:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@ReviewWidgetExtension@objc(pl)ConfigurationIntentHandling(im)handleConfiguration:completion:",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "handle"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "intent"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+        "text" : "ConfigurationIntent"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "completion"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntentResponse",
+        "text" : "ConfigurationIntentResponse"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> Swift"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s4Voida",
+        "text" : "Void"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "12.0",
+        "name" : "iOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "11.0",
+        "name" : "macOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "5.0",
+        "name" : "watchOS",
+        "unavailable" : false
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "handle(intent:completion:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : "(handleConfiguration:completion:) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "optional"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "handle"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "intent"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntent",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+              "text" : "ConfigurationIntent"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "completion"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "attribute",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
+            },
+            {
+              "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentResponse",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntentResponse",
+              "text" : "ConfigurationIntentResponse"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> Swift"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s4Voida",
+              "text" : "Void"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/configurationintenthandling\/handle(intent:completion:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ConfigurationIntent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntent"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntent",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ConfigurationIntent",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/configurationintent"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ConfigurationIntentHandling": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentHandling"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentHandling",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentHandling"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ConfigurationIntentHandling",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/configurationintenthandling"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ConfigurationIntentHandling/handle(intent:completion:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "handle"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+      "text" : "ConfigurationIntent"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntentResponse",
+      "text" : "ConfigurationIntentResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> Swift"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentHandling\/handle(intent:completion:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "handle(intent:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/configurationintenthandling\/handle(intent:completion:)"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ConfigurationIntentResponse": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntentResponse",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentResponse"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/configurationintentresponse"
+}
+}
+}

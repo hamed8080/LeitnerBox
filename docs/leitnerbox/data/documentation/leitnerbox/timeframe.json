@@ -1,0 +1,367 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10LeitnerBox9TimeframeO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Timeframe"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Timeframe"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "Timeframe"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Timeframe"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s12CaseIterableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SY",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/month",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/today",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/week",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/year"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/Equatable-Implementations",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/timeframe"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SY": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Timeframe"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Timeframe"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Timeframe",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/equatable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/rawrepresentable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/init(rawvalue:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/month": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "month"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/month",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Timeframe.month",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/month"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/today": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "today"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/today",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Timeframe.today",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/today"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/week": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "week"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/week",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Timeframe.week",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/week"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Timeframe/year": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "year"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Timeframe\/year",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Timeframe.year",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/timeframe\/year"
+},
+"doc://ir.amozkade.LeitnerBoxd/s12CaseIterableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s12CaseIterableP",
+  "title" : "Swift.CaseIterable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/s8SendableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

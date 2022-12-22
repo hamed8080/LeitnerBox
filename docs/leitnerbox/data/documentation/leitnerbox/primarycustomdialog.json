@@ -1,0 +1,909 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10LeitnerBox19PrimaryCustomDialogV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "PrimaryCustomDialog"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "PrimaryCustomDialog"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "PrimaryCustomDialog"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "PrimaryCustomDialog"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI4ViewP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/init(title:message:systemImageName:textBinding:hideDialog:textPlaceholder:submitTitle:cancelTitle:onSubmit:onClose:colorScheme:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/body",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/cancelTitle",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/colorScheme",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/hideDialog",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/message",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/onClose",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/onSubmit",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/submitTitle",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/systemImageName",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/textBinding",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/textPlaceholder",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/title"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/View-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/primarycustomdialog"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI4ViewP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI4ViewP",
+  "title" : "SwiftUI.View",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PrimaryCustomDialog"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PrimaryCustomDialog"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "PrimaryCustomDialog",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/View-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/View-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "View Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/view-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/body": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "body"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "some"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI4ViewP",
+      "text" : "View"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/body",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "body",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/body"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/cancelTitle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cancelTitle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/cancelTitle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "cancelTitle",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/canceltitle"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/colorScheme": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "colorScheme"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI11ColorSchemeO",
+      "text" : "ColorScheme"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/colorScheme",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "colorScheme",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/colorscheme"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/hideDialog": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hideDialog"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/hideDialog",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hideDialog",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/hidedialog"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/init(title:message:systemImageName:textBinding:hideDialog:textPlaceholder:submitTitle:cancelTitle:onSubmit:onClose:colorScheme:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "title"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "message"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "systemImageName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "textBinding"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI7BindingV",
+      "text" : "Binding"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ">?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "hideDialog"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI7BindingV",
+      "text" : "Binding"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "textPlaceholder"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "submitTitle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "cancelTitle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "onSubmit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "onClose"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "colorScheme"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI11EnvironmentV",
+      "text" : "Environment"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI11ColorSchemeO",
+      "text" : "ColorScheme"
+    },
+    {
+      "kind" : "text",
+      "text" : ">)"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/init(title:message:systemImageName:textBinding:hideDialog:textPlaceholder:submitTitle:cancelTitle:onSubmit:onClose:colorScheme:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(title:message:systemImageName:textBinding:hideDialog:textPlaceholder:submitTitle:cancelTitle:onSubmit:onClose:colorScheme:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/init(title:message:systemimagename:textbinding:hidedialog:textplaceholder:submittitle:canceltitle:onsubmit:onclose:colorscheme:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/message": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "message"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/message",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "message",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/message"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/onClose": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "onClose"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/onClose",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "onClose",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/onclose"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/onSubmit": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "onSubmit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/onSubmit",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "onSubmit",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/onsubmit"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/submitTitle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "submitTitle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/submitTitle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "submitTitle",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/submittitle"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/systemImageName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "systemImageName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/systemImageName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "systemImageName",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/systemimagename"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/textBinding": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "textBinding"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI7BindingV",
+      "text" : "Binding"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ">?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/textBinding",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "textBinding",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/textbinding"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/textPlaceholder": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "textPlaceholder"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/textPlaceholder",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "textPlaceholder",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/textplaceholder"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/PrimaryCustomDialog/title": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "title"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/PrimaryCustomDialog\/title",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "title",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/primarycustomdialog\/title"
+},
+"doc://ir.amozkade.LeitnerBoxd/s8SendableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

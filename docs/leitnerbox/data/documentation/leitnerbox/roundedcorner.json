@@ -1,0 +1,435 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10LeitnerBox13RoundedCornerV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "RoundedCorner"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "RoundedCorner"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "RoundedCorner"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "RoundedCorner"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI10AnimatableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI5ShapeP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI4ViewP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/init()",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/init(radius:corners:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/corners",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/radius"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/path(in:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/Animatable-Implementations",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/Shape-Implementations",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/View-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/roundedcorner"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI10AnimatableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI10AnimatableP",
+  "title" : "SwiftUI.Animatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI4ViewP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI4ViewP",
+  "title" : "SwiftUI.View",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI5ShapeP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI5ShapeP",
+  "title" : "SwiftUI.Shape",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RoundedCorner"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RoundedCorner"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "RoundedCorner",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/Animatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/Animatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Animatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/animatable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/Shape-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/Shape-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Shape Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/shape-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/View-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/View-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "View Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/view-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/corners": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "corners"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@UIRectCorner",
+      "text" : "UIRectCorner"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/corners",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "corners",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/corners"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/init()"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/init(radius:corners:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "radius"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "corners"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@UIRectCorner",
+      "text" : "UIRectCorner"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/init(radius:corners:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(radius:corners:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/init(radius:corners:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/path(in:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "path"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "in"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@S@CGRect",
+      "text" : "CGRect"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI4PathV",
+      "text" : "Path"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/path(in:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "path(in:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/path(in:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/RoundedCorner/radius": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "radius"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/RoundedCorner\/radius",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "radius",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/roundedcorner\/radius"
+},
+"doc://ir.amozkade.LeitnerBoxd/s8SendableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

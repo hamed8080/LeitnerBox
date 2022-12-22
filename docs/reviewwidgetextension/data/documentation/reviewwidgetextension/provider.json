@@ -1,0 +1,585 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:21ReviewWidgetExtension8ProviderV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Provider"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Provider"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "Provider"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Provider"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s8SendableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/9WidgetKit22IntentTimelineProviderP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/init()",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/init(topQuestionsData:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/allQuestion",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/topQuestionsData"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/getSnapshot(for:in:completion:)",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/getTimeline(for:in:completion:)",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/placeholder(in:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/IntentTimelineProvider-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/provider"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/9WidgetKit22IntentTimelineProviderP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/9WidgetKit22IntentTimelineProviderP",
+  "title" : "WidgetKit.IntentTimelineProvider",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Provider",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/IntentTimelineProvider-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/IntentTimelineProvider-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "IntentTimelineProvider Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/intenttimelineprovider-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/allQuestion": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "allQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:21ReviewWidgetExtension0B8QuestionC",
+      "text" : "WidgetQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/allQuestion",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "allQuestion",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/allquestion"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/getSnapshot(for:in:completion:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "getSnapshot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+      "text" : "ConfigurationIntent"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "in"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit22IntentTimelineProviderP7Contexta",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:21ReviewWidgetExtension11SimpleEntryV",
+      "text" : "SimpleEntry"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/getSnapshot(for:in:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "getSnapshot(for:in:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/getsnapshot(for:in:completion:)"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/getTimeline(for:in:completion:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "getTimeline"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+      "text" : "ConfigurationIntent"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "in"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit22IntentTimelineProviderP7Contexta",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit8TimelineV",
+      "text" : "Timeline"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit22IntentTimelineProviderP5EntryQa",
+      "text" : "Entry"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/getTimeline(for:in:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "getTimeline(for:in:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/gettimeline(for:in:completion:)"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/init()"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/init(topQuestionsData:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "topQuestionsData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI10AppStorageV",
+      "text" : "AppStorage"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?>)"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/init(topQuestionsData:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(topQuestionsData:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/init(topquestionsdata:)"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/placeholder(in:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "placeholder"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "in"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit22IntentTimelineProviderP7Contexta",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:21ReviewWidgetExtension11SimpleEntryV",
+      "text" : "SimpleEntry"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/placeholder(in:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "placeholder(in:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/placeholder(in:)"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider/topQuestionsData": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "topQuestionsData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider\/topQuestionsData",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "topQuestionsData",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider\/topquestionsdata"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s8SendableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

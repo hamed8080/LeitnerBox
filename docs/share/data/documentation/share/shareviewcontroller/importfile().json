@@ -1,0 +1,172 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/importFile()"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:5Share0A14ViewControllerC10importFileyyF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "importFile"
+      },
+      {
+        "kind" : "text",
+        "text" : "()"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Share"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "importFile()"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "importFile"
+            },
+            {
+              "kind" : "text",
+              "text" : "()"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/share\/shareviewcontroller\/importfile()"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Share",
+  "type" : "topic",
+  "url" : "\/documentation\/share"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ShareViewController",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/importFile()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "importFile"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/importFile()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "importFile()",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/importfile()"
+}
+}
+}

@@ -1,0 +1,336 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ReviewWidgetEntryView"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ReviewWidgetEntryView\/init(entry:widgetFamily:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:21ReviewWidgetExtension0aB9EntryViewV5entry12widgetFamilyAcA06SimpleD0V_7SwiftUI11EnvironmentVy0B3Kit0bH0OGtcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "entry"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV",
+        "text" : "Provider"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV5Entrya",
+        "text" : "Entry"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "widgetFamily"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:7SwiftUI11EnvironmentV",
+        "text" : "Environment"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:9WidgetKit0A6FamilyO",
+        "text" : "WidgetFamily"
+      },
+      {
+        "kind" : "text",
+        "text" : ">)"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(entry:widgetFamily:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "entry"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV",
+              "text" : "Provider"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV5Entrya",
+              "text" : "Entry"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "widgetFamily"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:7SwiftUI11EnvironmentV",
+              "text" : "Environment"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:9WidgetKit0A6FamilyO",
+              "text" : "WidgetFamily"
+            },
+            {
+              "kind" : "text",
+              "text" : "> = Environment(\\.widgetFamily))"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/init(entry:widgetfamily:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Provider": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Provider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Provider",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/provider"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ReviewWidgetEntryView": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ReviewWidgetEntryView"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ReviewWidgetEntryView",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ReviewWidgetEntryView"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ReviewWidgetEntryView",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ReviewWidgetEntryView/init(entry:widgetFamily:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "entry"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV",
+      "text" : "Provider"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:21ReviewWidgetExtension8ProviderV5Entrya",
+      "text" : "Entry"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "widgetFamily"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI11EnvironmentV",
+      "text" : "Environment"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:9WidgetKit0A6FamilyO",
+      "text" : "WidgetFamily"
+    },
+    {
+      "kind" : "text",
+      "text" : ">)"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ReviewWidgetEntryView\/init(entry:widgetFamily:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(entry:widgetFamily:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/init(entry:widgetfamily:)"
+}
+}
+}

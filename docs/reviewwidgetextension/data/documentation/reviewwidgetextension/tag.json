@@ -1,0 +1,627 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@ReviewWidgetExtension@objc(cs)Tag",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Tag"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Tag"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "Tag"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : "(Tag) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Tag"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(cs)NSManagedObject"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/7Combine16ObservableObjectP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSFetchRequestResult",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSObject",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s7CVarArgP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s23CustomStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SH",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s12IdentifiableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/color",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/leitner",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/name",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/question"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/addToQuestion(_:)-3r115",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/addToQuestion(_:)-4ot94",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/removeFromQuestion(_:)-450vl",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/removeFromQuestion(_:)-sfnl"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/fetchRequest()"
+      ],
+      "title" : "Type Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/Identifiable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/tag"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/7Combine16ObservableObjectP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/7Combine16ObservableObjectP",
+  "title" : "Combine.ObservableObject",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Tag"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Tag"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Tag",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/Identifiable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/Identifiable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Identifiable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/identifiable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/addToQuestion(_:)-3r115": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "addToQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)Question",
+      "text" : "Question"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/addToQuestion(_:)-3r115",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "addToQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/addtoquestion(_:)-3r115"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/addToQuestion(_:)-4ot94": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "addToQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/addToQuestion(_:)-4ot94",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "addToQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/addtoquestion(_:)-4ot94"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/color": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "color"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSObject",
+      "text" : "NSObject"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/color",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "color",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/color"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/fetchRequest()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fetchRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSFetchRequest",
+      "text" : "NSFetchRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)Tag",
+      "text" : "Tag"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/fetchRequest()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "fetchRequest()",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/fetchrequest()"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/leitner": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "leitner"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)Leitner",
+      "text" : "Leitner"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/leitner",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "leitner",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/leitner"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/name": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/name"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/question": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "question"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/question",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "question",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/question"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/removeFromQuestion(_:)-450vl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "removeFromQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/removeFromQuestion(_:)-450vl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "removeFromQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/removefromquestion(_:)-450vl"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/Tag/removeFromQuestion(_:)-sfnl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "removeFromQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@ReviewWidgetExtension@objc(cs)Question",
+      "text" : "Question"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/Tag\/removeFromQuestion(_:)-sfnl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "removeFromQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/tag\/removefromquestion(_:)-sfnl"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(cs)NSManagedObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(cs)NSManagedObject",
+  "title" : "CoreData.NSManagedObject",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSFetchRequestResult": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSFetchRequestResult",
+  "title" : "CoreData.NSFetchRequestResult",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s12IdentifiableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s12IdentifiableP",
+  "title" : "Swift.Identifiable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s7CVarArgP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

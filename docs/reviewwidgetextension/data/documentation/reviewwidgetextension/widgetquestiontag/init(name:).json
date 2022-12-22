@@ -1,0 +1,199 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/WidgetQuestionTag"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/WidgetQuestionTag\/init(name:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:21ReviewWidgetExtension0B11QuestionTagC4nameACSS_tcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "name"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(name:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "name"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/widgetquestiontag\/init(name:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/WidgetQuestionTag": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WidgetQuestionTag"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/WidgetQuestionTag",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WidgetQuestionTag"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WidgetQuestionTag",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/widgetquestiontag"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/WidgetQuestionTag/init(name:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/WidgetQuestionTag\/init(name:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(name:)",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/init(name:)"
+}
+}
+}

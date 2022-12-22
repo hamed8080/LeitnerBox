@@ -1,0 +1,708 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@LeitnerBox@objc(cs)Tag",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Tag"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Tag"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "Tag"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : "(Tag) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Tag"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(cs)NSManagedObject"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7Combine16ObservableObjectP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(pl)NSFetchRequestResult",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(pl)NSObject",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s7CVarArgP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s23CustomStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s12IdentifiableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/color",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/leitner",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/name",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/question",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/questions",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/tagSwiftUIColor"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/addToQuestion(_:)-5j41i",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/addToQuestion(_:)-7414j",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/removeFromQuestion(_:)-3mx3j",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/removeFromQuestion(_:)-7x6ye"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/fetchRequest()"
+      ],
+      "title" : "Type Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/Identifiable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/tag"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/7Combine16ObservableObjectP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7Combine16ObservableObjectP",
+  "title" : "Combine.ObservableObject",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Tag"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Tag"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Tag",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/Identifiable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/Identifiable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Identifiable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/identifiable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/addToQuestion(_:)-5j41i": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "addToQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@LeitnerBox@objc(cs)Question",
+      "text" : "Question"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/addToQuestion(_:)-5j41i",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "addToQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/addtoquestion(_:)-5j41i"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/addToQuestion(_:)-7414j": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "addToQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/addToQuestion(_:)-7414j",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "addToQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/addtoquestion(_:)-7414j"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/color": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "color"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSObject",
+      "text" : "NSObject"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/color",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "color",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/color"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/fetchRequest()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fetchRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSFetchRequest",
+      "text" : "NSFetchRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@LeitnerBox@objc(cs)Tag",
+      "text" : "Tag"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/fetchRequest()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "fetchRequest()",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/fetchrequest()"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/leitner": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "leitner"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@LeitnerBox@objc(cs)Leitner",
+      "text" : "Leitner"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/leitner",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "leitner",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/leitner"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/name": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/name"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/question": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "question"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/question",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "question",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/question"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/questions": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "questions"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@LeitnerBox@objc(cs)Question",
+      "text" : "Question"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/questions",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "questions",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/questions"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/removeFromQuestion(_:)-3mx3j": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "removeFromQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@M@LeitnerBox@objc(cs)Question",
+      "text" : "Question"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/removeFromQuestion(_:)-3mx3j",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "removeFromQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/removefromquestion(_:)-3mx3j"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/removeFromQuestion(_:)-7x6ye": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "removeFromQuestion"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSSet",
+      "text" : "NSSet"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/removeFromQuestion(_:)-7x6ye",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "removeFromQuestion(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/removefromquestion(_:)-7x6ye"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/Tag/tagSwiftUIColor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tagSwiftUIColor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI5ColorV",
+      "text" : "Color"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/Tag\/tagSwiftUIColor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "tagSwiftUIColor",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/tag\/tagswiftuicolor"
+},
+"doc://ir.amozkade.LeitnerBoxd/objc(cs)NSManagedObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(cs)NSManagedObject",
+  "title" : "CoreData.NSManagedObject",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/objc(pl)NSFetchRequestResult": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(pl)NSFetchRequestResult",
+  "title" : "CoreData.NSFetchRequestResult",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/s12IdentifiableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s12IdentifiableP",
+  "title" : "Swift.Identifiable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/s7CVarArgP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

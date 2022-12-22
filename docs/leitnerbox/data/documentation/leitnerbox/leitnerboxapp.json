@@ -1,0 +1,472 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10LeitnerBox0aB3AppV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "LeitnerBoxApp"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "LeitnerBoxApp"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "LeitnerBoxApp"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@main"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "LeitnerBoxApp"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI3AppP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI12DropDelegateP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/init()",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/init(hideSplash:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/body",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/hideSplash"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/dropUpdated(info:)",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/performDrop(info:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/App-Implementations",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/DropDelegate-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/leitnerboxapp"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI12DropDelegateP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI12DropDelegateP",
+  "title" : "SwiftUI.DropDelegate",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/7SwiftUI3AppP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/7SwiftUI3AppP",
+  "title" : "SwiftUI.App",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "LeitnerBoxApp"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "LeitnerBoxApp"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "LeitnerBoxApp",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/App-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/App-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "App Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/app-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/DropDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/DropDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "DropDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/dropdelegate-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/body": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "body"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "some"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI5SceneP",
+      "text" : "Scene"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/body",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "body",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/body"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/dropUpdated(info:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dropUpdated"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "info"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI8DropInfoV",
+      "text" : "DropInfo"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI12DropProposalV",
+      "text" : "DropProposal"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/dropUpdated(info:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "dropUpdated(info:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/dropupdated(info:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/hideSplash": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hideSplash"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/hideSplash",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hideSplash",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/hidesplash"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/init()"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/init(hideSplash:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "hideSplash"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/init(hideSplash:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(hideSplash:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/init(hidesplash:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/LeitnerBoxApp/performDrop(info:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "performDrop"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "info"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI8DropInfoV",
+      "text" : "DropInfo"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/LeitnerBoxApp\/performDrop(info:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "performDrop(info:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/leitnerboxapp\/performdrop(info:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/s8SendableP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

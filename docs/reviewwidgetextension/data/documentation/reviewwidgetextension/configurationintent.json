@@ -1,0 +1,253 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntent"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@ReviewWidgetExtension@objc(cs)ConfigurationIntent",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ConfigurationIntent"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ReviewWidgetExtension"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ConfigurationIntent"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "12.0",
+        "name" : "iOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "11.0",
+        "name" : "macOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "5.0",
+        "name" : "watchOS",
+        "unavailable" : false
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ConfigurationIntent"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : "(ConfigurationIntent) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ConfigurationIntent"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(cs)INIntent"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSCoding",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSCopying",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSSecureCoding",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/7Intents23INIntentSetImageKeyPathP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSObject",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s7CVarArgP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s23CustomStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/reviewwidgetextension\/configurationintent"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/7Intents23INIntentSetImageKeyPathP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/7Intents23INIntentSetImageKeyPathP",
+  "title" : "Intents.INIntentSetImageKeyPath",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ReviewWidgetExtension",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/documentation/ReviewWidgetExtension/ConfigurationIntent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntent"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/documentation\/ReviewWidgetExtension\/ConfigurationIntent",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ConfigurationIntent",
+  "type" : "topic",
+  "url" : "\/documentation\/reviewwidgetextension\/configurationintent"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(cs)INIntent": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(cs)INIntent",
+  "title" : "Intents.INIntent",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.NewReviewWidget/s7CVarArgP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.NewReviewWidget\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

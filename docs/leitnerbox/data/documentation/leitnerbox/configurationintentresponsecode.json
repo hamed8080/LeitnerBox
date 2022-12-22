@@ -1,0 +1,464 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@LeitnerBox@E@ConfigurationIntentResponseCode",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ConfigurationIntentResponseCode"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "LeitnerBox"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ConfigurationIntentResponseCode"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "12.0",
+        "name" : "iOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "11.0",
+        "name" : "macOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "5.0",
+        "name" : "watchOS",
+        "unavailable" : false
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "ConfigurationIntentResponseCode"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ConfigurationIntentResponseCode"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/SY"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/continueInApp",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/failure",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/failureRequiringAppLaunch",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/inProgress",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/ready",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/success",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/unspecified"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/Equatable-Implementations",
+        "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/leitnerbox\/configurationintentresponsecode"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/SY": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox": {
+  "abstract" : [
+    {
+      "text" : "With LeitnerBox you could memorize words faster than before.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "LeitnerBox",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentResponseCode"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConfigurationIntentResponseCode"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/equatable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/rawrepresentable-implementations"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/continueInApp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "continueInApp"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/continueInApp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.continueInApp",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/continueinapp"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/failure": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "failure"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/failure",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.failure",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/failure"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/failureRequiringAppLaunch": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "failureRequiringAppLaunch"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/failureRequiringAppLaunch",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.failureRequiringAppLaunch",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/failurerequiringapplaunch"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/inProgress": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "inProgress"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/inProgress",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.inProgress",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/inprogress"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/init(rawvalue:)"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/ready": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ready"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/ready",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.ready",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/ready"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/success": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "success"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/success",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.success",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/success"
+},
+"doc://ir.amozkade.LeitnerBoxd/documentation/LeitnerBox/ConfigurationIntentResponseCode/unspecified": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unspecified"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd\/documentation\/LeitnerBox\/ConfigurationIntentResponseCode\/unspecified",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ConfigurationIntentResponseCode.unspecified",
+  "type" : "topic",
+  "url" : "\/documentation\/leitnerbox\/configurationintentresponsecode\/unspecified"
+}
+}
+}

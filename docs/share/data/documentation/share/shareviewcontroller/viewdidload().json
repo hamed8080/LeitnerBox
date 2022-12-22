@@ -1,0 +1,180 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/viewDidLoad()"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@Share@objc(cs)ShareViewController(im)viewDidLoad",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "viewDidLoad"
+      },
+      {
+        "kind" : "text",
+        "text" : "()"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Share"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "viewDidLoad()"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "override"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "viewDidLoad"
+            },
+            {
+              "kind" : "text",
+              "text" : "()"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/share\/shareviewcontroller\/viewdidload()"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Share",
+  "type" : "topic",
+  "url" : "\/documentation\/share"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ShareViewController",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/viewDidLoad()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "viewDidLoad"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/viewDidLoad()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "viewDidLoad()",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/viewdidload()"
+}
+}
+}

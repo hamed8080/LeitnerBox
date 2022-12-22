@@ -1,0 +1,144 @@
+{
+  "interfaceLanguages" : {
+    "swift" : [
+      {
+        "children" : [
+          {
+            "title" : "Classes",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/appgrouplocalstorage\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/appgrouplocalstorage\/savefile(fileurl:result:)",
+                "title" : "func saveFile(fileURL: URL, result: (Error?) -> Void)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/appgrouplocalstorage\/groupname",
+                "title" : "static let groupName: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/share\/appgrouplocalstorage\/shared",
+                "title" : "static let shared: AppGroupLocalStorage",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/share\/appgrouplocalstorage",
+            "title" : "AppGroupLocalStorage",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/shareviewcontroller\/img",
+                "title" : "var img: UIImageView!",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/share\/shareviewcontroller\/lbl",
+                "title" : "var lbl: UILabel!",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/shareviewcontroller\/importfile()",
+                "title" : "func importFile()",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/share\/shareviewcontroller\/viewdidload()",
+                "title" : "func viewDidLoad()",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/shareviewcontroller\/groupname",
+                "title" : "static let groupName: String",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/share\/shareviewcontroller",
+            "title" : "ShareViewController",
+            "type" : "class"
+          },
+          {
+            "title" : "Structures",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/temporaryfile\/init(creatingtempdirectoryforfilename:)",
+                "title" : "init(creatingTempDirectoryForFilename: String) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/share\/temporaryfile\/deletedirectory",
+                "title" : "let deleteDirectory: () throws -> Void",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/share\/temporaryfile\/directoryurl",
+                "title" : "let directoryURL: URL",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/share\/temporaryfile\/fileurl",
+                "title" : "let fileURL: URL",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/share\/temporaryfile",
+            "title" : "TemporaryFile",
+            "type" : "struct"
+          }
+        ],
+        "path" : "\/documentation\/share",
+        "title" : "Share",
+        "type" : "module"
+      }
+    ]
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 0
+  }
+}

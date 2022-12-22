@@ -1,0 +1,207 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/lbl"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@Share@objc(cs)ShareViewController(py)lbl",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "lbl"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:objc(cs)UILabel",
+        "text" : "UILabel"
+      },
+      {
+        "kind" : "text",
+        "text" : "!"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Share"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "lbl"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@IBOutlet"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "lbl"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)UILabel",
+              "text" : "UILabel"
+            },
+            {
+              "kind" : "text",
+              "text" : "!"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/share\/shareviewcontroller\/lbl"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Share",
+  "type" : "topic",
+  "url" : "\/documentation\/share"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ShareViewController",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/lbl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "lbl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UILabel",
+      "text" : "UILabel"
+    },
+    {
+      "kind" : "text",
+      "text" : "!"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/lbl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "lbl",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/lbl"
+}
+}
+}

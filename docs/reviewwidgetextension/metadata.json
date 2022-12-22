@@ -1,0 +1,9 @@
+{
+  "bundleDisplayName" : "ReviewWidgetExtension",
+  "bundleIdentifier" : "ir.amozkade.LeitnerBoxd.NewReviewWidget",
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 0
+  }
+}

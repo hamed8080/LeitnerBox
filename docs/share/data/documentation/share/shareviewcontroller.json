@@ -1,0 +1,470 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@M@Share@objc(cs)ShareViewController",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ShareViewController"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Share"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ShareViewController"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ShareViewController"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@objc"
+            },
+            {
+              "kind" : "text",
+              "text" : "(ShareViewController) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ShareViewController"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(cs)UIViewController"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSCoding",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSExtensionRequestHandling",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSObject",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s7CVarArgP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s23CustomStringConvertibleP",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/SQ",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/SH",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIActivityItemsConfigurationProviding",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIAppearanceContainer",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIContentContainer",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIFocusEnvironment",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIPasteConfigurationSupporting",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIResponderStandardEditActions",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIStateRestoring",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UITraitEnvironment",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIUserActivityRestoring"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/img",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/lbl"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/importFile()",
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/viewDidLoad()"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/groupName"
+      ],
+      "title" : "Type Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/share\/shareviewcontroller"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ir.amozkade.LeitnerBoxd.Share/SH": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/SQ": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Share",
+  "type" : "topic",
+  "url" : "\/documentation\/share"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ShareViewController"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ShareViewController",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/groupName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "groupName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/groupName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "groupName",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/groupname"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/img": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "img"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIImageView",
+      "text" : "UIImageView"
+    },
+    {
+      "kind" : "text",
+      "text" : "!"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/img",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "img",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/img"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/importFile()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "importFile"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/importFile()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "importFile()",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/importfile()"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/lbl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "lbl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UILabel",
+      "text" : "UILabel"
+    },
+    {
+      "kind" : "text",
+      "text" : "!"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/lbl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "lbl",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/lbl"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/documentation/Share/ShareViewController/viewDidLoad()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "viewDidLoad"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/documentation\/Share\/ShareViewController\/viewDidLoad()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "viewDidLoad()",
+  "type" : "topic",
+  "url" : "\/documentation\/share\/shareviewcontroller\/viewdidload()"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(cs)UIViewController": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(cs)UIViewController",
+  "title" : "UIKit.UIViewController",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)NSExtensionRequestHandling": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSExtensionRequestHandling",
+  "title" : "Foundation.NSExtensionRequestHandling",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIActivityItemsConfigurationProviding": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIActivityItemsConfigurationProviding",
+  "title" : "UIKit.UIActivityItemsConfigurationProviding",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIAppearanceContainer": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIAppearanceContainer",
+  "title" : "UIKit.UIAppearanceContainer",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIContentContainer": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIContentContainer",
+  "title" : "UIKit.UIContentContainer",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIFocusEnvironment": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIFocusEnvironment",
+  "title" : "UIKit.UIFocusEnvironment",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIPasteConfigurationSupporting": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIPasteConfigurationSupporting",
+  "title" : "UIKit.UIPasteConfigurationSupporting",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIResponderStandardEditActions": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIResponderStandardEditActions",
+  "title" : "UIKit.UIResponderStandardEditActions",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIStateRestoring": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIStateRestoring",
+  "title" : "UIKit.UIStateRestoring",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UITraitEnvironment": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UITraitEnvironment",
+  "title" : "UIKit.UITraitEnvironment",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/objc(pl)UIUserActivityRestoring": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/objc(pl)UIUserActivityRestoring",
+  "title" : "UIKit.UIUserActivityRestoring",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://ir.amozkade.LeitnerBoxd.Share/s7CVarArgP": {
+  "identifier" : "doc:\/\/ir.amozkade.LeitnerBoxd.Share\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

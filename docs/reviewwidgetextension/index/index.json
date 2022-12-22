@@ -1,0 +1,3563 @@
+{
+  "interfaceLanguages" : {
+    "swift" : [
+      {
+        "children" : [
+          {
+            "title" : "Classes",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/appgrouplocalstorage\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/appgrouplocalstorage\/savefile(fileurl:result:)",
+                "title" : "func saveFile(fileURL: URL, result: (Error?) -> Void)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/appgrouplocalstorage\/groupname",
+                "title" : "static let groupName: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/appgrouplocalstorage\/shared",
+                "title" : "static let shared: AppGroupLocalStorage",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/appgrouplocalstorage",
+            "title" : "AppGroupLocalStorage",
+            "type" : "class"
+          },
+          {
+            "path" : "\/documentation\/reviewwidgetextension\/configurationintent",
+            "title" : "ConfigurationIntent",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponse\/init(code:useractivity:)",
+                "title" : "init(code: ConfigurationIntentResponseCode, userActivity: NSUserActivity?)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponse\/code",
+                "title" : "var code: ConfigurationIntentResponseCode",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponse",
+            "title" : "ConfigurationIntentResponse",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/backtotoplevel",
+                "title" : "var backToTopLevel: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/createdate",
+                "title" : "var createDate: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/level",
+                "title" : "var level: NSSet?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/name",
+                "title" : "var name: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/tag",
+                "title" : "var tag: NSSet?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/addtolevel(_:)-1wvgb",
+                "title" : "func addToLevel(Level)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/addtolevel(_:)-3592w",
+                "title" : "func addToLevel(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/addtotag(_:)-1wtx3",
+                "title" : "func addToTag(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/addtotag(_:)-2kyq7",
+                "title" : "func addToTag(Tag)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/removefromlevel(_:)-4o0p2",
+                "title" : "func removeFromLevel(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/removefromlevel(_:)-6k7kp",
+                "title" : "func removeFromLevel(Level)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/removefromtag(_:)-8fxnj",
+                "title" : "func removeFromTag(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/removefromtag(_:)-8gedn",
+                "title" : "func removeFromTag(Tag)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Leitner>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/leitner\/id-41dye",
+                    "title" : "var id: Int64",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/leitner\/id-59log",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/leitner\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/leitner",
+            "title" : "Leitner",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/createdate",
+                "title" : "var createDate: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/daystorecommend",
+                "title" : "var daysToRecommend: Int32",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/leitner",
+                "title" : "var leitner: Leitner?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/level",
+                "title" : "var level: Int16",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/questions",
+                "title" : "var questions: NSSet?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/addtoquestions(_:)-3cl0x",
+                "title" : "func addToQuestions(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/addtoquestions(_:)-6lv02",
+                "title" : "func addToQuestions(Question)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/removefromquestions(_:)-1kg3e",
+                "title" : "func removeFromQuestions(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/removefromquestions(_:)-4n7cm",
+                "title" : "func removeFromQuestions(Question)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/level\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Level>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/level\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/level\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/level",
+            "title" : "Level",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/answer",
+                "title" : "var answer: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/completed",
+                "title" : "var completed: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/createtime",
+                "title" : "var createTime: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/detaildescription",
+                "title" : "var detailDescription: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/favorite",
+                "title" : "var favorite: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/favoritedate",
+                "title" : "var favoriteDate: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/level",
+                "title" : "var level: Level?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/passtime",
+                "title" : "var passTime: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/question",
+                "title" : "var question: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/statistics",
+                "title" : "var statistics: NSSet?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/synonyms",
+                "title" : "var synonyms: NSSet?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/tag",
+                "title" : "var tag: NSSet?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtostatistics(_:)-2yr68",
+                "title" : "func addToStatistics(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtostatistics(_:)-7bk25",
+                "title" : "func addToStatistics(Statistic)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtosynonyms(_:)-5831l",
+                "title" : "func addToSynonyms(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtosynonyms(_:)-5bzb2",
+                "title" : "func addToSynonyms(Synonym)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtotag(_:)-1woya",
+                "title" : "func addToTag(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/addtotag(_:)-2vsfg",
+                "title" : "func addToTag(Tag)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromstatistics(_:)-3yzti",
+                "title" : "func removeFromStatistics(Statistic)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromstatistics(_:)-7ixak",
+                "title" : "func removeFromStatistics(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromsynonyms(_:)-5ngq0",
+                "title" : "func removeFromSynonyms(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromsynonyms(_:)-5q5lt",
+                "title" : "func removeFromSynonyms(Synonym)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromtag(_:)-7olut",
+                "title" : "func removeFromTag(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/removefromtag(_:)-jurb",
+                "title" : "func removeFromTag(Tag)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/question\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Question>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/question\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/question\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/question",
+            "title" : "Question",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/statistic\/actiondate",
+                "title" : "var actionDate: Date?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/statistic\/ispassed",
+                "title" : "var isPassed: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/statistic\/question",
+                "title" : "var question: Question?",
+                "type" : "property"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/statistic\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Statistic>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/statistic\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/statistic\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/statistic",
+            "title" : "Statistic",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/question",
+                "title" : "var question: NSSet?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/addtoquestion(_:)-5a0ls",
+                "title" : "func addToQuestion(Question)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/addtoquestion(_:)-7mhel",
+                "title" : "func addToQuestion(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/removefromquestion(_:)-3vl5l",
+                "title" : "func removeFromQuestion(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/removefromquestion(_:)-4b4ee",
+                "title" : "func removeFromQuestion(Question)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Synonym>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/synonym\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/synonym\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/synonym",
+            "title" : "Synonym",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/color",
+                "title" : "var color: NSObject?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/leitner",
+                "title" : "var leitner: Leitner?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/name",
+                "title" : "var name: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/question",
+                "title" : "var question: NSSet?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/addtoquestion(_:)-3r115",
+                "title" : "func addToQuestion(Question)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/addtoquestion(_:)-4ot94",
+                "title" : "func addToQuestion(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/removefromquestion(_:)-450vl",
+                "title" : "func removeFromQuestion(NSSet)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/removefromquestion(_:)-sfnl",
+                "title" : "func removeFromQuestion(Question)",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/fetchrequest()",
+                "title" : "class func fetchRequest() -> NSFetchRequest<Tag>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/tag\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/tag\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/tag",
+            "title" : "Tag",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/init(question:answer:tags:detaileddescription:level:isfavorite:iscompleted:)",
+                "title" : "init(question: String?, answer: String?, tags: [WidgetQuestionTag], detailedDescription: String?, level: Int, isFavorite: Bool, isCompleted: Bool)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/answer",
+                "title" : "let answer: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/detaileddescription",
+                "title" : "let detailedDescription: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/iscompleted",
+                "title" : "let isCompleted: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/isfavorite",
+                "title" : "let isFavorite: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/level",
+                "title" : "let level: Int",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/question",
+                "title" : "let question: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestion\/tags",
+                "title" : "let tags: [WidgetQuestionTag]",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/widgetquestion",
+            "title" : "WidgetQuestion",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/init(name:)",
+                "title" : "init(name: String)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/name",
+                "title" : "let name: String",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/id",
+                    "title" : "var id: ObjectIdentifier",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/widgetquestiontag",
+            "title" : "WidgetQuestionTag",
+            "type" : "class"
+          },
+          {
+            "title" : "Protocols",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintenthandling\/confirm(intent:completion:)",
+                "title" : "func confirm(intent: ConfigurationIntent, completion: (ConfigurationIntentResponse) -> Swift.Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintenthandling\/handle(intent:completion:)",
+                "title" : "func handle(intent: ConfigurationIntent, completion: (ConfigurationIntentResponse) -> Swift.Void)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/configurationintenthandling",
+            "title" : "ConfigurationIntentHandling",
+            "type" : "protocol"
+          },
+          {
+            "title" : "Structures",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/init(topquestionsdata:)",
+                "title" : "init(topQuestionsData: AppStorage<Data?>)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/allquestion",
+                "title" : "var allQuestion: [WidgetQuestion]",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/topquestionsdata",
+                "title" : "var topQuestionsData: Data?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/getsnapshot(for:in:completion:)",
+                "title" : "func getSnapshot(for: ConfigurationIntent, in: Context, completion: (SimpleEntry) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/gettimeline(for:in:completion:)",
+                "title" : "func getTimeline(for: ConfigurationIntent, in: Context, completion: (Timeline<Entry>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/placeholder(in:)",
+                "title" : "func placeholder(in: Context) -> SimpleEntry",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/provider\/recommendations()",
+                    "title" : "func recommendations() -> [IntentRecommendation<Self.Intent>]",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/provider\/intenttimelineprovider-implementations",
+                "title" : "IntentTimelineProvider Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/provider",
+            "title" : "Provider",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget\/body",
+                "title" : "var body: some WidgetConfiguration",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget\/kind",
+                "title" : "let kind: String",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Type Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidget\/main()",
+                    "title" : "static func main()",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget\/widget-implementations",
+                "title" : "Widget Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/reviewwidget",
+            "title" : "ReviewWidget",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/init(entry:widgetfamily:)",
+                "title" : "init(entry: Provider.Entry, widgetFamily: Environment<WidgetFamily>)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/body",
+                "title" : "var body: some View",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/entry",
+                "title" : "var entry: Provider.Entry",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/large",
+                "title" : "var large: some View",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/medium",
+                "title" : "var medium: some View",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgetfamily",
+                "title" : "var widgetFamily: WidgetFamily",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accentcolor(_:)",
+                    "title" : "func accentColor(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(activationpoint:)-11wb5",
+                    "title" : "func accessibility(activationPoint: CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(activationpoint:)-7sw7y",
+                    "title" : "func accessibility(activationPoint: UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(addtraits:)",
+                    "title" : "func accessibility(addTraits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(hidden:)",
+                    "title" : "func accessibility(hidden: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(hint:)",
+                    "title" : "func accessibility(hint: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(identifier:)",
+                    "title" : "func accessibility(identifier: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(inputlabels:)",
+                    "title" : "func accessibility(inputLabels: [Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(label:)",
+                    "title" : "func accessibility(label: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(removetraits:)",
+                    "title" : "func accessibility(removeTraits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(selectionidentifier:)",
+                    "title" : "func accessibility(selectionIdentifier: AnyHashable) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(sortpriority:)",
+                    "title" : "func accessibility(sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibility(value:)",
+                    "title" : "func accessibility(value: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaction(_:_:)",
+                    "title" : "func accessibilityAction(AccessibilityActionKind, () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaction(action:label:)",
+                    "title" : "func accessibilityAction<Label>(action: () -> Void, label: () -> Label) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaction(named:_:)-21vqi",
+                    "title" : "func accessibilityAction(named: Text, () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaction(named:_:)-2e7g7",
+                    "title" : "func accessibilityAction(named: LocalizedStringKey, () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaction(named:_:)-5ythz",
+                    "title" : "func accessibilityAction<S>(named: S, () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityactions(_:)",
+                    "title" : "func accessibilityActions<Content>(() -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityactivationpoint(_:)-2p1tb",
+                    "title" : "func accessibilityActivationPoint(CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityactivationpoint(_:)-8ckyg",
+                    "title" : "func accessibilityActivationPoint(UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityaddtraits(_:)",
+                    "title" : "func accessibilityAddTraits(AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityadjustableaction(_:)",
+                    "title" : "func accessibilityAdjustableAction((AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitychartdescriptor(_:)",
+                    "title" : "func accessibilityChartDescriptor<R>(R) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitychildren(children:)",
+                    "title" : "func accessibilityChildren<V>(children: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-33uu6",
+                    "title" : "func accessibilityCustomContent(LocalizedStringKey, Text, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-4cp2e",
+                    "title" : "func accessibilityCustomContent(AccessibilityCustomContentKey, Text?, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-5x049",
+                    "title" : "func accessibilityCustomContent<V>(AccessibilityCustomContentKey, V, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-6nzn1",
+                    "title" : "func accessibilityCustomContent(AccessibilityCustomContentKey, LocalizedStringKey, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-6uwf3",
+                    "title" : "func accessibilityCustomContent(Text, Text, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-71mzl",
+                    "title" : "func accessibilityCustomContent(LocalizedStringKey, LocalizedStringKey, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-87dgk",
+                    "title" : "func accessibilityCustomContent<L, V>(L, V, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitycustomcontent(_:_:importance:)-8h1gi",
+                    "title" : "func accessibilityCustomContent<V>(LocalizedStringKey, V, importance: AXCustomContent.Importance) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityelement(children:)",
+                    "title" : "func accessibilityElement(children: AccessibilityChildBehavior) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityfocused(_:)",
+                    "title" : "func accessibilityFocused(AccessibilityFocusState<Bool>.Binding) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityfocused(_:equals:)",
+                    "title" : "func accessibilityFocused<Value>(AccessibilityFocusState<Value>.Binding, equals: Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityheading(_:)",
+                    "title" : "func accessibilityHeading(AccessibilityHeadingLevel) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityhidden(_:)",
+                    "title" : "func accessibilityHidden(Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityhint(_:)-44o1m",
+                    "title" : "func accessibilityHint<S>(S) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityhint(_:)-86dl4",
+                    "title" : "func accessibilityHint(Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityhint(_:)-l8wf",
+                    "title" : "func accessibilityHint(LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityidentifier(_:)",
+                    "title" : "func accessibilityIdentifier(String) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityignoresinvertcolors(_:)",
+                    "title" : "func accessibilityIgnoresInvertColors(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityinputlabels(_:)-309y4",
+                    "title" : "func accessibilityInputLabels([Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityinputlabels(_:)-3kt4i",
+                    "title" : "func accessibilityInputLabels<S>([S]) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityinputlabels(_:)-as84",
+                    "title" : "func accessibilityInputLabels([LocalizedStringKey]) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitylabel(_:)-1cv7",
+                    "title" : "func accessibilityLabel(LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitylabel(_:)-6nccz",
+                    "title" : "func accessibilityLabel(Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitylabel(_:)-6y928",
+                    "title" : "func accessibilityLabel<S>(S) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitylabeledpair(role:id:in:)",
+                    "title" : "func accessibilityLabeledPair<ID>(role: AccessibilityLabeledPairRole, id: ID, in: Namespace.ID) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitylinkedgroup(id:in:)",
+                    "title" : "func accessibilityLinkedGroup<ID>(id: ID, in: Namespace.ID) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityremovetraits(_:)",
+                    "title" : "func accessibilityRemoveTraits(AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrepresentation(representation:)",
+                    "title" : "func accessibilityRepresentation<V>(representation: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrespondstouserinteraction(_:)",
+                    "title" : "func accessibilityRespondsToUserInteraction(Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:)-20abs",
+                    "title" : "func accessibilityRotor<Content>(LocalizedStringKey, entries: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:)-49i2g",
+                    "title" : "func accessibilityRotor<L, Content>(L, entries: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:)-7angx",
+                    "title" : "func accessibilityRotor<Content>(AccessibilitySystemRotor, entries: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:)-7eei9",
+                    "title" : "func accessibilityRotor<Content>(Text, entries: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entryid:entrylabel:)-59yhe",
+                    "title" : "func accessibilityRotor<L, EntryModel, ID>(L, entries: [EntryModel], entryID: KeyPath<EntryModel, ID>, entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entryid:entrylabel:)-5j3yt",
+                    "title" : "func accessibilityRotor<EntryModel, ID>(AccessibilitySystemRotor, entries: [EntryModel], entryID: KeyPath<EntryModel, ID>, entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entryid:entrylabel:)-6aajc",
+                    "title" : "func accessibilityRotor<EntryModel, ID>(LocalizedStringKey, entries: [EntryModel], entryID: KeyPath<EntryModel, ID>, entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entryid:entrylabel:)-9n21f",
+                    "title" : "func accessibilityRotor<EntryModel, ID>(Text, entries: [EntryModel], entryID: KeyPath<EntryModel, ID>, entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entrylabel:)-3lngy",
+                    "title" : "func accessibilityRotor<EntryModel>(Text, entries: [EntryModel], entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entrylabel:)-4ujza",
+                    "title" : "func accessibilityRotor<L, EntryModel>(L, entries: [EntryModel], entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entrylabel:)-5qbbc",
+                    "title" : "func accessibilityRotor<EntryModel>(LocalizedStringKey, entries: [EntryModel], entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:entries:entrylabel:)-5vqhh",
+                    "title" : "func accessibilityRotor<EntryModel>(AccessibilitySystemRotor, entries: [EntryModel], entryLabel: KeyPath<EntryModel, String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:textranges:)-2o6yv",
+                    "title" : "func accessibilityRotor(LocalizedStringKey, textRanges: [Range<String.Index>]) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:textranges:)-3zwdf",
+                    "title" : "func accessibilityRotor<L>(L, textRanges: [Range<String.Index>]) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:textranges:)-48hbw",
+                    "title" : "func accessibilityRotor(AccessibilitySystemRotor, textRanges: [Range<String.Index>]) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotor(_:textranges:)-6zv89",
+                    "title" : "func accessibilityRotor(Text, textRanges: [Range<String.Index>]) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityrotorentry(id:in:)",
+                    "title" : "func accessibilityRotorEntry<ID>(id: ID, in: Namespace.ID) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityscrollaction(_:)",
+                    "title" : "func accessibilityScrollAction((Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityshowslargecontentviewer()",
+                    "title" : "func accessibilityShowsLargeContentViewer() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityshowslargecontentviewer(_:)",
+                    "title" : "func accessibilityShowsLargeContentViewer<V>(() -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitysortpriority(_:)",
+                    "title" : "func accessibilitySortPriority(Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilitytextcontenttype(_:)",
+                    "title" : "func accessibilityTextContentType(AccessibilityTextContentType) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityvalue(_:)-57jgi",
+                    "title" : "func accessibilityValue<S>(S) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityvalue(_:)-5umg1",
+                    "title" : "func accessibilityValue(LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/accessibilityvalue(_:)-jvsd",
+                    "title" : "func accessibilityValue(Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/actionsheet(ispresented:content:)",
+                    "title" : "func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/actionsheet(item:content:)",
+                    "title" : "func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/activitybackgroundtint(_:)",
+                    "title" : "func activityBackgroundTint(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/activitysystemactionforegroundcolor(_:)",
+                    "title" : "func activitySystemActionForegroundColor(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:)-3693t",
+                    "title" : "func alert<S, A>(S, isPresented: Binding<Bool>, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:)-8u7n2",
+                    "title" : "func alert<A>(LocalizedStringKey, isPresented: Binding<Bool>, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:)-9a848",
+                    "title" : "func alert<A>(Text, isPresented: Binding<Bool>, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:message:)-7qkbq",
+                    "title" : "func alert<A, M>(Text, isPresented: Binding<Bool>, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:message:)-9ptxs",
+                    "title" : "func alert<A, M>(LocalizedStringKey, isPresented: Binding<Bool>, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:actions:message:)-9sod5",
+                    "title" : "func alert<S, A, M>(S, isPresented: Binding<Bool>, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:)-117f4",
+                    "title" : "func alert<S, A, T>(S, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:)-32uur",
+                    "title" : "func alert<A, T>(LocalizedStringKey, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:)-59wkx",
+                    "title" : "func alert<A, T>(Text, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:message:)-69yc1",
+                    "title" : "func alert<A, M, T>(Text, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:message:)-6wrao",
+                    "title" : "func alert<S, A, M, T>(S, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(_:ispresented:presenting:actions:message:)-96khr",
+                    "title" : "func alert<A, M, T>(LocalizedStringKey, isPresented: Binding<Bool>, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(ispresented:content:)",
+                    "title" : "func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(ispresented:error:actions:)",
+                    "title" : "func alert<E, A>(isPresented: Binding<Bool>, error: E?, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(ispresented:error:actions:message:)",
+                    "title" : "func alert<E, A, M>(isPresented: Binding<Bool>, error: E?, actions: (E) -> A, message: (E) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alert(item:content:)",
+                    "title" : "func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alignmentguide(_:computevalue:)-5v9s2",
+                    "title" : "func alignmentGuide(HorizontalAlignment, computeValue: (ViewDimensions) -> CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/alignmentguide(_:computevalue:)-9a30y",
+                    "title" : "func alignmentGuide(VerticalAlignment, computeValue: (ViewDimensions) -> CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/allowshittesting(_:)",
+                    "title" : "func allowsHitTesting(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/allowstightening(_:)",
+                    "title" : "func allowsTightening(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/anchorpreference(key:value:transform:)",
+                    "title" : "func anchorPreference<A, K>(key: K.Type, value: Anchor<A>.Source, transform: (Anchor<A>) -> K.Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/animation(_:)",
+                    "title" : "func animation(Animation?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/animation(_:value:)",
+                    "title" : "func animation<V>(Animation?, value: V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/aspectratio(_:contentmode:)-22w6s",
+                    "title" : "func aspectRatio(CGSize, contentMode: ContentMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/aspectratio(_:contentmode:)-5uv04",
+                    "title" : "func aspectRatio(CGFloat?, contentMode: ContentMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/autocapitalization(_:)",
+                    "title" : "func autocapitalization(UITextAutocapitalizationType) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/autocorrectiondisabled(_:)",
+                    "title" : "func autocorrectionDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(_:alignment:)",
+                    "title" : "func background<Background>(Background, alignment: Alignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(_:ignoressafeareaedges:)",
+                    "title" : "func background<S>(S, ignoresSafeAreaEdges: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(_:in:fillstyle:)-33fr2",
+                    "title" : "func background<S, T>(S, in: T, fillStyle: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(_:in:fillstyle:)-41wx1",
+                    "title" : "func background<S, T>(S, in: T, fillStyle: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(alignment:content:)",
+                    "title" : "func background<V>(alignment: Alignment, content: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(ignoressafeareaedges:)",
+                    "title" : "func background(ignoresSafeAreaEdges: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(in:fillstyle:)-1f9y7",
+                    "title" : "func background<S>(in: S, fillStyle: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/background(in:fillstyle:)-97ye4",
+                    "title" : "func background<S>(in: S, fillStyle: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/backgroundpreferencevalue(_:_:)",
+                    "title" : "func backgroundPreferenceValue<Key, T>(Key.Type, (Key.Value) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/backgroundpreferencevalue(_:alignment:_:)",
+                    "title" : "func backgroundPreferenceValue<K, V>(K.Type, alignment: Alignment, (K.Value) -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/backgroundstyle(_:)",
+                    "title" : "func backgroundStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/badge(_:)-2m0f3",
+                    "title" : "func badge<S>(S?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/badge(_:)-4q1yv",
+                    "title" : "func badge(Text?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/badge(_:)-5rrcm",
+                    "title" : "func badge(Int) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/badge(_:)-99kwc",
+                    "title" : "func badge(LocalizedStringKey?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/baselineoffset(_:)",
+                    "title" : "func baselineOffset(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/blendmode(_:)",
+                    "title" : "func blendMode(BlendMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/blur(radius:opaque:)",
+                    "title" : "func blur(radius: CGFloat, opaque: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/bold(_:)",
+                    "title" : "func bold(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/border(_:width:)",
+                    "title" : "func border<S>(S, width: CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/brightness(_:)",
+                    "title" : "func brightness(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/buttonbordershape(_:)",
+                    "title" : "func buttonBorderShape(ButtonBorderShape) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/buttonstyle(_:)-1damf",
+                    "title" : "func buttonStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/buttonstyle(_:)-1grdi",
+                    "title" : "func buttonStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/clipshape(_:style:)",
+                    "title" : "func clipShape<S>(S, style: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/clipped(antialiased:)",
+                    "title" : "func clipped(antialiased: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/colorinvert()",
+                    "title" : "func colorInvert() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/colormultiply(_:)",
+                    "title" : "func colorMultiply(Color) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/colorscheme(_:)",
+                    "title" : "func colorScheme(ColorScheme) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/compositinggroup()",
+                    "title" : "func compositingGroup() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:)-2hsy0",
+                    "title" : "func confirmationDialog<S, A>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:)-8ngs0",
+                    "title" : "func confirmationDialog<A>(LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:)-8rg0f",
+                    "title" : "func confirmationDialog<A>(Text, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-3cvh5",
+                    "title" : "func confirmationDialog<A, M>(Text, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-99irc",
+                    "title" : "func confirmationDialog<A, M>(LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-9moz7",
+                    "title" : "func confirmationDialog<S, A, M>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A, message: () -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-8shsd",
+                    "title" : "func confirmationDialog<S, A, T>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9isih",
+                    "title" : "func confirmationDialog<A, T>(LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9pcpl",
+                    "title" : "func confirmationDialog<A, T>(Text, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-8277r",
+                    "title" : "func confirmationDialog<A, M, T>(LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-8y427",
+                    "title" : "func confirmationDialog<A, M, T>(Text, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-qse0",
+                    "title" : "func confirmationDialog<S, A, M, T>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, presenting: T?, actions: (T) -> A, message: (T) -> M) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/containershape(_:)",
+                    "title" : "func containerShape<T>(T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contentshape(_:_:eofill:)",
+                    "title" : "func contentShape<S>(ContentShapeKinds, S, eoFill: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contentshape(_:eofill:)",
+                    "title" : "func contentShape<S>(S, eoFill: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contenttransition(_:)",
+                    "title" : "func contentTransition(ContentTransition) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contextmenu(_:)",
+                    "title" : "func contextMenu<MenuItems>(ContextMenu<MenuItems>?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contextmenu(forselectiontype:menu:primaryaction:)",
+                    "title" : "func contextMenu<I, M>(forSelectionType: I.Type, menu: (Set<I>) -> M, primaryAction: ((Set<I>) -> Void)?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contextmenu(menuitems:)",
+                    "title" : "func contextMenu<MenuItems>(menuItems: () -> MenuItems) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contextmenu(menuitems:preview:)",
+                    "title" : "func contextMenu<M, P>(menuItems: () -> M, preview: () -> P) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/contrast(_:)",
+                    "title" : "func contrast(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/controlgroupstyle(_:)",
+                    "title" : "func controlGroupStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/controlsize(_:)",
+                    "title" : "func controlSize(ControlSize) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/coordinatespace(name:)",
+                    "title" : "func coordinateSpace<T>(name: T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/cornerradius(_:antialiased:)",
+                    "title" : "func cornerRadius(CGFloat, antialiased: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/datepickerstyle(_:)",
+                    "title" : "func datePickerStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/defaultappstorage(_:)",
+                    "title" : "func defaultAppStorage(UserDefaults) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/deferssystemgestures(on:)",
+                    "title" : "func defersSystemGestures(on: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/deletedisabled(_:)",
+                    "title" : "func deleteDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/disableautocorrection(_:)",
+                    "title" : "func disableAutocorrection(Bool?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/disabled(_:)",
+                    "title" : "func disabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/disclosuregroupstyle(_:)",
+                    "title" : "func disclosureGroupStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/draggable(_:)",
+                    "title" : "func draggable<T>(() -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/draggable(_:preview:)",
+                    "title" : "func draggable<V, T>(() -> T, preview: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/drawinggroup(opaque:colormode:)",
+                    "title" : "func drawingGroup(opaque: Bool, colorMode: ColorRenderingMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/dropdestination(for:action:istargeted:)",
+                    "title" : "func dropDestination<T>(for: T.Type, action: ([T], CGPoint) -> Bool, isTargeted: (Bool) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/dynamicisland(verticalplacement:)",
+                    "title" : "func dynamicIsland(verticalPlacement: DynamicIslandExpandedRegionVerticalPlacement) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/dynamictypesize(_:)",
+                    "title" : "func dynamicTypeSize(DynamicTypeSize) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/edgesignoringsafearea(_:)",
+                    "title" : "func edgesIgnoringSafeArea(Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/environment(_:_:)",
+                    "title" : "func environment<V>(WritableKeyPath<EnvironmentValues, V>, V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/environmentobject(_:)",
+                    "title" : "func environmentObject<T>(T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileexporter(ispresented:document:contenttype:defaultfilename:oncompletion:)-6f9aa",
+                    "title" : "func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String?, onCompletion: (Result<URL, Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileexporter(ispresented:document:contenttype:defaultfilename:oncompletion:)-8llki",
+                    "title" : "func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String?, onCompletion: (Result<URL, Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileexporter(ispresented:documents:contenttype:oncompletion:)-255x8",
+                    "title" : "func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: (Result<[URL], Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileexporter(ispresented:documents:contenttype:oncompletion:)-4d75",
+                    "title" : "func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: (Result<[URL], Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)",
+                    "title" : "func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fileimporter(ispresented:allowedcontenttypes:oncompletion:)",
+                    "title" : "func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: (Result<URL, Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/filemover(ispresented:file:oncompletion:)",
+                    "title" : "func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: (Result<URL, Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/filemover(ispresented:files:oncompletion:)",
+                    "title" : "func fileMover<C>(isPresented: Binding<Bool>, files: C, onCompletion: (Result<[URL], Error>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/finddisabled(_:)",
+                    "title" : "func findDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/findnavigator(ispresented:)",
+                    "title" : "func findNavigator(isPresented: Binding<Bool>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fixedsize()",
+                    "title" : "func fixedSize() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fixedsize(horizontal:vertical:)",
+                    "title" : "func fixedSize(horizontal: Bool, vertical: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/flipsforrighttoleftlayoutdirection(_:)",
+                    "title" : "func flipsForRightToLeftLayoutDirection(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focused(_:)",
+                    "title" : "func focused(FocusState<Bool>.Binding) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focused(_:equals:)",
+                    "title" : "func focused<Value>(FocusState<Value>.Binding, equals: Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedobject(_:)-2e49o",
+                    "title" : "func focusedObject<T>(T?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedobject(_:)-7joil",
+                    "title" : "func focusedObject<T>(T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedsceneobject(_:)-26fvi",
+                    "title" : "func focusedSceneObject<T>(T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedsceneobject(_:)-9293f",
+                    "title" : "func focusedSceneObject<T>(T?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedscenevalue(_:_:)-41zyy",
+                    "title" : "func focusedSceneValue<T>(WritableKeyPath<FocusedValues, T?>, T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedscenevalue(_:_:)-6gmhf",
+                    "title" : "func focusedSceneValue<T>(WritableKeyPath<FocusedValues, T?>, T?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedvalue(_:_:)-52j78",
+                    "title" : "func focusedValue<Value>(WritableKeyPath<FocusedValues, Value?>, Value?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/focusedvalue(_:_:)-5g3jv",
+                    "title" : "func focusedValue<Value>(WritableKeyPath<FocusedValues, Value?>, Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/font(_:)",
+                    "title" : "func font(Font?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fontdesign(_:)",
+                    "title" : "func fontDesign(Font.Design?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fontweight(_:)",
+                    "title" : "func fontWeight(Font.Weight?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fontwidth(_:)",
+                    "title" : "func fontWidth(Font.Width?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/foregroundcolor(_:)",
+                    "title" : "func foregroundColor(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/foregroundstyle(_:)",
+                    "title" : "func foregroundStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/foregroundstyle(_:_:)",
+                    "title" : "func foregroundStyle<S1, S2>(S1, S2) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/foregroundstyle(_:_:_:)",
+                    "title" : "func foregroundStyle<S1, S2, S3>(S1, S2, S3) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/formstyle(_:)",
+                    "title" : "func formStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/frame()",
+                    "title" : "func frame() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/frame(minwidth:idealwidth:maxwidth:minheight:idealheight:maxheight:alignment:)",
+                    "title" : "func frame(minWidth: CGFloat?, idealWidth: CGFloat?, maxWidth: CGFloat?, minHeight: CGFloat?, idealHeight: CGFloat?, maxHeight: CGFloat?, alignment: Alignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/frame(width:height:alignment:)",
+                    "title" : "func frame(width: CGFloat?, height: CGFloat?, alignment: Alignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fullscreencover(ispresented:ondismiss:content:)",
+                    "title" : "func fullScreenCover<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)?, content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/fullscreencover(item:ondismiss:content:)",
+                    "title" : "func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)?, content: (Item) -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gaugestyle(_:)",
+                    "title" : "func gaugeStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gesture(_:including:)",
+                    "title" : "func gesture<T>(T, including: GestureMask) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/grayscale(_:)",
+                    "title" : "func grayscale(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gridcellanchor(_:)",
+                    "title" : "func gridCellAnchor(UnitPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gridcellcolumns(_:)",
+                    "title" : "func gridCellColumns(Int) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gridcellunsizedaxes(_:)",
+                    "title" : "func gridCellUnsizedAxes(Axis.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/gridcolumnalignment(_:)",
+                    "title" : "func gridColumnAlignment(HorizontalAlignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/groupboxstyle(_:)",
+                    "title" : "func groupBoxStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/handlesexternalevents(preferring:allowing:)",
+                    "title" : "func handlesExternalEvents(preferring: Set<String>, allowing: Set<String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/headerprominence(_:)",
+                    "title" : "func headerProminence(Prominence) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/help(_:)-3p3dx",
+                    "title" : "func help<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/help(_:)-51j51",
+                    "title" : "func help(Text) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/help(_:)-822z0",
+                    "title" : "func help(LocalizedStringKey) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/hidden()",
+                    "title" : "func hidden() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/highprioritygesture(_:including:)",
+                    "title" : "func highPriorityGesture<T>(T, including: GestureMask) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/hovereffect(_:)",
+                    "title" : "func hoverEffect(HoverEffect) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/huerotation(_:)",
+                    "title" : "func hueRotation(Angle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/id(_:)",
+                    "title" : "func id<ID>(ID) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ignoressafearea(_:edges:)",
+                    "title" : "func ignoresSafeArea(SafeAreaRegions, edges: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/imagescale(_:)",
+                    "title" : "func imageScale(Image.Scale) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/indexviewstyle(_:)",
+                    "title" : "func indexViewStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/interactionactivitytrackingtag(_:)",
+                    "title" : "func interactionActivityTrackingTag(String) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/interactivedismissdisabled(_:)",
+                    "title" : "func interactiveDismissDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/italic(_:)",
+                    "title" : "func italic(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/itemprovider(_:)",
+                    "title" : "func itemProvider(Optional<() -> NSItemProvider?>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/kerning(_:)",
+                    "title" : "func kerning(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/keyboardshortcut(_:)-25w4n",
+                    "title" : "func keyboardShortcut(KeyboardShortcut?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/keyboardshortcut(_:)-9cniw",
+                    "title" : "func keyboardShortcut(KeyboardShortcut) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/keyboardshortcut(_:modifiers:)",
+                    "title" : "func keyboardShortcut(KeyEquivalent, modifiers: EventModifiers) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/keyboardshortcut(_:modifiers:localization:)",
+                    "title" : "func keyboardShortcut(KeyEquivalent, modifiers: EventModifiers, localization: KeyboardShortcut.Localization) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/keyboardtype(_:)",
+                    "title" : "func keyboardType(UIKeyboardType) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/labelstyle(_:)",
+                    "title" : "func labelStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/labeledcontentstyle(_:)",
+                    "title" : "func labeledContentStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/labelshidden()",
+                    "title" : "func labelsHidden() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/layoutpriority(_:)",
+                    "title" : "func layoutPriority(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/layoutvalue(key:value:)",
+                    "title" : "func layoutValue<K>(key: K.Type, value: K.Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/linelimit(_:)",
+                    "title" : "func lineLimit(Int?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/linelimit(_:reservesspace:)",
+                    "title" : "func lineLimit(Int, reservesSpace: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/linespacing(_:)",
+                    "title" : "func lineSpacing(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listitemtint(_:)-20ier",
+                    "title" : "func listItemTint(ListItemTint?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listitemtint(_:)-75kn3",
+                    "title" : "func listItemTint(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listrowbackground(_:)",
+                    "title" : "func listRowBackground<V>(V?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listrowinsets(_:)",
+                    "title" : "func listRowInsets(EdgeInsets?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listrowseparator(_:edges:)",
+                    "title" : "func listRowSeparator(Visibility, edges: VerticalEdge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listrowseparatortint(_:edges:)",
+                    "title" : "func listRowSeparatorTint(Color?, edges: VerticalEdge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listsectionseparator(_:edges:)",
+                    "title" : "func listSectionSeparator(Visibility, edges: VerticalEdge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/listsectionseparatortint(_:edges:)",
+                    "title" : "func listSectionSeparatorTint(Color?, edges: VerticalEdge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/liststyle(_:)",
+                    "title" : "func listStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/luminancetoalpha()",
+                    "title" : "func luminanceToAlpha() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/mask(_:)",
+                    "title" : "func mask<Mask>(Mask) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/mask(alignment:_:)",
+                    "title" : "func mask<Mask>(alignment: Alignment, () -> Mask) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/matchedgeometryeffect(id:in:properties:anchor:issource:)",
+                    "title" : "func matchedGeometryEffect<ID>(id: ID, in: Namespace.ID, properties: MatchedGeometryProperties, anchor: UnitPoint, isSource: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/menuindicator(_:)",
+                    "title" : "func menuIndicator(Visibility) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/menuorder(_:)",
+                    "title" : "func menuOrder(MenuOrder) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/menustyle(_:)",
+                    "title" : "func menuStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/minimumscalefactor(_:)",
+                    "title" : "func minimumScaleFactor(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/modifier(_:)",
+                    "title" : "func modifier<T>(T) -> ModifiedContent<Self, T>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/monospaced(_:)",
+                    "title" : "func monospaced(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/monospaceddigit()",
+                    "title" : "func monospacedDigit() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/movedisabled(_:)",
+                    "title" : "func moveDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/multilinetextalignment(_:)",
+                    "title" : "func multilineTextAlignment(TextAlignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbarbackbuttonhidden(_:)",
+                    "title" : "func navigationBarBackButtonHidden(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbarhidden(_:)",
+                    "title" : "func navigationBarHidden(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbaritems(leading:)",
+                    "title" : "func navigationBarItems<L>(leading: L) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbaritems(leading:trailing:)",
+                    "title" : "func navigationBarItems<L, T>(leading: L, trailing: T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbaritems(trailing:)",
+                    "title" : "func navigationBarItems<T>(trailing: T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:)-48d3x",
+                    "title" : "func navigationBarTitle(LocalizedStringKey) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:)-7fz9n",
+                    "title" : "func navigationBarTitle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:)-970mr",
+                    "title" : "func navigationBarTitle(Text) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:displaymode:)-3v25g",
+                    "title" : "func navigationBarTitle(LocalizedStringKey, displayMode: NavigationBarItem.TitleDisplayMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:displaymode:)-3y5ic",
+                    "title" : "func navigationBarTitle(Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitle(_:displaymode:)-4oqrz",
+                    "title" : "func navigationBarTitle<S>(S, displayMode: NavigationBarItem.TitleDisplayMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationbartitledisplaymode(_:)",
+                    "title" : "func navigationBarTitleDisplayMode(NavigationBarItem.TitleDisplayMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdestination(for:destination:)",
+                    "title" : "func navigationDestination<D, C>(for: D.Type, destination: (D) -> C) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdestination(ispresented:destination:)",
+                    "title" : "func navigationDestination<V>(isPresented: Binding<Bool>, destination: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:)-38f3q",
+                    "title" : "func navigationDocument(URL) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:)-6nha1",
+                    "title" : "func navigationDocument<D>(D) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:preview:)-192g4",
+                    "title" : "func navigationDocument<D, I>(D, preview: SharePreview<Never, I>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:preview:)-7b1r9",
+                    "title" : "func navigationDocument<D>(D, preview: SharePreview<Never, Never>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:preview:)-8u3ft",
+                    "title" : "func navigationDocument<D, I1, I2>(D, preview: SharePreview<I1, I2>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationdocument(_:preview:)-9qlml",
+                    "title" : "func navigationDocument<D, I>(D, preview: SharePreview<I, Never>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationsplitviewcolumnwidth(_:)",
+                    "title" : "func navigationSplitViewColumnWidth(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationsplitviewcolumnwidth(min:ideal:max:)",
+                    "title" : "func navigationSplitViewColumnWidth(min: CGFloat?, ideal: CGFloat, max: CGFloat?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationsplitviewstyle(_:)",
+                    "title" : "func navigationSplitViewStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationtitle(_:)-16s73",
+                    "title" : "func navigationTitle<V>(() -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationtitle(_:)-3zazs",
+                    "title" : "func navigationTitle(LocalizedStringKey) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationtitle(_:)-48wyq",
+                    "title" : "func navigationTitle(Binding<String>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationtitle(_:)-6gmau",
+                    "title" : "func navigationTitle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationtitle(_:)-839np",
+                    "title" : "func navigationTitle(Text) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/navigationviewstyle(_:)",
+                    "title" : "func navigationViewStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/offset(_:)",
+                    "title" : "func offset(CGSize) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/offset(x:y:)",
+                    "title" : "func offset(x: CGFloat, y: CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onappear(perform:)",
+                    "title" : "func onAppear(perform: (() -> Void)?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onchange(of:perform:)",
+                    "title" : "func onChange<V>(of: V, perform: (V) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/oncontinueuseractivity(_:perform:)",
+                    "title" : "func onContinueUserActivity(String, perform: (NSUserActivity) -> ()) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/oncontinuoushover(coordinatespace:perform:)",
+                    "title" : "func onContinuousHover(coordinateSpace: CoordinateSpace, perform: (HoverPhase) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondisappear(perform:)",
+                    "title" : "func onDisappear(perform: (() -> Void)?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrag(_:)",
+                    "title" : "func onDrag(() -> NSItemProvider) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrag(_:preview:)",
+                    "title" : "func onDrag<V>(() -> NSItemProvider, preview: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:delegate:)-1yc4c",
+                    "title" : "func onDrop(of: [String], delegate: DropDelegate) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:delegate:)-2e65y",
+                    "title" : "func onDrop(of: [UTType], delegate: DropDelegate) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:istargeted:perform:)-2dcs2",
+                    "title" : "func onDrop(of: [UTType], isTargeted: Binding<Bool>?, perform: ([NSItemProvider]) -> Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:istargeted:perform:)-6iiwe",
+                    "title" : "func onDrop(of: [String], isTargeted: Binding<Bool>?, perform: ([NSItemProvider]) -> Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:istargeted:perform:)-91uhr",
+                    "title" : "func onDrop(of: [UTType], isTargeted: Binding<Bool>?, perform: ([NSItemProvider], CGPoint) -> Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ondrop(of:istargeted:perform:)-9xkvp",
+                    "title" : "func onDrop(of: [String], isTargeted: Binding<Bool>?, perform: ([NSItemProvider], CGPoint) -> Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onhover(perform:)",
+                    "title" : "func onHover(perform: (Bool) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onlongpressgesture(minimumduration:maximumdistance:perform:onpressingchanged:)",
+                    "title" : "func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, perform: () -> Void, onPressingChanged: ((Bool) -> Void)?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onlongpressgesture(minimumduration:maximumdistance:pressing:perform:)",
+                    "title" : "func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onlongpressgesture(minimumduration:perform:onpressingchanged:)",
+                    "title" : "func onLongPressGesture(minimumDuration: Double, perform: () -> Void, onPressingChanged: ((Bool) -> Void)?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onlongpressgesture(minimumduration:pressing:perform:)",
+                    "title" : "func onLongPressGesture(minimumDuration: Double, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onopenurl(perform:)",
+                    "title" : "func onOpenURL(perform: (URL) -> ()) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onpreferencechange(_:perform:)",
+                    "title" : "func onPreferenceChange<K>(K.Type, perform: (K.Value) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onreceive(_:perform:)",
+                    "title" : "func onReceive<P>(P, perform: (P.Output) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/onsubmit(of:_:)",
+                    "title" : "func onSubmit(of: SubmitTriggers, (() -> Void)) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ontapgesture(count:coordinatespace:perform:)",
+                    "title" : "func onTapGesture(count: Int, coordinateSpace: CoordinateSpace, perform: (CGPoint) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/ontapgesture(count:perform:)",
+                    "title" : "func onTapGesture(count: Int, perform: () -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/opacity(_:)",
+                    "title" : "func opacity(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlay(_:alignment:)",
+                    "title" : "func overlay<Overlay>(Overlay, alignment: Alignment) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlay(_:ignoressafeareaedges:)",
+                    "title" : "func overlay<S>(S, ignoresSafeAreaEdges: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlay(_:in:fillstyle:)",
+                    "title" : "func overlay<S, T>(S, in: T, fillStyle: FillStyle) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlay(alignment:content:)",
+                    "title" : "func overlay<V>(alignment: Alignment, content: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlaypreferencevalue(_:_:)",
+                    "title" : "func overlayPreferenceValue<Key, T>(Key.Type, (Key.Value) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/overlaypreferencevalue(_:alignment:_:)",
+                    "title" : "func overlayPreferenceValue<K, V>(K.Type, alignment: Alignment, (K.Value) -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/padding(_:)-4lrkb",
+                    "title" : "func padding(EdgeInsets) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/padding(_:)-7k1gc",
+                    "title" : "func padding(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/padding(_:_:)",
+                    "title" : "func padding(Edge.Set, CGFloat?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/persistentsystemoverlays(_:)",
+                    "title" : "func persistentSystemOverlays(Visibility) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/pickerstyle(_:)",
+                    "title" : "func pickerStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/popover(ispresented:attachmentanchor:arrowedge:content:)",
+                    "title" : "func popover<Content>(isPresented: Binding<Bool>, attachmentAnchor: PopoverAttachmentAnchor, arrowEdge: Edge, content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/popover(item:attachmentanchor:arrowedge:content:)",
+                    "title" : "func popover<Item, Content>(item: Binding<Item?>, attachmentAnchor: PopoverAttachmentAnchor, arrowEdge: Edge, content: (Item) -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/position(_:)",
+                    "title" : "func position(CGPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/position(x:y:)",
+                    "title" : "func position(x: CGFloat, y: CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/preference(key:value:)",
+                    "title" : "func preference<K>(key: K.Type, value: K.Value) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/preferredcolorscheme(_:)",
+                    "title" : "func preferredColorScheme(ColorScheme?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/presentationdetents(_:)",
+                    "title" : "func presentationDetents(Set<PresentationDetent>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/presentationdetents(_:selection:)",
+                    "title" : "func presentationDetents(Set<PresentationDetent>, selection: Binding<PresentationDetent>) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/presentationdragindicator(_:)",
+                    "title" : "func presentationDragIndicator(Visibility) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/previewcontext(_:)",
+                    "title" : "func previewContext<C>(C) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/previewdevice(_:)",
+                    "title" : "func previewDevice(PreviewDevice?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/previewdisplayname(_:)",
+                    "title" : "func previewDisplayName(String?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/previewinterfaceorientation(_:)",
+                    "title" : "func previewInterfaceOrientation(InterfaceOrientation) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/previewlayout(_:)",
+                    "title" : "func previewLayout(PreviewLayout) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/privacysensitive(_:)",
+                    "title" : "func privacySensitive(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/progressviewstyle(_:)",
+                    "title" : "func progressViewStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/projectioneffect(_:)",
+                    "title" : "func projectionEffect(ProjectionTransform) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/redacted(reason:)",
+                    "title" : "func redacted(reason: RedactionReasons) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/refreshable(action:)",
+                    "title" : "func refreshable(action: () async -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/renameaction(_:)-48eip",
+                    "title" : "func renameAction(() -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/renameaction(_:)-5ngce",
+                    "title" : "func renameAction(FocusState<Bool>.Binding) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/replacedisabled(_:)",
+                    "title" : "func replaceDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/rotation3deffect(_:axis:anchor:anchorz:perspective:)",
+                    "title" : "func rotation3DEffect(Angle, axis: (x: CGFloat, y: CGFloat, z: CGFloat), anchor: UnitPoint, anchorZ: CGFloat, perspective: CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/rotationeffect(_:anchor:)",
+                    "title" : "func rotationEffect(Angle, anchor: UnitPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/safeareainset(edge:alignment:spacing:content:)-4y4i3",
+                    "title" : "func safeAreaInset<V>(edge: HorizontalEdge, alignment: VerticalAlignment, spacing: CGFloat?, content: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/safeareainset(edge:alignment:spacing:content:)-6h61",
+                    "title" : "func safeAreaInset<V>(edge: VerticalEdge, alignment: HorizontalAlignment, spacing: CGFloat?, content: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/saturation(_:)",
+                    "title" : "func saturation(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scaleeffect(_:anchor:)-1437f",
+                    "title" : "func scaleEffect(CGSize, anchor: UnitPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scaleeffect(_:anchor:)-87jr9",
+                    "title" : "func scaleEffect(CGFloat, anchor: UnitPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scaleeffect(x:y:anchor:)",
+                    "title" : "func scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scaledtofill()",
+                    "title" : "func scaledToFill() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scaledtofit()",
+                    "title" : "func scaledToFit() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scenepadding(_:)",
+                    "title" : "func scenePadding(Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scenepadding(_:edges:)",
+                    "title" : "func scenePadding(ScenePadding, edges: Edge.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scrollcontentbackground(_:)",
+                    "title" : "func scrollContentBackground(Visibility) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scrolldisabled(_:)",
+                    "title" : "func scrollDisabled(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scrolldismisseskeyboard(_:)",
+                    "title" : "func scrollDismissesKeyboard(ScrollDismissesKeyboardMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/scrollindicators(_:axes:)",
+                    "title" : "func scrollIndicators(ScrollIndicatorVisibility, axes: Axis.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchcompletion(_:)",
+                    "title" : "func searchCompletion(String) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchscopes(_:scopes:)",
+                    "title" : "func searchScopes<V, S>(Binding<V>, scopes: () -> S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchsuggestions(_:)",
+                    "title" : "func searchSuggestions<S>(() -> S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchsuggestions(_:for:)",
+                    "title" : "func searchSuggestions(Visibility, for: SearchSuggestionsPlacement.Set) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:)-16ink",
+                    "title" : "func searchable(text: Binding<String>, placement: SearchFieldPlacement, prompt: LocalizedStringKey) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:)-62dm9",
+                    "title" : "func searchable(text: Binding<String>, placement: SearchFieldPlacement, prompt: Text?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:)-7r1me",
+                    "title" : "func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement, prompt: S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:suggestions:)-2gz5",
+                    "title" : "func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement, prompt: Text?, suggestions: () -> S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:suggestions:)-5uaoa",
+                    "title" : "func searchable<V, S>(text: Binding<String>, placement: SearchFieldPlacement, prompt: S, suggestions: () -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:placement:prompt:suggestions:)-zswu",
+                    "title" : "func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement, prompt: LocalizedStringKey, suggestions: () -> S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:placement:prompt:token:)-73dlk",
+                    "title" : "func searchable<C, T>(text: Binding<String>, tokens: Binding<C>, placement: SearchFieldPlacement, prompt: Text?, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:placement:prompt:token:)-759zx",
+                    "title" : "func searchable<C, T>(text: Binding<String>, tokens: Binding<C>, placement: SearchFieldPlacement, prompt: LocalizedStringKey, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:placement:prompt:token:)-8slnv",
+                    "title" : "func searchable<C, T, S>(text: Binding<String>, tokens: Binding<C>, placement: SearchFieldPlacement, prompt: S, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-5ueam",
+                    "title" : "func searchable<C, T>(text: Binding<String>, tokens: Binding<C>, suggestedTokens: Binding<C>, placement: SearchFieldPlacement, prompt: Text?, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-71nms",
+                    "title" : "func searchable<C, T>(text: Binding<String>, tokens: Binding<C>, suggestedTokens: Binding<C>, placement: SearchFieldPlacement, prompt: LocalizedStringKey, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-77end",
+                    "title" : "func searchable<C, T, S>(text: Binding<String>, tokens: Binding<C>, suggestedTokens: Binding<C>, placement: SearchFieldPlacement, prompt: S, token: (C.Element) -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/shadow(color:radius:x:y:)",
+                    "title" : "func shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/sheet(ispresented:ondismiss:content:)",
+                    "title" : "func sheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)?, content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/sheet(item:ondismiss:content:)",
+                    "title" : "func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)?, content: (Item) -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/simultaneousgesture(_:including:)",
+                    "title" : "func simultaneousGesture<T>(T, including: GestureMask) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/speechadjustedpitch(_:)",
+                    "title" : "func speechAdjustedPitch(Double) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/speechalwaysincludespunctuation(_:)",
+                    "title" : "func speechAlwaysIncludesPunctuation(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/speechannouncementsqueued(_:)",
+                    "title" : "func speechAnnouncementsQueued(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/speechspellsoutcharacters(_:)",
+                    "title" : "func speechSpellsOutCharacters(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "deprecated" : true,
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/statusbar(hidden:)",
+                    "title" : "func statusBar(hidden: Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/statusbarhidden(_:)",
+                    "title" : "func statusBarHidden(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/strikethrough(_:pattern:color:)",
+                    "title" : "func strikethrough(Bool, pattern: Text.LineStyle.Pattern, color: Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/submitlabel(_:)",
+                    "title" : "func submitLabel(SubmitLabel) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/submitscope(_:)",
+                    "title" : "func submitScope(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/swipeactions(edge:allowsfullswipe:content:)",
+                    "title" : "func swipeActions<T>(edge: HorizontalEdge, allowsFullSwipe: Bool, content: () -> T) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/symbolrenderingmode(_:)",
+                    "title" : "func symbolRenderingMode(SymbolRenderingMode?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/symbolvariant(_:)",
+                    "title" : "func symbolVariant(SymbolVariants) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tabitem(_:)",
+                    "title" : "func tabItem<V>(() -> V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tabviewstyle(_:)",
+                    "title" : "func tabViewStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tablestyle(_:)",
+                    "title" : "func tableStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tag(_:)",
+                    "title" : "func tag<V>(V) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/task(id:priority:_:)",
+                    "title" : "func task<T>(id: T, priority: TaskPriority, () async -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/task(priority:_:)",
+                    "title" : "func task(priority: TaskPriority, () async -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/textcase(_:)",
+                    "title" : "func textCase(Text.Case?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/textcontenttype(_:)",
+                    "title" : "func textContentType(UITextContentType?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/textfieldstyle(_:)",
+                    "title" : "func textFieldStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/textinputautocapitalization(_:)",
+                    "title" : "func textInputAutocapitalization(TextInputAutocapitalization?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/textselection(_:)",
+                    "title" : "func textSelection<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tint(_:)",
+                    "title" : "func tint(Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/togglestyle(_:)",
+                    "title" : "func toggleStyle<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbar(_:for:)",
+                    "title" : "func toolbar(Visibility, for: ToolbarPlacement...) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbar(content:)-1okjt",
+                    "title" : "func toolbar<Content>(content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbar(content:)-1q3fl",
+                    "title" : "func toolbar<Content>(content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbar(id:content:)",
+                    "title" : "func toolbar<Content>(id: String, content: () -> Content) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbarbackground(_:for:)-2xtxj",
+                    "title" : "func toolbarBackground(Visibility, for: ToolbarPlacement...) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbarbackground(_:for:)-49rt0",
+                    "title" : "func toolbarBackground<S>(S, for: ToolbarPlacement...) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbarcolorscheme(_:for:)",
+                    "title" : "func toolbarColorScheme(ColorScheme?, for: ToolbarPlacement...) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbarrole(_:)",
+                    "title" : "func toolbarRole(ToolbarRole) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/toolbartitlemenu(content:)",
+                    "title" : "func toolbarTitleMenu<C>(content: () -> C) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/tracking(_:)",
+                    "title" : "func tracking(CGFloat) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transaction(_:)",
+                    "title" : "func transaction((inout Transaction) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transformanchorpreference(key:value:transform:)",
+                    "title" : "func transformAnchorPreference<A, K>(key: K.Type, value: Anchor<A>.Source, transform: (inout K.Value, Anchor<A>) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transformeffect(_:)",
+                    "title" : "func transformEffect(CGAffineTransform) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transformenvironment(_:transform:)",
+                    "title" : "func transformEnvironment<V>(WritableKeyPath<EnvironmentValues, V>, transform: (inout V) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transformpreference(_:_:)",
+                    "title" : "func transformPreference<K>(K.Type, (inout K.Value) -> Void) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/transition(_:)",
+                    "title" : "func transition(AnyTransition) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/truncationmode(_:)",
+                    "title" : "func truncationMode(Text.TruncationMode) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/underline(_:pattern:color:)",
+                    "title" : "func underline(Bool, pattern: Text.LineStyle.Pattern, color: Color?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/unredacted()",
+                    "title" : "func unredacted() -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/useractivity(_:element:_:)",
+                    "title" : "func userActivity<P>(String, element: P?, (P, NSUserActivity) -> ()) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/useractivity(_:isactive:_:)",
+                    "title" : "func userActivity(String, isActive: Bool, (NSUserActivity) -> ()) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgetaccentable(_:)",
+                    "title" : "func widgetAccentable(Bool) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgetlabel(_:)-6rwwf",
+                    "title" : "func widgetLabel(LocalizedStringKey) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgetlabel(_:)-9qjwk",
+                    "title" : "func widgetLabel<S>(S) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgetlabel(label:)",
+                    "title" : "func widgetLabel<Label>(label: () -> Label) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/widgeturl(_:)",
+                    "title" : "func widgetURL(URL?) -> some View",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/zindex(_:)",
+                    "title" : "func zIndex(Double) -> some View",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview\/view-implementations",
+                "title" : "View Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/reviewwidgetentryview",
+            "title" : "ReviewWidgetEntryView",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget_previews\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget_previews\/previews",
+                "title" : "static var previews: some View",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Type Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/reviewwidget_previews\/platform",
+                    "title" : "static var platform: PreviewPlatform?",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/reviewwidget_previews\/previewprovider-implementations",
+                "title" : "PreviewProvider Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/reviewwidget_previews",
+            "title" : "ReviewWidget_Previews",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/init(date:question:configuration:)",
+                "title" : "init(date: Date, question: WidgetQuestion, configuration: ConfigurationIntent)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/configuration",
+                "title" : "let configuration: ConfigurationIntent",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/date",
+                "title" : "let date: Date",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/question",
+                "title" : "let question: WidgetQuestion",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/relevance",
+                    "title" : "var relevance: TimelineEntryRelevance?",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/simpleentry\/timelineentry-implementations",
+                "title" : "TimelineEntry Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/simpleentry",
+            "title" : "SimpleEntry",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/temporaryfile\/init(creatingtempdirectoryforfilename:)",
+                "title" : "init(creatingTempDirectoryForFilename: String) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/temporaryfile\/deletedirectory",
+                "title" : "let deleteDirectory: () throws -> Void",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/temporaryfile\/directoryurl",
+                "title" : "let directoryURL: URL",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/temporaryfile\/fileurl",
+                "title" : "let fileURL: URL",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/temporaryfile",
+            "title" : "TemporaryFile",
+            "type" : "struct"
+          },
+          {
+            "title" : "Variables",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/reviewwidgetextension\/previewquestion",
+            "title" : "var previewQuestion: WidgetQuestion",
+            "type" : "var"
+          },
+          {
+            "title" : "Enumerations",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/continueinapp",
+                "title" : "case continueInApp",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/failure",
+                "title" : "case failure",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/failurerequiringapplaunch",
+                "title" : "case failureRequiringAppLaunch",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/inprogress",
+                "title" : "case inProgress",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/ready",
+                "title" : "case ready",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/success",
+                "title" : "case success",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/unspecified",
+                "title" : "case unspecified",
+                "type" : "case"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/init(rawvalue:)",
+                "title" : "init?(rawValue: Int)",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/hashvalue",
+                    "title" : "var hashValue: Int",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/hash(into:)",
+                    "title" : "func hash(into: inout Hasher)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode\/rawrepresentable-implementations",
+                "title" : "RawRepresentable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/reviewwidgetextension\/configurationintentresponsecode",
+            "title" : "ConfigurationIntentResponseCode",
+            "type" : "enum"
+          }
+        ],
+        "path" : "\/documentation\/reviewwidgetextension",
+        "title" : "ReviewWidgetExtension",
+        "type" : "module"
+      }
+    ]
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 0
+  }
+}
