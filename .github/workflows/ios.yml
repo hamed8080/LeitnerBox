@@ -23,6 +23,6 @@ jobs:
           -project LeitnerBox.xcodeproj
           -scheme LeitnerBox
           -sdk iphonesimulator
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0'
+          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2'
           -only-testing:LeitnerBoxTests
           IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION | xcpretty && exit ${PIPESTATUS[0]}
