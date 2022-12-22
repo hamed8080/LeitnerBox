@@ -1,0 +1,16 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/CustomView/PercentageView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%@%%"
+      },
+      {
+        "comment": "",
+        "key": "Total percent"
+      }
+    ]
+  },
+  "version": 1
+}

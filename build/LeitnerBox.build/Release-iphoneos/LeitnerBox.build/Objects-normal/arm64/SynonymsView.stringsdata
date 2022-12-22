@@ -1,0 +1,16 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/AddSynonym/SynonymsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Synonyms"
+      },
+      {
+        "comment": "",
+        "key": "%@"
+      }
+    ]
+  },
+  "version": 1
+}

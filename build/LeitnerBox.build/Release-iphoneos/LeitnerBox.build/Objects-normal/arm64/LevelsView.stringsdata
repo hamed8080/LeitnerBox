@@ -1,0 +1,16 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Level/LevelsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Search inside leitner..."
+      },
+      {
+        "comment": "",
+        "key": "Nothind has found."
+      }
+    ]
+  },
+  "version": 1
+}

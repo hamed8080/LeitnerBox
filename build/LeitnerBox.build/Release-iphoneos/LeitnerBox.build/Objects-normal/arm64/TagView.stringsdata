@@ -1,0 +1,32 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Tag/TagView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Manage Tags for %@"
+      },
+      {
+        "comment": "",
+        "key": "Add"
+      },
+      {
+        "comment": "",
+        "key": "Tag name"
+      },
+      {
+        "comment": "",
+        "key": "Select Color"
+      },
+      {
+        "comment": "",
+        "key": "SAVE"
+      },
+      {
+        "comment": "",
+        "key": "Cancel"
+      }
+    ]
+  },
+  "version": 1
+}

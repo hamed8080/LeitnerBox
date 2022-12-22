@@ -1,0 +1,56 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Leitners/LeitnerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Leitner name"
+      },
+      {
+        "comment": "",
+        "key": "Back to top level"
+      },
+      {
+        "comment": "",
+        "key": "SAVE"
+      },
+      {
+        "comment": "",
+        "key": "Cancel"
+      },
+      {
+        "comment": "",
+        "key": "Delete"
+      },
+      {
+        "comment": "",
+        "key": "Export"
+      },
+      {
+        "comment": "",
+        "key": "Add Item"
+      },
+      {
+        "comment": "",
+        "key": "Prononce \ndetails answer "
+      },
+      {
+        "comment": "",
+        "key": "%@ %@ - %@"
+      },
+      {
+        "comment": "",
+        "key": "Pronounce Voice"
+      },
+      {
+        "comment": "",
+        "key": "More"
+      },
+      {
+        "comment": "",
+        "key": "Leitner is empty.\nTap to add new Leitner."
+      }
+    ]
+  },
+  "version": 1
+}

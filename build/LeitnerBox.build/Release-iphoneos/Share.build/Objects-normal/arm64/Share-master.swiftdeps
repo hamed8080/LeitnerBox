@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "456c621af2824325f9a1903ab5afd69cf21a0ec8f6e3346d11a3889904b907d2"
+build_start_time: [1671709125, 721591949]
+build_end_time: [1671709132, 318156957]
+inputs:
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/AppGroupLocalStorage.swift": [1667300511, 212821960]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/Extentions/FileManager+.swift": [1667300251, 659240722]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share/ShareViewController.swift": [1667300879, 47802686]

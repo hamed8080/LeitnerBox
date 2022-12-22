@@ -1,0 +1,16 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/CustomView/CustomDialog.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Message"
+      },
+      {
+        "comment": "",
+        "key": "Hello"
+      }
+    ]
+  },
+  "version": 1
+}

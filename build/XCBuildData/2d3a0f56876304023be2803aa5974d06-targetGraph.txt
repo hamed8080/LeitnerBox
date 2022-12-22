@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Share in LeitnerBox, no dependencies
+ReviewWidgetExtension in LeitnerBox, no dependencies
+LeitnerBox in LeitnerBox, depends on:
+Share in LeitnerBox (explicit)
+ReviewWidgetExtension in LeitnerBox (explicit)

@@ -1,0 +1,28 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Search/SearchView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Advance Search in %@"
+      },
+      {
+        "comment": "",
+        "key": "Search inside leitner..."
+      },
+      {
+        "comment": "",
+        "key": "Nothind has found."
+      },
+      {
+        "comment": "",
+        "key": "Sort By"
+      },
+      {
+        "comment": "",
+        "key": "More"
+      }
+    ]
+  },
+  "version": 1
+}

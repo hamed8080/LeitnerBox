@@ -1,0 +1,24 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget/ReviewWidget.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Level: %lld"
+      },
+      {
+        "comment": "",
+        "key": "It will update approximately every 10 minutes."
+      },
+      {
+        "comment": "",
+        "key": "Review words"
+      },
+      {
+        "comment": "",
+        "key": "With this widget you could review words randomly in a specific leitner"
+      }
+    ]
+  },
+  "version": 1
+}

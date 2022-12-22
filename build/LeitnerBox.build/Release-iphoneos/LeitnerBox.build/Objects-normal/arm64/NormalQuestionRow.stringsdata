@@ -1,0 +1,40 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/CustomView/NormalQuestionRow.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "COMPLETED"
+      },
+      {
+        "comment": "",
+        "key": "Move"
+      },
+      {
+        "comment": "",
+        "key": "Delete"
+      },
+      {
+        "comment": "",
+        "key": "Edit"
+      },
+      {
+        "comment": "",
+        "key": "Copy"
+      },
+      {
+        "comment": "",
+        "key": "Reset to first level"
+      },
+      {
+        "comment": "",
+        "key": "Mark as completed"
+      },
+      {
+        "comment": "",
+        "key": "%@"
+      }
+    ]
+  },
+  "version": 1
+}

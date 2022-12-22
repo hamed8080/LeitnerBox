@@ -1,0 +1,38 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "2de8392af20b5f4d87f3cb8a74a8022a4e84cfeacbe1affdcf81a8d380e57947"
+build_start_time: [1671709126, 279274940]
+build_end_time: [1671709132, 395838975]
+inputs:
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/AppGroupLocalStorage.swift": [1667300511, 212821960]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/Extentions/FileManager+.swift": [1667300251, 659240722]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/Extentions/UserDefaults+.swift": [1667298419, 656596183]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Helpers/WidgetQuestion.swift": [1667298419, 625911951]
+  "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget/ReviewWidget.swift": [1667298419, 529075145]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Leitner+CoreDataClass.swift"
+  : [1671709126, 219266414]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Leitner+CoreDataProperties.swift"
+  : [1671709126, 219860076]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/LeitnerBox+CoreDataModel.swift"
+  : [1671709126, 211274147]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Level+CoreDataClass.swift"
+  : [1671709126, 217064857]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Level+CoreDataProperties.swift"
+  : [1671709126, 217834949]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Question+CoreDataClass.swift"
+  : [1671709126, 217296600]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Question+CoreDataProperties.swift"
+  : [1671709126, 217902421]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Statistic+CoreDataClass.swift"
+  : [1671709126, 217039108]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Statistic+CoreDataProperties.swift"
+  : [1671709126, 218077659]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Synonym+CoreDataClass.swift"
+  : [1671709126, 220499277]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Synonym+CoreDataProperties.swift"
+  : [1671709126, 221132755]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Tag+CoreDataClass.swift"
+  : [1671709126, 217079162]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/CoreDataGenerated/LeitnerBox/Tag+CoreDataProperties.swift"
+  : [1671709126, 217862606]
+  ? "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/build/LeitnerBox.build/Release-iphoneos/ReviewWidgetExtension.build/DerivedSources/IntentDefinitionGenerated/ReviewWidget/ConfigurationIntent.swift"
+  : [1671709125, 982652187]

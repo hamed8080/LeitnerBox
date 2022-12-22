@@ -1,0 +1,44 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Statistics/StatisticsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Statistics"
+      },
+      {
+        "comment": "",
+        "key": "Total Percent"
+      },
+      {
+        "comment": "",
+        "key": "Timeframe"
+      },
+      {
+        "comment": "",
+        "key": "Week"
+      },
+      {
+        "comment": "",
+        "key": "Month"
+      },
+      {
+        "comment": "",
+        "key": "Year"
+      },
+      {
+        "comment": "",
+        "key": "Day"
+      },
+      {
+        "comment": "",
+        "key": "Count"
+      },
+      {
+        "comment": "",
+        "key": "IsPassed"
+      }
+    ]
+  },
+  "version": 1
+}

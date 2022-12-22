@@ -1,0 +1,20 @@
+{
+  "source": "/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/AddOrEditQuestion/AddOrEditQuestionView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Save"
+      },
+      {
+        "comment": "",
+        "key": "clear"
+      },
+      {
+        "comment": "",
+        "key": "Done"
+      }
+    ]
+  },
+  "version": 1
+}
