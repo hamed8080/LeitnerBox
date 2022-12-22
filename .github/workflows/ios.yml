@@ -21,10 +21,10 @@ jobs:
         run: export IS_CONTINUOUS_INTEGRATION="1" 
       - name: Run Unit Tests
         run: xcodebuild \
-        test \
-        -project LeitnerBox.xcodeproj \
-        -scheme LeitnerBox \
-        -sdk iphonesimulator \
-        -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
-        -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]} \
-        IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION
+            test \
+            -project LeitnerBox.xcodeproj \
+            -scheme LeitnerBox \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' \
+            -only-testing:LeitnerBoxTests | xcpretty && exit ${PIPESTATUS[0]} \
+            IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION
