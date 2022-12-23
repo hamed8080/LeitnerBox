@@ -800,7 +800,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# if which swiftlint > /dev/null; then\n#    APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\n# else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
+			shellScript = "if [ -x \"$(command -v swiftlint)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ]; \nthen\n    echo \"Start linting on with build phase xproject script.\"\n   APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\nelif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\nthen\n    echo \"Not linting in CI with xproject build phase script.\"\nelif ! [ -x \"$(command -v swiftlint)\" ]; \nthen\n   echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		05A9438529557FBE003657DB /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -819,7 +819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# if which swiftformat >/dev/null; then\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\n# else\n#   echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n# fi\n";
+			shellScript = "if [ -x \"$(command -v swiftformat)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ];\nthen\n    echo \"Start formatting with swiftformat build phase xproject script.\"\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\nelif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\nthen\n    echo \"Not formatting with swiftformat in CI with xproject build phase script.\"\nelif ! [ -x \"$(command -v swiftformat)\" ]; \nthen\n   echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
