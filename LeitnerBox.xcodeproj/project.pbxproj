@@ -800,7 +800,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n   APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\nelse\n   echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
+			shellScript = "# if which swiftlint > /dev/null; then\n#    APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\n# else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
 		};
 		05A9438529557FBE003657DB /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -819,7 +819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "# if which swiftformat >/dev/null; then\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\n# else\n#   echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n# fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

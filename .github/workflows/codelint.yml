@@ -1,0 +1,22 @@
+name: Lint code
+
+on:
+  push:
+    branches: [ "main" ]
+      - '.github/workflows/codelint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/codelint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
+
+jobs:
+  SwiftLint:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Lint code using SwiftLint
+        run: swiftlint lint --reporter github-actions-logging
