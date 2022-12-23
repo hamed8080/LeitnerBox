@@ -9,29 +9,14 @@ import Foundation
 import SwiftUI
 
 class TagViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var tags: [Tag] = []
-
-    @Published
-    var leitner: Leitner
-
-    @Published
-    var showAddOrEditTagDialog: Bool = false
-
-    @Published
-    var selectedTag: Tag?
-
-    @Published
-    var tagName: String = ""
-
-    @Published
-    var colorPickerColor: Color = .gray
-
-    @Published
-    var searchText: String = ""
+    @Published var viewContext: NSManagedObjectContext
+    @Published var tags: [Tag] = []
+    @Published var leitner: Leitner
+    @Published var showAddOrEditTagDialog: Bool = false
+    @Published var selectedTag: Tag?
+    @Published var tagName: String = ""
+    @Published var colorPickerColor: Color = .gray
+    @Published var searchText: String = ""
 
     var filtered: [Tag] {
         if searchText.isEmpty {

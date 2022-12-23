@@ -8,19 +8,11 @@ import CoreData
 import SwiftUI
 
 struct QuestionSynonymsView: View {
-    @EnvironmentObject
-    var viewModel: SynonymViewModel
-
+    @EnvironmentObject var viewModel: SynonymViewModel
     var accessControls: [AccessControls] = [.showSynonyms, .addSynonym]
-
-    @State
-    var showAddSynonyms = false
-
-    @State
-    private var selectedQuestion: Question?
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @State var showAddSynonyms = false
+    @State private var selectedQuestion: Question?
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         NavigationStack {

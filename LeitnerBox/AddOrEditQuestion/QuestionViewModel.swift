@@ -9,30 +9,14 @@ import Foundation
 import SwiftUI
 
 class QuestionViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var level: Level
-
-    @Published
-    var isManual = true
-
-    @Published
-    var completed = false
-
-    @Published
-    var answer: String = ""
-
-    @Published
-    var detailDescription: String = ""
-
-    @Published
-    var questionString: String = ""
-
-    @Published
-    var favorite: Bool = false
-
+    @Published var viewContext: NSManagedObjectContext
+    @Published var level: Level
+    @Published var isManual = true
+    @Published var completed = false
+    @Published var answer: String = ""
+    @Published var detailDescription: String = ""
+    @Published var questionString: String = ""
+    @Published var favorite: Bool = false
     var question: Question
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner, question: Question? = nil) {

@@ -10,15 +10,9 @@ import SwiftUI
 
 class StatisticsViewModel: ObservableObject {
     var viewContext: NSManagedObjectContext
-
-    @Published
-    var statistics: [Statistic] = []
-
-    @State
-    var percentage: Double = 0
-
-    @Published
-    var timeframe: Timeframe = .week
+    @Published var statistics: [Statistic] = []
+    @State var percentage: Double = 0
+    @Published var timeframe: Timeframe = .week
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext

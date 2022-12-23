@@ -139,11 +139,9 @@ struct SearchView: View {
         }
     }
 
-    @State
-    var heightOfReview: CGFloat = 128
+    @State var heightOfReview: CGFloat = 128
 
-    @ViewBuilder
-    var pronunceWordsView: some View {
+    @ViewBuilder var pronunceWordsView: some View {
         if viewModel.reviewStatus == .isPlaying || viewModel.reviewStatus == .isPaused {
             let question = viewModel.lastPlayedQuestion
             VStack(alignment: .leading) {
@@ -209,19 +207,18 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
-
-        var viewModel: SearchViewModel {
-            try? PersistenceController.shared.generateAndFillLeitner()
-            return SearchViewModel(
-                viewContext: PersistenceController.shared.viewContext,
-                leitner: LeitnerView_Previews.leitner,
-                voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice
-            )
-        }
+        static let context = PersistenceController.shared.viewContext
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        @StateObject var viewModel = SearchViewModel(
+            viewContext: Preview.context,
+            leitner: Preview.leitner,
+            voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice
+        )
 
         var body: some View {
             SearchView()
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+                .environment(\.managedObjectContext, Preview.context)
+                .environmentObject(LeitnerViewModel(viewContext: Preview.context))
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
                 .environmentObject(viewModel)
         }

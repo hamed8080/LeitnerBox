@@ -8,26 +8,13 @@ import CoreData
 import SwiftUI
 
 struct NormalQuestionRow: View {
-    @StateObject
-    var question: Question
-
-    @StateObject
-    var tagsViewModel: TagViewModel
-
-    @EnvironmentObject
-    var searchViewModel: SearchViewModel
-
-    @EnvironmentObject
-    var leitnersVM: LeitnerViewModel
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
-
-    @Environment(\.dynamicTypeSize)
-    var typeSize
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @StateObject var question: Question
+    @StateObject var tagsViewModel: TagViewModel
+    @EnvironmentObject var searchViewModel: SearchViewModel
+    @EnvironmentObject var leitnersVM: LeitnerViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.dynamicTypeSize) var typeSize
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var aceessControls: [AccessControls] = {
         var aceessControls = AccessControls.full
@@ -100,8 +87,7 @@ struct NormalQuestionRow: View {
         }
     }
 
-    @ViewBuilder
-    var questionAndAnswer: some View {
+    @ViewBuilder var questionAndAnswer: some View {
         Text(question.question ?? "")
             .font(.title2.bold())
         if let answer = question.answer, !answer.isEmpty {
@@ -117,8 +103,7 @@ struct NormalQuestionRow: View {
         }
     }
 
-    @ViewBuilder
-    var completed: some View {
+    @ViewBuilder var completed: some View {
         if question.completed {
             Text("COMPLETED")
                 .foregroundColor(.blue)
@@ -126,8 +111,7 @@ struct NormalQuestionRow: View {
         }
     }
 
-    @ViewBuilder
-    var controls: some View {
+    @ViewBuilder var controls: some View {
         if aceessControls.contains(.trailingControls) {
             let padding: CGFloat = sizeClass == .compact ? 4 : 8
             HStack(spacing: padding) {
@@ -247,9 +231,9 @@ struct NormalQuestionRow: View {
 
 struct NormalQuestionRow_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = LeitnerView_Previews.leitner
-        let question = leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
-        let tagVM = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        let question = Preview.leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
+        let tagVM = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         let searchVM = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             NormalQuestionRow(question: question!, tagsViewModel: tagVM)

@@ -10,20 +10,11 @@ import Foundation
 import SwiftUI
 
 class LevelsViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var leitner: Leitner
-
-    @Published
-    var searchWord: String = ""
-
-    @Published
-    var levels: [Level] = []
-
-    @Published
-    var selectedLevel: Level?
+    @Published var viewContext: NSManagedObjectContext
+    @Published var leitner: Leitner
+    @Published var searchWord: String = ""
+    @Published var levels: [Level] = []
+    @Published var selectedLevel: Level?
 
     var filtered: [Question] {
         if searchWord.isEmpty || searchWord == "#" {

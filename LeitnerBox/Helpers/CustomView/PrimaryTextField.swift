@@ -46,8 +46,7 @@ struct PrimaryTextField: View {
 }
 
 struct PrimaryTextField_Previews: PreviewProvider {
-    @State
-    static var text: String = ""
+    @State static var text: String = ""
 
     static var previews: some View {
         VStack {

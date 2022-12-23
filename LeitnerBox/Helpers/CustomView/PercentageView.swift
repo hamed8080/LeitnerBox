@@ -7,14 +7,9 @@
 import SwiftUI
 
 struct PercentageView: View {
-    @Binding
-    var percent: Double
-
-    @State
-    var trimPercentage: CGFloat = 0
-
-    @State
-    var textPercentageAnimation: Double = 0
+    @Binding var percent: Double
+    @State var trimPercentage: CGFloat = 0
+    @State var textPercentageAnimation: Double = 0
 
     var bottomText: Text = .init("")
 

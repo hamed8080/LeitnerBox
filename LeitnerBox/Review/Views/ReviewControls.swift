@@ -5,18 +5,13 @@
 //  Created by hamed on 11/1/22.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct ReviewControls: View {
-    @StateObject
-    var viewModel: ReviewViewModel
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @StateObject var viewModel: ReviewViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         HStack(spacing: sizeClass == .compact ? 26 : 48) {

@@ -4,12 +4,12 @@
 //
 //  Created by hamed on 12/22/22.
 //
-import Foundation
 import AVFoundation
+import Foundation
 
 protocol AVSpeechSynthesizerProtocol {
     var isPaused: Bool { get }
-    var isSpeaking : Bool { get }
+    var isSpeaking: Bool { get }
     var delegate: AVSpeechSynthesizerDelegate? { get set }
     func speak(_ utterance: AVSpeechUtterance)
     func pauseSpeaking(at: AVSpeechBoundary) -> Bool
@@ -17,13 +17,8 @@ protocol AVSpeechSynthesizerProtocol {
     func stopSpeaking(at: AVSpeechBoundary) -> Bool
 }
 
-protocol AVSpeechSynthesisVoiceProtocol {
+protocol AVSpeechSynthesisVoiceProtocol {}
 
-}
+extension AVSpeechSynthesisVoice: AVSpeechSynthesisVoiceProtocol {}
 
-extension AVSpeechSynthesisVoice : AVSpeechSynthesisVoiceProtocol {
-
-}
-
-extension AVSpeechSynthesizer: AVSpeechSynthesizerProtocol {
-}
+extension AVSpeechSynthesizer: AVSpeechSynthesizerProtocol {}

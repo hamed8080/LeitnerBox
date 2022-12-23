@@ -4,24 +4,22 @@
 //
 // Created by Hamed Hosseini on 10/28/22.
 
+import AVFoundation
 @testable import LeitnerBox
 import SwiftUI
 import XCTest
-import AVFoundation
 
 final class SearchViewModelTests: XCTestCase {
     var viewModel: SearchViewModel!
 
     override func setUp() {
-        try? PersistenceController.shared.generateAndFillLeitner()
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext, voices: []).leitners.first!
+        let leitners = try? PersistenceController.shared.generateAndFillLeitner()
         let mockSpeach = MockAVSpeechSynthesisVoice()
         let mockSynthesizer = MockAVSpeechSynthesizer()
         viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext,
-                                    leitner: leitner,
+                                    leitner: leitners!.first!,
                                     voiceSpeech: mockSpeach,
-                                    synthesizer: mockSynthesizer
-        )
+                                    synthesizer: mockSynthesizer)
     }
 
     func test_delete_items_with_offset() {

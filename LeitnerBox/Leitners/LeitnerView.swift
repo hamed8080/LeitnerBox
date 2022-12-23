@@ -31,7 +31,7 @@ struct LeitnerView: View {
         }
         .animation(.easeInOut, value: selectedLeitnrId)
         .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: viewModel.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
-        .sheet(isPresented: Binding(get: {viewModel.backupFile != nil}, set: {_ in})) {
+        .sheet(isPresented: Binding(get: { viewModel.backupFile != nil }, set: { _ in })) {
             if .iOS == true {
                 Task {
                     await viewModel.deleteBackupFile()
@@ -108,14 +108,11 @@ struct LeitnerView: View {
 }
 
 struct SidebarListView: View {
-    @AppStorage("pronounceDetailAnswer")
-    private var pronounceDetailAnswer = false
+    @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
 
-    @Binding
-    var selectedLeitnrId: Leitner.ID?
+    @Binding var selectedLeitnrId: Leitner.ID?
 
-    @EnvironmentObject
-    var viewModel: LeitnerViewModel
+    @EnvironmentObject var viewModel: LeitnerViewModel
 
     var body: some View {
         List(viewModel.leitners, selection: $selectedLeitnrId.animation()) { leitner in
@@ -193,14 +190,11 @@ struct SidebarListView: View {
 
 /// It has animation so it's better to separate it from the main view.
 struct EmptyLeitnerAnimation: View {
-    @EnvironmentObject
-    var viewModel: LeitnerViewModel
+    @EnvironmentObject var viewModel: LeitnerViewModel
 
-    @State
-    var isAnimating: Bool = false
+    @State var isAnimating: Bool = false
 
-    @State
-    private var progress: CGFloat = 0
+    @State private var progress: CGFloat = 0
 
     var body: some View {
         if viewModel.leitners.count == 0 {
@@ -241,17 +235,9 @@ struct EmptyLeitnerAnimation: View {
 }
 
 struct LeitnerView_Previews: PreviewProvider {
-    static var leitner: Leitner {
-        let context = PersistenceController.shared.viewContext
-        let req = Leitner.fetchRequest()
-        req.fetchLimit = 1
-        let leitner = (try? context.fetch(req))?.first ?? Leitner(context: context)
-        return leitner
-    }
-
     struct Preview: View {
         var viewModel: LeitnerViewModel {
-            try? PersistenceController.shared.generateAndFillLeitner()
+            _ = try? PersistenceController.shared.generateAndFillLeitner()
             return LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
         }
 
@@ -263,8 +249,7 @@ struct LeitnerView_Previews: PreviewProvider {
     }
 
     struct EmptyLeitnerAnimationViewPreview: View {
-        @StateObject
-        var viewModel = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
+        @StateObject var viewModel = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
 
         var body: some View {
             EmptyLeitnerAnimation()

@@ -9,17 +9,10 @@ import CoreData
 import SwiftUI
 
 struct LevelsView: View {
-    @EnvironmentObject
-    var viewModel: LevelsViewModel
-
-    @EnvironmentObject
-    var searchViewModel: SearchViewModel
-
-    @Environment(\.avSpeechSynthesisVoice)
-    var voiceSpeech: AVSpeechSynthesisVoice
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @EnvironmentObject var viewModel: LevelsViewModel
+    @EnvironmentObject var searchViewModel: SearchViewModel
+    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         ZStack {
@@ -59,8 +52,7 @@ struct LevelsView: View {
         }
     }
 
-    @ViewBuilder
-    var header: some View {
+    @ViewBuilder var header: some View {
         VStack(alignment: .leading, spacing: 4) {
             let totalCount = viewModel.levels.map { $0.questions?.count ?? 0 }.reduce(0, +)
 
@@ -84,8 +76,7 @@ struct LevelsView: View {
         .listRowSeparator(.hidden)
     }
 
-    @ViewBuilder
-    var toolbars: some View {
+    @ViewBuilder var toolbars: some View {
         ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
             LazyView(
                 AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.leitner))
@@ -116,8 +107,7 @@ struct LevelsView: View {
         .keyboardShortcut("s", modifiers: [.command, .option])
     }
 
-    @ViewBuilder
-    var searchResult: some View {
+    @ViewBuilder var searchResult: some View {
         if viewModel.filtered.count > 0 || viewModel.searchWord.isEmpty {
             ForEach(viewModel.filtered) { suggestion in
                 SearchRowView(question: suggestion, leitner: searchViewModel.leitner)
@@ -146,11 +136,11 @@ public struct LazyView<Content: View>: View {
 
 struct LevelsView_Previews: PreviewProvider {
     struct Preview: View {
-        @StateObject
-        var viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
 
-        @StateObject
-        var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        @StateObject var viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
+
+        @StateObject var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
         var body: some View {
             LevelsView()

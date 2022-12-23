@@ -8,20 +8,12 @@ import CoreData
 import SwiftUI
 
 struct QuestionTagsView: View {
-    @EnvironmentObject
-    var question: Question
-
-    @State
-    private var showAddTags = false
-
+    @EnvironmentObject var question: Question
+    @State private var showAddTags = false
     let viewModel: TagViewModel
-
     var addPadding = false
-
     var accessControls: [AccessControls] = [.showTags, .addTag]
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -85,8 +77,9 @@ struct QuestionTagsView: View {
 }
 
 struct QuestionTagsView_Previews: PreviewProvider {
+    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
-        let leitner = LeitnerView_Previews.leitner
+        let leitner = QuestionTagsView_Previews.leitner
         let question = leitner.allQuestions.first!
         QuestionTagsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
             .environmentObject(question)

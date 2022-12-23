@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct ReviewAnswer: View {
-    @StateObject
-    var viewModel: ReviewViewModel
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
+    @StateObject var viewModel: ReviewViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
         HStack {

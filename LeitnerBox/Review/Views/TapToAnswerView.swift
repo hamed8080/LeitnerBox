@@ -9,11 +9,8 @@ import SwiftUI
 
 /// Animation causes multiple resest in review, it's better stay separate from other views.
 struct TapToAnswerView: View {
-    @StateObject
-    var viewModel: ReviewViewModel
-
-    @State
-    private var isAnimationShowAnswer = false
+    @StateObject var viewModel: ReviewViewModel
+    @State private var isAnimationShowAnswer = false
 
     var body: some View {
         Button {

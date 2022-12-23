@@ -7,10 +7,8 @@
 import SwiftUI
 
 struct CustomDialog<DialogContent: View>: ViewModifier {
-    @Binding
-    private var isShowing: Bool
+    @Binding private var isShowing: Bool
     private var dialogContent: DialogContent
-
     @Environment(\.colorScheme) var colorScheme
 
     init(isShowing: Binding<Bool>, @ViewBuilder dialogContent: @escaping () -> DialogContent) {

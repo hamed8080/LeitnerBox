@@ -9,8 +9,7 @@ import SwiftUI
 @main
 struct LeitnerBoxApp: App, DropDelegate {
     @State private var dragOver = false
-    @State
-    var hideSplash = false
+    @State var hideSplash = false
 
     var body: some Scene {
         WindowGroup {

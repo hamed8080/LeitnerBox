@@ -8,15 +8,9 @@ import CoreData
 import SwiftUI
 
 struct AddSynonymsView: View {
-    @StateObject
-    var viewModel: SynonymViewModel
-
-    @Environment(\.dismiss)
-    var dismiss
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
-
+    @StateObject var viewModel: SynonymViewModel
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     var completion: (() -> Void)?
 
     var body: some View {
@@ -43,16 +37,18 @@ struct AddSynonymsView: View {
 
 struct AddSynonymsView_Previews: PreviewProvider {
     struct Preview: View {
-        @StateObject
-        var viewModel = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!)
+        static let context = PersistenceController.shared.viewContext
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        @StateObject var viewModel = SynonymViewModel(viewContext: Preview.context, question: Preview.leitner.allQuestions.first!)
 
         var body: some View {
             AddSynonymsView(viewModel: viewModel)
                 .onAppear {
                     viewModel.searchText = "t"
                 }
-                .environmentObject(SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+                .environmentObject(SearchViewModel(viewContext: Preview.context, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                .environmentObject(LeitnerViewModel(viewContext: Preview.context))
+                .environment(\.managedObjectContext, Preview.context)
                 .preferredColorScheme(.dark)
         }
     }

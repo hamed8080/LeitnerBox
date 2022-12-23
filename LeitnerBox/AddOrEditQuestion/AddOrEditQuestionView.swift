@@ -8,20 +8,11 @@ import CoreData
 import SwiftUI
 
 struct AddOrEditQuestionView: View {
-    @StateObject
-    var viewModel: QuestionViewModel
-
-    @Environment(\.dismiss)
-    var dissmiss
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
-
-    @Environment(\.colorScheme)
-    var colorScheme
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @StateObject var viewModel: QuestionViewModel
+    @Environment(\.dismiss) var dissmiss
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         HStack(spacing: 0) {
@@ -137,17 +128,18 @@ struct AddOrEditQuestionView: View {
 
 struct AddQuestionView_Previews: PreviewProvider {
     struct Preview: View {
-        static let question = LeitnerView_Previews.leitner.allQuestions.first!
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let question = leitner.allQuestions.first!
         static let context = PersistenceController.shared.viewContext
-        @StateObject
-        var viewModel = QuestionViewModel(
+        @StateObject var viewModel = QuestionViewModel(
             viewContext: context,
-            leitner: LeitnerView_Previews.leitner,
+            leitner: Preview.leitner,
             question: question
         )
 
         var body: some View {
             AddOrEditQuestionView(viewModel: viewModel)
+                .environment(\.managedObjectContext, Preview.context)
         }
     }
 

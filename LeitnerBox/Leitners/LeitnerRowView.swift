@@ -7,11 +7,8 @@
 import SwiftUI
 
 struct LeitnerRowView: View {
-    @StateObject
-    var leitner: Leitner
-
-    @StateObject
-    var viewModel: LeitnerViewModel
+    @StateObject var leitner: Leitner
+    @StateObject var viewModel: LeitnerViewModel
 
     var body: some View {
         HStack {
@@ -43,7 +40,8 @@ struct LeitnerRowView: View {
 }
 
 struct LeitnerRowView_Previews: PreviewProvider {
+    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
-        LeitnerRowView(leitner: LeitnerView_Previews.leitner, viewModel: LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))
+        LeitnerRowView(leitner: LeitnerRowView_Previews.leitner, viewModel: LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))
     }
 }

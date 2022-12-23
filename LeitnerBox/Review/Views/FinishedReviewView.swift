@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct FinishedReviewView: View {
-    @State
-    private var isAnimating = false
+    @State private var isAnimating = false
 
     var body: some View {
         VStack(spacing: 12) {

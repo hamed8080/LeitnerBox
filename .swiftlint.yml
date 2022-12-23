@@ -1,3 +1,25 @@
 # By default, SwiftLint uses a set of sensible default rules you can adjust:
 disabled_rules: # rule identifiers turned on by default to exclude from running
-  - line_length
+  - opening_brace
+  - function_body_length
+  - compiler_protocol_init
+  - cyclomatic_complexity
+  - function_parameter_count
+  - type_body_length
+  - todo
+  - file_length
+  - trailing_comma
+  - force_cast
+  - force_try
+
+line_length: 250
+
+identifier_name:
+  min_length: 1 # only min_length
+  max_length: 50
+
+type_name:
+  min_length: 2 # only warning
+  max_length: # warning and error
+    warning: 50
+    error: 60

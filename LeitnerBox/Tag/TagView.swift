@@ -8,13 +8,9 @@ import CoreData
 import SwiftUI
 
 struct TagView: View {
-    @StateObject
-    var viewModel: TagViewModel
-
+    @StateObject var viewModel: TagViewModel
     @Environment(\.colorScheme) var colorScheme
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
         ZStack {
@@ -52,8 +48,7 @@ struct TagView: View {
         }
     }
 
-    @ViewBuilder
-    var addOrEditTagDialog: some View {
+    @ViewBuilder var addOrEditTagDialog: some View {
         VStack(spacing: 24) {
             Text("Tag name")
                 .foregroundColor(.accentColor)
@@ -103,8 +98,8 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
-        @StateObject
-        var viewModel = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        @StateObject var viewModel = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         var body: some View {
             TagView(viewModel: viewModel)
         }

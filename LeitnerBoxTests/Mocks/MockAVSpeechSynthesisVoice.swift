@@ -5,31 +5,28 @@
 //  Created by hamed on 12/22/22.
 //
 
-@testable import LeitnerBox
-import Foundation
 import AVFoundation
+import Foundation
+@testable import LeitnerBox
 
 class MockAVSpeechSynthesizer: NSObject, AVSpeechSynthesizerProtocol {
     var isPaused: Bool = true
     var isSpeaking: Bool = false
     var delegate: AVSpeechSynthesizerDelegate?
 
-    func speak(_ utterance: AVSpeechUtterance) {
-    }
+    func speak(_: AVSpeechUtterance) {}
 
-    func pauseSpeaking(at: AVSpeechBoundary) -> Bool {
-        return true
+    func pauseSpeaking(at _: AVSpeechBoundary) -> Bool {
+        true
     }
 
     func continueSpeaking() -> Bool {
-        return true
+        true
     }
 
-    func stopSpeaking(at: AVSpeechBoundary) -> Bool {
-        return true
+    func stopSpeaking(at _: AVSpeechBoundary) -> Bool {
+        true
     }
 }
 
-class MockAVSpeechSynthesisVoice: NSObject, AVSpeechSynthesisVoiceProtocol {
-
-}
+class MockAVSpeechSynthesisVoice: NSObject, AVSpeechSynthesisVoiceProtocol {}

@@ -9,17 +9,10 @@ import CoreData
 import SwiftUI
 
 struct ReviewView: View {
-    @StateObject
-    var viewModel: ReviewViewModel
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
-
-    @Environment(\.avSpeechSynthesisVoice)
-    var voiceSpeech: AVSpeechSynthesisVoice
+    @StateObject var viewModel: ReviewViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         if viewModel.isFinished {
@@ -88,9 +81,9 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     struct Preview: View {
-        static let level = (LeitnerView_Previews.leitner.levels).filter { $0.level == 1 }.first
-        @StateObject
-        var viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let level = (leitner.levels).filter { $0.level == 1 }.first
+        @StateObject var viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level!, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
             ReviewView(viewModel: viewModel)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)

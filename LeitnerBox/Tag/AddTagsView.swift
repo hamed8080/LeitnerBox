@@ -7,16 +7,10 @@
 import SwiftUI
 
 struct AddTagsView: View {
-    @StateObject
-    var question: Question
-
-    @StateObject
-    var viewModel: TagViewModel
-
+    @StateObject var question: Question
+    @StateObject var viewModel: TagViewModel
     var completion: (() -> Void)?
-
-    @Environment(\.dismiss)
-    var dismiss
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(spacing: 0) {
@@ -43,7 +37,7 @@ struct AddTagsView: View {
 
 struct AddTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        let leitner = LeitnerView_Previews.leitner
+        let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         let question = leitner.allQuestions.first!
         AddTagsView(question: question, viewModel: .init(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
             .preferredColorScheme(.dark)

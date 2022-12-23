@@ -9,17 +9,10 @@ import Foundation
 import SwiftUI
 
 class SynonymViewModel: ObservableObject {
-    @Published
-    var leitner: Leitner
-
-    @Published
-    var baseQuestion: Question
-
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var searchText: String = ""
+    @Published var leitner: Leitner
+    @Published var baseQuestion: Question
+    @Published var viewContext: NSManagedObjectContext
+    @Published var searchText: String = ""
 
     init(viewContext: NSManagedObjectContext, question: Question) {
         self.viewContext = viewContext

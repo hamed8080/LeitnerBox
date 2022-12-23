@@ -11,7 +11,7 @@ final class LeitnerViewModelTests: XCTestCase {
     var viewModel: LeitnerViewModel!
 
     override func setUp() {
-        try? PersistenceController.shared.generateAndFillLeitner()
+        _ = try? PersistenceController.shared.generateAndFillLeitner()
         viewModel = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
     }
 

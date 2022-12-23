@@ -9,23 +9,12 @@ import CoreData
 import SwiftUI
 
 struct LevelRow: View {
-    @StateObject
-    var level: Level
-
-    @State
-    var showDaysAfterDialog: Bool = false
-
-    @Environment(\.horizontalSizeClass)
-    var sizeClass
-
-    @Environment(\.avSpeechSynthesisVoice)
-    var voiceSpeech: AVSpeechSynthesisVoice
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
-
-    @State
-    var progress: Int = 0
+    @StateObject var level: Level
+    @State var showDaysAfterDialog: Bool = false
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @State var progress: Int = 0
 
     var body: some View {
         NavigationLink {
@@ -87,44 +76,38 @@ struct LevelRow: View {
             }
             .padding([.leading, .top, .bottom], 8)
         }
-        .popover(isPresented: $showDaysAfterDialog, attachmentAnchor: .point(UnitPoint(x: 2000, y: 20))) {
+        .popover(isPresented: $showDaysAfterDialog) {
             LevelConfigView(level: level)
+                .frame(width: 640, height: 120)
         }
     }
 }
 
 struct LevelConfigView: View {
-    @StateObject
-    var level: Level
-
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
+    @StateObject var level: Level
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
-        Form {
-            VStack(spacing: 24) {
-                VStackLayout(spacing: 24) {
-                    Text(verbatim: "Level \(level.level)")
-                        .font(.title2.bold())
-
-                    Stepper(value: $level.daysToRecommend, in: 1 ... 365, step: 1) {
-                        Text(verbatim: "Days to recommend: \(level.daysToRecommend)")
-                    }.onChange(of: level.daysToRecommend) { value in
-                        level.daysToRecommend = Int32(value)
-                        PersistenceController.saveDB(viewContext: context)
-                    }
-                }
-                .padding()
-                .cornerRadius(12)
-                Spacer()
+        VStack(spacing: 8) {
+            Text(verbatim: "Level \(level.level)")
+                .font(.title2.bold())
+                .foregroundColor(.accentColor)
+            Stepper(value: $level.daysToRecommend, in: 1 ... 365, step: 1) {
+                Text(verbatim: "Days to recommend: \(level.daysToRecommend)")
+            }.onChange(of: level.daysToRecommend) { value in
+                level.daysToRecommend = Int32(value)
+                PersistenceController.saveDB(viewContext: context)
             }
         }
+        .padding()
+        .cornerRadius(16)
     }
 }
 
 struct LevelRow_Previews: PreviewProvider {
+    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
-        LevelRow(level: LeitnerView_Previews.leitner.firstLevel!)
+        LevelRow(level: LevelRow_Previews.leitner.firstLevel!)
             .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
             .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
     }

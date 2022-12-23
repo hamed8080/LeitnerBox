@@ -34,8 +34,8 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     init(viewContext: NSManagedObjectContext,
          leitner: Leitner,
          voiceSpeech: AVSpeechSynthesisVoiceProtocol,
-         synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()
-    ) {
+         synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer())
+    {
         self.synthesizer = synthesizer
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
@@ -317,7 +317,7 @@ var searchSorts: [SortModel] = [
     .init(iconName: "star", title: "Favorite", sortType: .favorite),
     .init(iconName: "flag.2.crossed", title: "Completed", sortType: .completed),
     .init(iconName: "tag", title: "Tags", sortType: .tags),
-    .init(iconName: "tag.slash", title: "Without Tags", sortType: .noTags)
+    .init(iconName: "tag.slash", title: "Without Tags", sortType: .noTags),
 ]
 
 struct SortModel: Hashable {

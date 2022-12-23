@@ -10,35 +10,16 @@ import Foundation
 import SwiftUI
 
 class LeitnerViewModel: ObservableObject {
-    @Published
-    var viewContext: NSManagedObjectContext
-
-    @Published
-    var leitners: [Leitner] = []
-
-    @Published
-    var showEditOrAddLeitnerAlert = false
-
-    @Published
-    var selectedLeitner: Leitner?
-
-    @Published
-    var leitnerTitle: String = ""
-
-    @Published
-    var backToTopLevel = false
-
-    @Published
-    var backupFile: TemporaryFile?
-
-    @Published
-    var selectedVoiceIdentifire: String?
-
-    @Published
-    var voices: [AVSpeechSynthesisVoice] = []
-
-    @Published
-    var isBackuping = false
+    @Published var viewContext: NSManagedObjectContext
+    @Published var leitners: [Leitner] = []
+    @Published var showEditOrAddLeitnerAlert = false
+    @Published var selectedLeitner: Leitner?
+    @Published var leitnerTitle: String = ""
+    @Published var backToTopLevel = false
+    @Published var backupFile: TemporaryFile?
+    @Published var selectedVoiceIdentifire: String?
+    @Published var voices: [AVSpeechSynthesisVoice] = []
+    @Published var isBackuping = false
 
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
@@ -57,12 +38,12 @@ class LeitnerViewModel: ObservableObject {
         let wqs = leitners.first?.allQuestions.prefix(200).map { question -> WidgetQuestion in
             let tags = question.tagsArray?.map { WidgetQuestionTag(name: $0.name ?? "") } ?? []
             let widegetQuestion = WidgetQuestion(question: question.question,
-                                    answer: question.answer,
-                                    tags: tags,
-                                    detailedDescription: question.detailDescription,
-                                    level: Int(question.level?.level ?? 1),
-                                    isFavorite: question.favorite,
-                                    isCompleted: question.completed)
+                                                 answer: question.answer,
+                                                 tags: tags,
+                                                 detailedDescription: question.detailDescription,
+                                                 level: Int(question.level?.level ?? 1),
+                                                 isFavorite: question.favorite,
+                                                 isCompleted: question.completed)
             return widegetQuestion
         }
         if let wqs = wqs, let data = try? JSONEncoder().encode(wqs) {
@@ -136,6 +117,7 @@ class LeitnerViewModel: ObservableObject {
             backupFile = nil
         }
     }
+
     func exportDB() async {
         await MainActor.run {
             isBackuping = true
@@ -147,7 +129,7 @@ class LeitnerViewModel: ObservableObject {
             // https://developer.apple.com/library/content/qa/qa1809/_index.html
             NSSQLitePragmasOption: ["journal_mode": "DELETE"],
             // Minimize file size
-            NSSQLiteManualVacuumOption: true
+            NSSQLiteManualVacuumOption: true,
         ]
         guard let sourcePersistentStore = PersistenceController.shared.container.persistentStoreCoordinator.persistentStores.first else { return }
         let managedObjectModel = PersistenceController.shared.container.managedObjectModel

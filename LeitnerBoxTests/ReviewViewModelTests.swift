@@ -4,18 +4,17 @@
 //
 // Created by Hamed Hosseini on 10/28/22.
 
+import AVFoundation
 @testable import LeitnerBox
 import SwiftUI
 import XCTest
-import AVFoundation
 
 final class ReviewViewModelTests: XCTestCase {
     var viewModel: ReviewViewModel!
 
     override func setUp() {
-        try? PersistenceController.shared.generateAndFillLeitner()
-        let leitner = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext).leitners.first!
-        let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner).levels.first(where: { $0.level == 1 })!
+        let leitners = try? PersistenceController.shared.generateAndFillLeitner()
+        let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitners!.first!).levels.first(where: { $0.level == 1 })!
         let mockSpeech = MockAVSpeechSynthesisVoice()
         let synthesizer = MockAVSpeechSynthesizer()
         viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level, voiceSpeech: mockSpeech, synthesizer: synthesizer)

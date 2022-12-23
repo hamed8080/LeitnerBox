@@ -7,8 +7,7 @@
 import SwiftUI
 
 struct SynonymsView: View {
-    @StateObject
-    var viewModel: SynonymViewModel
+    @StateObject var viewModel: SynonymViewModel
     var accessControls: [AccessControls] = [.showSynonyms, .removeSynonym]
 
     var body: some View {
@@ -50,8 +49,9 @@ struct SynonymsView: View {
 
 struct SynonymsView_Previews: PreviewProvider {
     struct Preview: View {
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         var body: some View {
-            SynonymsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, question: LeitnerView_Previews.leitner.allQuestions.first!))
+            SynonymsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, question: Preview.leitner.allQuestions.first!))
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }

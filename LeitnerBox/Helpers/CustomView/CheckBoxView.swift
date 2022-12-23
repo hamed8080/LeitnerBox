@@ -7,9 +7,7 @@
 import SwiftUI
 
 struct CheckBoxView: View {
-    @Binding
-    var isActive: Bool
-
+    @Binding var isActive: Bool
     let text: String
 
     var body: some View {

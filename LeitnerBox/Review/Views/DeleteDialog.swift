@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct DeleteDialog: View {
-    @StateObject
-    var viewModel: ReviewViewModel
+    @StateObject var viewModel: ReviewViewModel
 
     var body: some View {
         VStack {

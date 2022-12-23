@@ -8,12 +8,8 @@ import Foundation
 import SwiftUI
 
 struct SplashScreen: View {
-    @State
-    var animateGradient = false
-
-    @State
-    var hideSplash = false
-
+    @State var animateGradient = false
+    @State var hideSplash = false
     @State private var progress: CGFloat = 0
     let colors1: [UIColor] = [.green, .cyan, .blue]
     let colors2: [UIColor] = [.blue, .purple, .systemPink, .red]

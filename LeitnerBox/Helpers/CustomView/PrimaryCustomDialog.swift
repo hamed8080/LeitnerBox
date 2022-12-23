@@ -11,8 +11,7 @@ struct PrimaryCustomDialog: View {
     var message: String?
     var systemImageName: String?
     var textBinding: Binding<String>?
-    @Binding
-    var hideDialog: Bool
+    @Binding var hideDialog: Bool
     var textPlaceholder: String?
     var submitTitle: String = "Submit"
     var cancelTitle: String = "Cancel"

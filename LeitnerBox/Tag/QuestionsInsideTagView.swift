@@ -9,12 +9,8 @@ import SwiftUI
 
 struct QuestionsInsideTagView: View {
     var tag: Tag
-
-    @StateObject
-    var tagViewModel: TagViewModel
-
-    @Environment(\.avSpeechSynthesisVoice)
-    var voiceSpeech: AVSpeechSynthesisVoice
+    @StateObject var tagViewModel: TagViewModel
+    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         ZStack {
@@ -35,14 +31,12 @@ struct QuestionsInsideTagView: View {
 
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = LeitnerView_Previews.leitner
+        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         static let context = PersistenceController.shared.viewContext
-
-        @StateObject
-        var viewModel = TagViewModel(viewContext: context, leitner: leitner)
+        @StateObject var viewModel = TagViewModel(viewContext: context, leitner: Preview.leitner)
 
         var body: some View {
-            QuestionsInsideTagView(tag: LeitnerView_Previews.leitner.tagsArray.first ?? Tag(), tagViewModel: viewModel)
+            QuestionsInsideTagView(tag: Preview.leitner.tagsArray.first ?? Tag(), tagViewModel: viewModel)
                 .preferredColorScheme(.light)
         }
     }

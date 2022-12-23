@@ -7,11 +7,8 @@
 import SwiftUI
 
 struct TagRowView: View {
-    @StateObject
-    var tag: Tag
-
-    @StateObject
-    var viewModel: TagViewModel
+    @StateObject var tag: Tag
+    @StateObject var viewModel: TagViewModel
 
     var body: some View {
         HStack {
@@ -38,10 +35,11 @@ struct TagRowView: View {
 }
 
 struct TagRowView_Previews: PreviewProvider {
+    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
         TagRowView(
             tag: Tag(context: PersistenceController.shared.viewContext),
-            viewModel: TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: LeitnerView_Previews.leitner)
+            viewModel: TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner)
         )
         .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
     }

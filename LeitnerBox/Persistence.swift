@@ -83,7 +83,8 @@ class PersistenceController: ObservableObject {
             item.loadItem(forTypeIdentifier: item.registeredTypeIdentifiers.first!, options: nil) { data, error in
                 do {
                     if let url = data as? URL,
-                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent) {
+                       let newFileLocation = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(url.lastPathComponent)
+                    {
                         if FileManager.default.fileExists(atPath: newFileLocation.path) {
                             try FileManager.default.removeItem(atPath: newFileLocation.path)
                         }
@@ -127,7 +128,7 @@ extension NSPersistentCloudKitContainer {
 // MARK: Generate the mock datas.
 
 extension PersistenceController {
-    func generateAndFillLeitner() throws {
+    func generateAndFillLeitner() throws -> [Leitner] {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
@@ -141,6 +142,7 @@ extension PersistenceController {
             }
         }
         try viewContext.save()
+        return leitners
     }
 
     func generateLevels(leitner: Leitner) -> [Level] {

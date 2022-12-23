@@ -12,12 +12,11 @@ final class QuestionViewModelTests: XCTestCase {
     var viewModel: QuestionViewModel!
 
     override func setUp() {
-        try? PersistenceController.shared.generateAndFillLeitner()
+        let leitners = try? PersistenceController.shared.generateAndFillLeitner()
         let viewContext = PersistenceController.shared.viewContext
-        let leitner = LeitnerViewModel(viewContext: viewContext).leitners.first!
         let question = Question(context: viewContext)
-        question.level = leitner.firstLevel
-        self.viewModel = QuestionViewModel(viewContext: viewContext, leitner: leitner, question: question)
+        question.level = leitners!.first!.firstLevel
+        viewModel = QuestionViewModel(viewContext: viewContext, leitner: leitners!.first!, question: question)
     }
 
     func test_save_edit() async {

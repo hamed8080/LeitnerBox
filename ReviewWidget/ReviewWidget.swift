@@ -21,8 +21,7 @@ var previewQuestion: WidgetQuestion {
 }
 
 struct Provider: IntentTimelineProvider {
-    @AppStorage("TopQuestionsForWidget", store: UserDefaults.group)
-    var topQuestionsData: Data?
+    @AppStorage("TopQuestionsForWidget", store: UserDefaults.group)  var topQuestionsData: Data?
 
     var allQuestion: [WidgetQuestion] {
         if let topQuestionsData = topQuestionsData, let questions = try? JSONDecoder().decode([WidgetQuestion].self, from: topQuestionsData) {
@@ -76,8 +75,7 @@ struct ReviewWidgetEntryView: View {
 
     @Environment(\.widgetFamily) var widgetFamily
 
-    @ViewBuilder
-    var body: some View {
+    @ViewBuilder  var body: some View {
         switch widgetFamily {
         case .systemExtraLarge:
             large

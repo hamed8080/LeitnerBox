@@ -7,8 +7,7 @@
 import SwiftUI
 
 struct TopSheetTextEditorView: View {
-    @Binding
-    var searchText: String
+    @Binding var searchText: String
     let placeholder: String
 
     var body: some View {
@@ -54,8 +53,7 @@ struct TopSheetTextEditorView: View {
 }
 
 struct TopSheetTextEditorView_Previews: PreviewProvider {
-    @State
-    static var searchText: String = "Test"
+    @State static var searchText: String = "Test"
 
     static var previews: some View {
         TopSheetTextEditorView(searchText: $searchText, placeholder: "Short")
