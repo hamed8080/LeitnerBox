@@ -3,9 +3,6 @@ name: Lint code
 on:
   push:
     branches: [ "main" ]
-      - '.github/workflows/codelint.yml'
-      - '.swiftlint.yml'
-      - '**/*.swift'
   pull_request:
     branches: [ "main" ]
     paths:
