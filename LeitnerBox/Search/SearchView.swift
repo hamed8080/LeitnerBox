@@ -131,6 +131,20 @@ struct SearchView: View {
                         }
                     }
 
+                    Menu {
+                        ForEach(viewModel.sortedTags, id: \.self) { tag in
+                            Button {
+                                withAnimation {
+                                    viewModel.sortByTag(tag)
+                                }
+                            } label: {
+                                Text(tag.name ?? "")
+                            }
+                        }
+                    } label: {
+                        Text("Sort By Tag")
+                    }
+
                 } label: {
                     Label("More", systemImage: "ellipsis.circle")
                 }

@@ -30,6 +30,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     var commandCenter: MPRemoteCommandCenter?
     private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
     var task: Task<Void, Error>?
+    var sortedTags: [Tag] { leitner.tagsArray.sorted(by: { $0.name ?? "" < $1.name ?? "" }) }
 
     init(viewContext: NSManagedObjectContext,
          leitner: Leitner,
@@ -106,6 +107,14 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
                 ($0.tagsArray?.count ?? 0) > ($1.tagsArray?.count ?? 0)
             })
         }
+    }
+
+    func sortByTag(_ tag: Tag) {
+        let all = leitner.allQuestions
+        sorted = all.sorted { q1, q2 in
+            (q1.tagsArray?.contains(where: { $0.objectID == tag.objectID }) ?? false) && !(q2.tagsArray?.contains(where: { $0.objectID == tag.objectID }) ?? false)
+        }
+        objectWillChange.send()
     }
 
     func toggleCompleted(_ question: Question) {
