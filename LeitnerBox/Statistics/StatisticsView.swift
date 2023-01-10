@@ -13,7 +13,7 @@ struct StatisticsView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Picker("Timeframe",  selection: $viewModel.timeframe) {
+                Picker("Timeframe", selection: $viewModel.timeframe) {
                     Label("Week", systemImage: "calendar")
                         .tag(Timeframe.week)
 

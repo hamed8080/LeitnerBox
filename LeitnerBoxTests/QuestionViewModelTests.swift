@@ -42,7 +42,7 @@ final class QuestionViewModelTests: XCTestCase {
         viewModel.detailDescription = "Descrition"
         viewModel.completed = true
         viewModel.favorite = true
-        viewModel.insert()
+        viewModel.insert(question: viewModel.question)
         let question = viewModel.level.leitner?.allQuestions.first(where: { $0.question == "New Question" })
         XCTAssertEqual(question?.completed, true)
         XCTAssertTrue(question?.answer == "Answer")
@@ -53,7 +53,7 @@ final class QuestionViewModelTests: XCTestCase {
 
         viewModel.completed = false
         viewModel.questionString = "TestNewQuestionCompletedFalse"
-        viewModel.insert()
+        viewModel.insert(question: viewModel.question)
         let notCompletedQuestion = viewModel.level.leitner?.allQuestions.first(where: { $0.question == "TestNewQuestionCompletedFalse" })
         XCTAssertEqual(notCompletedQuestion?.completed, false)
         XCTAssertEqual(notCompletedQuestion?.level?.level, 1)
@@ -92,6 +92,29 @@ final class QuestionViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.answer == "")
         XCTAssertTrue(viewModel.questionString == "")
         XCTAssertTrue(viewModel.detailDescription == "")
+    }
+
+    func test_split_pharases() {
+        setPhrases()
+        let splited = viewModel.splitPhrases()
+        XCTAssertEqual(splited.count, 3, "Splitting problem there should be 3 item in the list")
+    }
+
+    func setPhrases() {
+        let phrases = """
+        Word World
+        Test
+        Hello Daday
+        """
+        viewModel.questionString = phrases
+    }
+
+    func test_add_pharases() {
+        let beforeCount = viewModel.viewContext.insertedObjects.count
+        setPhrases()
+        viewModel.batchInsertPhrases()
+        let afterCount = beforeCount + viewModel.splitPhrases().count
+        XCTAssertGreaterThan(afterCount, beforeCount, "Insert does not work.")
     }
 
     override func tearDown() {

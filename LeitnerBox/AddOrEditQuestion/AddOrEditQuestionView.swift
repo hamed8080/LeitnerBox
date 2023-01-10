@@ -19,26 +19,36 @@ struct AddOrEditQuestionView: View {
             Spacer()
             ScrollView {
                 VStack(spacing: 36) {
-                    TextEditorView(
-                        placeholder: "Enter your question here...",
-                        shortPlaceholder: "Question",
-                        string: $viewModel.questionString,
-                        textEditorHeight: 48
-                    )
-                    CheckBoxView(isActive: $viewModel.isManual, text: "Manual Answer")
-                    if viewModel.isManual {
+                    VStack(alignment: .leading) {
                         TextEditorView(
-                            placeholder: "Enter your Answer here...",
-                            shortPlaceholder: "Answer",
-                            string: $viewModel.answer,
+                            placeholder: "Enter your question here...",
+                            shortPlaceholder: "Question",
+                            string: $viewModel.questionString,
                             textEditorHeight: 48
                         )
-                        TextEditorView(
-                            placeholder: "Enter your description here...",
-                            shortPlaceholder: "Description",
-                            string: $viewModel.detailDescription,
-                            textEditorHeight: 48
-                        )
+                        if viewModel.batchInserPhrasesMode {
+                            Text("When you are in the batch mode the question filed automatically split all th questions by (NewLine/Enter).")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
+
+                    if !viewModel.batchInserPhrasesMode {
+                        CheckBoxView(isActive: $viewModel.isManual, text: "Manual Answer")
+                        if viewModel.isManual {
+                            TextEditorView(
+                                placeholder: "Enter your Answer here...",
+                                shortPlaceholder: "Answer",
+                                string: $viewModel.answer,
+                                textEditorHeight: 48
+                            )
+                            TextEditorView(
+                                placeholder: "Enter your description here...",
+                                shortPlaceholder: "Description",
+                                string: $viewModel.detailDescription,
+                                textEditorHeight: 48
+                            )
+                        }
                     }
                     CheckBoxView(isActive: $viewModel.completed, text: "Complete Answer")
 
@@ -90,21 +100,30 @@ struct AddOrEditQuestionView: View {
             }
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(viewModel.title)
         .animation(.easeInOut, value: viewModel.isManual)
         .toolbar {
             ToolbarItem {
                 Button(action: viewModel.clear) {
-                    Label("clear", systemImage: "trash.square")
+                    Label("Clear", systemImage: "trash.square")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                 }
             }
 
-            ToolbarItem(placement: .principal) {
-                Text((viewModel.question.isInserted == false ? "Edit question" : "Add question").uppercased())
-                    .font(.body.weight(.bold))
-                    .foregroundColor(.accentColor)
+            ToolbarItem {
+                Button {
+                    withAnimation {
+                        viewModel.batchInserPhrasesMode.toggle()
+                    }
+                } label: {
+                    Label("Pharses", systemImage: viewModel.batchInserPhrasesMode ? "plus.app" : "rectangle.stack.badge.plus")
+                        .font(.title3)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
+                }
             }
 
             ToolbarItemGroup(placement: .keyboard) {

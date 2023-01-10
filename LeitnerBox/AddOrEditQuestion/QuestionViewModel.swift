@@ -17,7 +17,17 @@ class QuestionViewModel: ObservableObject {
     @Published var detailDescription: String = ""
     @Published var questionString: String = ""
     @Published var favorite: Bool = false
+    @Published var batchInserPhrasesMode = false
     var question: Question
+    var title: String {
+        if batchInserPhrasesMode {
+            return "Batch Insert Phrases"
+        } else if question.isInserted {
+            return "Add New Question"
+        } else {
+            return "Edit Question"
+        }
+    }
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner, question: Question? = nil) {
         self.viewContext = viewContext
@@ -42,10 +52,9 @@ class QuestionViewModel: ObservableObject {
             question.favoriteDate = Date()
         }
         question.favorite = favorite
-        PersistenceController.saveDB(viewContext: viewContext)
     }
 
-    func insert() {
+    func insert(question: Question) {
         withAnimation {
             question.question = self.questionString
             question.answer = answer
@@ -66,16 +75,33 @@ class QuestionViewModel: ObservableObject {
             if question.favorite {
                 question.favoriteDate = Date()
             }
-            PersistenceController.saveDB(viewContext: viewContext)
+        }
+    }
+
+    func batchInsertPhrases() {
+        let phrases = splitPhrases()
+        phrases.forEach { phrase in
+            let newQuestion = Question(context: viewContext)
+            insert(question: newQuestion)
+            question.tagsArray?.forEach { tag in
+                newQuestion.addToTag(tag)
+            }
+            question.synonymsArray?.forEach { synonym in
+                newQuestion.addToSynonyms(synonym)
+            }
+            newQuestion.question = phrase
         }
     }
 
     func save() {
-        if question.isInserted == false {
+        if batchInserPhrasesMode {
+            batchInsertPhrases()
+        } else if question.isInserted == false {
             saveEdit()
         } else {
-            insert()
+            insert(question: question)
         }
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func clear() {
@@ -93,5 +119,9 @@ class QuestionViewModel: ObservableObject {
         completed = editQuestion.completed
         detailDescription = editQuestion.detailDescription ?? ""
         favorite = editQuestion.favorite
+    }
+
+    func splitPhrases() -> [String] {
+        questionString.split(separator: "\n").map { String($0) }
     }
 }
