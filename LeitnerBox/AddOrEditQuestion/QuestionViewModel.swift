@@ -43,8 +43,9 @@ class QuestionViewModel: ObservableObject {
     }
 
     func saveEdit() {
-        question.question = questionString
+        question.question = questionString.trimmingCharacters(in: .whitespacesAndNewlines)
         question.answer = answer
+        question.leitner = level.leitner
         question.detailDescription = detailDescription
         question.completed = completed
 
@@ -56,8 +57,9 @@ class QuestionViewModel: ObservableObject {
 
     func insert(question: Question) {
         withAnimation {
-            question.question = self.questionString
+            question.question = self.questionString.trimmingCharacters(in: .whitespacesAndNewlines)
             question.answer = answer
+            question.leitner = level.leitner
             question.detailDescription = self.detailDescription
             question.level = level
             question.completed = completed

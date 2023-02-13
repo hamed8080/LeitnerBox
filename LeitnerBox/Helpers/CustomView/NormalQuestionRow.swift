@@ -232,11 +232,11 @@ struct NormalQuestionRow: View {
 struct NormalQuestionRow_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
-        let question = Preview.leitner.levels.filter { $0.level == 1 }.first?.allQuestions.first as? Question
+        let question = Question(context: PersistenceController.shared.viewContext)
         let tagVM = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         let searchVM = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
-            NormalQuestionRow(question: question!, tagsViewModel: tagVM)
+            NormalQuestionRow(question: question, tagsViewModel: tagVM)
                 .environmentObject(searchVM)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }

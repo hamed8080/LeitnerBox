@@ -4,7 +4,9 @@
 //
 // Created by Hamed Hosseini on 10/28/22.
 
+import CoreData
 import Foundation
+
 extension Question {
     var isReviewable: Bool {
         guard let passTime = passTime else { return true }
@@ -27,6 +29,26 @@ extension Question {
         } else {
             return "Available".uppercased()
         }
+    }
+
+    static func topWidgetQuestion(context: NSManagedObjectContext, leitnerId: Int64) -> [WidgetQuestion] {
+        let req = Question.fetchRequest()
+        req.fetchLimit = 10
+        req.predicate = NSPredicate(format: "level.leitner.id == %i", leitnerId)
+        let topQuestions = (try? context.fetch(req)) ?? []
+        var wqs: [WidgetQuestion] = []
+        topQuestions.forEach { question in
+            let tags = question.tagsArray?.map { WidgetQuestionTag(name: $0.name ?? "") } ?? []
+            let widegetQuestion = WidgetQuestion(question: question.question,
+                                                 answer: question.answer,
+                                                 tags: tags,
+                                                 detailedDescription: question.detailDescription,
+                                                 level: Int(question.level?.level ?? 1),
+                                                 isFavorite: question.favorite,
+                                                 isCompleted: question.completed)
+            wqs.append(widegetQuestion)
+        }
+        return wqs
     }
 
     var upperLevel: Level? {

@@ -17,6 +17,9 @@ class TagViewModel: ObservableObject {
     @Published var tagName: String = ""
     @Published var colorPickerColor: Color = .gray
     @Published var searchText: String = ""
+    let count = 20
+    var offset = 0
+    var hasNext: Bool = true
 
     var filtered: [Tag] {
         if searchText.isEmpty {
@@ -31,7 +34,7 @@ class TagViewModel: ObservableObject {
     init(viewContext: NSManagedObjectContext, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
-        load()
+        loadMore()
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -47,12 +50,21 @@ class TagViewModel: ObservableObject {
         }
     }
 
-    func load() {
+    func loadMore() {
+        if !hasNext { return }
         let predicate = NSPredicate(format: "leitner.id == %d", leitner.id)
         let req = Tag.fetchRequest()
+        req.fetchLimit = count
+        req.fetchOffset = offset
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
         req.predicate = predicate
-        tags = (try? viewContext.fetch(req)) ?? []
+        append(contentOf: (try? viewContext.fetch(req)) ?? [])
+        offset += count
+    }
+
+    func append(contentOf tags: [Tag]) {
+        hasNext = tags.count >= count
+        self.tags.append(contentsOf: tags)
     }
 
     func addToTag(_ tag: Tag, _ question: Question) {

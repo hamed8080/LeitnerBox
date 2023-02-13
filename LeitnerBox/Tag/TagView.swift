@@ -19,10 +19,15 @@ struct TagView: View {
                     NavigationLink {
                         QuestionsInsideTagView(
                             tag: tag,
+                            fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", tag.name ?? ""), animation: .easeInOut),
                             tagViewModel: TagViewModel(viewContext: context, leitner: viewModel.leitner)
                         )
                     } label: {
-                        TagRowView(tag: tag, viewModel: viewModel)
+                        TagRowView(tag: tag, viewModel: viewModel).onAppear {
+                            if tag == viewModel.tags.last {
+                                viewModel.loadMore()
+                            }
+                        }
                     }
                 }
                 .onDelete(perform: viewModel.deleteItems)

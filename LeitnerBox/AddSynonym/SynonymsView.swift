@@ -14,11 +14,10 @@ struct SynonymsView: View {
         List(viewModel.allSynonymsInLeitner) { synonym in
 
             VStack(alignment: .leading) {
-                let firstQuestion = synonym.allQuestions.first
+                let allQuestions = synonym.allQuestions
+                let firstQuestion = allQuestions.first
                 Text(firstQuestion?.question ?? "")
                     .font(.title3.bold())
-
-                let allQuestions = synonym.allQuestions.filter { $0 != firstQuestion }
                 ScrollView(.horizontal) {
                     HStack(spacing: 4) {
                         ForEach(allQuestions) { question in
@@ -50,9 +49,10 @@ struct SynonymsView: View {
 struct SynonymsView_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        let context = PersistenceController.shared.viewContext
         var body: some View {
-            SynonymsView(viewModel: .init(viewContext: PersistenceController.shared.viewContext, question: Preview.leitner.allQuestions.first!))
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+            SynonymsView(viewModel: .init(viewContext: context, leitner: Preview.leitner))
+                .environment(\.managedObjectContext, context)
         }
     }
 

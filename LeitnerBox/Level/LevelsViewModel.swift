@@ -5,45 +5,91 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
+import Combine
 import CoreData
 import Foundation
 import SwiftUI
 
+struct LevelRowData: Identifiable {
+    var id: NSManagedObjectID { level.objectID }
+    let leitnerId: Int
+    let level: Level
+    let favCount: Int
+    let reviewableCount: Int
+    let totalCountInsideLevel: Int
+    var notCompletdCount: Int { totalCountInsideLevel - reviewableCount }
+}
+
 class LevelsViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContext
-    @Published var leitner: Leitner
+    var leitner: Leitner
     @Published var searchWord: String = ""
-    @Published var levels: [Level] = []
+    var levels: [LevelRowData] = []
     @Published var selectedLevel: Level?
-
-    var filtered: [Question] {
-        if searchWord.isEmpty || searchWord == "#" {
-            return []
-        }
-        let tagName = searchWord.replacingOccurrences(of: "#", with: "")
-        if searchWord.contains("#"), tagName.isEmpty == false {
-            return leitner.allQuestions.filter {
-                $0.tagsArray?.contains(where: { $0.name?.lowercased().contains(tagName.lowercased()) ?? false }) ?? false
-            }
-        }
-        return leitner.allQuestions.filter {
-            $0.question?.lowercased().contains(searchWord.lowercased()) ?? false ||
-                $0.answer?.lowercased().contains(searchWord.lowercased()) ?? false ||
-                $0.detailDescription?.lowercased().contains(searchWord.lowercased()) ?? false
-        }
-    }
+    @Published var searchedQuestions: [Question] = []
+    private(set) var cancellableSet: Set<AnyCancellable> = []
+    var totalCount: Int = 0
+    var completedCount: Int = 0
+    var reviewableCount: Int = 0
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
         load()
+        $searchWord.sink { [weak self] _ in
+            self?.fetchQuestions()
+        }
+        .store(in: &cancellableSet)
+
+        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextDidSave).sink { [weak self] _ in
+            self?.load()
+        }.store(in: &cancellableSet)
+    }
+
+    func fetchQuestions() {
+        if searchWord.count == 1 || searchWord.isEmpty || searchWord == "#" {
+            searchedQuestions = []
+            return
+        }
+
+        let isTag = searchWord[searchWord.startIndex] == "#"
+        let tagName = searchWord.replacingOccurrences(of: "#", with: "")
+        let req = Question.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
+        req.fetchLimit = 20
+        if isTag, !tagName.isEmpty {
+            req.predicate = NSPredicate(format: "ANY tag.name == [c] %@", tagName)
+        } else {
+            req.predicate = NSPredicate(format: "question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@", searchWord, searchWord, searchWord)
+        }
+        if let questions = try? viewContext.fetch(req) {
+            searchedQuestions = questions
+        }
     }
 
     func load() {
-        let predicate = NSPredicate(format: "leitner.id == %d", leitner.id)
-        let req = Level.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
-        req.predicate = predicate
-        levels = (try? viewContext.fetch(req)) ?? []
+        let leitnerId = leitner.id
+        let levels = Leitner.fetchLevelsInsideLeitner(context: viewContext, leitnerId: leitnerId)
+        totalCount = Leitner.fetchLeitnerQuestionsCount(context: viewContext, leitnerId: leitnerId)
+        completedCount = Level.fetchCompletedCount(context: viewContext, leitnerId: leitnerId)
+        var rowDatas: [LevelRowData] = []
+        levels.forEach { level in
+            let favCount = Level.fetchFavCountInsideLevel(context: viewContext, level: level.level, leitnerId: leitnerId)
+            let reviewableCount = Level.fetchReviewableCountInsideLevel(context: viewContext, level: level, leitnerId: leitnerId)
+            let totalCount = Level.fetchTotalCountInsideLevel(context: viewContext, level: level.level, leitnerId: leitnerId)
+            rowDatas.append(
+                .init(
+                    leitnerId: Int(leitnerId),
+                    level: level,
+                    favCount: favCount,
+                    reviewableCount: reviewableCount,
+                    totalCountInsideLevel: totalCount
+                )
+            )
+        }
+        let reviewableCount = rowDatas.map(\.reviewableCount).reduce(0, +)
+        self.levels = rowDatas
+        self.reviewableCount = reviewableCount
+        objectWillChange.send()
     }
 }

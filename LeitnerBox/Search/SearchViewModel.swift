@@ -5,10 +5,12 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
+import Combine
 import CoreData
 import Foundation
 import MediaPlayer
 import SwiftUI
+
 enum ReviewStatus {
     case isPlaying
     case isPaused
@@ -22,15 +24,20 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     @Published var showLeitnersListDialog = false
     @Published var leitner: Leitner
     @Published var editQuestion: Question?
-    @Published var selectedSort: SearchSort = .level
+    @Published var selectedSort: SearchSort = .date
     @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
     @Published var reviewStatus: ReviewStatus = .unInitialized
-    private(set) var sorted: [Question] = []
+    private(set) var questions: [Question] = []
+    private(set) var searchedQuestions: [Question] = []
     var synthesizer: AVSpeechSynthesizerProtocol
     var commandCenter: MPRemoteCommandCenter?
     private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
     var task: Task<Void, Error>?
     var sortedTags: [Tag] { leitner.tagsArray.sorted(by: { $0.name ?? "" < $1.name ?? "" }) }
+    private(set) var cancellableSet: Set<AnyCancellable> = []
+    private var count = 20
+    private var offset = 0
+    var selectedTag: Tag?
 
     init(viewContext: NSManagedObjectContext,
          leitner: Leitner,
@@ -43,19 +50,89 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.leitner = leitner
         super.init()
         self.synthesizer.delegate = self
-        sort(.date)
+        $searchText.sink { [weak self] newValue in
+            self?.searchQuestion(searchText: newValue)
+        }
+        .store(in: &cancellableSet)
+        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextWillSave).sink { [weak self] newValue in
+            let context = newValue.object as? NSManagedObjectContext
+            context?.insertedObjects.forEach { object in
+                if let question = object as? Question {
+                    withAnimation {
+                        self?.questions.insert(question, at: 0)
+                        self?.objectWillChange.send()
+                    }
+                }
+            }
+        }.store(in: &cancellableSet)
+        fetchMoreQuestion()
+    }
+
+    func fetchMoreQuestion() {
+        let req = Question.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
+        req.fetchLimit = count
+        req.fetchOffset = offset
+        var predicates: [NSPredicate] = []
+        predicates.append(NSPredicate(format: "leitnerId == %i", leitner.id))
+        if let selectedTag {
+            predicates.append(NSPredicate(format: "ANY tag.name == %@", selectedTag.name ?? ""))
+        }
+        req.predicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
+
+        switch selectedSort {
+        case .level:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.level?.level, ascending: true),
+                                   NSSortDescriptor(keyPath: \Question.question, ascending: true),
+                                   NSSortDescriptor(keyPath: \Question.createTime, ascending: true)]
+        case .completed:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.completed, ascending: false), NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
+        case .alphabet:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
+        case .favorite:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.favorite, ascending: false), NSSortDescriptor(keyPath: \Question.favoriteDate, ascending: false)]
+        case .date:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
+        case .passedTime:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: true)]
+        case .noTags:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.tagsCount, ascending: true), NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
+        case .tags:
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.tagsCount, ascending: false), NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
+        }
+        questions.append(contentsOf: (try? viewContext.fetch(req)) ?? [])
+        objectWillChange.send()
+        offset += count
+    }
+
+    func searchQuestion(searchText: String) {
+        if searchText.count <= 2 || searchText.isEmpty || searchText == "#" {
+            searchedQuestions = []
+            return
+        }
+
+        let req = Question.fetchRequest()
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
+        req.fetchLimit = 20
+        if searchText.count > 0, searchText[searchText.startIndex] == "#" {
+            let tagName = searchText.replacingOccurrences(of: "#", with: "")
+            req.predicate = NSPredicate(format: "ANY tag.name == [c] %@", tagName)
+        } else if !searchText.isEmpty {
+            req.predicate = NSPredicate(format: "question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@", searchText, searchText, searchText)
+        }
+        searchedQuestions = (try? viewContext.fetch(req)) ?? []
     }
 
     func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { sorted[$0] }.forEach(viewContext.delete)
+            offsets.map { questions[$0] }.forEach(viewContext.delete)
             PersistenceController.saveDB(viewContext: viewContext)
         }
     }
 
     func delete(_ question: Question) {
         viewContext.delete(question)
-        sorted.removeAll(where: { $0 == question })
+        questions.removeAll(where: { $0 == question })
         PersistenceController.saveDB(viewContext: viewContext)
         objectWillChange.send() // notify to redrawn filtred items and delete selected question
     }
@@ -68,53 +145,6 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             synonym.addToQuestion(question)
         }
         PersistenceController.saveDB(viewContext: viewContext)
-    }
-
-    func sort(_ sort: SearchSort) {
-        selectedSort = sort
-        let all = leitner.allQuestions
-        switch sort {
-        case .level:
-            sorted = all.sorted(by: {
-                ($0.level?.level ?? 0, $1.createTime?.timeIntervalSince1970 ?? -1) < ($1.level?.level ?? 0, $0.createTime?.timeIntervalSince1970 ?? -1)
-            })
-        case .completed:
-            sorted = all.sorted(by: { first, second in
-                (first.completed ? 1 : 0, first.passTime?.timeIntervalSince1970 ?? -1) > (second.completed ? 1 : 0, second.passTime?.timeIntervalSince1970 ?? -1)
-            })
-        case .alphabet:
-            sorted = all.sorted(by: {
-                ($0.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") < ($1.question?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
-            })
-        case .favorite:
-            sorted = all.sorted(by: {
-                ($0.favorite ? 1 : 0, $0.favoriteDate?.timeIntervalSince1970 ?? -1) > ($1.favorite ? 1 : 0, $1.favoriteDate?.timeIntervalSince1970 ?? -1)
-            })
-        case .date:
-            sorted = all.sorted(by: {
-                ($0.createTime?.timeIntervalSince1970 ?? -1) > ($1.createTime?.timeIntervalSince1970 ?? -1)
-            })
-        case .passedTime:
-            sorted = all.sorted(by: {
-                ($0.passTime?.timeIntervalSince1970 ?? -1) > ($1.passTime?.timeIntervalSince1970 ?? -1)
-            })
-        case .noTags:
-            sorted = all.sorted(by: {
-                ($0.tagsArray?.count ?? 0) < ($1.tagsArray?.count ?? 0)
-            })
-        case .tags:
-            sorted = all.sorted(by: {
-                ($0.tagsArray?.count ?? 0) > ($1.tagsArray?.count ?? 0)
-            })
-        }
-    }
-
-    func sortByTag(_ tag: Tag) {
-        let all = leitner.allQuestions
-        sorted = all.sorted { q1, q2 in
-            (q1.tagsArray?.contains(where: { $0.objectID == tag.objectID }) ?? false) && !(q2.tagsArray?.contains(where: { $0.objectID == tag.objectID }) ?? false)
-        }
-        objectWillChange.send()
     }
 
     func toggleCompleted(_ question: Question) {
@@ -169,18 +199,21 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             withAnimation {
                 playNext()
             }
-        } else if lastPlayedQuestion == nil, let firstQuestion = sorted.first {
+        } else if lastPlayedQuestion == nil, let firstQuestion = questions.first {
             pronounce(firstQuestion)
             lastPlayedQuestion = firstQuestion
-        } else if let firstQuestion = sorted.first {
+        } else if let firstQuestion = questions.first {
             pronounce(firstQuestion)
             lastPlayedQuestion = firstQuestion
         }
     }
 
     func playNext() {
-        if let lastPlayedQuestion = lastPlayedQuestion, let index = sorted.firstIndex(of: lastPlayedQuestion), sorted.indices.contains(index + 1) {
-            let nextQuestion = sorted[index + 1]
+        if !hasNext() {
+            return
+        }
+        if let lastPlayedQuestion = lastPlayedQuestion, let index = questions.firstIndex(of: lastPlayedQuestion), questions.indices.contains(index + 1) {
+            let nextQuestion = questions[index + 1]
             pronounce(nextQuestion)
             self.lastPlayedQuestion = nextQuestion
         }
@@ -194,10 +227,18 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
 
     func hasNext() -> Bool {
-        if let lastPlayedQuestion = lastPlayedQuestion, let index = sorted.firstIndex(of: lastPlayedQuestion), sorted.indices.contains(index + 1) {
+        if let lastPlayedQuestion = lastPlayedQuestion, let index = questions.firstIndex(of: lastPlayedQuestion), questions.indices.contains(index + 1) {
             return true
         } else {
-            return false
+            let beforeCount = questions.count
+            fetchMoreQuestion()
+            let afterCount = questions.count
+            if afterCount == beforeCount {
+                finished()
+                return false
+            } else {
+                return true
+            }
         }
     }
 
@@ -222,7 +263,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
 
     var reviewdCount: Int {
-        if let lastPlayedQuestion = lastPlayedQuestion, let index = sorted.firstIndex(of: lastPlayedQuestion) {
+        if let lastPlayedQuestion = lastPlayedQuestion, let index = questions.firstIndex(of: lastPlayedQuestion) {
             return index + 1
         } else {
             return 0
@@ -234,7 +275,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         question.passTime = nil
         question.completed = false
         PersistenceController.saveDB(viewContext: viewContext)
-        sorted.removeAll(where: { $0 == question })
+        questions.removeAll(where: { $0 == question })
         objectWillChange.send()
     }
 
@@ -259,25 +300,19 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
 
     func reload() {
-        sort(selectedSort)
+        selectedTag = nil
+        selectedSort = .date
+        questions = []
+        offset = 0
+        fetchMoreQuestion()
     }
 
-    var filtered: [Question] {
-        if searchText.isEmpty || searchText == "#" {
-            return sorted
-        }
-        let tagName = searchText.replacingOccurrences(of: "#", with: "")
-        if searchText.contains("#"), tagName.isEmpty == false {
-            return sorted.filter {
-                $0.tagsArray?.contains(where: { $0.name?.lowercased().contains(tagName.lowercased()) ?? false }) ?? false
-            }
-        } else {
-            return sorted.filter {
-                $0.question?.lowercased().contains(searchText.lowercased()) ?? false ||
-                    $0.answer?.lowercased().contains(searchText.lowercased()) ?? false ||
-                    $0.detailDescription?.lowercased().contains(searchText.lowercased()) ?? false
-            }
-        }
+    func sort(_ sort: SearchSort, _ tag: Tag? = nil) {
+        selectedTag = tag
+        selectedSort = sort
+        questions = []
+        offset = 0
+        fetchMoreQuestion()
     }
 
     func complete(_ question: Question) {

@@ -76,7 +76,7 @@ struct AddOrEditQuestionView: View {
                         QuestionTagsView(viewModel: .init(viewContext: context, leitner: viewModel.level.leitner!), accessControls: [.showTags, .addTag, .removeTag])
                             .environmentObject(viewModel.question)
                         QuestionSynonymsView(accessControls: [.showSynonyms, .addSynonym, .removeSynonym])
-                            .environmentObject(SynonymViewModel(viewContext: context, question: viewModel.question))
+                            .environmentObject(SynonymViewModel(viewContext: context, leitner: viewModel.level.leitner!, baseQuestion: viewModel.question))
                     }
 
                     Button {
@@ -148,17 +148,16 @@ struct AddOrEditQuestionView: View {
 struct AddQuestionView_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
-        static let question = leitner.allQuestions.first!
-        static let context = PersistenceController.shared.viewContext
+        static let question = Question(context: PersistenceController.shared.viewContext)
         @StateObject var viewModel = QuestionViewModel(
-            viewContext: context,
+            viewContext: PersistenceController.shared.viewContext,
             leitner: Preview.leitner,
             question: question
         )
 
         var body: some View {
             AddOrEditQuestionView(viewModel: viewModel)
-                .environment(\.managedObjectContext, Preview.context)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 

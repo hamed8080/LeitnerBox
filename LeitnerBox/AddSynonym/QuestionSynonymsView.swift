@@ -26,8 +26,8 @@ struct QuestionSynonymsView: View {
                     .buttonStyle(.borderless)
                 }
                 if accessControls.contains(.showSynonyms) {
-                    let synonym = viewModel.baseQuestion.synonymsArray ?? []
-                    let allSynonymsQuestions = (synonym.first?.allQuestions ?? []).filter { $0.objectID != viewModel.baseQuestion.objectID }
+                    let question = viewModel.baseQuestion
+                    let allSynonymsQuestions = Synonym.allSynonyms(context: context, question: question?.question ?? "")
                     ScrollView(.horizontal) {
                         HStack(spacing: 4) {
                             ForEach(allSynonymsQuestions) { question in

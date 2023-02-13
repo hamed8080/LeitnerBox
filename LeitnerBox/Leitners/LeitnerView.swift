@@ -24,6 +24,7 @@ struct LeitnerView: View {
             NavigationStack {
                 if let leitner = viewModel.leitners.first(where: { $0.id == selectedLeitnrId }) {
                     LevelsView()
+                        .id(leitner.id)
                         .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
                         .environmentObject(LevelsViewModel(viewContext: context, leitner: leitner))
                 }
@@ -109,14 +110,13 @@ struct LeitnerView: View {
 
 struct SidebarListView: View {
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
-
     @Binding var selectedLeitnrId: Leitner.ID?
-
     @EnvironmentObject var viewModel: LeitnerViewModel
 
     var body: some View {
         List(viewModel.leitners, selection: $selectedLeitnrId.animation()) { leitner in
-            LeitnerRowView(leitner: leitner, viewModel: viewModel)
+            LeitnerRowView(leitner: leitner)
+                .id(leitner.id)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
                         viewModel.delete(leitner)
@@ -191,9 +191,7 @@ struct SidebarListView: View {
 /// It has animation so it's better to separate it from the main view.
 struct EmptyLeitnerAnimation: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
-
     @State var isAnimating: Bool = false
-
     @State private var progress: CGFloat = 0
 
     var body: some View {
@@ -262,14 +260,5 @@ struct LeitnerView_Previews: PreviewProvider {
             Preview()
         }
         .previewDisplayName("LeitnerView")
-
-//        NavigationStack {
-//            EmptyLeitnerAnimationViewPreview()
-//        }
-//        .previewDisplayName("EmptyLeitnerAnimationViewPreview")
-
-//        NavigationStack{
-//            Text("\(LeitnerView_Previews.leitner.name!)")
-//        }
     }
 }

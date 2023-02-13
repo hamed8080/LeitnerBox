@@ -9,15 +9,15 @@ import SwiftUI
 
 struct QuestionsInsideTagView: View {
     var tag: Tag
+    @FetchRequest var fetchRequest: FetchedResults<Question>
     @StateObject var tagViewModel: TagViewModel
     @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         ZStack {
             List {
-                ForEach(tag.questions) { question in
+                ForEach(fetchRequest) { question in
                     NormalQuestionRow(question: question, tagsViewModel: tagViewModel, aceessControls: AccessControls.normal + [.trailingControls, .microphone])
-                        .environmentObject(SearchViewModel(viewContext: tagViewModel.viewContext, leitner: tagViewModel.leitner, voiceSpeech: voiceSpeech))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                 }
@@ -34,9 +34,11 @@ struct QuestionsInsideTagView_Previews: PreviewProvider {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         static let context = PersistenceController.shared.viewContext
         @StateObject var viewModel = TagViewModel(viewContext: context, leitner: Preview.leitner)
-
+        static let tag = Preview.leitner.tagsArray.first ?? Tag()
         var body: some View {
-            QuestionsInsideTagView(tag: Preview.leitner.tagsArray.first ?? Tag(), tagViewModel: viewModel)
+            QuestionsInsideTagView(tag: Preview.tag,
+                                   fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", Preview.tag.name ?? ""), animation: .easeInOut),
+                                   tagViewModel: viewModel)
                 .preferredColorScheme(.light)
         }
     }

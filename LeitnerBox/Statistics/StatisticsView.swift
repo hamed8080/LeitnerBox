@@ -60,6 +60,9 @@ struct StatisticsView: View {
             }
         }
         .navigationTitle("Statistics")
+        .onAppear {
+            viewModel.load()
+        }
     }
 }
 

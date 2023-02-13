@@ -33,22 +33,12 @@ class LeitnerViewModel: ObservableObject {
     func load() {
         let req = Leitner.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
-        leitners = (try? viewContext.fetch(req)) ?? []
-
-        let wqs = leitners.first?.allQuestions.prefix(200).map { question -> WidgetQuestion in
-            let tags = question.tagsArray?.map { WidgetQuestionTag(name: $0.name ?? "") } ?? []
-            let widegetQuestion = WidgetQuestion(question: question.question,
-                                                 answer: question.answer,
-                                                 tags: tags,
-                                                 detailedDescription: question.detailDescription,
-                                                 level: Int(question.level?.level ?? 1),
-                                                 isFavorite: question.favorite,
-                                                 isCompleted: question.completed)
-            return widegetQuestion
-        }
-        if let wqs = wqs, let data = try? JSONEncoder().encode(wqs) {
-            widgetQuestions = data
-        }
+        let leitners = (try? viewContext.fetch(req)) ?? []
+        let firstLeitnerId = leitners.first?.id ?? -1
+        let wqs = Question.topWidgetQuestion(context: viewContext, leitnerId: firstLeitnerId)
+        let data = try? JSONEncoder().encode(wqs)
+        self.leitners = leitners
+        widgetQuestions = data
     }
 
     func delete(_ leitner: Leitner) {

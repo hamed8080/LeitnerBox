@@ -16,7 +16,6 @@ class StatisticsViewModel: ObservableObject {
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
-        load()
     }
 
     func saveDB() {

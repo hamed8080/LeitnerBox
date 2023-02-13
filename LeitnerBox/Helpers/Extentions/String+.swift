@@ -22,3 +22,9 @@ extension String {
         return isContains
     }
 }
+
+extension Optional where Wrapped == String {
+    var isNilOrEmpty: Bool {
+        self?.isEmpty ?? true
+    }
+}

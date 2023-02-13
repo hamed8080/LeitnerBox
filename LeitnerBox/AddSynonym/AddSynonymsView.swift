@@ -18,7 +18,7 @@ struct AddSynonymsView: View {
             TopSheetTextEditorView(searchText: $viewModel.searchText, placeholder: "Search for synonyms...")
 
             List {
-                ForEach(viewModel.filtered) { question in
+                ForEach(viewModel.searchedQuestions) { question in
                     NormalQuestionRow(question: question, tagsViewModel: .init(viewContext: context, leitner: viewModel.leitner))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
@@ -29,7 +29,7 @@ struct AddSynonymsView: View {
                         }
                 }
             }
-            .animation(.easeInOut, value: viewModel.filtered)
+            .animation(.easeInOut, value: viewModel.searchedQuestions)
             .listStyle(.plain)
         }
     }
@@ -37,18 +37,18 @@ struct AddSynonymsView: View {
 
 struct AddSynonymsView_Previews: PreviewProvider {
     struct Preview: View {
-        static let context = PersistenceController.shared.viewContext
+        let context = PersistenceController.shared.viewContext
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
-        @StateObject var viewModel = SynonymViewModel(viewContext: Preview.context, question: Preview.leitner.allQuestions.first!)
+        @StateObject var viewModel = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
 
         var body: some View {
             AddSynonymsView(viewModel: viewModel)
                 .onAppear {
                     viewModel.searchText = "t"
                 }
-                .environmentObject(SearchViewModel(viewContext: Preview.context, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                .environmentObject(LeitnerViewModel(viewContext: Preview.context))
-                .environment(\.managedObjectContext, Preview.context)
+                .environmentObject(SearchViewModel(viewContext: context, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
+                .environmentObject(LeitnerViewModel(viewContext: context))
+                .environment(\.managedObjectContext, context)
                 .preferredColorScheme(.dark)
         }
     }

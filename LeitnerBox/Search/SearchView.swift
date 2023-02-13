@@ -11,13 +11,19 @@ struct SearchView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @State var favoriteCount: Int = 0
 
     var body: some View {
         ZStack {
             List {
-                ForEach(viewModel.filtered) { item in
+                ForEach(viewModel.searchedQuestions.count > 0 ? viewModel.searchedQuestions : viewModel.questions) { item in
                     SearchRowView(question: item, leitner: viewModel.leitner)
                         .listRowInsets(EdgeInsets())
+                        .onAppear {
+                            if item == viewModel.questions.last {
+                                viewModel.fetchMoreQuestion()
+                            }
+                        }
                 }
                 .onDelete(perform: viewModel.deleteItems)
             }
@@ -35,10 +41,9 @@ struct SearchView: View {
                         }
                 }
             }
-            .animation(.easeInOut, value: viewModel.filtered)
             .listStyle(.plain)
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                if viewModel.searchText.isEmpty == false, viewModel.filtered.count < 1 {
+                if viewModel.searchText.isEmpty == false, viewModel.searchedQuestions.count < 1 {
                     HStack {
                         Image(systemName: "doc.text.magnifyingglass")
                             .foregroundColor(.gray.opacity(0.8))
@@ -47,14 +52,16 @@ struct SearchView: View {
                     }
                 }
             }
-            pronunceWordsView
+            PronunceWordsView()
         }
-        .animation(.easeInOut, value: viewModel.filtered)
+        .animation(.easeInOut, value: viewModel.questions.count)
+        .animation(.easeInOut, value: viewModel.searchedQuestions.count)
         .animation(.easeInOut, value: viewModel.reviewStatus)
         .navigationTitle("Advance Search in \(viewModel.leitner.name ?? "")")
         .onAppear {
             viewModel.viewDidAppear()
             viewModel.resumeSpeaking()
+            favoriteCount = Leitner.fetchFavCount(context: context, leitnerId: viewModel.leitner.id)
         }
         .onDisappear {
             viewModel.pauseSpeaking()
@@ -125,7 +132,6 @@ struct SearchView: View {
                                 viewModel.sort(sortItem.sortType)
                             }
                         } label: {
-                            let favoriteCount = viewModel.leitner.allQuestions.filter { $0.favorite == true }.count
                             let countText = sortItem.sortType == .favorite ? " (\(favoriteCount))" : ""
                             Label("\(viewModel.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                         }
@@ -135,7 +141,7 @@ struct SearchView: View {
                         ForEach(viewModel.sortedTags, id: \.self) { tag in
                             Button {
                                 withAnimation {
-                                    viewModel.sortByTag(tag)
+                                    viewModel.sort(.date, tag)
                                 }
                             } label: {
                                 Text(tag.name ?? "")
@@ -152,10 +158,13 @@ struct SearchView: View {
             }
         }
     }
+}
 
-    @State var heightOfReview: CGFloat = 128
+struct PronunceWordsView: View {
+    @EnvironmentObject var viewModel: SearchViewModel
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
-    @ViewBuilder var pronunceWordsView: some View {
+    var body: some View {
         if viewModel.reviewStatus == .isPlaying || viewModel.reviewStatus == .isPaused {
             let question = viewModel.lastPlayedQuestion
             VStack(alignment: .leading) {
@@ -188,9 +197,9 @@ struct SearchView: View {
                                     .font(.body.weight(.medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            Text(verbatim: "\(viewModel.reviewdCount) / \(viewModel.leitner.allQuestions.count)")
+                            Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
                                 .font(.footnote.bold())
-                            if let question = question {
+                            if let question {
                                 QuestionTagsView(
                                     viewModel: .init(viewContext: context, leitner: viewModel.leitner),
                                     accessControls: [.showTags]
@@ -199,7 +208,7 @@ struct SearchView: View {
                                 .frame(maxHeight: 64)
                                 if question.synonyms?.count ?? 0 > 0 {
                                     QuestionSynonymsView(accessControls: [.showSynonyms])
-                                        .environmentObject(SynonymViewModel(viewContext: context, question: question))
+                                        .environmentObject(SynonymViewModel(viewContext: context, leitner: viewModel.leitner, baseQuestion: question))
                                         .frame(maxHeight: 64)
                                 }
                             }

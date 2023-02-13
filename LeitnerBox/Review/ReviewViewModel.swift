@@ -21,18 +21,25 @@ class ReviewViewModel: ObservableObject {
     @Published var isShowingAnswer = false
     @Published var totalCount = 0
     @Published var isFinished = false
+    @Published var leitner: Leitner?
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
     @Published var tags: [Tag] = []
     var synthesizer: AVSpeechSynthesizerProtocol
     private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
 
-    init(viewContext: NSManagedObjectContext, level: Level, voiceSpeech: AVSpeechSynthesisVoiceProtocol, synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()) {
-        self.level = level
+    init(viewContext: NSManagedObjectContext, levelValue: Int16, leitnerId: Int64, voiceSpeech: AVSpeechSynthesisVoiceProtocol, synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()) {
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
         self.synthesizer = synthesizer
+
+        let levelReq = Level.fetchRequest()
+        levelReq.predicate = NSPredicate(format: "leitner.id == %i AND level == %i", leitnerId, levelValue)
+        let level = try! viewContext.fetch(levelReq).first!
+        self.level = level
+        leitner = level.leitner
+
         let req = Question.fetchRequest()
-        req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", level.level, level.leitner?.id ?? 0)
+        req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", levelValue, leitner?.id ?? 0)
         questions = ((try? viewContext.fetch(req)) ?? []).filter(\.isReviewable).shuffled()
         totalCount = questions.count
         preapareNext(questions.first)
@@ -93,7 +100,7 @@ class ReviewViewModel: ObservableObject {
         statistic.isPassed = false
         selectedQuestion?.statistics?.adding(statistic)
 
-        if level.leitner?.backToTopLevel == true {
+        if leitner?.backToTopLevel == true {
             selectedQuestion?.level = selectedQuestion?.firstLevel
         }
         PersistenceController.saveDB(viewContext: viewContext)
@@ -150,7 +157,7 @@ class ReviewViewModel: ObservableObject {
     }
 
     func loadTags() {
-        guard let leitnerId = level.leitner?.id else { return }
+        guard let leitnerId = leitner?.id else { return }
         let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
         let req = Tag.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
