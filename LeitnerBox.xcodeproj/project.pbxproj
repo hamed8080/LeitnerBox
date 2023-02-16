@@ -32,7 +32,6 @@
 		05266AC128367DAA004693BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266AC028367DAA004693BC /* Preview Assets.xcassets */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
 		05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
-		052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052AEE7328C1BB8600D41BB5 /* AccessControls.swift */; };
 		052CA6AA283C944200376E79 /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManager+.swift */; };
 		052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */; };
 		052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
@@ -62,9 +61,8 @@
 		0565CA3E2876E79A0076F6F4 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565CA3D2876E79A0076F6F4 /* SearchViewModelTests.swift */; };
 		0565CA42287718D50076F6F4 /* ReviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0565CA41287718D50076F6F4 /* ReviewViewModelTests.swift */; };
 		05747BFC28AE82ED00868CC6 /* Synonym+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFB28AE82BE00868CC6 /* Synonym+.swift */; };
-		05747BFF28AE9D7B00868CC6 /* AddSynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */; };
+		05747BFF28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFE28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift */; };
 		05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */; };
-		05747C0328AED1EC00868CC6 /* QuestionSynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */; };
 		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
 		0579D4AB283CE459000BD93D /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0579D4A1283CE459000BD93D /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D4AF283CE46F000BD93D /* ShareViewController.swift */; };
@@ -78,8 +76,7 @@
 		05867E71283A469000F4A413 /* Level+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E70283A469000F4A413 /* Level+.swift */; };
 		05867E73283A480600F4A413 /* Question+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E72283A480600F4A413 /* Question+.swift */; };
 		05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E74283A63AA00F4A413 /* ReviewViewModel.swift */; };
-		0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */; };
-		058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39328AF520E0080BDDF /* AddTagsView.swift */; };
+		058EA39428AF520E0080BDDF /* TagsListPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39328AF520E0080BDDF /* TagsListPickerView.swift */; };
 		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
 		058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */; };
 		058EB56D28CF9ADA00622B76 /* ToolbarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */; };
@@ -97,10 +94,11 @@
 		05BD6FCA2954A45B005BE4CB /* build+docc+commit.sh in Resources */ = {isa = PBXBuildFile; fileRef = 05BD6FC92954A45B005BE4CB /* build+docc+commit.sh */; };
 		05BE4312285615E800B80E5E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589EA5528538D1400354C8C /* StatisticsView.swift */; };
 		05D0329F2838DB2B00FE67D5 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0329E2838DB2B00FE67D5 /* Date+.swift */; };
-		05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A02838E2A900FE67D5 /* SearchRowView.swift */; };
 		05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A42838E82C00FE67D5 /* SearchViewModel.swift */; };
 		05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A62838F8D300FE67D5 /* CustomDialog.swift */; };
 		05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */; };
+		05D62D34299CD0AD00AC1283 /* QuestionTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D62D33299CD0AD00AC1283 /* QuestionTagList.swift */; };
+		05D62D38299CD7F100AC1283 /* QuestionSynonymList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D62D37299CD7F100AC1283 /* QuestionSynonymList.swift */; };
 		05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DB660028AFFFCD00E01999 /* SynonymsView.swift */; };
 		05E315C328A63AB100E020FC /* AnimatableGradientModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */; };
 		05E37357290D541D00853CB1 /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E37356290D541D00853CB1 /* EnvironmentValues+.swift */; };
@@ -181,7 +179,6 @@
 		05266AC028367DAA004693BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
-		052AEE7328C1BB8600D41BB5 /* AccessControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessControls.swift; sourceTree = "<group>"; };
 		052CA6A9283C944200376E79 /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
 		052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewControllerWrapper.swift; sourceTree = "<group>"; };
 		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -214,9 +211,8 @@
 		0565CA3D2876E79A0076F6F4 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		0565CA41287718D50076F6F4 /* ReviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModelTests.swift; sourceTree = "<group>"; };
 		05747BFB28AE82BE00868CC6 /* Synonym+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Synonym+.swift"; sourceTree = "<group>"; };
-		05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSynonymsView.swift; sourceTree = "<group>"; };
+		05747BFE28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSynonymPickerView.swift; sourceTree = "<group>"; };
 		05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymViewModel.swift; sourceTree = "<group>"; };
-		05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSynonymsView.swift; sourceTree = "<group>"; };
 		0579D4A1283CE459000BD93D /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0579D4A6283CE459000BD93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0579D4A8283CE459000BD93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,9 +228,8 @@
 		05867E70283A469000F4A413 /* Level+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Level+.swift"; sourceTree = "<group>"; };
 		05867E72283A480600F4A413 /* Question+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+.swift"; sourceTree = "<group>"; };
 		05867E74283A63AA00F4A413 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
-		0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTagsView.swift; sourceTree = "<group>"; };
 		0589EA5528538D1400354C8C /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		058EA39328AF520E0080BDDF /* AddTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsView.swift; sourceTree = "<group>"; };
+		058EA39328AF520E0080BDDF /* TagsListPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsListPickerView.swift; sourceTree = "<group>"; };
 		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
 		058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonKeyboardShortcut.swift; sourceTree = "<group>"; };
 		058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarNavigation.swift; sourceTree = "<group>"; };
@@ -252,10 +247,11 @@
 		05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsInsideTagView.swift; sourceTree = "<group>"; };
 		05BD6FC92954A45B005BE4CB /* build+docc+commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build+docc+commit.sh"; sourceTree = "<group>"; };
 		05D0329E2838DB2B00FE67D5 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		05D032A02838E2A900FE67D5 /* SearchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowView.swift; sourceTree = "<group>"; };
 		05D032A42838E82C00FE67D5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		05D032A62838F8D300FE67D5 /* CustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialog.swift; sourceTree = "<group>"; };
 		05D032A82838F8F100FE67D5 /* PrimaryCustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryCustomDialog.swift; sourceTree = "<group>"; };
+		05D62D33299CD0AD00AC1283 /* QuestionTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTagList.swift; sourceTree = "<group>"; };
+		05D62D37299CD7F100AC1283 /* QuestionSynonymList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSynonymList.swift; sourceTree = "<group>"; };
 		05DB660028AFFFCD00E01999 /* SynonymsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymsView.swift; sourceTree = "<group>"; };
 		05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableGradientModifier.swift; sourceTree = "<group>"; };
 		05E37356290D541D00853CB1 /* EnvironmentValues+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
@@ -365,7 +361,7 @@
 				054AB5C3283951DE008BC840 /* Level */,
 				05BAE2162837CC880043FAEB /* Search */,
 				05BAE21328379C9E0043FAEB /* AddOrEditQuestion */,
-				05747BFD28AE9D6500868CC6 /* AddSynonym */,
+				05747BFD28AE9D6500868CC6 /* Synonym */,
 				0545068D284A350D007EBAFA /* Tag */,
 				053666D828377536002F899F /* Helpers */,
 				0589EA5428538D0500354C8C /* Statistics */,
@@ -423,7 +419,6 @@
 				058343C02875DBA200AD0FF3 /* MyError.swift */,
 				051B7DAD288B02C300465C24 /* WidgetQuestion.swift */,
 				05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */,
-				052AEE7328C1BB8600D41BB5 /* AccessControls.swift */,
 				058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */,
 				058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */,
 			);
@@ -472,12 +467,12 @@
 		0545068D284A350D007EBAFA /* Tag */ = {
 			isa = PBXGroup;
 			children = (
-				058EA39328AF520E0080BDDF /* AddTagsView.swift */,
+				058EA39328AF520E0080BDDF /* TagsListPickerView.swift */,
 				054E7721284A52FF006BCDEF /* TagView.swift */,
 				05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */,
 				054E7723284A544B006BCDEF /* TagRowView.swift */,
 				0545068E284A3519007EBAFA /* TagViewModel.swift */,
-				0589DD4A284B4E6000EEB7A8 /* QuestionTagsView.swift */,
+				05D62D33299CD0AD00AC1283 /* QuestionTagList.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -522,15 +517,15 @@
 			path = LeitnerBoxUITests;
 			sourceTree = "<group>";
 		};
-		05747BFD28AE9D6500868CC6 /* AddSynonym */ = {
+		05747BFD28AE9D6500868CC6 /* Synonym */ = {
 			isa = PBXGroup;
 			children = (
-				05747C0228AED1EC00868CC6 /* QuestionSynonymsView.swift */,
-				05747BFE28AE9D7B00868CC6 /* AddSynonymsView.swift */,
+				05747BFE28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift */,
 				05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */,
 				05DB660028AFFFCD00E01999 /* SynonymsView.swift */,
+				05D62D37299CD7F100AC1283 /* QuestionSynonymList.swift */,
 			);
-			path = AddSynonym;
+			path = Synonym;
 			sourceTree = "<group>";
 		};
 		0579D4A2283CE459000BD93D /* Share */ = {
@@ -576,7 +571,6 @@
 			children = (
 				05BAE2172837CCA50043FAEB /* SearchView.swift */,
 				05D032A42838E82C00FE67D5 /* SearchViewModel.swift */,
-				05D032A02838E2A900FE67D5 /* SearchRowView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -844,27 +838,24 @@
 				05867E6D283A2A9100F4A413 /* RoundedCorner+.swift in Sources */,
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
 				05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */,
+				05D62D38299CD7F100AC1283 /* QuestionSynonymList.swift in Sources */,
 				05F1C8B2288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */,
 				05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */,
-				05D032A12838E2A900FE67D5 /* SearchRowView.swift in Sources */,
 				05867E75283A63AA00F4A413 /* ReviewViewModel.swift in Sources */,
 				05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */,
 				053666D2283769A1002F899F /* ReviewView.swift in Sources */,
 				05D0329F2838DB2B00FE67D5 /* Date+.swift in Sources */,
-				058EA39428AF520E0080BDDF /* AddTagsView.swift in Sources */,
+				058EA39428AF520E0080BDDF /* TagsListPickerView.swift in Sources */,
 				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
 				051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */,
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
-				052AEE7428C1BB8600D41BB5 /* AccessControls.swift in Sources */,
 				051E1076291137D100F990BD /* DeleteDialog.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
 				058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */,
 				053666E428378918002F899F /* Color+.swift in Sources */,
-				0589DD4B284B4E6000EEB7A8 /* QuestionTagsView.swift in Sources */,
 				053666E628378949002F899F /* UIColor+.swift in Sources */,
 				051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
-				05747C0328AED1EC00868CC6 /* QuestionSynonymsView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
@@ -886,6 +877,7 @@
 				05BE4312285615E800B80E5E /* StatisticsView.swift in Sources */,
 				05867E73283A480600F4A413 /* Question+.swift in Sources */,
 				05081530285C719000CF632E /* NotAnyToReviewView.swift in Sources */,
+				05D62D34299CD0AD00AC1283 /* QuestionTagList.swift in Sources */,
 				054E7720284A523E006BCDEF /* Tag+.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
 				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,
@@ -898,7 +890,7 @@
 				05E37357290D541D00853CB1 /* EnvironmentValues+.swift in Sources */,
 				05BAE2152837BA480043FAEB /* LevelRow.swift in Sources */,
 				05E315C328A63AB100E020FC /* AnimatableGradientModifier.swift in Sources */,
-				05747BFF28AE9D7B00868CC6 /* AddSynonymsView.swift in Sources */,
+				05747BFF28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift in Sources */,
 				052CBA492840BAA400544925 /* Bool+.swift in Sources */,
 				05D032A92838F8F100FE67D5 /* PrimaryCustomDialog.swift in Sources */,
 				05A854ED29541BFA0039AA17 /* AVSpeechSynthesisVoiceProtocol.swift in Sources */,

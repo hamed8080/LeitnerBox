@@ -9,7 +9,8 @@ import CoreData
 import SwiftUI
 
 struct ReviewControls: View {
-    @StateObject var viewModel: ReviewViewModel
+    @EnvironmentObject var viewModel: ReviewViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
@@ -29,7 +30,12 @@ struct ReviewControls: View {
 
             if let question = viewModel.selectedQuestion {
                 NavigationLink {
-                    AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.level.leitner!, question: question))
+                    AddOrEditQuestionView()
+                        .environmentObject(objVM)
+                        .onAppear {
+                            objVM.questionVM.question = question
+                            objVM.questionVM.setEditQuestionProperties(editQuestion: question)
+                        }
                 } label: {
                     IconButtonKeyboardShortcut(title: "Edit", systemImageName: "pencil")
                 }

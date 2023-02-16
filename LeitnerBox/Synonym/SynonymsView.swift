@@ -7,12 +7,10 @@
 import SwiftUI
 
 struct SynonymsView: View {
-    @StateObject var viewModel: SynonymViewModel
-    var accessControls: [AccessControls] = [.showSynonyms, .removeSynonym]
+    @EnvironmentObject var viewModel: SynonymViewModel
 
     var body: some View {
         List(viewModel.allSynonymsInLeitner) { synonym in
-
             VStack(alignment: .leading) {
                 let allQuestions = synonym.allQuestions
                 let firstQuestion = allQuestions.first
@@ -31,9 +29,7 @@ struct SynonymsView: View {
                                 .transition(.asymmetric(insertion: .slide, removal: .scale))
                                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
                                 .onLongPressGesture {
-                                    if accessControls.contains(.removeSynonym) {
-                                        viewModel.deleteFromSynonym(question)
-                                    }
+//                                    viewModel.removeSynonymFromQuestion(question: synonym, synonymQuestion: question)
                                 }
                         }
                     }
@@ -51,7 +47,8 @@ struct SynonymsView_Previews: PreviewProvider {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         let context = PersistenceController.shared.viewContext
         var body: some View {
-            SynonymsView(viewModel: .init(viewContext: context, leitner: Preview.leitner))
+            SynonymsView()
+                .environmentObject(SynonymViewModel(viewContext: context, leitner: Preview.leitner))
                 .environment(\.managedObjectContext, context)
         }
     }

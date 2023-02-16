@@ -8,39 +8,37 @@ import CoreData
 import SwiftUI
 
 struct TagView: View {
-    @StateObject var viewModel: TagViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
-        ZStack {
-            List {
-                ForEach(viewModel.tags) { tag in
-                    NavigationLink {
-                        QuestionsInsideTagView(
-                            tag: tag,
-                            fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", tag.name ?? ""), animation: .easeInOut),
-                            tagViewModel: TagViewModel(viewContext: context, leitner: viewModel.leitner)
-                        )
-                    } label: {
-                        TagRowView(tag: tag, viewModel: viewModel).onAppear {
-                            if tag == viewModel.tags.last {
-                                viewModel.loadMore()
-                            }
+        List {
+            ForEach(objVM.tagVM.tags) { tag in
+                NavigationLink {
+                    QuestionsInsideTagView(
+                        tag: tag,
+                        fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", tag.name ?? ""), animation: .easeInOut)
+                    )
+                    .environmentObject(objVM)
+                } label: {
+                    TagRowView(tag: tag, viewModel: objVM.tagVM).onAppear {
+                        if tag == objVM.tagVM.tags.last {
+                            objVM.tagVM.loadMore()
                         }
                     }
                 }
-                .onDelete(perform: viewModel.deleteItems)
             }
-            .animation(.easeInOut, value: viewModel.tags)
-            .listStyle(.plain)
+            .onDelete(perform: objVM.tagVM.deleteItems)
         }
-        .navigationTitle("Manage Tags for \(viewModel.leitner.name ?? "")")
+        .listStyle(.plain)
+        .navigationTitle("Manage Tags for \(objVM.tagVM.leitner.name ?? "")")
+        .onAppear {
+            objVM.tagVM.loadMore()
+        }
         .toolbar {
             ToolbarItem {
                 Button {
-                    viewModel.clear()
-                    viewModel.showAddOrEditTagDialog.toggle()
+                    objVM.tagVM.showAddOrEditTagDialog.toggle()
                 } label: {
                     Label("Add", systemImage: "plus.square")
                         .font(.title3)
@@ -48,7 +46,8 @@ struct TagView: View {
                         .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
                 }
             }
-        }.customDialog(isShowing: $viewModel.showAddOrEditTagDialog) {
+        }
+        .sheet(isPresented: $objVM.tagVM.showAddOrEditTagDialog) {
             addOrEditTagDialog
         }
     }
@@ -61,15 +60,15 @@ struct TagView: View {
             TextEditorView(
                 placeholder: "Enter tag name",
                 shortPlaceholder: "Name",
-                string: $viewModel.tagName,
+                string: $objVM.tagVM.tagName,
                 textEditorHeight: 48
             )
 
-            ColorPicker("Select Color", selection: $viewModel.colorPickerColor)
+            ColorPicker("Select Color", selection: $objVM.tagVM.colorPickerColor)
                 .frame(height: 36)
 
             Button {
-                viewModel.editOrAddTag()
+                objVM.tagVM.editOrAddTag()
             } label: {
                 HStack {
                     Spacer()
@@ -84,7 +83,7 @@ struct TagView: View {
             .tint(.accentColor)
 
             Button {
-                viewModel.showAddOrEditTagDialog.toggle()
+                objVM.tagVM.showAddOrEditTagDialog.toggle()
             } label: {
                 HStack {
                     Spacer()
@@ -97,7 +96,9 @@ struct TagView: View {
             .buttonStyle(.bordered)
             .frame(maxWidth: .infinity)
             .tint(.red)
+            Spacer()
         }
+        .padding()
     }
 }
 
@@ -106,7 +107,8 @@ struct TagView_Previews: PreviewProvider {
         static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
         @StateObject var viewModel = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         var body: some View {
-            TagView(viewModel: viewModel)
+            TagView()
+                .environmentObject(viewModel)
         }
     }
 

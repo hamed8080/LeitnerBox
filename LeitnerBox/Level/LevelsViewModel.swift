@@ -31,22 +31,34 @@ class LevelsViewModel: ObservableObject {
     var totalCount: Int = 0
     var completedCount: Int = 0
     var reviewableCount: Int = 0
+    @Published var isSearching: Bool = false
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
         load()
-        $searchWord.sink { [weak self] _ in
-            self?.fetchQuestions()
+        $searchWord.sink { [weak self] newValue in
+            self?.fetchQuestions(newValue)
         }
         .store(in: &cancellableSet)
 
-        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextDidSave).sink { [weak self] _ in
-            self?.load()
+        $isSearching.dropFirst().sink { [weak self] newValue in
+            if newValue == false {
+                self?.searchedQuestions = []
+            }
+        }
+        .store(in: &cancellableSet)
+
+        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextDidSave).sink { _ in
+            Task {
+                await MainActor.run {
+                    self.load()
+                }
+            }
         }.store(in: &cancellableSet)
     }
 
-    func fetchQuestions() {
+    func fetchQuestions(_ searchWord: String) {
         if searchWord.count == 1 || searchWord.isEmpty || searchWord == "#" {
             searchedQuestions = []
             return

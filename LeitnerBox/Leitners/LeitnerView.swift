@@ -5,8 +5,59 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
+import Combine
 import CoreData
 import SwiftUI
+
+class ObjectsContainer: ObservableObject {
+    var leitner: Leitner
+    @Published var leitnerVM: LeitnerViewModel
+    @Published var searchVM: SearchViewModel
+    @Published var levelsVM: LevelsViewModel
+    @Published var tagVM: TagViewModel
+    @Published var synonymVM: SynonymViewModel
+    @Published var questionVM: QuestionViewModel
+    private(set) var cancellableSet: Set<AnyCancellable> = []
+
+    init(context: NSManagedObjectContext, leitner: Leitner, leitnerVM: LeitnerViewModel) {
+        self.leitner = leitner
+        self.leitnerVM = leitnerVM
+        searchVM = SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        levelsVM = LevelsViewModel(viewContext: context, leitner: leitner)
+        tagVM = TagViewModel(viewContext: context, leitner: leitner)
+        synonymVM = SynonymViewModel(viewContext: context, leitner: leitner)
+        questionVM = QuestionViewModel(viewContext: context, leitner: leitner)
+
+        searchVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+        self.leitnerVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+
+        levelsVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+
+        tagVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+
+        synonymVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+
+        questionVM.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+        .store(in: &cancellableSet)
+    }
+}
 
 struct LeitnerView: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
@@ -25,8 +76,7 @@ struct LeitnerView: View {
                 if let leitner = viewModel.leitners.first(where: { $0.id == selectedLeitnrId }) {
                     LevelsView()
                         .id(leitner.id)
-                        .environmentObject(SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice))
-                        .environmentObject(LevelsViewModel(viewContext: context, leitner: leitner))
+                        .environmentObject(ObjectsContainer(context: context, leitner: leitner, leitnerVM: viewModel))
                 }
             }
         }
@@ -134,6 +184,7 @@ struct SidebarListView: View {
             viewModel.load()
         }
         .listStyle(.plain)
+        .navigationTitle("Leitner Box")
     }
 
     var toolbarView: some View {

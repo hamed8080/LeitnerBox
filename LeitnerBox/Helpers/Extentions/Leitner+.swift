@@ -55,7 +55,7 @@ extension Leitner {
 
     static func fetchFavCount(context: NSManagedObjectContext, leitnerId: Int64) -> Int {
         let req = Question.fetchRequest()
-        req.predicate = NSPredicate(format: "ANY level.leitner.id == %i AND favorite == %@", leitnerId, NSNumber(value: true))
+        req.predicate = NSPredicate(format: "level.leitner.id == %i AND favorite == %@", leitnerId, NSNumber(value: true))
         let favCount = (try? context.count(for: req)) ?? 0
         return favCount
     }

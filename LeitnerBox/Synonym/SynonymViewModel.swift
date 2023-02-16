@@ -41,27 +41,39 @@ class SynonymViewModel: ObservableObject {
         }
     }
 
-    func addAsSynonym(_ quesiton: Question) {
-        guard let baseQuestion else { return }
+    func addAsSynonym(_: Question) {
+//        guard let baseQuestion else { return }
+//        withAnimation {
+//            let synonym = baseQuestion.synonymsArray?.first ?? quesiton.synonymsArray?.first ?? Synonym(context: viewContext)
+//            synonym.addToQuestion(quesiton)
+//            synonym.addToQuestion(baseQuestion)
+//            objectWillChange.send()
+//        }
+    }
+
+    func addSynonymToQuestion(_ question: Question, _ synonymQuestion: Question) {
         withAnimation {
-            let synonym = baseQuestion.synonymsArray?.first ?? quesiton.synonymsArray?.first ?? Synonym(context: viewContext)
-            synonym.addToQuestion(quesiton)
-            synonym.addToQuestion(baseQuestion)
-            objectWillChange.send()
+            if let synonym = question.synonyms?.allObjects.first as? Synonym {
+                synonymQuestion.addToSynonyms(synonym)
+            } else {
+                let synonym = Synonym(context: viewContext)
+                synonym.addToQuestion(question)
+                synonymQuestion.addToSynonyms(synonym)
+            }
+            try? PersistenceController.shared.viewContext.save()
         }
     }
 
-    func deleteFromSynonym(_ question: Question) {
-        withAnimation {
-            question.synonymsArray?.forEach { synonym in
-                synonym.removeFromQuestion(question)
-            }
-            objectWillChange.send()
-        }
-    }
+    func removeSynonymFromQuestion(question _: Question, synonymQuestion _: Question) {}
 
     var allSynonymsInLeitner: [Synonym] {
         let req = Synonym.fetchRequest()
         return (try? viewContext.fetch(req)) ?? []
+    }
+
+    func reset() {
+        searchedQuestions = []
+        searchText = ""
+        baseQuestion = nil
     }
 }

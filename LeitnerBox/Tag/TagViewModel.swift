@@ -4,6 +4,7 @@
 //
 // Created by Hamed Hosseini on 10/28/22.
 
+import Combine
 import CoreData
 import Foundation
 import SwiftUI
@@ -11,6 +12,7 @@ import SwiftUI
 class TagViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContext
     @Published var tags: [Tag] = []
+    @Published var searchedTags: [Tag] = []
     @Published var leitner: Leitner
     @Published var showAddOrEditTagDialog: Bool = false
     @Published var selectedTag: Tag?
@@ -20,21 +22,23 @@ class TagViewModel: ObservableObject {
     let count = 20
     var offset = 0
     var hasNext: Bool = true
+    private(set) var cancellableSet: Set<AnyCancellable> = []
 
     var filtered: [Tag] {
-        if searchText.isEmpty {
-            return tags
+        if !searchText.isEmpty {
+            return searchedTags
         } else {
-            return tags.filter {
-                $0.name?.lowercased().contains(searchText.lowercased()) ?? false
-            }
+            return tags
         }
     }
 
     init(viewContext: NSManagedObjectContext, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
-        loadMore()
+        $searchText.dropFirst().sink { [weak self] newValue in
+            self?.searchTags(text: newValue)
+        }
+        .store(in: &cancellableSet)
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -48,6 +52,19 @@ class TagViewModel: ObservableObject {
         withAnimation {
             tag.removeFromQuestion(question)
         }
+    }
+
+    func searchTags(text: String) {
+        if text.isEmpty {
+            searchedTags = []
+            return
+        }
+        let req = Tag.fetchRequest()
+        req.fetchLimit = count
+        let predicate = NSPredicate(format: "leitner.id == %d AND name contains[c] %@", leitner.id, text)
+        req.predicate = predicate
+        req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+        searchedTags = (try? viewContext.fetch(req)) ?? []
     }
 
     func loadMore() {
@@ -81,6 +98,8 @@ class TagViewModel: ObservableObject {
         } else {
             addTag()
         }
+        PersistenceController.saveDB(viewContext: viewContext)
+        clearFields()
     }
 
     func editTag() {
@@ -102,11 +121,33 @@ class TagViewModel: ObservableObject {
             }
             tags.append(newItem)
             showAddOrEditTagDialog.toggle()
-            clear()
         }
     }
 
-    func clear() {
+    func addTagToQuestion(_ tag: Tag, question: Question?) {
+        withAnimation {
+            guard let question else { return }
+            tag.addToQuestion(question)
+            PersistenceController.saveDB(viewContext: viewContext)
+        }
+    }
+
+    func removeTagForQuestion(_ tag: Tag, question: Question?) {
+        withAnimation {
+            guard let question else { return }
+            tag.removeFromQuestion(question)
+            PersistenceController.saveDB(viewContext: viewContext)
+        }
+    }
+
+    func reset() {
+        tags = []
+        searchedTags = []
+        offset = 0
+        clearFields()
+    }
+
+    func clearFields() {
         colorPickerColor = .gray
         tagName = ""
         selectedTag = nil

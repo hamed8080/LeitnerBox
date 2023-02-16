@@ -9,11 +9,13 @@ import CoreData
 import SwiftUI
 
 struct ReviewView: View {
+    @EnvironmentObject var objVM: ObjectsContainer
     @StateObject var viewModel: ReviewViewModel
-    @EnvironmentObject var searchVM: SearchViewModel
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
+    @State var showTagPicker: Bool = false
+    @State var showSynonymPicker: Bool = false
 
     var body: some View {
         if viewModel.isFinished {
@@ -23,31 +25,52 @@ struct ReviewView: View {
                 VStack {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 48) {
-                            ReviewHeader(viewModel: viewModel)
-                            ReviewQuestion(viewModel: viewModel)
+                            ReviewHeader()
+                                .environmentObject(viewModel)
+                            ReviewQuestion()
+                                .environmentObject(viewModel)
                             if let question = viewModel.selectedQuestion {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    QuestionTagsView(
-                                        viewModel: .init(viewContext: context, leitner: viewModel.leitner!),
-                                        accessControls: [.addTag, .showTags, .removeTag, .saveDirectly]
-                                    )
-                                    .environmentObject(question)
-                                    if let leitner = viewModel.leitner {
-                                        QuestionSynonymsView(accessControls: [.addSynonym, .showSynonyms, .removeSynonym, .saveDirectly])
-                                            .environmentObject(SynonymViewModel(viewContext: context, leitner: leitner, baseQuestion: question))
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Button {
+                                        showTagPicker.toggle()
+                                    } label: {
+                                        Label("Tags", systemImage: "plus.circle")
+                                    }
+                                    .keyboardShortcut("t", modifiers: [.command])
+                                    .buttonStyle(.borderless)
+
+                                    QuestionTagList(tags: question.tagsArray ?? []) { tag in
+                                        objVM.tagVM.removeTagForQuestion(tag, question: viewModel.selectedQuestion)
+                                    }
+
+                                    Button {
+                                        showSynonymPicker.toggle()
+                                    } label: {
+                                        Label("Synonyms", systemImage: "plus.circle")
+                                    }
+                                    .buttonStyle(.borderless)
+
+                                    QuestionSynonymList(synonyms: viewModel.selectedQuestion?.synonymsArray ?? []) { _ in
+                                        // Navigate to add or edit question
+                                    } onLongClick: { _ in
+//                                        synonymVM.removeSynonymFromQuestion(question: question, synonymQuestion: synonymQuestion)
                                     }
                                 }
                             }
-                            ReviewControls(viewModel: viewModel)
+                            ReviewControls()
+                                .environmentObject(viewModel)
                             if viewModel.isShowingAnswer {
-                                ReviewAnswer(viewModel: viewModel)
+                                ReviewAnswer()
+                                    .environmentObject(viewModel)
                             } else {
-                                TapToAnswerView(viewModel: viewModel)
+                                TapToAnswerView()
+                                    .environmentObject(viewModel)
                             }
                         }
                     }
                     Spacer()
-                    PassOrFailButtons(viewModel: viewModel)
+                    PassOrFailButtons()
+                        .environmentObject(viewModel)
                 }
             }
             .animation(.easeInOut, value: viewModel.isShowingAnswer)
@@ -56,22 +79,36 @@ struct ReviewView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
-                        LazyView(AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.leitner!)))
+                        AddOrEditQuestionView()
+                            .environmentObject(objVM)
                     }
                     .keyboardShortcut("a", modifiers: [.command, .option])
 
                     ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
                         SearchView()
-                            .environmentObject(searchVM)
+                            .environmentObject(objVM)
                     }
                     .keyboardShortcut("s", modifiers: [.command, .option])
                 }
             }
-            .customDialog(isShowing: $viewModel.showDelete, content: {
-                DeleteDialog(viewModel: viewModel)
-            })
+            .customDialog(isShowing: $viewModel.showDelete) {
+                DeleteDialog()
+                    .environmentObject(viewModel)
+            }
             .onDisappear {
                 viewModel.stopPronounce()
+            }
+            .sheet(isPresented: $showSynonymPicker) {
+                QuestionSynonymPickerView { question in
+                    guard let baseQuestion = viewModel.selectedQuestion else { return }
+                    objVM.synonymVM.addSynonymToQuestion(baseQuestion, question)
+                }
+                .environmentObject(objVM)
+            }
+            .sheet(isPresented: $showTagPicker) {
+                TagsListPickerView { tag in
+                    objVM.tagVM.addTagToQuestion(tag, question: viewModel.selectedQuestion)
+                }
             }
 
         } else {

@@ -9,69 +9,46 @@ import SwiftUI
 
 struct NormalQuestionRow: View {
     @StateObject var question: Question
-    @StateObject var tagsViewModel: TagViewModel
-    @EnvironmentObject var searchViewModel: SearchViewModel
-    @EnvironmentObject var leitnersVM: LeitnerViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.horizontalSizeClass) var sizeClass
-    @Environment(\.dynamicTypeSize) var typeSize
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-
-    var aceessControls: [AccessControls] = {
-        var aceessControls = AccessControls.full
-        aceessControls.append(.saveDirectly)
-        return aceessControls
-    }()
+    @State var showTagPicker: Bool = false
 
     var body: some View {
-        HStack {
-            if sizeClass == .regular, typeSize == .large {
-                ipadView
-            } else {
-                iphoneView
-            }
-        }
-    }
-
-    var ipadView: some View {
         VStack(alignment: .leading, spacing: 4) {
             questionAndAnswer
-                .padding(.top, 8)
                 .padding([.leading, .trailing])
             HStack {
                 levelAndAvailibility
                 Spacer()
                 completed
-                controls
+                QuestionRowControls(question: question)
             }
-            .padding([.leading, .trailing])
+            .padding()
 
-            QuestionTagsView(
-                viewModel: tagsViewModel,
-                addPadding: true,
-                accessControls: aceessControls
-            )
-            .environmentObject(question)
-        }
-    }
-
-    var iphoneView: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 4) {
-                questionAndAnswer
-                levelAndAvailibility
-                HStack {
-                    completed
-                    Spacer()
-                    controls
+            HStack(alignment: .top, spacing: 16) {
+                Button {
+                    showTagPicker.toggle()
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "plus.circle")
+                        Text("Tags")
+                    }
                 }
-            }.padding()
+                .buttonStyle(.borderless)
 
-            QuestionTagsView(
-                viewModel: tagsViewModel,
-                addPadding: true,
-                accessControls: aceessControls
-            )
-            .environmentObject(question)
+                if let tags = question.tagsArray, tags.count > 0 {
+                    QuestionTagList(tags: tags) { tag in
+                        objVM.tagVM.removeTagForQuestion(tag, question: question)
+                    }
+                    .environmentObject(question)
+                }
+            }
+            .padding([.leading, .bottom])
+        }
+        .sheet(isPresented: $showTagPicker) {
+            TagsListPickerView { tag in
+                objVM.tagVM.addTagToQuestion(tag, question: question)
+            }
         }
     }
 
@@ -79,27 +56,28 @@ struct NormalQuestionRow: View {
         HStack {
             Text(verbatim: "LEVEL: \(question.level?.level ?? 0)")
                 .foregroundColor(.blue)
-                .font(.footnote.bold())
+                .font(.caption2.bold())
 
             Text(question.remainDays)
                 .foregroundColor(.gray)
-                .font(.footnote.bold())
+                .font(.caption2.bold())
         }
     }
 
     @ViewBuilder var questionAndAnswer: some View {
         Text(question.question ?? "")
-            .font(.title2.bold())
+            .font(sizeClass == .regular ? .title3.bold() : .body.bold())
+            .padding(.top)
         if let answer = question.answer, !answer.isEmpty {
-            Text(answer.uppercased())
-                .foregroundColor(.gray)
-                .font(.headline.bold())
+            Text(answer)
+                .foregroundColor(.teal)
+                .font(sizeClass == .regular ? .body.bold() : .caption.bold())
         }
 
         if let detailDescription = question.detailDescription, !detailDescription.isEmpty {
-            Text(detailDescription.uppercased())
+            Text(detailDescription)
                 .foregroundColor(.gray)
-                .font(.headline.bold())
+                .font(sizeClass == .regular ? .headline : .caption)
         }
     }
 
@@ -107,123 +85,114 @@ struct NormalQuestionRow: View {
         if question.completed {
             Text("COMPLETED")
                 .foregroundColor(.blue)
-                .font(.footnote.bold())
+                .font(.caption2.bold())
         }
     }
+}
 
-    @ViewBuilder var controls: some View {
-        if aceessControls.contains(.trailingControls) {
-            let padding: CGFloat = sizeClass == .compact ? 4 : 8
-            HStack(spacing: padding) {
-                let controlSize: CGFloat = 24
-                if aceessControls.contains(.microphone) {
-                    Button {
-                        searchViewModel.pronounceOnce(question)
-                    } label: {
-                        Image(systemName: "mic.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: controlSize, height: controlSize)
-                            .padding(padding)
-                            .foregroundColor(.accentColor)
+struct QuestionRowControls: View {
+    @StateObject var question: Question
+    @EnvironmentObject var objVM: ObjectsContainer
+    @Environment(\.horizontalSizeClass) var sizeClass
+    let controlSize: CGFloat = 18
+    var padding: CGFloat { sizeClass == .compact ? 4 : 8 }
+    @EnvironmentObject var questionVM: QuestionViewModel
+
+    var body: some View {
+        HStack(spacing: padding) {
+            Button {
+                objVM.searchVM.pronounceOnce(question)
+            } label: {
+                Image(systemName: "mic.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: controlSize, height: controlSize)
+                    .padding(padding)
+                    .foregroundColor(.accentColor)
+            }
+            .buttonStyle(.borderless)
+
+            Button {
+                withAnimation {
+                    objVM.searchVM.toggleFavorite(question)
+                }
+            } label: {
+                Image(systemName: question.favorite ? "star.fill" : "star")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: controlSize, height: controlSize)
+                    .padding(padding)
+                    .foregroundColor(.accentColor)
+            }
+            .buttonStyle(.borderless)
+
+            Menu {
+                Button(role: .destructive) {
+                    withAnimation {
+                        objVM.searchVM.delete(question)
                     }
-                    .buttonStyle(.borderless)
+                } label: {
+                    Label("Delete", systemImage: "trash")
                 }
 
-                if aceessControls.contains(.favorite) {
-                    Button {
-                        withAnimation {
-                            searchViewModel.toggleFavorite(question)
+                Divider()
+                NavigationLink {
+                    AddOrEditQuestionView()
+                        .environmentObject(objVM)
+                        .onAppear {
+                            objVM.questionVM.question = question
+                            objVM.questionVM.setEditQuestionProperties(editQuestion: question)
                         }
-                    } label: {
-                        Image(systemName: question.favorite ? "star.fill" : "star")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: controlSize, height: controlSize)
-                            .padding(padding)
-                            .foregroundColor(.accentColor)
-                    }
-                    .buttonStyle(.borderless)
+                } label: {
+                    Label("Edit", systemImage: "pencil")
                 }
 
-                if aceessControls.contains(.more) {
-                    Menu {
-                        if aceessControls.contains(.delete) {
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    searchViewModel.delete(question)
-                                }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+                Button {
+                    UIPasteboard.general.string = [question.question, question.answer, question.detailDescription]
+                        .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+                        .filter { !$0.isEmpty }
+                        .joined(separator: "\n")
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                }
+
+                Button {
+                    withAnimation {
+                        objVM.searchVM.resetToFirstLevel(question)
+                    }
+                } label: {
+                    Label("Reset to first level", systemImage: "goforward")
+                }
+
+                Button {
+                    withAnimation {
+                        objVM.searchVM.complete(question)
+                    }
+                } label: {
+                    Label("Mark as completed", systemImage: "tray.full")
+                }
+
+                Divider()
+
+                Menu("Move") {
+                    ForEach(objVM.leitnerVM.leitners) { leitner in
+                        Button {
+                            withAnimation {
+                                self.objVM.searchVM.moveQuestionTo(question, leitner: leitner)
                             }
-
-                            Divider()
+                        } label: {
+                            Label("\(leitner.name ?? "")", systemImage: "folder")
                         }
-
-                        if aceessControls.contains(.edit) {
-                            Button {
-                                searchViewModel.editQuestion = question
-                            } label: {
-                                Label("Edit", systemImage: "pencil")
-                            }
-                        }
-
-                        if aceessControls.contains(.copy) {
-                            Button {
-                                UIPasteboard.general.string = [question.question, question.answer, question.detailDescription]
-                                    .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
-                                    .filter { !$0.isEmpty }
-                                    .joined(separator: "\n")
-                            } label: {
-                                Label("Copy", systemImage: "doc.on.doc")
-                            }
-                        }
-
-                        if aceessControls.contains(.reset) {
-                            Button {
-                                withAnimation {
-                                    searchViewModel.resetToFirstLevel(question)
-                                }
-                            } label: {
-                                Label("Reset to first level", systemImage: "goforward")
-                            }
-                        }
-
-                        if aceessControls.contains(.completed) {
-                            Button {
-                                withAnimation {
-                                    searchViewModel.complete(question)
-                                }
-                            } label: {
-                                Label("Mark as completed", systemImage: "tray.full")
-                            }
-
-                            Divider()
-                        }
-
-                        if aceessControls.contains(.move) {
-                            Menu("Move") {
-                                ForEach(leitnersVM.leitners) { leitner in
-                                    Button {
-                                        withAnimation {
-                                            self.searchViewModel.moveQuestionTo(question, leitner: leitner)
-                                        }
-                                    } label: {
-                                        Label("\(leitner.name ?? "")", systemImage: "folder")
-                                    }
-                                }
-                            }
-                        }
-
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: controlSize, height: controlSize)
-                            .padding(padding)
-                            .foregroundColor(.accentColor)
                     }
                 }
+
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: controlSize, height: controlSize)
+                    .padding(padding)
+                    .foregroundColor(.accentColor)
             }
         }
     }
@@ -236,7 +205,8 @@ struct NormalQuestionRow_Previews: PreviewProvider {
         let tagVM = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         let searchVM = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {
-            NormalQuestionRow(question: question, tagsViewModel: tagVM)
+            NormalQuestionRow(question: question)
+                .environmentObject(tagVM)
                 .environmentObject(searchVM)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }

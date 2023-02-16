@@ -165,20 +165,6 @@ class ReviewViewModel: ObservableObject {
         tags = (try? viewContext.fetch(req)) ?? []
     }
 
-    func addTagToQuestion(_ tag: Tag) {
-        guard let selectedQuestion = selectedQuestion else { return }
-        tag.addToQuestion(selectedQuestion)
-        PersistenceController.saveDB(viewContext: viewContext)
-    }
-
-    func removeTagForQuestion(_ tag: Tag) {
-        withAnimation {
-            guard let selectedQuestion = selectedQuestion else { return }
-            tag.removeFromQuestion(selectedQuestion)
-            PersistenceController.saveDB(viewContext: viewContext)
-        }
-    }
-
     var partOfspeech: String? {
         let text = String((selectedQuestion?.question ?? "").split(separator: "\n").first ?? "")
         let tagger = NLTagger(tagSchemes: [.lexicalClass])

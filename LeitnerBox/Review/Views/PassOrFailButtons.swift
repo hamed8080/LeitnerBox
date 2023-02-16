@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PassOrFailButtons: View {
-    @StateObject var viewModel: ReviewViewModel
+    @EnvironmentObject var viewModel: ReviewViewModel
     @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {

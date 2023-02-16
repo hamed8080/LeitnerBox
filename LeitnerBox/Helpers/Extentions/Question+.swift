@@ -65,7 +65,8 @@ extension Question {
         tag?.allObjects as? [Tag]
     }
 
-    var synonymsArray: [Synonym]? {
-        synonyms?.allObjects as? [Synonym]
+    var synonymsArray: [Question]? {
+        guard let synonym = (synonyms?.allObjects as? [Synonym])?.first else { return nil }
+        return synonym.question?.allObjects as? [Question]
     }
 }

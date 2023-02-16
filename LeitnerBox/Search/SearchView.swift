@@ -8,119 +8,110 @@ import CoreData
 import SwiftUI
 
 struct SearchView: View {
-    @EnvironmentObject var viewModel: SearchViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State var favoriteCount: Int = 0
 
     var body: some View {
-        ZStack {
-            List {
-                ForEach(viewModel.searchedQuestions.count > 0 ? viewModel.searchedQuestions : viewModel.questions) { item in
-                    SearchRowView(question: item, leitner: viewModel.leitner)
-                        .listRowInsets(EdgeInsets())
-                        .onAppear {
-                            if item == viewModel.questions.last {
-                                viewModel.fetchMoreQuestion()
-                            }
+        List {
+            ForEach(objVM.searchVM.searchedQuestions.count > 0 ? objVM.searchVM.searchedQuestions : objVM.searchVM.questions) { question in
+                NormalQuestionRow(question: question)
+                    .listRowInsets(EdgeInsets())
+                    .onAppear {
+                        if question == objVM.searchVM.questions.last {
+                            objVM.searchVM.fetchMoreQuestion()
                         }
-                }
-                .onDelete(perform: viewModel.deleteItems)
-            }
-            .if(.iOS) { view in
-                view.refreshable {
-                    context.rollback()
-                    viewModel.reload()
-                }
-            }
-            .navigationDestination(isPresented: Binding(get: { viewModel.editQuestion != nil }, set: { _ in })) {
-                if let editQuestion = viewModel.editQuestion {
-                    AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.leitner, question: editQuestion))
-                        .onDisappear {
-                            viewModel.editQuestion = nil
-                        }
-                }
-            }
-            .listStyle(.plain)
-            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-                if viewModel.searchText.isEmpty == false, viewModel.searchedQuestions.count < 1 {
-                    HStack {
-                        Image(systemName: "doc.text.magnifyingglass")
-                            .foregroundColor(.gray.opacity(0.8))
-                        Text("Nothind has found.")
-                            .foregroundColor(.gray.opacity(0.8))
                     }
+            }
+            .onDelete(perform: objVM.searchVM.deleteItems)
+        }
+        .if(.iOS) { view in
+            view.refreshable {
+                context.rollback()
+                objVM.searchVM.reload()
+            }
+        }
+        .animation(.easeInOut, value: objVM.searchVM.questions.count)
+        .animation(.easeInOut, value: objVM.searchVM.searchedQuestions.count)
+        .animation(.easeInOut, value: objVM.searchVM.reviewStatus)
+        .navigationTitle("Advance Search in \(objVM.searchVM.leitner.name ?? "")")
+        .listStyle(.plain)
+        .searchable(text: $objVM.searchVM.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
+            if objVM.searchVM.searchText.isEmpty == false, objVM.searchVM.searchedQuestions.count < 1 {
+                HStack {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .foregroundColor(.gray.opacity(0.8))
+                    Text("Nothind has found.")
+                        .foregroundColor(.gray.opacity(0.8))
                 }
             }
+        }
+        .overlay {
             PronunceWordsView()
         }
-        .animation(.easeInOut, value: viewModel.questions.count)
-        .animation(.easeInOut, value: viewModel.searchedQuestions.count)
-        .animation(.easeInOut, value: viewModel.reviewStatus)
-        .navigationTitle("Advance Search in \(viewModel.leitner.name ?? "")")
         .onAppear {
-            viewModel.viewDidAppear()
-            viewModel.resumeSpeaking()
-            favoriteCount = Leitner.fetchFavCount(context: context, leitnerId: viewModel.leitner.id)
+            objVM.searchVM.viewDidAppear()
+            objVM.searchVM.resumeSpeaking()
+            favoriteCount = Leitner.fetchFavCount(context: context, leitnerId: objVM.searchVM.leitner.id)
         }
         .onDisappear {
-            viewModel.pauseSpeaking()
+            objVM.searchVM.pauseSpeaking()
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
-                    LazyView(
-                        AddOrEditQuestionView(viewModel: .init(viewContext: context, leitner: viewModel.leitner))
-                    )
+                    AddOrEditQuestionView()
+                        .environmentObject(objVM)
                 }
 
                 Button {
                     withAnimation {
-                        viewModel.stopReview()
+                        objVM.searchVM.stopReview()
                     }
                 } label: {
                     IconButtonKeyboardShortcut(title: "Stop", systemImageName: "stop.circle")
                 }
                 .toobarNavgationButtonStyle()
-                .disabled(viewModel.reviewStatus != .isPlaying)
-                .opacity(viewModel.reviewStatus == .isPlaying ? 1 : 0.7)
+                .disabled(objVM.searchVM.reviewStatus != .isPlaying)
+                .opacity(objVM.searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
                 .keyboardShortcut("s", modifiers: [.command, .option])
 
                 Button {
                     withAnimation {
-                        viewModel.pauseReview()
+                        objVM.searchVM.pauseReview()
                     }
                 } label: {
                     IconButtonKeyboardShortcut(title: "Pause", systemImageName: "pause.circle")
                 }
                 .toobarNavgationButtonStyle()
-                .disabled(viewModel.reviewStatus != .isPlaying)
-                .opacity(viewModel.reviewStatus == .isPlaying ? 1 : 0.7)
+                .disabled(objVM.searchVM.reviewStatus != .isPlaying)
+                .opacity(objVM.searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
                 .keyboardShortcut("p", modifiers: [.command, .option])
 
                 Button {
                     withAnimation {
-                        viewModel.playReview()
+                        objVM.searchVM.playReview()
                     }
                 } label: {
                     IconButtonKeyboardShortcut(title: "Play", systemImageName: "play.square")
                 }
                 .toobarNavgationButtonStyle()
-                .disabled(viewModel.reviewStatus == .isPlaying)
-                .opacity(viewModel.reviewStatus == .isPlaying ? 0.7 : 1)
+                .disabled(objVM.searchVM.reviewStatus == .isPlaying)
+                .opacity(objVM.searchVM.reviewStatus == .isPlaying ? 0.7 : 1)
                 .keyboardShortcut("p", modifiers: [.command, .option])
 
                 Button {
                     withAnimation {
-                        viewModel.playNextImmediately()
+                        objVM.searchVM.playNextImmediately()
                     }
                 } label: {
                     IconButtonKeyboardShortcut(title: "Next", systemImageName: "forward.end")
                         .foregroundStyle(Color.accentColor)
                 }
                 .toobarNavgationButtonStyle()
-                .disabled(viewModel.reviewStatus != .isPlaying)
-                .opacity(viewModel.reviewStatus == .isPlaying ? 1 : 0.7)
+                .disabled(objVM.searchVM.reviewStatus != .isPlaying)
+                .opacity(objVM.searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
                 .keyboardShortcut("n", modifiers: [.command, .option])
 
                 Menu {
@@ -129,19 +120,19 @@ struct SearchView: View {
                     ForEach(searchSorts, id: \.self) { sortItem in
                         Button {
                             withAnimation {
-                                viewModel.sort(sortItem.sortType)
+                                objVM.searchVM.sort(sortItem.sortType)
                             }
                         } label: {
                             let countText = sortItem.sortType == .favorite ? " (\(favoriteCount))" : ""
-                            Label("\(viewModel.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
+                            Label("\(objVM.searchVM.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                         }
                     }
 
                     Menu {
-                        ForEach(viewModel.sortedTags, id: \.self) { tag in
+                        ForEach(objVM.searchVM.sortedTags, id: \.self) { tag in
                             Button {
                                 withAnimation {
-                                    viewModel.sort(.date, tag)
+                                    objVM.searchVM.sort(.date, tag)
                                 }
                             } label: {
                                 Text(tag.name ?? "")
@@ -161,12 +152,12 @@ struct SearchView: View {
 }
 
 struct PronunceWordsView: View {
-    @EnvironmentObject var viewModel: SearchViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
 
     var body: some View {
-        if viewModel.reviewStatus == .isPlaying || viewModel.reviewStatus == .isPaused {
-            let question = viewModel.lastPlayedQuestion
+        if objVM.searchVM.reviewStatus == .isPlaying || objVM.searchVM.reviewStatus == .isPaused {
+            let question = objVM.searchVM.lastPlayedQuestion
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -197,20 +188,16 @@ struct PronunceWordsView: View {
                                     .font(.body.weight(.medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
+                            Text(verbatim: "\(objVM.searchVM.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: objVM.searchVM.leitner.id))")
                                 .font(.footnote.bold())
                             if let question {
-                                QuestionTagsView(
-                                    viewModel: .init(viewContext: context, leitner: viewModel.leitner),
-                                    accessControls: [.showTags]
-                                )
-                                .environmentObject(question)
-                                .frame(maxHeight: 64)
-                                if question.synonyms?.count ?? 0 > 0 {
-                                    QuestionSynonymsView(accessControls: [.showSynonyms])
-                                        .environmentObject(SynonymViewModel(viewContext: context, leitner: viewModel.leitner, baseQuestion: question))
-                                        .frame(maxHeight: 64)
-                                }
+                                QuestionTagList(tags: question.tagsArray ?? [])
+                                    .environmentObject(question)
+                                    .frame(maxHeight: 64)
+//                                if let synonyms = question.synonyms?.allObjects as? [Synonym], synonyms.count > 0 {
+//                                    QuestionSynonymList(synonyms: synonyms, onClick: { _ in }, onLongClick: { _ in })
+//                                        .frame(maxHeight: 64)
+//                                }
                             }
                         }
                     }
@@ -221,7 +208,7 @@ struct PronunceWordsView: View {
                 .background(.thinMaterial)
                 .cornerRadius(24, corners: [.topLeft, .topRight])
             }
-            .animation(.easeInOut, value: viewModel.lastPlayedQuestion)
+            .animation(.easeInOut, value: objVM.searchVM.lastPlayedQuestion)
             .transition(.move(edge: .bottom))
             .ignoresSafeArea(.all, edges: .bottom)
         }

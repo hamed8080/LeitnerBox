@@ -50,22 +50,30 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.leitner = leitner
         super.init()
         self.synthesizer.delegate = self
+        setupObservers()
+        fetchMoreQuestion()
+    }
+
+    fileprivate func setupObservers() {
         $searchText.sink { [weak self] newValue in
             self?.searchQuestion(searchText: newValue)
-        }
-        .store(in: &cancellableSet)
-        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextWillSave).sink { [weak self] newValue in
+        }.store(in: &cancellableSet)
+
+        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextWillSave).sink { newValue in
             let context = newValue.object as? NSManagedObjectContext
             context?.insertedObjects.forEach { object in
                 if let question = object as? Question {
-                    withAnimation {
-                        self?.questions.insert(question, at: 0)
-                        self?.objectWillChange.send()
+                    Task {
+                        await MainActor.run {
+                            withAnimation {
+                                self.questions.insert(question, at: 0)
+                                self.objectWillChange.send()
+                            }
+                        }
                     }
                 }
             }
         }.store(in: &cancellableSet)
-        fetchMoreQuestion()
     }
 
     func fetchMoreQuestion() {
@@ -135,16 +143,6 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         questions.removeAll(where: { $0 == question })
         PersistenceController.saveDB(viewContext: viewContext)
         objectWillChange.send() // notify to redrawn filtred items and delete selected question
-    }
-
-    func addSynonym(question: Question, synonymQuestion: Question) {
-        if let firstSynonym = question.synonymsArray?.first {
-            firstSynonym.addToQuestion(synonymQuestion)
-        } else {
-            let synonym = Synonym(context: viewContext)
-            synonym.addToQuestion(question)
-        }
-        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func toggleCompleted(_ question: Question) {

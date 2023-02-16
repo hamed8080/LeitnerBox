@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LevelRow: View {
     var levelRowData: LevelRowData
-    @EnvironmentObject var searchVM: SearchViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @State var showDaysAfterDialog: Bool = false
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
@@ -19,10 +19,8 @@ struct LevelRow: View {
 
     var body: some View {
         NavigationLink {
-            LazyView(
-                ReviewView(viewModel: ReviewViewModel(viewContext: context, levelValue: levelRowData.level.level, leitnerId: Int64(levelRowData.leitnerId), voiceSpeech: voiceSpeech))
-                    .environmentObject(searchVM)
-            )
+            ReviewView(viewModel: ReviewViewModel(viewContext: context, levelValue: levelRowData.level.level, leitnerId: Int64(levelRowData.leitnerId), voiceSpeech: voiceSpeech))
+                .environmentObject(objVM)
         } label: {
             HStack {
                 HStack {
@@ -61,9 +59,9 @@ struct LevelRow: View {
                         total: Float(levelRowData.totalCountInsideLevel)
                     )
                     .progressViewStyle(.linear)
-                    .animation(.easeInOut, value: reviewableCount)
+                    .animation(.easeOut(duration: 0.3), value: reviewableCount)
                     .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
                             reviewableCount = levelRowData.reviewableCount
                         }
                     }

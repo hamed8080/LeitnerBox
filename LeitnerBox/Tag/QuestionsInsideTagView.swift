@@ -10,14 +10,14 @@ import SwiftUI
 struct QuestionsInsideTagView: View {
     var tag: Tag
     @FetchRequest var fetchRequest: FetchedResults<Question>
-    @StateObject var tagViewModel: TagViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
 
     var body: some View {
         ZStack {
             List {
                 ForEach(fetchRequest) { question in
-                    NormalQuestionRow(question: question, tagsViewModel: tagViewModel, aceessControls: AccessControls.normal + [.trailingControls, .microphone])
+                    NormalQuestionRow(question: question)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                 }
@@ -37,8 +37,7 @@ struct QuestionsInsideTagView_Previews: PreviewProvider {
         static let tag = Preview.leitner.tagsArray.first ?? Tag()
         var body: some View {
             QuestionsInsideTagView(tag: Preview.tag,
-                                   fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", Preview.tag.name ?? ""), animation: .easeInOut),
-                                   tagViewModel: viewModel)
+                                   fetchRequest: FetchRequest(sortDescriptors: [.init(\.question)], predicate: NSPredicate(format: "ANY tag.name == %@", Preview.tag.name ?? ""), animation: .easeInOut))
                 .preferredColorScheme(.light)
         }
     }

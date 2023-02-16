@@ -109,9 +109,7 @@ class LeitnerViewModel: ObservableObject {
     }
 
     func exportDB() async {
-        await MainActor.run {
-            isBackuping = true
-        }
+        await showLoading(show: true)
         let backupStoreOptions: [AnyHashable: Any] = [
             NSReadOnlyPersistentStoreOption: true,
             // Disable write-ahead logging. Benefit: the entire store will be
@@ -136,13 +134,20 @@ class LeitnerViewModel: ObservableObject {
             let exportFile = makeFilename(sourcePersistentStore)
             let backupFile = try TemporaryFile(creatingTempDirectoryForFilename: exportFile)
             try backupPersistentContainer.migratePersistentStore(newPersistentStore, to: backupFile.fileURL, options: backupStoreOptions, withType: NSSQLiteStoreType)
+            await showLoading(show: false)
             await MainActor.run {
-                isBackuping = false
                 self.backupFile = backupFile
             }
             print("file exported to\(backupFile.fileURL)")
         } catch {
+            await showLoading(show: false)
             print("failed to export: Error \(error.localizedDescription)")
+        }
+    }
+
+    func showLoading(show: Bool) async {
+        await MainActor.run {
+            isBackuping = show
         }
     }
 

@@ -42,26 +42,14 @@ struct StatisticsView: View {
                 .chartLegend(.visible)
                 .frame(height: 300)
                 .padding()
-
-                PercentageView(
-                    percent: $viewModel.percentage,
-                    bottomText: Text("Total Percent")
-                        .font(.title3.bold())
-                        .foregroundColor(.gray)
-                )
-                .frame(width: 320, height: 320)
-                .onAppear {
-                    withAnimation {
-                        if let leitner = viewModel.statistics.first?.question?.level?.leitner {
-                            viewModel.percentage = leitner.succcessPercentage
-                        }
-                    }
-                }
             }
         }
         .navigationTitle("Statistics")
         .onAppear {
             viewModel.load()
+        }
+        .onDisappear {
+            viewModel.reset()
         }
     }
 }

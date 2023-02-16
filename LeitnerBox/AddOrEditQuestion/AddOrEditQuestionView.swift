@@ -8,11 +8,12 @@ import CoreData
 import SwiftUI
 
 struct AddOrEditQuestionView: View {
-    @StateObject var viewModel: QuestionViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.dismiss) var dissmiss
-    @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @State var showTagPicker: Bool = false
+    @State var showSynonymPicker: Bool = false
 
     var body: some View {
         HStack(spacing: 0) {
@@ -23,43 +24,43 @@ struct AddOrEditQuestionView: View {
                         TextEditorView(
                             placeholder: "Enter your question here...",
                             shortPlaceholder: "Question",
-                            string: $viewModel.questionString,
+                            string: $objVM.questionVM.questionString,
                             textEditorHeight: 48
                         )
-                        if viewModel.batchInserPhrasesMode {
+                        if objVM.questionVM.batchInserPhrasesMode {
                             Text("When you are in the batch mode the question filed automatically split all th questions by (NewLine/Enter).")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                         }
                     }
 
-                    if !viewModel.batchInserPhrasesMode {
-                        CheckBoxView(isActive: $viewModel.isManual, text: "Manual Answer")
-                        if viewModel.isManual {
+                    if !objVM.questionVM.batchInserPhrasesMode {
+                        CheckBoxView(isActive: $objVM.questionVM.isManual, text: "Manual Answer")
+                        if objVM.questionVM.isManual {
                             TextEditorView(
                                 placeholder: "Enter your Answer here...",
                                 shortPlaceholder: "Answer",
-                                string: $viewModel.answer,
+                                string: $objVM.questionVM.answer,
                                 textEditorHeight: 48
                             )
                             TextEditorView(
                                 placeholder: "Enter your description here...",
                                 shortPlaceholder: "Description",
-                                string: $viewModel.detailDescription,
+                                string: $objVM.questionVM.detailDescription,
                                 textEditorHeight: 48
                             )
                         }
                     }
-                    CheckBoxView(isActive: $viewModel.completed, text: "Complete Answer")
+                    CheckBoxView(isActive: $objVM.questionVM.completed, text: "Complete Answer")
 
                     HStack {
                         Button {
                             withAnimation {
-                                viewModel.favorite.toggle()
+                                objVM.questionVM.favorite.toggle()
                             }
                         } label: {
                             HStack {
-                                Image(systemName: viewModel.favorite == true ? "star.fill" : "star")
+                                Image(systemName: objVM.questionVM.favorite == true ? "star.fill" : "star")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 32, height: 32)
@@ -72,16 +73,35 @@ struct AddOrEditQuestionView: View {
                         Spacer()
                     }
 
-                    VStack {
-                        QuestionTagsView(viewModel: .init(viewContext: context, leitner: viewModel.level.leitner!), accessControls: [.showTags, .addTag, .removeTag])
-                            .environmentObject(viewModel.question)
-                        QuestionSynonymsView(accessControls: [.showSynonyms, .addSynonym, .removeSynonym])
-                            .environmentObject(SynonymViewModel(viewContext: context, leitner: viewModel.level.leitner!, baseQuestion: viewModel.question))
+                    VStack(alignment: .leading) {
+                        Button {
+                            showTagPicker.toggle()
+                        } label: {
+                            Label("Tags", systemImage: "plus.circle")
+                        }
+                        .keyboardShortcut("t", modifiers: [.command])
+                        .buttonStyle(.borderless)
+                        QuestionTagList(tags: objVM.questionVM.question?.tagsArray ?? []) { tag in
+                            objVM.questionVM.removeTagForQuestion(tag)
+                        }
+
+                        Button {
+                            showSynonymPicker.toggle()
+                        } label: {
+                            Label("Synonyms", systemImage: "plus.circle")
+                        }
+                        .buttonStyle(.borderless)
+
+                        QuestionSynonymList(synonyms: objVM.questionVM.synonyms) { _ in
+
+                        } onLongClick: { synonymQuestion in
+                            objVM.questionVM.removeSynonym(synonymQuestion)
+                        }
                     }
 
                     Button {
-                        viewModel.save()
-                        viewModel.clear()
+                        objVM.questionVM.save()
+                        objVM.questionVM.reset()
                         dissmiss()
                     } label: {
                         HStack {
@@ -101,11 +121,11 @@ struct AddOrEditQuestionView: View {
             Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(viewModel.title)
-        .animation(.easeInOut, value: viewModel.isManual)
+        .navigationTitle(objVM.questionVM.title)
+        .animation(.easeInOut, value: objVM.questionVM.isManual)
         .toolbar {
             ToolbarItem {
-                Button(action: viewModel.clear) {
+                Button(action: objVM.questionVM.reset) {
                     Label("Clear", systemImage: "trash.square")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
@@ -116,10 +136,10 @@ struct AddOrEditQuestionView: View {
             ToolbarItem {
                 Button {
                     withAnimation {
-                        viewModel.batchInserPhrasesMode.toggle()
+                        objVM.questionVM.batchInserPhrasesMode.toggle()
                     }
                 } label: {
-                    Label("Pharses", systemImage: viewModel.batchInserPhrasesMode ? "plus.app" : "rectangle.stack.badge.plus")
+                    Label("Pharses", systemImage: objVM.questionVM.batchInserPhrasesMode ? "plus.app" : "rectangle.stack.badge.plus")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
@@ -136,10 +156,20 @@ struct AddOrEditQuestionView: View {
             }
         }
         .contentShape(Rectangle())
+        .sheet(isPresented: $showSynonymPicker) {
+            QuestionSynonymPickerView { question in
+                objVM.questionVM.addSynonym(question)
+            }
+            .environmentObject(objVM)
+        }
+        .sheet(isPresented: $showTagPicker) {
+            TagsListPickerView { tag in
+                objVM.questionVM.addTagToQuestion(tag)
+            }
+            .environmentObject(objVM)
+        }
         .onDisappear {
-            // For when user enter `AddQuestionView` and click `back` button, delete the `Quesiton(context: context)` from context to prevent `save` incorrectly if somewhere in the application save on the  `Context` get called.
-            // It's essential to set tag to nil on question, because tag will be deleted completely.
-            viewModel.question.tag = nil
+            objVM.questionVM.reset()
             context.rollback()
         }
     }
@@ -156,7 +186,8 @@ struct AddQuestionView_Previews: PreviewProvider {
         )
 
         var body: some View {
-            AddOrEditQuestionView(viewModel: viewModel)
+            AddOrEditQuestionView()
+                .environmentObject(viewModel)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }

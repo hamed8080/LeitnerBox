@@ -11,7 +11,6 @@ import SwiftUI
 class StatisticsViewModel: ObservableObject {
     var viewContext: NSManagedObjectContext
     @Published var statistics: [Statistic] = []
-    @State var percentage: Double = 0
     @Published var timeframe: Timeframe = .week
 
     init(viewContext: NSManagedObjectContext) {
@@ -106,6 +105,10 @@ class StatisticsViewModel: ObservableObject {
         case .year:
             return yearPlotable()
         }
+    }
+
+    func reset() {
+        statistics = []
     }
 }
 
