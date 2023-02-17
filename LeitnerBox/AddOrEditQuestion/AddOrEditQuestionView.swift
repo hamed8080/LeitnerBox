@@ -81,7 +81,7 @@ struct AddOrEditQuestionView: View {
                         }
                         .keyboardShortcut("t", modifiers: [.command])
                         .buttonStyle(.borderless)
-                        QuestionTagList(tags: objVM.questionVM.question?.tagsArray ?? []) { tag in
+                        QuestionTagList(tags: objVM.questionVM.tags) { tag in
                             objVM.questionVM.removeTagForQuestion(tag)
                         }
 
@@ -120,6 +120,10 @@ struct AddOrEditQuestionView: View {
             }
             Spacer()
         }
+        .animation(.easeInOut, value: objVM.questionVM.tags.count)
+        .animation(.easeInOut, value: objVM.questionVM.synonyms.count)
+        .animation(.easeInOut, value: objVM.questionVM.completed)
+        .animation(.easeInOut, value: objVM.questionVM.favorite)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(objVM.questionVM.title)
         .animation(.easeInOut, value: objVM.questionVM.isManual)

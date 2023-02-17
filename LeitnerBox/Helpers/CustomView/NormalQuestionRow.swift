@@ -94,7 +94,7 @@ struct QuestionRowControls: View {
     @StateObject var question: Question
     @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.horizontalSizeClass) var sizeClass
-    let controlSize: CGFloat = 18
+    let controlSize: CGFloat = 24
     var padding: CGFloat { sizeClass == .compact ? 4 : 8 }
     @EnvironmentObject var questionVM: QuestionViewModel
 

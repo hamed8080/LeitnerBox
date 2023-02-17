@@ -18,7 +18,7 @@ final class LevelViewModelTests: XCTestCase {
 
     func test_filter() {
         viewModel.searchWord = ""
-        XCTAssertTrue(viewModel.filtered.count == 0, "filter count is not equal all question!")
+        XCTAssertTrue(viewModel.levels.count == 0, "filter count is not equal all question!")
 
         viewModel.searchWord = "#"
         XCTAssertTrue(viewModel.filtered.count == 0, "empty tag is not equal all question!")

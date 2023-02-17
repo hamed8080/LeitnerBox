@@ -52,6 +52,7 @@ class QuestionViewModel: ObservableObject {
         question.detailDescription = detailDescription
         question.completed = completed
         setSynonyms(question: question)
+        setTags(question: question)
 
         if question.favorite == false, favorite {
             question.favoriteDate = Date()
@@ -68,6 +69,7 @@ class QuestionViewModel: ObservableObject {
             question.level = level
             question.completed = completed
             setSynonyms(question: question)
+            setTags(question: question)
 
             if question.completed {
                 if let lastLevel = level?.leitner?.levels.first(where: { $0.level == 13 }) {
@@ -123,6 +125,7 @@ class QuestionViewModel: ObservableObject {
         questionString = ""
         completed = false
         isManual = true
+        favorite = false
         detailDescription = ""
     }
 
@@ -134,6 +137,7 @@ class QuestionViewModel: ObservableObject {
         detailDescription = editQuestion.detailDescription ?? ""
         favorite = editQuestion.favorite
         synonyms = editQuestion.synonymsArray ?? []
+        tags = editQuestion.tagsArray ?? []
     }
 
     func addTagToQuestion(_ tag: Tag) {
@@ -170,6 +174,12 @@ class QuestionViewModel: ObservableObject {
             synonyms.forEach { question in
                 synonym.addToQuestion(question)
             }
+        }
+    }
+
+    func setTags(question: Question) {
+        tags.forEach { tag in
+            question.addToTag(tag)
         }
     }
 }
