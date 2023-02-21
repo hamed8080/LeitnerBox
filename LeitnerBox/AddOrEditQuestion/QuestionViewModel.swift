@@ -141,19 +141,27 @@ class QuestionViewModel: ObservableObject {
     }
 
     func addTagToQuestion(_ tag: Tag) {
+        if tags.contains(tag) { return }
         tags.append(tag)
     }
 
     func removeTagForQuestion(_ tag: Tag) {
         tags.removeAll(where: { $0.name == tag.name })
+        question?.removeFromTag(tag) // remove editng mode tag
     }
 
     func addSynonym(_ question: Question) {
+        if synonyms.contains(question) { return }
         synonyms.append(question)
     }
 
     func removeSynonym(_ question: Question) {
+        // Remove from local array if we are insert mode and we have never saved the object.
         synonyms.removeAll(where: { $0 == question })
+        // Remove when we are edit mode
+        if let synonym = question.synonyms?.allObjects.first as? Synonym {
+            question.removeFromSynonyms(synonym)
+        }
     }
 
     func splitPhrases() -> [String] {
@@ -166,7 +174,6 @@ class QuestionViewModel: ObservableObject {
                 self.synonyms.forEach { question in
                     synonym.addToQuestion(question)
                 }
-                synonym.addToQuestion(question)
             }
         } else {
             let synonym = Synonym(context: viewContext)

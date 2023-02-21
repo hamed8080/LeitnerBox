@@ -64,16 +64,20 @@ class SynonymViewModel: ObservableObject {
         }
     }
 
-    func removeSynonymFromQuestion(question _: Question, synonymQuestion _: Question) {}
+    func removeQuestionFromSynonym(_ question: Question) {
+        if let synonym = question.synonyms?.allObjects.first as? Synonym {
+            question.removeFromSynonyms(synonym)
+        }
+        try? PersistenceController.shared.viewContext.save()
+    }
 
     var allSynonymsInLeitner: [Synonym] {
         let req = Synonym.fetchRequest()
         return (try? viewContext.fetch(req)) ?? []
     }
 
+    /// We want the user keep all ``searchText`` and list of ``searchedQuestions``
     func reset() {
-        searchedQuestions = []
-        searchText = ""
         baseQuestion = nil
     }
 }

@@ -23,14 +23,13 @@ struct QuestionSynonymList: View {
                         .padding([.trailing, .leading], 8)
                         .background(.blue.opacity(0.3))
                         .cornerRadius(6)
-                        .transition(.asymmetric(insertion: .slide, removal: .scale))
+                        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
                         .onTapGesture {
                             onClick(question)
                         } // do not remove this line, it'll stop scrolling
                         .onLongPressGesture {
                             onLongClick(question)
                         }
-                        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
                 }
                 .padding([.bottom])
             }

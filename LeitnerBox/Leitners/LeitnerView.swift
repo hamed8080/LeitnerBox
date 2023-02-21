@@ -5,82 +5,31 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import AVFoundation
-import Combine
 import CoreData
 import SwiftUI
-
-class ObjectsContainer: ObservableObject {
-    var leitner: Leitner
-    @Published var leitnerVM: LeitnerViewModel
-    @Published var searchVM: SearchViewModel
-    @Published var levelsVM: LevelsViewModel
-    @Published var tagVM: TagViewModel
-    @Published var synonymVM: SynonymViewModel
-    @Published var questionVM: QuestionViewModel
-    private(set) var cancellableSet: Set<AnyCancellable> = []
-
-    init(context: NSManagedObjectContext, leitner: Leitner, leitnerVM: LeitnerViewModel) {
-        self.leitner = leitner
-        self.leitnerVM = leitnerVM
-        searchVM = SearchViewModel(viewContext: context, leitner: leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
-        levelsVM = LevelsViewModel(viewContext: context, leitner: leitner)
-        tagVM = TagViewModel(viewContext: context, leitner: leitner)
-        synonymVM = SynonymViewModel(viewContext: context, leitner: leitner)
-        questionVM = QuestionViewModel(viewContext: context, leitner: leitner)
-
-        searchVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-        self.leitnerVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-
-        levelsVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-
-        tagVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-
-        synonymVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-
-        questionVM.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        .store(in: &cancellableSet)
-    }
-}
 
 struct LeitnerView: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    @State var selectedLeitnrId: Leitner.ID?
+    @State var selectedLeitner: Leitner?
 
     var body: some View {
         NavigationSplitView {
             if viewModel.leitners.count == 0 {
                 EmptyLeitnerAnimation()
             } else {
-                SidebarListView(selectedLeitnrId: $selectedLeitnrId)
+                SidebarListView(selectedLeitner: $selectedLeitner)
             }
         } detail: {
             NavigationStack {
-                if let leitner = viewModel.leitners.first(where: { $0.id == selectedLeitnrId }) {
+                if let leitner = selectedLeitner {
                     LevelsView()
                         .id(leitner.id)
                         .environmentObject(ObjectsContainer(context: context, leitner: leitner, leitnerVM: viewModel))
                 }
             }
         }
-        .animation(.easeInOut, value: selectedLeitnrId)
+        .animation(.easeInOut, value: selectedLeitner)
         .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: viewModel.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
         .sheet(isPresented: Binding(get: { viewModel.backupFile != nil }, set: { _ in })) {
             if .iOS == true {
@@ -99,8 +48,8 @@ struct LeitnerView: View {
             editOrAddLeitnerView
         }
         .onAppear {
-            if selectedLeitnrId == nil {
-                selectedLeitnrId = viewModel.leitners.first?.id
+            if selectedLeitner == nil {
+                selectedLeitner = viewModel.leitners.first
             }
         }
     }
@@ -160,20 +109,22 @@ struct LeitnerView: View {
 
 struct SidebarListView: View {
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
-    @Binding var selectedLeitnrId: Leitner.ID?
+    @Binding var selectedLeitner: Leitner?
     @EnvironmentObject var viewModel: LeitnerViewModel
 
     var body: some View {
-        List(viewModel.leitners, selection: $selectedLeitnrId.animation()) { leitner in
-            LeitnerRowView(leitner: leitner)
-                .id(leitner.id)
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button(role: .destructive) {
-                        viewModel.delete(leitner)
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
+        List(viewModel.leitners, selection: $selectedLeitner) { leitner in
+            NavigationLink(value: leitner) {
+                LeitnerRowView(leitner: leitner)
+            }
+            .id(leitner.id)
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button(role: .destructive) {
+                    viewModel.delete(leitner)
+                } label: {
+                    Label("Delete", systemImage: "trash")
                 }
+            }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {

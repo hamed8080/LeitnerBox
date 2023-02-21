@@ -7,10 +7,11 @@
 import SwiftUI
 
 struct SynonymsView: View {
-    @EnvironmentObject var viewModel: SynonymViewModel
+    @EnvironmentObject var objVM: ObjectsContainer
+    private var synonymVM: SynonymViewModel { objVM.synonymVM }
 
     var body: some View {
-        List(viewModel.allSynonymsInLeitner) { synonym in
+        List(synonymVM.allSynonymsInLeitner) { synonym in
             VStack(alignment: .leading) {
                 let allQuestions = synonym.allQuestions
                 let firstQuestion = allQuestions.first

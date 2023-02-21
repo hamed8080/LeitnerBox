@@ -45,7 +45,6 @@ struct TagsListPickerView: View {
 struct AddTagsView_Previews: PreviewProvider {
     static var previews: some View {
         let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
-        let question = Question(context: PersistenceController.shared.viewContext)
         TagsListPickerView { _ in }
             .environmentObject(TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner))
             .preferredColorScheme(.dark)

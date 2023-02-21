@@ -14,6 +14,8 @@ struct AddOrEditQuestionView: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State var showTagPicker: Bool = false
     @State var showSynonymPicker: Bool = false
+    private var questionVMBinding: Binding<QuestionViewModel> { $objVM.questionVM }
+    private var questionVM: QuestionViewModel { objVM.questionVM }
 
     var body: some View {
         HStack(spacing: 0) {
@@ -24,43 +26,43 @@ struct AddOrEditQuestionView: View {
                         TextEditorView(
                             placeholder: "Enter your question here...",
                             shortPlaceholder: "Question",
-                            string: $objVM.questionVM.questionString,
+                            string: questionVMBinding.questionString,
                             textEditorHeight: 48
                         )
-                        if objVM.questionVM.batchInserPhrasesMode {
+                        if questionVM.batchInserPhrasesMode {
                             Text("When you are in the batch mode the question filed automatically split all th questions by (NewLine/Enter).")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                         }
                     }
 
-                    if !objVM.questionVM.batchInserPhrasesMode {
-                        CheckBoxView(isActive: $objVM.questionVM.isManual, text: "Manual Answer")
-                        if objVM.questionVM.isManual {
+                    if !questionVM.batchInserPhrasesMode {
+                        CheckBoxView(isActive: questionVMBinding.isManual, text: "Manual Answer")
+                        if questionVM.isManual {
                             TextEditorView(
                                 placeholder: "Enter your Answer here...",
                                 shortPlaceholder: "Answer",
-                                string: $objVM.questionVM.answer,
+                                string: questionVMBinding.answer,
                                 textEditorHeight: 48
                             )
                             TextEditorView(
                                 placeholder: "Enter your description here...",
                                 shortPlaceholder: "Description",
-                                string: $objVM.questionVM.detailDescription,
+                                string: questionVMBinding.detailDescription,
                                 textEditorHeight: 48
                             )
                         }
                     }
-                    CheckBoxView(isActive: $objVM.questionVM.completed, text: "Complete Answer")
+                    CheckBoxView(isActive: questionVMBinding.completed, text: "Complete Answer")
 
                     HStack {
                         Button {
                             withAnimation {
-                                objVM.questionVM.favorite.toggle()
+                                questionVM.favorite.toggle()
                             }
                         } label: {
                             HStack {
-                                Image(systemName: objVM.questionVM.favorite == true ? "star.fill" : "star")
+                                Image(systemName: questionVM.favorite == true ? "star.fill" : "star")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 32, height: 32)
@@ -81,8 +83,8 @@ struct AddOrEditQuestionView: View {
                         }
                         .keyboardShortcut("t", modifiers: [.command])
                         .buttonStyle(.borderless)
-                        QuestionTagList(tags: objVM.questionVM.tags) { tag in
-                            objVM.questionVM.removeTagForQuestion(tag)
+                        QuestionTagList(tags: questionVM.tags) { tag in
+                            questionVM.removeTagForQuestion(tag)
                         }
 
                         Button {
@@ -92,16 +94,18 @@ struct AddOrEditQuestionView: View {
                         }
                         .buttonStyle(.borderless)
 
-                        QuestionSynonymList(synonyms: objVM.questionVM.synonyms) { _ in
+                        QuestionSynonymList(synonyms: questionVM.synonyms) { _ in
 
                         } onLongClick: { synonymQuestion in
-                            objVM.questionVM.removeSynonym(synonymQuestion)
+                            withAnimation {
+                                questionVM.removeSynonym(synonymQuestion)
+                            }
                         }
                     }
 
                     Button {
-                        objVM.questionVM.save()
-                        objVM.questionVM.reset()
+                        questionVM.save()
+                        questionVM.reset()
                         dissmiss()
                     } label: {
                         HStack {
@@ -120,16 +124,17 @@ struct AddOrEditQuestionView: View {
             }
             Spacer()
         }
-        .animation(.easeInOut, value: objVM.questionVM.tags.count)
-        .animation(.easeInOut, value: objVM.questionVM.synonyms.count)
-        .animation(.easeInOut, value: objVM.questionVM.completed)
-        .animation(.easeInOut, value: objVM.questionVM.favorite)
+        .animation(.easeInOut, value: questionVM.tags.count)
+        .animation(.easeInOut, value: questionVM.question?.tagsArray?.count)
+        .animation(.easeInOut, value: questionVM.synonyms.count)
+        .animation(.easeInOut, value: questionVM.completed)
+        .animation(.easeInOut, value: questionVM.favorite)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(objVM.questionVM.title)
-        .animation(.easeInOut, value: objVM.questionVM.isManual)
+        .navigationTitle(questionVM.title)
+        .animation(.easeInOut, value: questionVM.isManual)
         .toolbar {
             ToolbarItem {
-                Button(action: objVM.questionVM.reset) {
+                Button(action: questionVM.reset) {
                     Label("Clear", systemImage: "trash.square")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
@@ -140,10 +145,10 @@ struct AddOrEditQuestionView: View {
             ToolbarItem {
                 Button {
                     withAnimation {
-                        objVM.questionVM.batchInserPhrasesMode.toggle()
+                        questionVM.batchInserPhrasesMode.toggle()
                     }
                 } label: {
-                    Label("Pharses", systemImage: objVM.questionVM.batchInserPhrasesMode ? "plus.app" : "rectangle.stack.badge.plus")
+                    Label("Pharses", systemImage: questionVM.batchInserPhrasesMode ? "plus.app" : "rectangle.stack.badge.plus")
                         .font(.title3)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
@@ -162,18 +167,18 @@ struct AddOrEditQuestionView: View {
         .contentShape(Rectangle())
         .sheet(isPresented: $showSynonymPicker) {
             QuestionSynonymPickerView { question in
-                objVM.questionVM.addSynonym(question)
+                questionVM.addSynonym(question)
             }
             .environmentObject(objVM)
         }
         .sheet(isPresented: $showTagPicker) {
             TagsListPickerView { tag in
-                objVM.questionVM.addTagToQuestion(tag)
+                questionVM.addTagToQuestion(tag)
             }
             .environmentObject(objVM)
         }
         .onDisappear {
-            objVM.questionVM.reset()
+            questionVM.reset()
             context.rollback()
         }
     }

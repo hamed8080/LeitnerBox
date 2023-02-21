@@ -16,6 +16,9 @@ struct ReviewView: View {
     @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
     @State var showTagPicker: Bool = false
     @State var showSynonymPicker: Bool = false
+    private var question: Question? { viewModel.selectedQuestion }
+    private var tags: [Tag] { question?.tagsArray ?? [] }
+    private var synonyms: [Question] { question?.synonymsArray ?? [] }
 
     var body: some View {
         if viewModel.isFinished {
@@ -29,7 +32,7 @@ struct ReviewView: View {
                                 .environmentObject(viewModel)
                             ReviewQuestion()
                                 .environmentObject(viewModel)
-                            if let question = viewModel.selectedQuestion {
+                            if let question = question {
                                 VStack(alignment: .leading, spacing: 12) {
                                     Button {
                                         showTagPicker.toggle()
@@ -39,8 +42,8 @@ struct ReviewView: View {
                                     .keyboardShortcut("t", modifiers: [.command])
                                     .buttonStyle(.borderless)
 
-                                    QuestionTagList(tags: question.tagsArray ?? []) { tag in
-                                        objVM.tagVM.removeTagForQuestion(tag, question: viewModel.selectedQuestion)
+                                    QuestionTagList(tags: tags) { tag in
+                                        objVM.tagVM.removeTagForQuestion(tag, question: question)
                                     }
 
                                     Button {
@@ -50,10 +53,10 @@ struct ReviewView: View {
                                     }
                                     .buttonStyle(.borderless)
 
-                                    QuestionSynonymList(synonyms: viewModel.selectedQuestion?.synonymsArray ?? []) { _ in
+                                    QuestionSynonymList(synonyms: synonyms) { _ in
                                         // Navigate to add or edit question
-                                    } onLongClick: { _ in
-//                                        synonymVM.removeSynonymFromQuestion(question: question, synonymQuestion: synonymQuestion)
+                                    } onLongClick: { synonymQuestion in
+                                        objVM.synonymVM.removeQuestionFromSynonym(synonymQuestion)
                                     }
                                 }
                             }
@@ -73,6 +76,8 @@ struct ReviewView: View {
                         .environmentObject(viewModel)
                 }
             }
+            .animation(.easeInOut, value: tags.count)
+            .animation(.easeInOut, value: synonyms.count)
             .animation(.easeInOut, value: viewModel.isShowingAnswer)
             .padding()
             .background(Color(named: "dialogBackground"))
@@ -100,14 +105,14 @@ struct ReviewView: View {
             }
             .sheet(isPresented: $showSynonymPicker) {
                 QuestionSynonymPickerView { question in
-                    guard let baseQuestion = viewModel.selectedQuestion else { return }
+                    guard let baseQuestion = self.question else { return }
                     objVM.synonymVM.addSynonymToQuestion(baseQuestion, question)
                 }
                 .environmentObject(objVM)
             }
             .sheet(isPresented: $showTagPicker) {
                 TagsListPickerView { tag in
-                    objVM.tagVM.addTagToQuestion(tag, question: viewModel.selectedQuestion)
+                    objVM.tagVM.addTagToQuestion(tag, question: question)
                 }
             }
 
