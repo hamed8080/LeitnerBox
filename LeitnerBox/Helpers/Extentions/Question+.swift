@@ -31,7 +31,7 @@ extension Question {
         }
     }
 
-    static func topWidgetQuestion(context: NSManagedObjectContext, leitnerId: Int64) -> [WidgetQuestion] {
+    static func topWidgetQuestion(context: NSManagedObjectContextProtocol, leitnerId: Int64) -> [WidgetQuestion] {
         let req = Question.fetchRequest()
         req.fetchLimit = 10
         req.predicate = NSPredicate(format: "level.leitner.id == %i", leitnerId)

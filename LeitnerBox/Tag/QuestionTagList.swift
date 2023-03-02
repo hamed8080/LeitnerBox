@@ -34,6 +34,7 @@ struct QuestionTagList: View {
             }
             .padding(addPadding ? [.leading, .bottom] : [])
         }
+        .animation(.easeInOut, value: tags.count)
     }
 }
 

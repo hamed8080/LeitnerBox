@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0500C62C29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0500C62B29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift */; };
 		05081530285C719000CF632E /* NotAnyToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508152F285C719000CF632E /* NotAnyToReviewView.swift */; };
 		050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
 		050D6DD42879EB220020BCDB /* QuestionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050D6DD32879EB220020BCDB /* QuestionViewModelTests.swift */; };
@@ -69,7 +70,6 @@
 		0579D4B1283CE855000BD93D /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
 		057CBCD2285839B800B1592D /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057CBCD1285839B800B1592D /* StatisticsViewModel.swift */; };
 		058343C12875DBA200AD0FF3 /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058343C02875DBA200AD0FF3 /* MyError.swift */; };
-		058343C32875E45E00AD0FF3 /* MockNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058343C22875E45E00AD0FF3 /* MockNSManagedObjectContext.swift */; };
 		058343C52875E7DB00AD0FF3 /* TagViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058343C42875E7DB00AD0FF3 /* TagViewModelTests.swift */; };
 		05867E6D283A2A9100F4A413 /* RoundedCorner+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6C283A2A9100F4A413 /* RoundedCorner+.swift */; };
 		05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05867E6E283A334900F4A413 /* LevelsViewModel.swift */; };
@@ -104,6 +104,11 @@
 		05E37357290D541D00853CB1 /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E37356290D541D00853CB1 /* EnvironmentValues+.swift */; };
 		05E8674429A562F700CEB3A3 /* ObjectsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8674329A562F700CEB3A3 /* ObjectsContainer.swift */; };
 		05E8AA9828565DBD00F2A855 /* PercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8AA9728565DBD00F2A855 /* PercentageView.swift */; };
+		05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */; };
+		05ECC8AB29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */; };
+		05ECC8AC29B0DEB50092782E /* MappingModelV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */; };
+		05ECC8AD29B0DEB80092782E /* MigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */; };
+		05EDC35029A93729006795FC /* MockNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058343C22875E45E00AD0FF3 /* MockNSManagedObjectContext.swift */; };
 		05F1C8A7288AD07A00CD5F1E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */; };
 		05F1C8A9288AD07A00CD5F1E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */; };
 		05F1C8AC288AD07A00CD5F1E /* ReviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1C8AB288AD07A00CD5F1E /* ReviewWidget.swift */; };
@@ -160,6 +165,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0500C62B29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextProtocol.swift; sourceTree = "<group>"; };
 		0508152F285C719000CF632E /* NotAnyToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAnyToReviewView.swift; sourceTree = "<group>"; };
 		050D6DD32879EB220020BCDB /* QuestionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModelTests.swift; sourceTree = "<group>"; };
 		051B7DAA288B00BC00465C24 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -258,6 +264,9 @@
 		05E37356290D541D00853CB1 /* EnvironmentValues+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
 		05E8674329A562F700CEB3A3 /* ObjectsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsContainer.swift; sourceTree = "<group>"; };
 		05E8AA9728565DBD00F2A855 /* PercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageView.swift; sourceTree = "<group>"; };
+		05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBoxV2.xcdatamodel; sourceTree = "<group>"; };
+		05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicyV1_V2.swift; sourceTree = "<group>"; };
+		05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelV1_V2.xcmappingmodel; sourceTree = "<group>"; };
 		05F1C8A5288AD07A00CD5F1E /* ReviewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReviewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -309,6 +318,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0500C62729A8E2F400C4A5D4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0500C62B29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		051E106C291136C700F990BD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +388,8 @@
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
 				05266AC228367DAA004693BC /* Persistence.swift */,
 				05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */,
+				05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */,
+				05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */,
 				05266ABF28367DAA004693BC /* Preview Content */,
 				052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */,
 				059D2DA628A527C600231E09 /* SplashScreen.swift */,
@@ -416,6 +435,7 @@
 		053666D828377536002F899F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0500C62729A8E2F400C4A5D4 /* Protocols */,
 				053666DA2837755F002F899F /* Extentions */,
 				053666D52837740D002F899F /* CustomView */,
 				054E771D284A4C7D006BCDEF /* UIColorValueTransformer.swift */,
@@ -797,7 +817,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -x \"$(command -v swiftlint)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ]; \nthen\n    echo \"Start linting on with build phase xproject script.\"\n   APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n   swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\nelif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\nthen\n    echo \"Not linting in CI with xproject build phase script.\"\nelif ! [ -x \"$(command -v swiftlint)\" ]; \nthen\n   echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#if [ -x \"$(command -v swiftlint)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ]; \n# then\n#     echo \"Start linting on with build phase xproject script.\"\n#    APP_PATH=\"/Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBox\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/Share\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/ReviewWidget\"\n#    swiftlint --config \"${APP_PATH}.swiftlint.yml\" \"${APP_PATH}/LeitnerBoxTests\"\n# elif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\n# then\n#     echo \"Not linting in CI with xproject build phase script.\"\n# elif ! [ -x \"$(command -v swiftlint)\" ]; \n# then\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
 		};
 		05A9438529557FBE003657DB /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -816,7 +836,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -x \"$(command -v swiftformat)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ];\nthen\n    echo \"Start formatting with swiftformat build phase xproject script.\"\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n   swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\nelif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\nthen\n    echo \"Not formatting with swiftformat in CI with xproject build phase script.\"\nelif ! [ -x \"$(command -v swiftformat)\" ]; \nthen\n   echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "# if [ -x \"$(command -v swiftformat)\" ] && [ \"$IS_CONTINUOUS_INTEGRATION\" != \"1\" ];\n# then\n#     echo \"Start formatting with swiftformat build phase xproject script.\"\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/ReviewWidget\n#    swiftformat --swiftversion 5.6 /Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/Share\n# elif [ \"$IS_CONTINUOUS_INTEGRATION\" = \"1\" ];\n# then\n#     echo \"Not formatting with swiftformat in CI with xproject build phase script.\"\n# elif ! [ -x \"$(command -v swiftformat)\" ]; \n# then\n#    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n# fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -826,6 +846,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				052CA6AA283C944200376E79 /* FileManager+.swift in Sources */,
+				0500C62C29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift in Sources */,
+				05ECC8AB29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel in Sources */,
 				0591796128C149F100228D7F /* Array+.swift in Sources */,
 				051E10722911379800F990BD /* ReviewHeader.swift in Sources */,
 				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
@@ -876,6 +898,7 @@
 				052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */,
 				057CBCD2285839B800B1592D /* StatisticsViewModel.swift in Sources */,
 				054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */,
+				05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */,
 				053666D728377420002F899F /* PrimaryTextField.swift in Sources */,
 				054AB5C22839185E008BC840 /* Leitner+.swift in Sources */,
 				05BE4312285615E800B80E5E /* StatisticsView.swift in Sources */,
@@ -907,12 +930,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A854EB29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift in Sources */,
-				058343C32875E45E00AD0FF3 /* MockNSManagedObjectContext.swift in Sources */,
 				0565CA3C2876DAC40076F6F4 /* LevelViewModelTests.swift in Sources */,
 				0565CA42287718D50076F6F4 /* ReviewViewModelTests.swift in Sources */,
 				050D6DD42879EB220020BCDB /* QuestionViewModelTests.swift in Sources */,
 				0543D0EF2870B3AC005807ED /* LeitnerViewModelTests.swift in Sources */,
 				0565CA3E2876E79A0076F6F4 /* SearchViewModelTests.swift in Sources */,
+				05EDC35029A93729006795FC /* MockNSManagedObjectContext.swift in Sources */,
 				058343C52875E7DB00AD0FF3 /* TagViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -942,10 +965,12 @@
 			files = (
 				051B7DA9288B006D00465C24 /* FileManager+.swift in Sources */,
 				05F1C8B1288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */,
+				05ECC8AC29B0DEB50092782E /* MappingModelV1_V2.xcmappingmodel in Sources */,
 				051B7DAC288B00BC00465C24 /* UserDefaults+.swift in Sources */,
 				05F1C8AC288AD07A00CD5F1E /* ReviewWidget.swift in Sources */,
 				051B7DAF288B02C300465C24 /* WidgetQuestion.swift in Sources */,
 				051B7DA7288AFC8300465C24 /* LeitnerBox.xcdatamodeld in Sources */,
+				05ECC8AD29B0DEB80092782E /* MigrationPolicyV1_V2.swift in Sources */,
 				051B7DA8288B005100465C24 /* AppGroupLocalStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1425,9 +1450,10 @@
 		05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */,
 				05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */,
 			);
-			currentVersion = 05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */;
+			currentVersion = 05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */;
 			path = LeitnerBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

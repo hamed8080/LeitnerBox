@@ -7,32 +7,113 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "33084921-4B13-4749-A8F5-E7F8BE18E43B"
+            uuid = "CB24CC32-647A-4A27-80E9-4AA88E025554"
+            shouldBeEnabled = "Yes"
+            condition = "dbQuestion?.completed == true"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeitnerBoxTests/SearchViewModelTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "test_reset_to_first_level()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CB24CC32-647A-4A27-80E9-4AA88E025554 - f4a9ced8c24a0a7c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBoxTests.SearchViewModelTests.test_reset_to_first_level() -&gt; ()"
+                  moduleName = "LeitnerBoxTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests/SearchViewModelTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "3600">
+               </Location>
+               <Location
+                  uuid = "CB24CC32-647A-4A27-80E9-4AA88E025554 - f4a9ced8c24a0a7c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBoxTests.SearchViewModelTests.test_reset_to_first_level() -&gt; ()"
+                  moduleName = "LeitnerBoxTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBoxTests/SearchViewModelTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "3276">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0418756C-F52B-4C8F-9E57-A2E84E8CB08B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LeitnerBox/Synonym/SynonymViewModel.swift"
+            filePath = "LeitnerBox/MigrationPolicyV1ToV2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "addSynonymToQuestion(_:_:)"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "begin(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B163013F-F7CE-4B2D-B430-E48ECBE70C23"
+            uuid = "FE3134C7-5A9C-4202-8D95-4A476C6A3B15"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LeitnerBox/Synonym/SynonymViewModel.swift"
+            filePath = "LeitnerBox/v1_v2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "addSynonymToQuestion(_:_:)"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "begin(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7D024C6-75F5-482B-BCF8-427F562FAFF2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeitnerBox/MigrationPolicyV1_V2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "begin(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0B291FA-865C-4EEF-B05B-5D7B2B64FE73"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeitnerBox/Persistence.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "init(inMemory:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

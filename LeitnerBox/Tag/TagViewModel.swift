@@ -7,17 +7,16 @@
 import Combine
 import CoreData
 import Foundation
-import SwiftUI
 
 class TagViewModel: ObservableObject {
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     @Published var tags: [Tag] = []
     @Published var searchedTags: [Tag] = []
     @Published var leitner: Leitner
     @Published var showAddOrEditTagDialog: Bool = false
     @Published var selectedTag: Tag?
     @Published var tagName: String = ""
-    @Published var colorPickerColor: Color = .gray
+    @Published var colorPickerColor: NSObject?
     @Published var searchText: String = ""
     let count = 20
     var offset = 0
@@ -32,7 +31,7 @@ class TagViewModel: ObservableObject {
         }
     }
 
-    init(viewContext: NSManagedObjectContext, leitner: Leitner) {
+    init(viewContext: NSManagedObjectContextProtocol, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
         $searchText.dropFirst().sink { [weak self] newValue in
@@ -42,16 +41,8 @@ class TagViewModel: ObservableObject {
     }
 
     func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { tags[$0] }.forEach(viewContext.delete)
-            tags.remove(atOffsets: offsets)
-        }
-    }
-
-    func deleteTagFromQuestion(_ tag: Tag, _ question: Question) {
-        withAnimation {
-            tag.removeFromQuestion(question)
-        }
+        offsets.map { tags[$0] }.forEach(viewContext.delete)
+        tags.remove(atOffsets: offsets)
     }
 
     func searchTags(text: String) {
@@ -84,15 +75,7 @@ class TagViewModel: ObservableObject {
         self.tags.append(contentsOf: tags)
     }
 
-    func addToTag(_ tag: Tag, _ question: Question) {
-        withAnimation {
-            if let tag = tags.first(where: { $0.objectID == tag.objectID }) {
-                tag.addToQuestion(question)
-            }
-        }
-    }
-
-    func editOrAddTag() {
+    func saveAddOrEdit() {
         if selectedTag != nil {
             editTag()
         } else {
@@ -104,40 +87,29 @@ class TagViewModel: ObservableObject {
 
     func editTag() {
         selectedTag?.name = tagName
-        if let cgColor = colorPickerColor.cgColor {
-            selectedTag?.color = UIColor(cgColor: cgColor)
-        }
+        selectedTag?.color = colorPickerColor
         showAddOrEditTagDialog.toggle()
     }
 
     func addTag() {
-        withAnimation {
-            let newItem = Tag(context: viewContext)
-            newItem.leitner = leitner
-            newItem.name = tagName
-
-            if let cgColor = colorPickerColor.cgColor {
-                newItem.color = UIColor(cgColor: cgColor)
-            }
-            tags.append(newItem)
-            showAddOrEditTagDialog.toggle()
-        }
+        let newItem = Tag(context: viewContext as! NSManagedObjectContext)
+        newItem.leitner = leitner
+        newItem.name = tagName
+        newItem.color = colorPickerColor
+        tags.append(newItem)
+        showAddOrEditTagDialog.toggle()
     }
 
     func addTagToQuestion(_ tag: Tag, question: Question?) {
-        withAnimation {
-            guard let question else { return }
-            tag.addToQuestion(question)
-            PersistenceController.saveDB(viewContext: viewContext)
-        }
+        guard let question else { return }
+        tag.addToQuestion(question)
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func removeTagForQuestion(_ tag: Tag, question: Question?) {
-        withAnimation {
-            guard let question else { return }
-            tag.removeFromQuestion(question)
-            PersistenceController.saveDB(viewContext: viewContext)
-        }
+        guard let question else { return }
+        tag.removeFromQuestion(question)
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func reset() {
@@ -148,7 +120,7 @@ class TagViewModel: ObservableObject {
     }
 
     func clearFields() {
-        colorPickerColor = .gray
+        colorPickerColor = nil
         tagName = ""
         selectedTag = nil
     }

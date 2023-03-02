@@ -25,7 +25,7 @@ struct TagRowView: View {
             Button {
                 viewModel.selectedTag = tag
                 viewModel.tagName = tag.name ?? ""
-                viewModel.colorPickerColor = tag.tagSwiftUIColor ?? .gray
+                viewModel.colorPickerColor = UIColor(tag.tagSwiftUIColor ?? .gray)
                 viewModel.showAddOrEditTagDialog.toggle()
             } label: {
                 Label("Edit", systemImage: "pencil")

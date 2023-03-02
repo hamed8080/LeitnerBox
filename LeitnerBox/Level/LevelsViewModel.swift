@@ -68,11 +68,11 @@ class LevelsViewModel: ObservableObject {
         let tagName = searchWord.replacingOccurrences(of: "#", with: "")
         let req = Question.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
-        req.fetchLimit = 20
+        req.fetchLimit = 100
         if isTag, !tagName.isEmpty {
-            req.predicate = NSPredicate(format: "ANY tag.name == [c] %@", tagName)
+            req.predicate = NSPredicate(format: "(ANY tag.name contains[c] %@) AND leitnerId == %i", tagName, leitner.id)
         } else {
-            req.predicate = NSPredicate(format: "question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@", searchWord, searchWord, searchWord)
+            req.predicate = NSPredicate(format: "(question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@) AND leitnerId == %i", searchWord, searchWord, searchWord, leitner.id)
         }
         if let questions = try? viewContext.fetch(req) {
             searchedQuestions = questions

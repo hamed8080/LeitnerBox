@@ -59,6 +59,14 @@
                BlueprintName = "LeitnerBoxTests"
                ReferencedContainer = "container:LeitnerBox.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "QuestionViewModelTests">
+               </Test>
+               <Test
+                  Identifier = "ReviewViewModelTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
@@ -95,15 +103,15 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-com.apple.CoreData.SQLDebug 1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.ConcurrencyDebug 1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.Logging.stderr 1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>

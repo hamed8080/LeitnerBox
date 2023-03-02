@@ -10,6 +10,12 @@ import SwiftUI
 struct TagView: View {
     @EnvironmentObject var objVM: ObjectsContainer
     @Environment(\.colorScheme) var colorScheme
+    private var selectedColor: Binding<Color> {
+        Binding(
+            get: { Color(objVM.tagVM.colorPickerColor as? UIColor ?? .gray) },
+            set: { value in objVM.tagVM.colorPickerColor = UIColor(value) }
+        )
+    }
 
     var body: some View {
         List {
@@ -64,11 +70,11 @@ struct TagView: View {
                 textEditorHeight: 48
             )
 
-            ColorPicker("Select Color", selection: $objVM.tagVM.colorPickerColor)
+            ColorPicker("Select Color", selection: selectedColor)
                 .frame(height: 36)
 
             Button {
-                objVM.tagVM.editOrAddTag()
+                objVM.tagVM.saveAddOrEdit()
             } label: {
                 HStack {
                     Spacer()

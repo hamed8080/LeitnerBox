@@ -4,15 +4,18 @@
 //
 // Created by Hamed Hosseini on 10/28/22.
 
+import CoreData
 @testable import LeitnerBox
 import XCTest
 
 final class LeitnerViewModelTests: XCTestCase {
     var viewModel: LeitnerViewModel!
+    var context: NSManagedObjectContext = PersistenceController.shared.viewContext
+    var mockContext: MockNSManagedObjectContext = .init()
 
     override func setUp() {
         _ = try? PersistenceController.shared.generateAndFillLeitner()
-        viewModel = LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
+        viewModel = LeitnerViewModel(viewContext: context)
     }
 
     func test_load_method() {
@@ -58,7 +61,7 @@ final class LeitnerViewModelTests: XCTestCase {
     func test_check_newId_for_leitner_added() {
         viewModel.leitners.removeAll()
         let firstLeitner = viewModel.makeNewLeitner()
-        PersistenceController.saveDB(viewContext: viewModel.viewContext)
+        PersistenceController.saveDB(viewContext: context)
         XCTAssertEqual(firstLeitner.id, 1, "Expected to get id 1 whenever the leitner is empty")
 
         let lastId = viewModel.leitners.max(by: { $0.id < $1.id })?.id ?? 0
@@ -67,12 +70,17 @@ final class LeitnerViewModelTests: XCTestCase {
         XCTAssertEqual(newLeitner.id, lastId + 1, "Expected to add new item with higher id number!")
     }
 
-    func test_fail_to_save() throws {
-        let mockContext = MockNSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        let notInContextLeitner = Leitner()
+    func test_fawil_to_save() throws {
+        mockContext.error = MyError.failToSave
+        let viewModel = LeitnerViewModel(viewContext: mockContext)
+        let notInContextLeitner = Leitner(context: context)
         viewModel.viewContext.delete(notInContextLeitner)
         PersistenceController.saveDB(viewContext: mockContext) { error in
             XCTAssertEqual(error, .failToSave)
         }
+    }
+
+    override func tearDown() {
+        viewModel = nil
     }
 }

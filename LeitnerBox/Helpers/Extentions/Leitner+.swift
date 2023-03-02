@@ -53,6 +53,15 @@ extension Leitner {
         return levels
     }
 
+    static func fetchLevelInsideLeitner(context: NSManagedObjectContext, leitnerId: Int64, level: Int64) -> Level? {
+        let predicate = NSPredicate(format: "leitner.id == %d AND level == %i", leitnerId, level)
+        let levelReq = Level.fetchRequest()
+        levelReq.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
+        levelReq.predicate = predicate
+        let level = try? context.fetch(levelReq).first
+        return level
+    }
+
     static func fetchFavCount(context: NSManagedObjectContext, leitnerId: Int64) -> Int {
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.leitner.id == %i AND favorite == %@", leitnerId, NSNumber(value: true))

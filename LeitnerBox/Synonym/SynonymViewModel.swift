@@ -41,16 +41,6 @@ class SynonymViewModel: ObservableObject {
         }
     }
 
-    func addAsSynonym(_: Question) {
-//        guard let baseQuestion else { return }
-//        withAnimation {
-//            let synonym = baseQuestion.synonymsArray?.first ?? quesiton.synonymsArray?.first ?? Synonym(context: viewContext)
-//            synonym.addToQuestion(quesiton)
-//            synonym.addToQuestion(baseQuestion)
-//            objectWillChange.send()
-//        }
-    }
-
     func addSynonymToQuestion(_ question: Question, _ synonymQuestion: Question) {
         withAnimation {
             if let synonym = question.synonyms?.allObjects.first as? Synonym {

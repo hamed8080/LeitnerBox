@@ -121,12 +121,12 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
 
         let req = Question.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
-        req.fetchLimit = 20
+        req.fetchLimit = 100
         if searchText.count > 0, searchText[searchText.startIndex] == "#" {
             let tagName = searchText.replacingOccurrences(of: "#", with: "")
-            req.predicate = NSPredicate(format: "ANY tag.name == [c] %@", tagName)
+            req.predicate = NSPredicate(format: "(ANY tag.name contains[c] %@) AND leitnerId == %i", tagName, leitner.id)
         } else if !searchText.isEmpty {
-            req.predicate = NSPredicate(format: "question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@", searchText, searchText, searchText)
+            req.predicate = NSPredicate(format: "(question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@) AND leitnerId == %i", searchText, searchText, searchText, leitner.id)
         }
         searchedQuestions = (try? viewContext.fetch(req)) ?? []
     }
@@ -135,6 +135,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         withAnimation {
             offsets.map { questions[$0] }.forEach(viewContext.delete)
             PersistenceController.saveDB(viewContext: viewContext)
+            questions.remove(atOffsets: offsets)
         }
     }
 
@@ -156,7 +157,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
 
     func resetToFirstLevel(_ question: Question) {
-        if let firstLevel = leitner.levels.first(where: { $0.level == 1 }) {
+        if let firstLevel = Leitner.fetchLevelInsideLeitner(context: viewContext, leitnerId: leitner.id, level: 1) {
             question.level = firstLevel
             question.passTime = nil
             question.completed = false
@@ -272,6 +273,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         question.level = leitner.firstLevel
         question.passTime = nil
         question.completed = false
+        question.leitner = leitner
         PersistenceController.saveDB(viewContext: viewContext)
         questions.removeAll(where: { $0 == question })
         objectWillChange.send()

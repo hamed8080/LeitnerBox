@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class LeitnerViewModel: ObservableObject {
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     @Published var leitners: [Leitner] = []
     @Published var showEditOrAddLeitnerAlert = false
     @Published var selectedLeitner: Leitner?
@@ -23,7 +23,7 @@ class LeitnerViewModel: ObservableObject {
 
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
-    init(viewContext: NSManagedObjectContext, voices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })) {
+    init(viewContext: NSManagedObjectContextProtocol, voices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })) {
         self.viewContext = viewContext
         self.voices = voices
         selectedVoiceIdentifire = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
@@ -79,13 +79,13 @@ class LeitnerViewModel: ObservableObject {
 
     func makeNewLeitner() -> Leitner {
         let maxId = leitners.max(by: { $0.id < $1.id })?.id ?? 0
-        let newItem = Leitner(context: viewContext)
+        let newItem = Leitner(context: viewContext as! NSManagedObjectContext)
         newItem.createDate = Date()
         newItem.name = leitnerTitle
         newItem.id = maxId + 1
         newItem.backToTopLevel = backToTopLevel
         let levels: [Level] = (1 ... 13).map { levelId in
-            let level = Level(context: viewContext)
+            let level = Level(context: viewContext as! NSManagedObjectContext)
             level.level = Int16(levelId)
             level.leitner = newItem
             level.daysToRecommend = Int32(levelId) * 2
