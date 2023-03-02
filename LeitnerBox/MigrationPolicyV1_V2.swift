@@ -6,9 +6,9 @@
 //
 
 import CoreData
-import Foundation
+
 class MigrationPolicyV1_V2: NSEntityMigrationPolicy {
-    override func begin(_: NSEntityMapping, with manager: NSMigrationManager) throws {
+    override func begin(_ mapping: NSEntityMapping, with manager: NSMigrationManager) throws {
         let context = manager.sourceContext
         let req = Question.fetchRequest()
         if let questions: [NSManagedObject] = try? context.fetch(req) {

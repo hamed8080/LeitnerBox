@@ -7,59 +7,21 @@
 import SwiftUI
 
 @main
-struct LeitnerBoxApp: App, DropDelegate {
-    @State private var dragOver = false
-    @State var hideSplash = false
+struct LeitnerBoxApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if hideSplash == false {
-                SplashScreen()
-                    .animation(.easeInOut, value: hideSplash)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            hideSplash = true
-                        }
-                    }
-            } else {
-                ZStack {
-                    LeitnerView()
-                        .onDrop(of: [.fileURL, .data], delegate: self)
-                        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-                        .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
-                        .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
-                        .animation(.easeInOut, value: hideSplash)
-
-                    UpdateDatabaseInBackground()
+            ZStack {
+                Button {
+                    let ctx = PersistenceController.shared.container.viewContext
+                    let question = Question(context: ctx)
+                    question.question = "Hamed"
+                    try? ctx.save()
+                } label: {
+                    Text("Add")
                 }
             }
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
-    }
-
-    func dropUpdated(info _: DropInfo) -> DropProposal? {
-        let proposal = DropProposal(operation: .copy)
-        return proposal
-    }
-
-    func performDrop(info: DropInfo) -> Bool {
-        PersistenceController.shared.dropDatabase(info)
-        return true
-    }
-}
-
-struct UpdateDatabaseInBackground: View {
-    @Environment(\.scenePhase) var scenePhase
-
-    var body: some View {
-        EmptyView()
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
-                    PersistenceController.shared.replaceDBIfExistFromShareExtension()
-                } else if newPhase == .inactive {
-                    print("Inactive")
-                } else if newPhase == .background {
-                    print("Background")
-                }
-            }
     }
 }
