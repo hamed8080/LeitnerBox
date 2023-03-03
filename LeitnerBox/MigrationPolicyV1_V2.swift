@@ -7,6 +7,7 @@
 
 import CoreData
 
+@objc(MigrationPolicyV1_V2)
 class MigrationPolicyV1_V2: NSEntityMigrationPolicy {
     override func begin(_ mapping: NSEntityMapping, with manager: NSMigrationManager) throws {
         let context = manager.sourceContext

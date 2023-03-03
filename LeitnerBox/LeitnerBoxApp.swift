@@ -15,7 +15,8 @@ struct LeitnerBoxApp: App {
                 Button {
                     let ctx = PersistenceController.shared.container.viewContext
                     let question = Question(context: ctx)
-                    question.question = "Hamed"
+                    question.question = "Hamed 1"
+//                    question.name = "Hamed Hosseonio"
                     try? ctx.save()
                 } label: {
                     Text("Add")

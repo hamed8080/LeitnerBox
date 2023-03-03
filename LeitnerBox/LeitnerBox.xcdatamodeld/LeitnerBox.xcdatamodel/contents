@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Question" representedClassName="Question" syncable="YES">
-        <attribute name="question" optional="YES" attributeType="String"/>
+        <attribute name="answer" optional="YES" attributeType="String"/>
+        <attribute name="question" attributeType="String"/>
+        <attribute name="tagsCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="tag.@count" usesScalarValueType="NO"/>
+        <relationship name="tag" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Tag" inverseName="question" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="UIColorValueTransformer"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="question" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Question" inverseName="tag" inverseEntity="Question"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
 </model>

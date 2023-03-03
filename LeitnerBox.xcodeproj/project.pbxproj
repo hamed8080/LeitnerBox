@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AB928367DA9004693BC /* LeitnerBoxApp.swift */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
+		05901A7529B1B8960032A742 /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05901A7129B1B8960032A742 /* Question+CoreDataClass.swift */; };
+		05901A7629B1B8960032A742 /* Question+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05901A7229B1B8960032A742 /* Question+CoreDataProperties.swift */; };
+		05901A7729B1B8960032A742 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05901A7329B1B8960032A742 /* Tag+CoreDataClass.swift */; };
+		05901A7829B1B8960032A742 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05901A7429B1B8960032A742 /* Tag+CoreDataProperties.swift */; };
+		05901AAF29B1D9F50032A742 /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05901AAD29B1D9F50032A742 /* LeitnerBox.xcdatamodeld */; };
+		05901AB229B1DA860032A742 /* v1_v2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05901AB129B1DA860032A742 /* v1_v2.xcmappingmodel */; };
 		05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */; };
-		05ECC8B029B0F6000092782E /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8AE29B0F6000092782E /* LeitnerBox.xcdatamodeld */; };
-		05ECC8C229B0FC400092782E /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8C029B0FC400092782E /* Question+CoreDataClass.swift */; };
-		05ECC8C329B0FC400092782E /* Question+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8C129B0FC400092782E /* Question+CoreDataProperties.swift */; };
-		05ECC8CB29B102CB0092782E /* MappingModel_V1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8CA29B102CB0092782E /* MappingModel_V1_V2.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,12 +36,14 @@
 		05266AB928367DA9004693BC /* LeitnerBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerBoxApp.swift; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		05901A7129B1B8960032A742 /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = "<group>"; };
+		05901A7229B1B8960032A742 /* Question+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05901A7329B1B8960032A742 /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		05901A7429B1B8960032A742 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05901AAE29B1D9F50032A742 /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
+		05901AB029B1DA380032A742 /* LeitnerBoxV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBoxV2.xcdatamodel; sourceTree = "<group>"; };
+		05901AB129B1DA860032A742 /* v1_v2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = v1_v2.xcmappingmodel; sourceTree = "<group>"; };
 		05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicyV1_V2.swift; sourceTree = "<group>"; };
-		05ECC8AF29B0F6000092782E /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
-		05ECC8B529B0F79E0092782E /* LeitnerBoxV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBoxV2.xcdatamodel; sourceTree = "<group>"; };
-		05ECC8C029B0FC400092782E /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05ECC8C129B0FC400092782E /* Question+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05ECC8CA29B102CB0092782E /* MappingModel_V1_V2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_V1_V2.xcmappingmodel; sourceTree = "<group>"; };
 		05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -75,13 +79,15 @@
 		05266AB828367DA9004693BC /* LeitnerBox */ = {
 			isa = PBXGroup;
 			children = (
+				05901AAD29B1D9F50032A742 /* LeitnerBox.xcdatamodeld */,
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
+				05901A7129B1B8960032A742 /* Question+CoreDataClass.swift */,
+				05901AB129B1DA860032A742 /* v1_v2.xcmappingmodel */,
+				05901A7229B1B8960032A742 /* Question+CoreDataProperties.swift */,
+				05901A7329B1B8960032A742 /* Tag+CoreDataClass.swift */,
+				05901A7429B1B8960032A742 /* Tag+CoreDataProperties.swift */,
 				05266AC228367DAA004693BC /* Persistence.swift */,
 				05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */,
-				05ECC8C029B0FC400092782E /* Question+CoreDataClass.swift */,
-				05ECC8C129B0FC400092782E /* Question+CoreDataProperties.swift */,
-				05ECC8AE29B0F6000092782E /* LeitnerBox.xcdatamodeld */,
-				05ECC8CA29B102CB0092782E /* MappingModel_V1_V2.xcmappingmodel */,
 			);
 			path = LeitnerBox;
 			sourceTree = "<group>";
@@ -209,12 +215,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
-				05ECC8C329B0FC400092782E /* Question+CoreDataProperties.swift in Sources */,
 				05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */,
+				05901AB229B1DA860032A742 /* v1_v2.xcmappingmodel in Sources */,
+				05901A7729B1B8960032A742 /* Tag+CoreDataClass.swift in Sources */,
+				05901AAF29B1D9F50032A742 /* LeitnerBox.xcdatamodeld in Sources */,
 				05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */,
-				05ECC8B029B0F6000092782E /* LeitnerBox.xcdatamodeld in Sources */,
-				05ECC8C229B0FC400092782E /* Question+CoreDataClass.swift in Sources */,
-				05ECC8CB29B102CB0092782E /* MappingModel_V1_V2.xcmappingmodel in Sources */,
+				05901A7629B1B8960032A742 /* Question+CoreDataProperties.swift in Sources */,
+				05901A7529B1B8960032A742 /* Question+CoreDataClass.swift in Sources */,
+				05901A7829B1B8960032A742 /* Tag+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,13 +435,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		05ECC8AE29B0F6000092782E /* LeitnerBox.xcdatamodeld */ = {
+		05901AAD29B1D9F50032A742 /* LeitnerBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				05ECC8B529B0F79E0092782E /* LeitnerBoxV2.xcdatamodel */,
-				05ECC8AF29B0F6000092782E /* LeitnerBox.xcdatamodel */,
+				05901AB029B1DA380032A742 /* LeitnerBoxV2.xcdatamodel */,
+				05901AAE29B1D9F50032A742 /* LeitnerBox.xcdatamodel */,
 			);
-			currentVersion = 05ECC8B529B0F79E0092782E /* LeitnerBoxV2.xcdatamodel */;
+			currentVersion = 05901AB029B1DA380032A742 /* LeitnerBoxV2.xcdatamodel */;
 			path = LeitnerBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
