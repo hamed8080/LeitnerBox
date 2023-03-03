@@ -11,7 +11,6 @@
 		05081530285C719000CF632E /* NotAnyToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508152F285C719000CF632E /* NotAnyToReviewView.swift */; };
 		050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
 		050D6DD42879EB220020BCDB /* QuestionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050D6DD32879EB220020BCDB /* QuestionViewModelTests.swift */; };
-		051B7DA7288AFC8300465C24 /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
 		051B7DA8288B005100465C24 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
 		051B7DA9288B006D00465C24 /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManager+.swift */; };
 		051B7DAB288B00BC00465C24 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051B7DAA288B00BC00465C24 /* UserDefaults+.swift */; };
@@ -32,7 +31,6 @@
 		05266ABE28367DAA004693BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266ABD28367DAA004693BC /* Assets.xcassets */; };
 		05266AC128367DAA004693BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05266AC028367DAA004693BC /* Preview Assets.xcassets */; };
 		05266AC328367DAA004693BC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC228367DAA004693BC /* Persistence.swift */; };
-		05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */; };
 		052CA6AA283C944200376E79 /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6A9283C944200376E79 /* FileManager+.swift */; };
 		052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */; };
 		052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
@@ -80,6 +78,8 @@
 		058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */; };
 		058EB56928CF84E700622B76 /* IconButtonKeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */; };
 		058EB56D28CF9ADA00622B76 /* ToolbarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */; };
+		05901AB929B1E8550032A742 /* LeitnerBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05901AB729B1E8550032A742 /* LeitnerBox.xcdatamodeld */; };
+		05901ABB29B1FE110032A742 /* ManagedObjectContextInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05901ABA29B1FE110032A742 /* ManagedObjectContextInstance.swift */; };
 		0591796128C149F100228D7F /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0591796028C149F100228D7F /* Array+.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
@@ -104,10 +104,6 @@
 		05E37357290D541D00853CB1 /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E37356290D541D00853CB1 /* EnvironmentValues+.swift */; };
 		05E8674429A562F700CEB3A3 /* ObjectsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8674329A562F700CEB3A3 /* ObjectsContainer.swift */; };
 		05E8AA9828565DBD00F2A855 /* PercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8AA9728565DBD00F2A855 /* PercentageView.swift */; };
-		05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */; };
-		05ECC8AB29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */; };
-		05ECC8AC29B0DEB50092782E /* MappingModelV1_V2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */; };
-		05ECC8AD29B0DEB80092782E /* MigrationPolicyV1_V2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */; };
 		05EDC35029A93729006795FC /* MockNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058343C22875E45E00AD0FF3 /* MockNSManagedObjectContext.swift */; };
 		05F1C8A7288AD07A00CD5F1E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */; };
 		05F1C8A9288AD07A00CD5F1E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */; };
@@ -185,7 +181,6 @@
 		05266ABD28367DAA004693BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05266AC028367DAA004693BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		05266AC228367DAA004693BC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBox.xcdatamodel; sourceTree = "<group>"; };
 		052CA6A9283C944200376E79 /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
 		052CA6AB283C988F00376E79 /* ActivityViewControllerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewControllerWrapper.swift; sourceTree = "<group>"; };
 		052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -240,6 +235,8 @@
 		058EA39528AF59CA0080BDDF /* TopSheetTextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetTextEditorView.swift; sourceTree = "<group>"; };
 		058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonKeyboardShortcut.swift; sourceTree = "<group>"; };
 		058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarNavigation.swift; sourceTree = "<group>"; };
+		05901AB829B1E8550032A742 /* LeitnerBoxNew.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBoxNew.xcdatamodel; sourceTree = "<group>"; };
+		05901ABA29B1FE110032A742 /* ManagedObjectContextInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextInstance.swift; sourceTree = "<group>"; };
 		0591796028C149F100228D7F /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -264,9 +261,6 @@
 		05E37356290D541D00853CB1 /* EnvironmentValues+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
 		05E8674329A562F700CEB3A3 /* ObjectsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsContainer.swift; sourceTree = "<group>"; };
 		05E8AA9728565DBD00F2A855 /* PercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageView.swift; sourceTree = "<group>"; };
-		05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeitnerBoxV2.xcdatamodel; sourceTree = "<group>"; };
-		05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPolicyV1_V2.swift; sourceTree = "<group>"; };
-		05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelV1_V2.xcmappingmodel; sourceTree = "<group>"; };
 		05F1C8A5288AD07A00CD5F1E /* ReviewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReviewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -387,9 +381,7 @@
 				05266AB928367DA9004693BC /* LeitnerBoxApp.swift */,
 				05266ABD28367DAA004693BC /* Assets.xcassets */,
 				05266AC228367DAA004693BC /* Persistence.swift */,
-				05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */,
-				05ECC8AA29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel */,
-				05ECC89F29B0A7390092782E /* MigrationPolicyV1_V2.swift */,
+				05901AB729B1E8550032A742 /* LeitnerBox.xcdatamodeld */,
 				05266ABF28367DAA004693BC /* Preview Content */,
 				052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */,
 				059D2DA628A527C600231E09 /* SplashScreen.swift */,
@@ -576,6 +568,7 @@
 			children = (
 				058343C22875E45E00AD0FF3 /* MockNSManagedObjectContext.swift */,
 				05A854EA29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift */,
+				05901ABA29B1FE110032A742 /* ManagedObjectContextInstance.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -847,7 +840,6 @@
 			files = (
 				052CA6AA283C944200376E79 /* FileManager+.swift in Sources */,
 				0500C62C29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift in Sources */,
-				05ECC8AB29B0DA2D0092782E /* MappingModelV1_V2.xcmappingmodel in Sources */,
 				0591796128C149F100228D7F /* Array+.swift in Sources */,
 				051E10722911379800F990BD /* ReviewHeader.swift in Sources */,
 				05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */,
@@ -884,8 +876,8 @@
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
-				05266AC628367DAA004693BC /* LeitnerBox.xcdatamodeld in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
+				05901AB929B1E8550032A742 /* LeitnerBox.xcdatamodeld in Sources */,
 				051E107A2911380A00F990BD /* ReviewControls.swift in Sources */,
 				05219C0A2859F6DB00D3ECF5 /* Sequence+.swift in Sources */,
 				058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */,
@@ -898,7 +890,6 @@
 				052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */,
 				057CBCD2285839B800B1592D /* StatisticsViewModel.swift in Sources */,
 				054AB5C9283960A4008BC840 /* LeitnerViewModel.swift in Sources */,
-				05ECC8A029B0A7390092782E /* MigrationPolicyV1_V2.swift in Sources */,
 				053666D728377420002F899F /* PrimaryTextField.swift in Sources */,
 				054AB5C22839185E008BC840 /* Leitner+.swift in Sources */,
 				05BE4312285615E800B80E5E /* StatisticsView.swift in Sources */,
@@ -929,6 +920,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05901ABB29B1FE110032A742 /* ManagedObjectContextInstance.swift in Sources */,
 				05A854EB29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift in Sources */,
 				0565CA3C2876DAC40076F6F4 /* LevelViewModelTests.swift in Sources */,
 				0565CA42287718D50076F6F4 /* ReviewViewModelTests.swift in Sources */,
@@ -965,12 +957,9 @@
 			files = (
 				051B7DA9288B006D00465C24 /* FileManager+.swift in Sources */,
 				05F1C8B1288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */,
-				05ECC8AC29B0DEB50092782E /* MappingModelV1_V2.xcmappingmodel in Sources */,
 				051B7DAC288B00BC00465C24 /* UserDefaults+.swift in Sources */,
 				05F1C8AC288AD07A00CD5F1E /* ReviewWidget.swift in Sources */,
 				051B7DAF288B02C300465C24 /* WidgetQuestion.swift in Sources */,
-				051B7DA7288AFC8300465C24 /* LeitnerBox.xcdatamodeld in Sources */,
-				05ECC8AD29B0DEB80092782E /* MigrationPolicyV1_V2.swift in Sources */,
 				051B7DA8288B005100465C24 /* AppGroupLocalStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1447,13 +1436,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		05266AC428367DAA004693BC /* LeitnerBox.xcdatamodeld */ = {
+		05901AB729B1E8550032A742 /* LeitnerBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */,
-				05266AC528367DAA004693BC /* LeitnerBox.xcdatamodel */,
+				05901AB829B1E8550032A742 /* LeitnerBoxNew.xcdatamodel */,
 			);
-			currentVersion = 05ECC89C29B083C20092782E /* LeitnerBoxV2.xcdatamodel */;
+			currentVersion = 05901AB829B1E8550032A742 /* LeitnerBoxNew.xcdatamodel */;
 			path = LeitnerBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

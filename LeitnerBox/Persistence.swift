@@ -16,21 +16,18 @@ class PersistenceController: ObservableObject {
         PersistenceController.shared.container.viewContext
     }
 
-    var container: NSPersistentContainer
+    var container: NSPersistentCloudKitContainer
 
     private init(inMemory: Bool = false) {
         UIColorValueTransformer.register()
-        container = NSPersistentContainer(name: "LeitnerBox")
+        container = NSPersistentCloudKitContainer(name: "LeitnerBox")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
             container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         }
-//        Task {
-        guard let storeURL = container.persistentStoreDescriptions.first?.url else { return }
-            let opt = [NSInferMappingModelAutomaticallyOption: false, NSMigratePersistentStoresAutomaticallyOption: true]
-            _ = try? container.persistentStoreCoordinator.addPersistentStore(type: .sqlite, at: storeURL, options: opt)
-//            _ = try await container.loadPersistentStoresAsync
-//        }
+        Task {
+            _ = try await container.loadPersistentStoresAsync
+        }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 
@@ -65,20 +62,20 @@ class PersistenceController: ObservableObject {
     }
 
     func replaceDatabase(appSuppportFile: URL) {
-//        do {
-//            let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
-//            guard let oldStore = persistentCordinator.persistentStores.first, let oldStoreUrl = oldStore.url else { return }
-//            try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
-//            Task {
-//                _ = try await container.loadPersistentStoresAsync
-//                await MainActor.run {
-//                    self.objectWillChange.send()
-//                }
-//            }
-//            container.viewContext.automaticallyMergesChangesFromParent = true
-//        } catch {
-//            print("error in restoring back up file\(error.localizedDescription)")
-//        }
+        do {
+            let persistentCordinator = PersistenceController.shared.container.persistentStoreCoordinator
+            guard let oldStore = persistentCordinator.persistentStores.first, let oldStoreUrl = oldStore.url else { return }
+            try persistentCordinator.replacePersistentStore(at: oldStoreUrl, withPersistentStoreFrom: appSuppportFile, type: .sqlite)
+            Task {
+                _ = try await container.loadPersistentStoresAsync
+                await MainActor.run {
+                    self.objectWillChange.send()
+                }
+            }
+            container.viewContext.automaticallyMergesChangesFromParent = true
+        } catch {
+            print("error in restoring back up file\(error.localizedDescription)")
+        }
     }
 
     class func saveDB(viewContext: NSManagedObjectContextProtocol, completionHandler: ((MyError) -> Void)? = nil) {

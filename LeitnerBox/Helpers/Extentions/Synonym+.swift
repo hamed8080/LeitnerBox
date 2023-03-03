@@ -12,7 +12,7 @@ extension Synonym {
         question?.allObjects as? [Question] ?? []
     }
 
-    static func allSynonyms(context: NSManagedObjectContext, question: String) -> [Question] {
+    static func allSynonyms(context: NSManagedObjectContextProtocol, question: String) -> [Question] {
         let req = Synonym.fetchRequest()
         req.predicate = NSPredicate(format: "ANY question.question == %@", question)
         let synonyms = (try? context.fetch(req)) ?? []

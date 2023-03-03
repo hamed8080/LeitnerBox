@@ -55,7 +55,11 @@ class TagViewModel: ObservableObject {
         let predicate = NSPredicate(format: "leitner.id == %d AND name contains[c] %@", leitner.id, text)
         req.predicate = predicate
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-        searchedTags = (try? viewContext.fetch(req)) ?? []
+        do {
+            searchedTags = try viewContext.fetch(req)
+        } catch {
+            print(error)
+        }
     }
 
     func loadMore() {
@@ -66,8 +70,12 @@ class TagViewModel: ObservableObject {
         req.fetchOffset = offset
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
         req.predicate = predicate
-        append(contentOf: (try? viewContext.fetch(req)) ?? [])
-        offset += count
+        do {
+            append(contentOf: try viewContext.fetch(req))
+            offset += count
+        } catch {
+            print(error)
+        }
     }
 
     func append(contentOf tags: [Tag]) {

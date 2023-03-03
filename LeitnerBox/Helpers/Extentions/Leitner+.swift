@@ -37,14 +37,14 @@ extension Leitner {
         levels.first(where: { $0.level == 1 })
     }
 
-    static func fetchLeitnerQuestionsCount(context: NSManagedObjectContext, leitnerId: Int64) -> Int {
+    static func fetchLeitnerQuestionsCount(context: NSManagedObjectContextProtocol, leitnerId: Int64) -> Int {
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.leitner.id == %i", leitnerId)
         let totalCount = (try? context.count(for: req)) ?? 0
         return totalCount
     }
 
-    static func fetchLevelsInsideLeitner(context: NSManagedObjectContext, leitnerId: Int64) -> [Level] {
+    static func fetchLevelsInsideLeitner(context: NSManagedObjectContextProtocol, leitnerId: Int64) -> [Level] {
         let predicate = NSPredicate(format: "leitner.id == %d", leitnerId)
         let levelReq = Level.fetchRequest()
         levelReq.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
@@ -53,7 +53,7 @@ extension Leitner {
         return levels
     }
 
-    static func fetchLevelInsideLeitner(context: NSManagedObjectContext, leitnerId: Int64, level: Int64) -> Level? {
+    static func fetchLevelInsideLeitner(context: NSManagedObjectContextProtocol, leitnerId: Int64, level: Int64) -> Level? {
         let predicate = NSPredicate(format: "leitner.id == %d AND level == %i", leitnerId, level)
         let levelReq = Level.fetchRequest()
         levelReq.sortDescriptors = [NSSortDescriptor(keyPath: \Level.level, ascending: true)]
@@ -62,7 +62,7 @@ extension Leitner {
         return level
     }
 
-    static func fetchFavCount(context: NSManagedObjectContext, leitnerId: Int64) -> Int {
+    static func fetchFavCount(context: NSManagedObjectContextProtocol, leitnerId: Int64) -> Int {
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.leitner.id == %i AND favorite == %@", leitnerId, NSNumber(value: true))
         let favCount = (try? context.count(for: req)) ?? 0

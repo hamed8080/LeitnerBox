@@ -11,7 +11,7 @@ import NaturalLanguage
 import SwiftUI
 
 class ReviewViewModel: ObservableObject {
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     @Published var questions: [Question] = []
     @Published var showDelete = false
     @Published var level: Level
@@ -27,7 +27,7 @@ class ReviewViewModel: ObservableObject {
     var synthesizer: AVSpeechSynthesizerProtocol
     private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
 
-    init(viewContext: NSManagedObjectContext, levelValue: Int16, leitnerId: Int64, voiceSpeech: AVSpeechSynthesisVoiceProtocol, synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()) {
+    init(viewContext: NSManagedObjectContextProtocol, levelValue: Int16, leitnerId: Int64, voiceSpeech: AVSpeechSynthesisVoiceProtocol, synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer()) {
         self.viewContext = viewContext
         self.voiceSpeech = voiceSpeech
         self.synthesizer = synthesizer
@@ -40,10 +40,14 @@ class ReviewViewModel: ObservableObject {
 
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.level == %d && level.leitner.id == %d", levelValue, leitner?.id ?? 0)
-        questions = ((try? viewContext.fetch(req)) ?? []).filter(\.isReviewable).shuffled()
-        totalCount = questions.count
-        preapareNext(questions.first)
-        loadTags()
+        do {
+            questions = try viewContext.fetch(req).filter(\.isReviewable).shuffled()
+            totalCount = questions.count
+            preapareNext(questions.first)
+            loadTags()
+        } catch {
+            print(error)
+        }
     }
 
     func deleteQuestion() {
@@ -76,7 +80,7 @@ class ReviewViewModel: ObservableObject {
             selectedQuestion?.level = selectedQuestion?.upperLevel
         }
 
-        let statistic = Statistic(context: viewContext)
+        let statistic = Statistic(context: viewContext.computedContext)
         statistic.question = selectedQuestion
         statistic.actionDate = Date()
         statistic.isPassed = true
@@ -94,7 +98,7 @@ class ReviewViewModel: ObservableObject {
     func fail() {
         isShowingAnswer = false
 
-        let statistic = Statistic(context: viewContext)
+        let statistic = Statistic(context: viewContext.computedContext)
         statistic.question = selectedQuestion
         statistic.actionDate = Date()
         statistic.isPassed = false
@@ -162,7 +166,11 @@ class ReviewViewModel: ObservableObject {
         let req = Tag.fetchRequest()
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
         req.predicate = predicate
-        tags = (try? viewContext.fetch(req)) ?? []
+        do {
+            tags = try viewContext.fetch(req)
+        } catch {
+            print(error)
+        }
     }
 
     var partOfspeech: String? {

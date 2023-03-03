@@ -21,10 +21,26 @@ extension String {
         }
         return isContains
     }
+
+    func isLessThan(_ value: String) -> Bool {
+        self < value
+    }
+
+    func isGreaterThan(_ value: String) -> Bool {
+        self > value
+    }
 }
 
 extension Optional where Wrapped == String {
     var isNilOrEmpty: Bool {
         self?.isEmpty ?? true
+    }
+
+    func isLessThan(_ value: String?) -> Bool {
+        self ?? "" < value ?? ""
+    }
+
+    func isGreaterThan(_ value: String?) -> Bool {
+        self ?? "" > value ?? ""
     }
 }

@@ -13,11 +13,11 @@
 //    var viewModel: ReviewViewModel!
 //
 //    override func setUp() {
-//        let leitners = try? PersistenceController.shared.generateAndFillLeitner()
-//        let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitners!.first!).levels.first(where: { $0.level == 1 })!
+//        let leitner = ManagedObjectContextInstance.instance.leitners.first!
+//        let level = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: leitner).levels.first(where: { $0.level.level == 1 })!
 //        let mockSpeech = MockAVSpeechSynthesisVoice()
 //        let synthesizer = MockAVSpeechSynthesizer()
-//        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, level: level, voiceSpeech: mockSpeech, synthesizer: synthesizer)
+//        viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, levelValue: level.level.level, leitnerId: leitner.id, voiceSpeech: mockSpeech, synthesizer: synthesizer)
 //    }
 //
 //    func test_delete_question() {
@@ -67,7 +67,7 @@
 //        viewModel.selectedQuestion = completedQuestion
 //        viewModel.pass()
 //
-//        let fetchAgainCompleted = lastLevel?.allQuestions.first(where: { $0.objectID == completedQuestion.objectID })
+//        let fetchAgainCompleted = lastLevel?.questions.first(where: { $0.objectID == completedQuestion.objectID })
 //        XCTAssertEqual(fetchAgainCompleted?.completed ?? false, true)
 //
 //        let lastQuestion = viewModel.questions.last
@@ -92,7 +92,7 @@
 //        XCTAssertEqual(newStateOfQuestion?.passTime?.timeIntervalSince1970 ?? -1, beforeDate?.timeIntervalSince1970 ?? -1)
 //
 //        viewModel.level.leitner?.backToTopLevel = true
-//        let questionToBackTop = viewModel.level.leitner?.allQuestions.first(where: { $0.level?.level ?? 0 > 1 })
+//        let questionToBackTop = viewModel.level.leitner?.questions.first(where: { $0.level?.level ?? 0 > 1 })
 //        viewModel.selectedQuestion = questionToBackTop
 //        viewModel.fail()
 //        let newStateOfQuestionTop = viewModel.level.leitner?.findQuestion(objectID: questionToBackTop?.objectID)

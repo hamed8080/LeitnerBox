@@ -10,6 +10,7 @@ import Foundation
 @testable import LeitnerBox
 
 class MockNSManagedObjectContext: NSObject, NSManagedObjectContextProtocol {
+    var computedContext: NSManagedObjectContext { NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType) } 
     var error: Error?
     var fetchResult: [NSFetchRequestResult] = []
     var executeResult = NSPersistentStoreResult()

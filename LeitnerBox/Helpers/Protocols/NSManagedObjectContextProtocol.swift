@@ -9,6 +9,7 @@ import CoreData
 import Foundation
 
 public protocol NSManagedObjectContextProtocol: AnyObject {
+    var computedContext: NSManagedObjectContext { get }
     func save() throws
     func reset()
     func rollback()
@@ -26,4 +27,6 @@ public protocol NSManagedObjectContextProtocol: AnyObject {
     var name: String? { get }
 }
 
-extension NSManagedObjectContext: NSManagedObjectContextProtocol {}
+extension NSManagedObjectContext: NSManagedObjectContextProtocol {
+    public var computedContext: NSManagedObjectContext { self }
+}

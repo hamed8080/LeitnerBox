@@ -21,7 +21,7 @@ struct LevelRowData: Identifiable {
 }
 
 class LevelsViewModel: ObservableObject {
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     var leitner: Leitner
     @Published var searchWord: String = ""
     var levels: [LevelRowData] = []
@@ -33,7 +33,7 @@ class LevelsViewModel: ObservableObject {
     var reviewableCount: Int = 0
     @Published var isSearching: Bool = false
 
-    init(viewContext: NSManagedObjectContext, leitner: Leitner) {
+    init(viewContext: NSManagedObjectContextProtocol, leitner: Leitner) {
         self.viewContext = viewContext
         self.leitner = leitner
         load()
@@ -74,8 +74,11 @@ class LevelsViewModel: ObservableObject {
         } else {
             req.predicate = NSPredicate(format: "(question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@) AND leitnerId == %i", searchWord, searchWord, searchWord, leitner.id)
         }
-        if let questions = try? viewContext.fetch(req) {
+        do {
+            let questions = try viewContext.fetch(req)
             searchedQuestions = questions
+        } catch {
+            print(error)
         }
     }
 

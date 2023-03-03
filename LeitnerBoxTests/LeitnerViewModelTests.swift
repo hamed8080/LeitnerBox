@@ -14,7 +14,7 @@ final class LeitnerViewModelTests: XCTestCase {
     var mockContext: MockNSManagedObjectContext = .init()
 
     override func setUp() {
-        _ = try? PersistenceController.shared.generateAndFillLeitner()
+        _ = ManagedObjectContextInstance.instance
         viewModel = LeitnerViewModel(viewContext: context)
     }
 
@@ -56,6 +56,7 @@ final class LeitnerViewModelTests: XCTestCase {
         let leitner = viewModel.leitners.first!
         viewModel.delete(leitner)
         XCTAssertFalse(viewModel.leitners.contains(where: { $0 == leitner }))
+        ManagedObjectContextInstance.instance.reset() // Reset this because we need to use the first item a lot in testing environment so it should not be empty
     }
 
     func test_check_newId_for_leitner_added() {

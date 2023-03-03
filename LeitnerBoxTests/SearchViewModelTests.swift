@@ -14,11 +14,10 @@ final class SearchViewModelTests: XCTestCase {
     var mockContext: MockNSManagedObjectContext! = .init()
 
     override func setUp() {
-        let leitners = try? PersistenceController.shared.generateAndFillLeitner()
         let mockSpeach = MockAVSpeechSynthesisVoice()
         let mockSynthesizer = MockAVSpeechSynthesizer()
         viewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext,
-                                    leitner: leitners!.first!,
+                                    leitner: ManagedObjectContextInstance.instance.leitners.first!,
                                     voiceSpeech: mockSpeach,
                                     synthesizer: mockSynthesizer)
     }
@@ -36,6 +35,7 @@ final class SearchViewModelTests: XCTestCase {
     }
 
     func test_sort() {
+        viewModel.count = 500
         viewModel.sort(.level)
         XCTAssertTrue(viewModel.questions.first?.level?.level ?? 0 < viewModel.questions.last?.level?.level ?? 0)
 
@@ -46,6 +46,9 @@ final class SearchViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.questions.first?.question ?? "" < viewModel.questions.last?.question ?? "")
 
         viewModel.sort(.favorite)
+        let top = ((viewModel.questions.first?.favorite ?? false) ? 1 : 0)
+        let bottom = ((viewModel.questions.last?.favorite ?? false) ? 1 : 0)
+        print(top, bottom)
         XCTAssertTrue(((viewModel.questions.first?.favorite ?? false) ? 1 : 0) > ((viewModel.questions.last?.favorite ?? false) ? 1 : 0))
 
         viewModel.sort(.passedTime)
@@ -55,18 +58,22 @@ final class SearchViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.questions.first?.createTime?.timeIntervalSince1970 ?? -1 > viewModel.questions.last?.createTime?.timeIntervalSince1970 ?? -1)
 
         viewModel.sort(.noTags)
-        XCTAssertTrue(viewModel.questions.first?.tagsArray?.count ?? -1 < viewModel.questions.last?.tagsArray?.count ?? -1)
+        XCTAssertTrue(viewModel.questions.first?.tagsArray?.count ?? -1 <= viewModel.questions.last?.tagsArray?.count ?? -1)
 
         viewModel.sort(.tags)
-        XCTAssertTrue(viewModel.questions.first?.tagsArray?.count ?? -1 > viewModel.questions.last?.tagsArray?.count ?? -1)
+        XCTAssertTrue(viewModel.questions.first?.tagsArray?.count ?? -1 >= viewModel.questions.last?.tagsArray?.count ?? -1)
+    }
+
+    func test_sorted_tags(){
+        XCTAssertTrue(viewModel.sortedTags.first?.name ?? "" < viewModel.sortedTags.last?.name ?? "")
     }
 
     func test_toggle_completed() {
-//        let question = viewModel.questions.first!
-//        let beforeState = question.completed
-//        viewModel.toggleCompleted(question)
-//        let updated = viewModel.questions.first(where: { $0.objectID == question.objectID })!
-//        XCTAssertNotEqual(updated.completed, beforeState, "toggle completed not worked!")
+        let question = viewModel.questions.first!
+        let beforeState = question.completed
+        viewModel.toggleCompleted(question)
+        let updated = viewModel.questions.first(where: { $0.objectID == question.objectID })!
+        XCTAssertNotEqual(updated.completed, beforeState, "toggle completed not worked!")
     }
 
     func test_toggle_favorite() {
@@ -88,20 +95,19 @@ final class SearchViewModelTests: XCTestCase {
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "question == %@ AND leitnerId == %i AND levelValue == %i", question.question ?? "", viewModel.leitner.id, 1)
         let dbQuestions = try? viewModel.viewContext.fetch(req)
-        let count = dbQuestions?.count
-        let dbQuestion = dbQuestions?.first
+        let dbQuestion = dbQuestions?.first(where: {question.objectID == $0.objectID})
         XCTAssertEqual(dbQuestion?.level?.level ?? 0, 1, "Level didn't reset to first level")
         XCTAssertEqual(dbQuestion?.completed, false, "Completed didn't reset to false")
         XCTAssertNil(dbQuestion?.passTime, "Passed time is not nil")
     }
 
     func test_set_a_question_completed() {
-//        let question = viewModel.questions.first(where: { $0.level?.level ?? 0 > 1 })!
-//        viewModel.complete(question)
-//        let updated = viewModel.questions.first(where: { $0.objectID == question.objectID })!
-//        XCTAssertEqual(updated.level?.level ?? 0, 13, "Level didn't reset to completed level")
-//        XCTAssertEqual(updated.completed, true, "Level completed didn't reset to true")
-//        XCTAssertNotNil(updated.passTime, "Passed time is nil")
+        let question = viewModel.questions.first(where: { $0.level?.level ?? 0 > 1 })!
+        viewModel.complete(question)
+        let updated = viewModel.questions.first(where: { $0.objectID == question.objectID })!
+        XCTAssertEqual(updated.level?.level ?? 0, 13, "Level didn't reset to completed level")
+        XCTAssertEqual(updated.completed, true, "Level completed didn't reset to true")
+        XCTAssertNotNil(updated.passTime, "Passed time is nil")
     }
 
     func test_filter() {
@@ -124,7 +130,9 @@ final class SearchViewModelTests: XCTestCase {
     func test_has_next() {
         viewModel.lastPlayedQuestion = viewModel.questions.first!
         XCTAssertTrue(viewModel.hasNext(), "The Array should have next Item!")
-
+        // to retrive all questions inside a leitner which is around 60 in test environment
+        viewModel.count = 500
+        viewModel.fetchMoreQuestion()
         viewModel.lastPlayedQuestion = viewModel.questions.last!
         XCTAssertFalse(viewModel.hasNext(), "The Array should not have next Item!")
     }

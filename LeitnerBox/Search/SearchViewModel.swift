@@ -19,7 +19,7 @@ enum ReviewStatus {
 
 class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     @Published var searchText: String = ""
     @Published var showLeitnersListDialog = false
     @Published var leitner: Leitner
@@ -33,13 +33,13 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     var commandCenter: MPRemoteCommandCenter?
     private var voiceSpeech: AVSpeechSynthesisVoiceProtocol
     var task: Task<Void, Error>?
-    var sortedTags: [Tag] { leitner.tagsArray.sorted(by: { $0.name ?? "" < $1.name ?? "" }) }
+    var sortedTags: [Tag] { leitner.tagsArray.sorted(by: { $0.name.isLessThan($1.name) }) }
     private(set) var cancellableSet: Set<AnyCancellable> = []
-    private var count = 20
+    var count = 20
     private var offset = 0
     var selectedTag: Tag?
 
-    init(viewContext: NSManagedObjectContext,
+    init(viewContext: NSManagedObjectContextProtocol,
          leitner: Leitner,
          voiceSpeech: AVSpeechSynthesisVoiceProtocol,
          synthesizer: AVSpeechSynthesizerProtocol = AVSpeechSynthesizer())
@@ -102,15 +102,19 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         case .date:
             req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
         case .passedTime:
-            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: true)]
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.passTime, ascending: false)]
         case .noTags:
             req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.tagsCount, ascending: true), NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
         case .tags:
             req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.tagsCount, ascending: false), NSSortDescriptor(keyPath: \Question.createTime, ascending: false)]
         }
-        questions.append(contentsOf: (try? viewContext.fetch(req)) ?? [])
-        objectWillChange.send()
-        offset += count
+        do {
+            questions.append(contentsOf: try viewContext.fetch(req))
+            objectWillChange.send()
+            offset += count
+        } catch {
+            print(error)
+        }
     }
 
     func searchQuestion(searchText: String) {
@@ -128,7 +132,11 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         } else if !searchText.isEmpty {
             req.predicate = NSPredicate(format: "(question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@) AND leitnerId == %i", searchText, searchText, searchText, leitner.id)
         }
-        searchedQuestions = (try? viewContext.fetch(req)) ?? []
+        do {
+            searchedQuestions = try viewContext.fetch(req)
+        } catch {
+            print(error)
+        }
     }
 
     func deleteItems(offsets: IndexSet) {

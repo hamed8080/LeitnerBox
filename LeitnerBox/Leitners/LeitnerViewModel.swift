@@ -31,14 +31,18 @@ class LeitnerViewModel: ObservableObject {
     }
 
     func load() {
-        let req = Leitner.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
-        let leitners = (try? viewContext.fetch(req)) ?? []
-        let firstLeitnerId = leitners.first?.id ?? -1
-        let wqs = Question.topWidgetQuestion(context: viewContext, leitnerId: firstLeitnerId)
-        let data = try? JSONEncoder().encode(wqs)
-        self.leitners = leitners
-        widgetQuestions = data
+        do {
+            let req = Leitner.fetchRequest()
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Leitner.createDate, ascending: true)]
+            let leitners = try viewContext.fetch(req)
+            let firstLeitnerId = leitners.first?.id ?? -1
+            let wqs = Question.topWidgetQuestion(context: viewContext, leitnerId: firstLeitnerId)
+            let data = try JSONEncoder().encode(wqs)
+            self.leitners = leitners
+            widgetQuestions = data
+        } catch {
+            print(error)
+        }
     }
 
     func delete(_ leitner: Leitner) {

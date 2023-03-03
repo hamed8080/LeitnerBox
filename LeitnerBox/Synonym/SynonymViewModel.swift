@@ -12,12 +12,12 @@ import SwiftUI
 class SynonymViewModel: ObservableObject {
     @Published var leitner: Leitner
     @Published var baseQuestion: Question?
-    @Published var viewContext: NSManagedObjectContext
+    @Published var viewContext: NSManagedObjectContextProtocol
     @Published var searchText: String = ""
     @Published var searchedQuestions: [Question] = []
     private(set) var cancellableSet: Set<AnyCancellable> = []
 
-    init(viewContext: NSManagedObjectContext, leitner: Leitner, baseQuestion: Question? = nil) {
+    init(viewContext: NSManagedObjectContextProtocol, leitner: Leitner, baseQuestion: Question? = nil) {
         self.viewContext = viewContext
         self.baseQuestion = baseQuestion
         self.leitner = leitner
@@ -36,8 +36,11 @@ class SynonymViewModel: ObservableObject {
         req.sortDescriptors = [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
         req.fetchLimit = 20
         req.predicate = NSPredicate(format: "question contains[c] %@ OR answer contains[c] %@ OR detailDescription contains[c] %@", searchText, searchText, searchText)
-        if let questions = try? viewContext.fetch(req) {
+        do {
+            let questions = try viewContext.fetch(req)
             searchedQuestions = questions
+        } catch {
+            print(error)
         }
     }
 
@@ -46,7 +49,7 @@ class SynonymViewModel: ObservableObject {
             if let synonym = question.synonyms?.allObjects.first as? Synonym {
                 synonymQuestion.addToSynonyms(synonym)
             } else {
-                let synonym = Synonym(context: viewContext)
+                let synonym = Synonym(context: viewContext.computedContext)
                 synonym.addToQuestion(question)
                 synonymQuestion.addToSynonyms(synonym)
             }
@@ -63,7 +66,12 @@ class SynonymViewModel: ObservableObject {
 
     var allSynonymsInLeitner: [Synonym] {
         let req = Synonym.fetchRequest()
-        return (try? viewContext.fetch(req)) ?? []
+        do {
+            return try viewContext.fetch(req)
+        } catch {
+            print(error)
+            return []
+        }
     }
 
     /// We want the user keep all ``searchText`` and list of ``searchedQuestions``

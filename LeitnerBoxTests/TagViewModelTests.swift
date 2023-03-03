@@ -15,6 +15,7 @@ final class TagViewModelTests: XCTestCase {
     var context: NSManagedObjectContext = PersistenceController.shared.viewContext
 
     override func setUp() {
+        _ = ManagedObjectContextInstance.instance
         viewModel = TagViewModel(viewContext: context, leitner: Leitner(context: context))
     }
 
