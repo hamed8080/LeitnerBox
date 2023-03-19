@@ -6,7 +6,6 @@
 
 import CoreData
 import Foundation
-import SwiftUI
 
 class QuestionViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContext
@@ -35,7 +34,7 @@ class QuestionViewModel: ObservableObject {
     init(viewContext: NSManagedObjectContext, leitner: Leitner, question: Question? = nil) {
         self.leitner = leitner
         self.viewContext = viewContext
-        level = question == nil ? leitner.firstLevel! : question!.level!
+        level = question == nil ? Leitner.fetchLevelInsideLeitner(context: viewContext, leitnerId: leitner.id, level: 1) : question?.level
         self.question = question
         // Insert
         if let question {
@@ -51,9 +50,9 @@ class QuestionViewModel: ObservableObject {
         question.leitner = leitner
         question.detailDescription = detailDescription
         question.completed = completed
+        setLevelToLatestIfCompeleted(question)
         setSynonyms(question: question)
         setTags(question: question)
-
         if question.favorite == false, favorite {
             question.favoriteDate = Date()
         }
@@ -61,28 +60,28 @@ class QuestionViewModel: ObservableObject {
     }
 
     func insert(question: Question) {
-        withAnimation {
-            question.question = self.questionString.trimmingCharacters(in: .whitespacesAndNewlines)
-            question.answer = answer
-            question.leitner = leitner
-            question.detailDescription = self.detailDescription
-            question.level = level
-            question.completed = completed
-            setSynonyms(question: question)
-            setTags(question: question)
+        question.question = self.questionString.trimmingCharacters(in: .whitespacesAndNewlines)
+        question.answer = answer
+        question.leitner = leitner
+        question.detailDescription = self.detailDescription
+        question.level = level
+        question.completed = completed
+        setSynonyms(question: question)
+        setTags(question: question)
+        setLevelToLatestIfCompeleted(question)
+        question.createTime = Date()
+        question.favorite = favorite
+        if question.favorite {
+            question.favoriteDate = Date()
+        }
+        question.question = self.questionString.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
-            if question.completed {
-                if let lastLevel = level?.leitner?.levels.first(where: { $0.level == 13 }) {
-                    question.level = lastLevel
-                    question.passTime = Date()
-                    question.completed = true
-                }
-            }
-
-            question.createTime = Date()
-            question.favorite = favorite
-            if question.favorite {
-                question.favoriteDate = Date()
+    func setLevelToLatestIfCompeleted(_ question: Question) {
+        if question.completed {
+            if let lastLevel = level?.leitner?.levels.first(where: { $0.level == 13 }) {
+                question.level = lastLevel
+                question.passTime = Date()
             }
         }
     }
@@ -127,6 +126,7 @@ class QuestionViewModel: ObservableObject {
         isManual = true
         favorite = false
         detailDescription = ""
+        batchInserPhrasesMode = false
     }
 
     func setEditQuestionProperties(editQuestion: Question) {

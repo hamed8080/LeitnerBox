@@ -32,11 +32,7 @@ extension Leitner {
     var levels: [Level] {
         level?.allObjects as? [Level] ?? []
     }
-
-    var firstLevel: Level? {
-        levels.first(where: { $0.level == 1 })
-    }
-
+    
     static func fetchLeitnerQuestionsCount(context: NSManagedObjectContextProtocol, leitnerId: Int64) -> Int {
         let req = Question.fetchRequest()
         req.predicate = NSPredicate(format: "level.leitner.id == %i", leitnerId)

@@ -110,7 +110,7 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         @StateObject var viewModel = TagViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         var body: some View {
             TagView()

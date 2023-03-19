@@ -82,6 +82,7 @@ class PersistenceController: ObservableObject {
         do {
             try viewContext.save()
         } catch {
+            print("error in save viewContext: ", error)
             completionHandler?(.failToSave)
         }
     }
@@ -107,11 +108,11 @@ extension NSPersistentCloudKitContainer {
 // MARK: Generate the mock datas.
 
 extension PersistenceController {
-    func generateAndFillLeitner() throws -> [Leitner] {
+    func generateAndFillLeitner() -> [Leitner] {
         let leitners = generateLeitner(5)
         leitners.forEach { leitner in
             generateLevels(leitner: leitner).forEach { level in
-                let questions = generateQuestions(5, level, leitner)
+                let questions = generateQuestions(20, level, leitner)
                 generateTags(5, leitner).forEach { tag in
                     questions.forEach { question in
                         tag.addToQuestion(question)
@@ -120,7 +121,7 @@ extension PersistenceController {
                 }
             }
         }
-        try viewContext.save()
+        PersistenceController.saveDB(viewContext: viewContext)
         return leitners
     }
 

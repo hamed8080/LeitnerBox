@@ -89,7 +89,7 @@ class TagViewModel: ObservableObject {
         } else {
             addTag()
         }
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
         clearFields()
     }
 
@@ -111,13 +111,13 @@ class TagViewModel: ObservableObject {
     func addTagToQuestion(_ tag: Tag, question: Question?) {
         guard let question else { return }
         tag.addToQuestion(question)
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
     }
 
     func removeTagForQuestion(_ tag: Tag, question: Question?) {
         guard let question else { return }
         tag.removeFromQuestion(question)
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
     }
 
     func reset() {
@@ -131,5 +131,9 @@ class TagViewModel: ObservableObject {
         colorPickerColor = nil
         tagName = ""
         selectedTag = nil
+    }
+
+    func save() {
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 }

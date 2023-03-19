@@ -35,7 +35,7 @@ struct TagRowView: View {
 }
 
 struct TagRowView_Previews: PreviewProvider {
-    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+    static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
         TagRowView(
             tag: Tag(context: PersistenceController.shared.viewContext),

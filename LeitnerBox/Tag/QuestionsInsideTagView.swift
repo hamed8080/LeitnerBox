@@ -31,7 +31,7 @@ struct QuestionsInsideTagView: View {
 
 struct QuestionsInsideTagView_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         static let context = PersistenceController.shared.viewContext
         @StateObject var viewModel = TagViewModel(viewContext: context, leitner: Preview.leitner)
         static let tag = Preview.leitner.tagsArray.first ?? Tag()

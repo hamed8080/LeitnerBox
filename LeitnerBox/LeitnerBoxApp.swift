@@ -5,6 +5,7 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import SwiftUI
+import AVFoundation
 
 @main
 struct LeitnerBoxApp: App, DropDelegate {
@@ -25,6 +26,7 @@ struct LeitnerBoxApp: App, DropDelegate {
                 ZStack {
                     LeitnerView()
                         .onDrop(of: [.fileURL, .data], delegate: self)
+                        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
                         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                         .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
                         .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))

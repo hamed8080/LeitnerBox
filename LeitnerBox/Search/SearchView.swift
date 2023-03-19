@@ -217,7 +217,7 @@ struct PronunceWordsView: View {
 struct SearchView_Previews: PreviewProvider {
     struct Preview: View {
         static let context = PersistenceController.shared.viewContext
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         @StateObject var viewModel = SearchViewModel(
             viewContext: Preview.context,
             leitner: Preview.leitner,

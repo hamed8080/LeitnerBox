@@ -48,7 +48,7 @@ final class TagViewModelTests: XCTestCase {
             let firstQuestion = questions.first!
             let oldQuestionTagCounts = firstQuestion.tag?.count ?? 0
             newTag.addToQuestion(firstQuestion)
-            try? viewModel.viewContext.save()
+            viewModel.save()
             XCTAssertEqual(firstQuestion.tagsArray?.count ?? 0, oldQuestionTagCounts + 1, "Tags not added")
         }
     }

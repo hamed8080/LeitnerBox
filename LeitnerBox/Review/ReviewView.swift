@@ -124,7 +124,7 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         static let level = (leitner.levels).filter { $0.level == 1 }.first
         @StateObject var viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, levelValue: 1, leitnerId: 1, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
         var body: some View {

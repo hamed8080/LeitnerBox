@@ -59,14 +59,6 @@
                BlueprintName = "LeitnerBoxTests"
                ReferencedContainer = "container:LeitnerBox.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "QuestionViewModelTests">
-               </Test>
-               <Test
-                  Identifier = "ReviewViewModelTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

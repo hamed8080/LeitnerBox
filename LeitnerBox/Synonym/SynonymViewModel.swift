@@ -53,7 +53,7 @@ class SynonymViewModel: ObservableObject {
                 synonym.addToQuestion(question)
                 synonymQuestion.addToSynonyms(synonym)
             }
-            try? PersistenceController.shared.viewContext.save()
+            save()
         }
     }
 
@@ -61,7 +61,7 @@ class SynonymViewModel: ObservableObject {
         if let synonym = question.synonyms?.allObjects.first as? Synonym {
             question.removeFromSynonyms(synonym)
         }
-        try? PersistenceController.shared.viewContext.save()
+        save()
     }
 
     var allSynonymsInLeitner: [Synonym] {
@@ -77,5 +77,9 @@ class SynonymViewModel: ObservableObject {
     /// We want the user keep all ``searchText`` and list of ``searchedQuestions``
     func reset() {
         baseQuestion = nil
+    }
+
+    func save() {
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 }

@@ -30,7 +30,6 @@ struct LeitnerView: View {
             }
         }
         .animation(.easeInOut, value: selectedLeitner)
-        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier: viewModel.selectedVoiceIdentifire ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
         .sheet(isPresented: Binding(get: { viewModel.backupFile != nil }, set: { _ in })) {
             if .iOS == true {
                 Task {
@@ -237,7 +236,7 @@ struct EmptyLeitnerAnimation: View {
 struct LeitnerView_Previews: PreviewProvider {
     struct Preview: View {
         var viewModel: LeitnerViewModel {
-            _ = try? PersistenceController.shared.generateAndFillLeitner()
+            _ = PersistenceController.shared.generateAndFillLeitner()
             return LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
         }
 

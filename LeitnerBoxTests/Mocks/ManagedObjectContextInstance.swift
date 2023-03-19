@@ -12,10 +12,10 @@ class ManagedObjectContextInstance {
     static let instance = ManagedObjectContextInstance()
     var leitners: [Leitner] = []
     private init(){
-        leitners = (try? PersistenceController.shared.generateAndFillLeitner()) ?? []
+        leitners = PersistenceController.shared.generateAndFillLeitner()
     }
 
     func reset() {
-        leitners = (try? PersistenceController.shared.generateAndFillLeitner()) ?? []
+        leitners = PersistenceController.shared.generateAndFillLeitner()
     }
 }

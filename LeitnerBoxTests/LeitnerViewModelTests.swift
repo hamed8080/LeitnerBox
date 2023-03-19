@@ -71,7 +71,7 @@ final class LeitnerViewModelTests: XCTestCase {
         XCTAssertEqual(newLeitner.id, lastId + 1, "Expected to add new item with higher id number!")
     }
 
-    func test_fawil_to_save() throws {
+    func test_fail_to_save() throws {
         mockContext.error = MyError.failToSave
         let viewModel = LeitnerViewModel(viewContext: mockContext)
         let notInContextLeitner = Leitner(context: context)

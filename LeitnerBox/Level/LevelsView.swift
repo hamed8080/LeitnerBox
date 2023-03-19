@@ -103,10 +103,8 @@ struct LevelsView: View {
 
 struct LevelsView_Previews: PreviewProvider {
     struct Preview: View {
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
-
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         @StateObject var viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
-
         @StateObject var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
         var body: some View {

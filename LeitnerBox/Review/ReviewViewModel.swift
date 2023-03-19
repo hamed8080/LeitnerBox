@@ -53,7 +53,7 @@ class ReviewViewModel: ObservableObject {
     func deleteQuestion() {
         if let selectedQuestion {
             viewContext.delete(selectedQuestion)
-            PersistenceController.saveDB(viewContext: viewContext)
+            save()
             toggleDeleteDialog()
         }
         removeFromList()
@@ -66,7 +66,7 @@ class ReviewViewModel: ObservableObject {
 
     func toggleFavorite() {
         selectedQuestion?.favorite.toggle()
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
         objectWillChange.send()
     }
 
@@ -74,7 +74,7 @@ class ReviewViewModel: ObservableObject {
         isShowingAnswer = false
         passCount += 1
         selectedQuestion?.passTime = Date()
-        if selectedQuestion?.level?.level == 13 {
+        if selectedQuestion?.levelValue == 13 {
             selectedQuestion?.completed = true
         } else {
             selectedQuestion?.level = selectedQuestion?.upperLevel
@@ -86,7 +86,7 @@ class ReviewViewModel: ObservableObject {
         statistic.isPassed = true
         selectedQuestion?.statistics?.adding(statistic)
 
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
         removeFromList()
         if !hasNext {
             isFinished = true
@@ -97,7 +97,6 @@ class ReviewViewModel: ObservableObject {
 
     func fail() {
         isShowingAnswer = false
-
         let statistic = Statistic(context: viewContext.computedContext)
         statistic.question = selectedQuestion
         statistic.actionDate = Date()
@@ -106,8 +105,9 @@ class ReviewViewModel: ObservableObject {
 
         if leitner?.backToTopLevel == true {
             selectedQuestion?.level = selectedQuestion?.firstLevel
+            selectedQuestion?.completed = false
         }
-        PersistenceController.saveDB(viewContext: viewContext)
+        save()
         failedCount += 1
         removeFromList()
         if !hasNext {
@@ -190,5 +190,9 @@ class ReviewViewModel: ObservableObject {
 
     func stopPronounce() {
         _ = synthesizer.stopSpeaking(at: .immediate)
+    }
+
+    func save() {
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 }

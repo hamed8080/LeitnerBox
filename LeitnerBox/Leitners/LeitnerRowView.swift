@@ -41,7 +41,7 @@ struct LeitnerRowView: View {
 }
 
 struct LeitnerRowView_Previews: PreviewProvider {
-    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+    static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
         LeitnerRowView(leitner: LeitnerRowView_Previews.leitner)
             .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.viewContext))

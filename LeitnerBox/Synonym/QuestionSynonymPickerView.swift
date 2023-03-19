@@ -37,7 +37,7 @@ struct QuestionSynonymPickerView: View {
 struct QuestionPickerView_Previews: PreviewProvider {
     struct Preview: View {
         let context = PersistenceController.shared.viewContext
-        static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+        static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         @StateObject var viewModel = SynonymViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
 
         var body: some View {

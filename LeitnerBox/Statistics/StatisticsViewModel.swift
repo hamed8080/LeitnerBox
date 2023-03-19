@@ -17,13 +17,8 @@ class StatisticsViewModel: ObservableObject {
         self.viewContext = viewContext
     }
 
-    func saveDB() {
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+    func save() {
+        PersistenceController.saveDB(viewContext: viewContext)
     }
 
     func load() {

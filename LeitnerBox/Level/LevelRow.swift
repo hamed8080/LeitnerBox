@@ -106,7 +106,7 @@ struct LevelConfigView: View {
 }
 
 struct LevelRow_Previews: PreviewProvider {
-    static let leitner = try! PersistenceController.shared.generateAndFillLeitner().first!
+    static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
     static var previews: some View {
         LevelRow(levelRowData: .init(leitnerId: 1, level: Level(), favCount: 25, reviewableCount: 50, totalCountInsideLevel: 100))
             .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)

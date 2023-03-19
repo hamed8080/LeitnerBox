@@ -278,7 +278,7 @@ class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
 
     func moveQuestionTo(_ question: Question, leitner: Leitner) {
-        question.level = leitner.firstLevel
+        question.level = Leitner.fetchLevelInsideLeitner(context: viewContext, leitnerId: leitner.id, level: 1)
         question.passTime = nil
         question.completed = false
         question.leitner = leitner
