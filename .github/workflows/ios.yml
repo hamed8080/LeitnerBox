@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_14.0.app && /usr/bin/xcodebuild -version
+        run: sudo xcode-select -switch /Applications/Xcode_14.2.app && /usr/bin/xcodebuild -version
       - name: Run Unit Tests
         run: >
           xcodebuild
@@ -24,6 +24,6 @@ jobs:
           -project LeitnerBox.xcodeproj
           -scheme LeitnerBox
           -sdk iphonesimulator
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0'
+          -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2'
           -only-testing:LeitnerBoxTests
           IS_CONTINUOUS_INTEGRATION=$IS_CONTINUOUS_INTEGRATION | xcpretty && exit ${PIPESTATUS[0]}

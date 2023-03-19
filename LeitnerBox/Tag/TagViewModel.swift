@@ -43,6 +43,7 @@ class TagViewModel: ObservableObject {
     func deleteItems(offsets: IndexSet) {
         offsets.map { tags[$0] }.forEach(viewContext.delete)
         tags.remove(atOffsets: offsets)
+        save()
     }
 
     func searchTags(text: String) {

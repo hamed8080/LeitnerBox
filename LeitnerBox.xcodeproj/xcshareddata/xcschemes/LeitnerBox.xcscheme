@@ -20,6 +20,20 @@
                ReferencedContainer = "container:LeitnerBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "05517F7F28720B74004FEEE1"
+               BuildableName = "LeitnerBoxUITests.xctest"
+               BlueprintName = "LeitnerBoxUITests"
+               ReferencedContainer = "container:LeitnerBox.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -57,16 +71,6 @@
                BlueprintIdentifier = "0543D0EB2870B3AC005807ED"
                BuildableName = "LeitnerBoxTests.xctest"
                BlueprintName = "LeitnerBoxTests"
-               ReferencedContainer = "container:LeitnerBox.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05517F7F28720B74004FEEE1"
-               BuildableName = "LeitnerBoxUITests.xctest"
-               BlueprintName = "LeitnerBoxUITests"
                ReferencedContainer = "container:LeitnerBox.xcodeproj">
             </BuildableReference>
          </TestableReference>
