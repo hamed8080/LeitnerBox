@@ -11,10 +11,17 @@ import AVFoundation
 struct LeitnerBoxApp: App, DropDelegate {
     @State private var dragOver = false
     @State var hideSplash = false
+    var isUnitTesting = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_TEST"] == "1"
 
     var body: some Scene {
         WindowGroup {
-            if hideSplash == false {
+            if isUnitTesting {
+                Text("In Unit Testing")
+                    .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
+                    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                    .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
+                    .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
+            } else if hideSplash == false {
                 SplashScreen()
                     .animation(.easeInOut, value: hideSplash)
                     .onAppear {
