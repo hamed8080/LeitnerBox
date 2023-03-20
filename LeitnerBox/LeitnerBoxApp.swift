@@ -15,31 +15,28 @@ struct LeitnerBoxApp: App, DropDelegate {
 
     var body: some Scene {
         WindowGroup {
-            if isUnitTesting {
-                Text("In Unit Testing")
-                    .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
-                    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-                    .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
-                    .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
-            } else if hideSplash == false {
-                SplashScreen()
-                    .animation(.easeInOut, value: hideSplash)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            hideSplash = true
-                        }
-                    }
-            } else {
-                ZStack {
+            ZStack {
+                if isUnitTesting {
+                    Text("In Unit Testing")
+                } else if hideSplash == false {
+                    SplashScreen()
+                } else {
                     LeitnerView()
-                        .onDrop(of: [.fileURL, .data], delegate: self)
-                        .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
-                        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-                        .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
-                        .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
-                        .animation(.easeInOut, value: hideSplash)
-
                     UpdateDatabaseInBackground()
+                }
+            }
+            .onDrop(of: [.fileURL, .data], delegate: self)
+            .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+            .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
+            .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
+            .animation(.easeInOut, value: hideSplash)
+            .animation(.easeInOut, value: hideSplash)
+            .onAppear {
+                if !isUnitTesting {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        hideSplash = true
+                    }
                 }
             }
         }

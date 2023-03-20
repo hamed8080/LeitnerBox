@@ -19,7 +19,7 @@ jobs:
       - name: Run Unit Tests
         run: >
           xcodebuild
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          CODE_SIGN_IDENTITY="" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
           test
           -project LeitnerBox.xcodeproj
           -scheme LeitnerBox
