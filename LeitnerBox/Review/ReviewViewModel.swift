@@ -10,7 +10,7 @@ import Foundation
 import NaturalLanguage
 import SwiftUI
 
-class ReviewViewModel: ObservableObject {
+final class ReviewViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var questions: [Question] = []
     @Published var showDelete = false

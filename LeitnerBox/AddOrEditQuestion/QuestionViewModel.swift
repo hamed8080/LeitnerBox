@@ -7,7 +7,7 @@
 import CoreData
 import Foundation
 
-class QuestionViewModel: ObservableObject {
+final class QuestionViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContext
     @Published var level: Level?
     @Published var isManual = true

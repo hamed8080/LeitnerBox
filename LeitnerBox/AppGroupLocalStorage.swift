@@ -6,7 +6,7 @@
 
 import Foundation
 
-class AppGroupLocalStorage {
+final class AppGroupLocalStorage {
     static let groupName = "group.ir.app_group"
     static let shared = AppGroupLocalStorage()
 

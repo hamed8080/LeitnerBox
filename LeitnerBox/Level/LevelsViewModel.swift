@@ -20,7 +20,7 @@ struct LevelRowData: Identifiable {
     var notCompletdCount: Int { totalCountInsideLevel - reviewableCount }
 }
 
-class LevelsViewModel: ObservableObject {
+final class LevelsViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     var leitner: Leitner
     @Published var searchWord: String = ""

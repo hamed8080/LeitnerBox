@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 import SwiftUI
 
-class SynonymViewModel: ObservableObject {
+final class SynonymViewModel: ObservableObject {
     @Published var leitner: Leitner
     @Published var baseQuestion: Question?
     @Published var viewContext: NSManagedObjectContextProtocol

@@ -19,7 +19,7 @@ struct ActivityViewControllerWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_: UIViewControllerType, context _: Context) {}
 }
 
-class LinkMetaDataManager: NSObject, UIActivityItemSource {
+final class LinkMetaDataManager: NSObject, UIActivityItemSource {
     let url: URL
 
     init(url: URL) {

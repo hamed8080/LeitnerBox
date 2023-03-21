@@ -5,7 +5,7 @@
 // Created by Hamed Hosseini on 10/28/22.
 
 import Foundation
-class WidgetQuestionTag: Codable, Identifiable {
+final class WidgetQuestionTag: Codable, Identifiable {
     let name: String
 
     internal init(name: String) {
@@ -13,7 +13,7 @@ class WidgetQuestionTag: Codable, Identifiable {
     }
 }
 
-class WidgetQuestion: Codable {
+final class WidgetQuestion: Codable {
     let question: String?
     let answer: String?
     let detailedDescription: String?

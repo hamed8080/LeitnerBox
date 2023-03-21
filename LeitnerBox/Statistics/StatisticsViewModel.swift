@@ -8,7 +8,7 @@ import CoreData
 import Foundation
 import SwiftUI
 
-class StatisticsViewModel: ObservableObject {
+final class StatisticsViewModel: ObservableObject {
     var viewContext: NSManagedObjectContext
     @Published var statistics: [Statistic] = []
     @Published var timeframe: Timeframe = .week

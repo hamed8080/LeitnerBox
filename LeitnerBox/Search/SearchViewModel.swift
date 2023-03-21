@@ -17,7 +17,7 @@ enum ReviewStatus {
     case unInitialized
 }
 
-class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var searchText: String = ""

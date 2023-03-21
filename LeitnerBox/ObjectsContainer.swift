@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 import SwiftUI
 
-class ObjectsContainer: ObservableObject {
+final class ObjectsContainer: ObservableObject {
     var leitner: Leitner
     @Published var leitnerVM: LeitnerViewModel
     @Published var searchVM: SearchViewModel

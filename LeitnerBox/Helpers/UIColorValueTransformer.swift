@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @objc(UIColorValueTransformer)
-class UIColorValueTransformer: ValueTransformer {
+final class UIColorValueTransformer: ValueTransformer {
     override class func transformedValueClass() -> AnyClass {
         UIColor.self
     }

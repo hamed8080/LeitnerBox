@@ -8,7 +8,7 @@ import UIKit
 import UniformTypeIdentifiers
 
 @objc(ShareViewController)
-class ShareViewController: UIViewController {
+final class ShareViewController: UIViewController {
     static let groupName = "group.ir.app_group"
 
     @IBOutlet var img: UIImageView!

@@ -8,7 +8,7 @@ import Combine
 import CoreData
 import Foundation
 
-class TagViewModel: ObservableObject {
+final class TagViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var tags: [Tag] = []
     @Published var searchedTags: [Tag] = []

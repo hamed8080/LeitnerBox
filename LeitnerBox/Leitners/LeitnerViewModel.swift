@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 import SwiftUI
 
-class LeitnerViewModel: ObservableObject {
+final class LeitnerViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var leitners: [Leitner] = []
     @Published var showEditOrAddLeitnerAlert = false

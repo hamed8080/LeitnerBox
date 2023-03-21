@@ -7,7 +7,7 @@
 import CoreData
 import SwiftUI
 
-class PersistenceController: ObservableObject {
+final class PersistenceController: ObservableObject {
     static let isTest: Bool = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_TEST"] == "1"
     static let inMemory = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" || isTest
     static var shared = PersistenceController(inMemory: inMemory)

@@ -8,7 +8,7 @@
 import Foundation
 @testable import LeitnerBox
 
-class ManagedObjectContextInstance {
+final class ManagedObjectContextInstance {
     static let instance = ManagedObjectContextInstance()
     var leitners: [Leitner] = []
     private init(){
