@@ -11,7 +11,7 @@ struct TopSheetTextEditorView: View {
     let placeholder: String
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             TextEditor(text: $searchText)
                 .padding([.leading, .trailing], 4)
                 .font(.system(.body))
@@ -46,9 +46,10 @@ struct TopSheetTextEditorView: View {
                     }
                     .padding([.leading, .trailing], 12)
                 )
-
             Divider()
         }
+        .padding(.top, 4)
+        .padding(.leading, 8)
     }
 }
 

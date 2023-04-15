@@ -14,19 +14,21 @@ struct QuestionSynonymPickerView: View {
     var completion: (Question) -> Void
 
     var body: some View {
-        List {
+        VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $objVM.synonymVM.searchText, placeholder: "Search for synonyms...")
-                .listRowSeparator(.hidden)
-            ForEach(objVM.synonymVM.searchedQuestions) { question in
-                NormalQuestionRow(question: question)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        completion(question)
-                        dismiss()
-                    }
+            List {
+                ForEach(objVM.synonymVM.searchedQuestions) { question in
+                    NormalQuestionRow(question: question)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            completion(question)
+                            dismiss()
+                        }
+                }
             }
         }
+        .animation(.easeInOut, value: objVM.synonymVM.searchedQuestions.count)
         .listStyle(.plain)
         .onDisappear {
             objVM.synonymVM.reset()

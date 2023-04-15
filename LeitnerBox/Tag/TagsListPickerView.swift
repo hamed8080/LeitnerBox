@@ -12,26 +12,28 @@ struct TagsListPickerView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        List {
+        VStack(spacing: 0) {
             TopSheetTextEditorView(searchText: $objVM.tagVM.searchText, placeholder: "Search for tags...")
-                .listRowSeparator(.hidden)
-            ForEach(objVM.tagVM.filtered) { tag in
-                Label(tag.name ?? "", systemImage: "tag")
-                    .padding(8)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        completion(tag)
-                        dismiss()
-                    }
-                    .onAppear {
-                        if tag == objVM.tagVM.tags.last {
-                            objVM.tagVM.loadMore()
+            List {
+                ForEach(objVM.tagVM.filtered) { tag in
+                    Label(tag.name ?? "", systemImage: "tag")
+                        .padding(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            completion(tag)
+                            dismiss()
                         }
-                    }
+                        .onAppear {
+                            if tag == objVM.tagVM.tags.last {
+                                objVM.tagVM.loadMore()
+                            }
+                        }
+                }
             }
         }
-        .animation(.easeInOut, value: objVM.tagVM.filtered)
+        .animation(.easeInOut, value: objVM.searchVM.searchedQuestions.count)
+        .animation(.easeInOut, value: objVM.tagVM.filtered.count)
         .listStyle(.plain)
         .onAppear {
             objVM.tagVM.loadMore()
