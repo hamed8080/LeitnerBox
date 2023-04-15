@@ -14,8 +14,8 @@ struct QuestionSynonymPickerView: View {
     var completion: (Question) -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            TopSheetTextEditorView(searchText: $objVM.synonymVM.searchText, placeholder: "Search for synonyms...")
+        ZStack(alignment: .top) {
+
             List {
                 ForEach(objVM.synonymVM.searchedQuestions) { question in
                     NormalQuestionRow(question: question)
@@ -27,9 +27,21 @@ struct QuestionSynonymPickerView: View {
                         }
                 }
             }
+            .listStyle(.plain)
+            .safeAreaInset(edge: .top) {
+                Spacer()
+                    .frame(height: 48)
+            }
+            TopSheetTextEditorView(searchText: $objVM.synonymVM.searchText, placeholder: "Search for synonyms...")
+                .background(
+                    LinearGradient(colors: [.blue.opacity(0.2), .green.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        .overlay (
+                            Material.ultraThinMaterial
+                        )
+                )
         }
         .animation(.easeInOut, value: objVM.synonymVM.searchedQuestions.count)
-        .listStyle(.plain)
+
         .onDisappear {
             objVM.synonymVM.reset()
         }

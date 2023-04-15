@@ -13,6 +13,8 @@ struct TopSheetTextEditorView: View {
     var body: some View {
         VStack(spacing: 0) {
             TextEditor(text: $searchText)
+                .scrollContentBackground(.hidden) // <- Hide it
+                .background(.clear)
                 .padding([.leading, .trailing], 4)
                 .font(.system(.body))
                 .frame(height: 48)
@@ -48,6 +50,7 @@ struct TopSheetTextEditorView: View {
                 )
             Divider()
         }
+        .background(.clear)
         .padding(.top, 4)
         .padding(.leading, 8)
     }

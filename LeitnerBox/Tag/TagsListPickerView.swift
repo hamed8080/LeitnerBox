@@ -12,8 +12,7 @@ struct TagsListPickerView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack(spacing: 0) {
-            TopSheetTextEditorView(searchText: $objVM.tagVM.searchText, placeholder: "Search for tags...")
+        ZStack(alignment: .top) {
             List {
                 ForEach(objVM.tagVM.filtered) { tag in
                     Label(tag.name ?? "", systemImage: "tag")
@@ -31,10 +30,22 @@ struct TagsListPickerView: View {
                         }
                 }
             }
+            .listStyle(.plain)
+            .safeAreaInset(edge: .top) {
+                Spacer()
+                    .frame(height: 48)
+            }
+
+            TopSheetTextEditorView(searchText: $objVM.tagVM.searchText, placeholder: "Search for tags...")
+                .background(
+                    LinearGradient(colors: [.blue.opacity(0.2), .green.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        .overlay (
+                            Material.ultraThinMaterial
+                        )
+                )
         }
         .animation(.easeInOut, value: objVM.searchVM.searchedQuestions.count)
         .animation(.easeInOut, value: objVM.tagVM.filtered.count)
-        .listStyle(.plain)
         .onAppear {
             objVM.tagVM.loadMore()
         }
