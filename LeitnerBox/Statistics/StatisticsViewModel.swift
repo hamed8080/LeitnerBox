@@ -7,71 +7,61 @@
 import CoreData
 import Foundation
 import SwiftUI
+import Combine
 
 final class StatisticsViewModel: ObservableObject {
     var viewContext: NSManagedObjectContext
     @Published var statistics: [Statistic] = []
     @Published var timeframe: Timeframe = .week
+    var cancelableSet = Set<AnyCancellable>()
+    private(set) var isLoading: Bool = false
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
+        $timeframe.sink { [weak self] timeFrame in
+            self?.load(timeframe: timeFrame)
+        }
+        .store(in: &cancelableSet)
     }
 
     func save() {
         PersistenceController.saveDB(viewContext: viewContext)
     }
 
-    func load() {
-        let req = Statistic.fetchRequest()
-        req.sortDescriptors = [NSSortDescriptor(keyPath: \Statistic.actionDate, ascending: true)]
-        do {
-            statistics = try viewContext.fetch(req)
-        } catch {
-            print("Fetch failed: Error \(error.localizedDescription)")
+    func load(timeframe: Timeframe = .week) {
+        isLoading = true
+        viewContext.perform {
+            let req = Statistic.fetchRequest()
+            req.sortDescriptors = [NSSortDescriptor(keyPath: \Statistic.actionDate, ascending: true)]
+            req.predicate = NSPredicate(format: "actionDate >= %@", self.startDate(timeframe: timeframe) as NSDate)
+            var statistics: [Statistic] = []
+            do {
+                statistics = try self.viewContext.fetch(req)
+            } catch {
+                print("Fetch failed: Error \(error.localizedDescription)")
+            }
+            DispatchQueue.main.async {
+                self.statistics = statistics
+                self.isLoading = false
+            }
         }
     }
 
-    private func byWeek() -> [Statistic] {
-        let lastWeek = Calendar.current.date(byAdding: .weekday, value: -8, to: .now)
-        return statistics.filter { lastWeek?.timeIntervalSince1970 ?? 0 <= $0.actionDate?.timeIntervalSince1970 ?? 0 }
+    func startDate(timeframe: Timeframe) -> Date {
+        switch timeframe {
+        case .today:
+            return Calendar.current.date(byAdding: .day, value: -1, to: .now) ?? Date()
+        case .week:
+            return Calendar.current.date(byAdding: .weekday, value: -8, to: .now) ?? Date()
+        case .month:
+            return Calendar.current.date(byAdding: .month, value: -1, to: .now) ?? Date()
+        case .year:
+            return Calendar.current.date(byAdding: .year, value: -5, to: .now) ?? Date()
+        }
     }
 
-    private func byMonth() -> [Statistic] {
-        let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: .now)
-        return statistics.filter { lastMonth?.timeIntervalSince1970 ?? 0 <= $0.actionDate?.timeIntervalSince1970 ?? 0 }
-    }
-
-    private func byYear() -> [Statistic] {
-        let lastYear = Calendar.current.date(byAdding: .year, value: -1, to: .now)
-        return statistics.filter { lastYear?.timeIntervalSince1970 ?? 0 <= $0.actionDate?.timeIntervalSince1970 ?? 0 }
-    }
-
-    private func successOfWeek() -> [[IndexingIterator<[Statistic]>.Element]] {
-        let gorupedByDate = byWeek().groupSort(byDate: { $0.actionDate ?? Date() })
-        return gorupedByDate
-    }
-
-    private func stateByPassed() -> [[Statistic]] {
-        [byWeek().filter(\.isPassed), byWeek().filter { $0.isPassed == false }]
-    }
-
-    private func weekPlotable() -> [PloatableItem] {
-        let data = byWeek()
-        return totolPlottables(data: data)
-    }
-
-    private func monthPlotable() -> [PloatableItem] {
-        let data = byMonth()
-        return totolPlottables(data: data)
-    }
-
-    private func yearPlotable() -> [PloatableItem] {
-        let data = byYear()
-        return totolPlottables(data: data)
-    }
-
-    private func totolPlottables(data: [Statistic]) -> [PloatableItem] {
-        plotables(data, isPassed: true) + plotables(data, isPassed: false)
+    var plottables: [PloatableItem] {
+        plotables(statistics, isPassed: true) + plotables(statistics, isPassed: false)
     }
 
     private func plotables(_ array: [Statistic], isPassed: Bool) -> [PloatableItem] {
@@ -87,19 +77,6 @@ final class StatisticsViewModel: ObservableObject {
             }
         }
         return arr
-    }
-
-    var plaotsForSelectedTime: [PloatableItem] {
-        switch timeframe {
-        case .today:
-            fatalError("not implemented")
-        case .week:
-            return weekPlotable()
-        case .month:
-            return monthPlotable()
-        case .year:
-            return yearPlotable()
-        }
     }
 
     func reset() {

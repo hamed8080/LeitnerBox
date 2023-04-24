@@ -14,6 +14,7 @@ struct LeitnerBoxApp: App, DropDelegate {
     var isUnitTesting = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_TEST"] == "1"
 
     var body: some Scene {
+        let context = PersistenceController.shared.container.viewContext
         WindowGroup {
             ZStack {
                 if isUnitTesting {
@@ -27,9 +28,9 @@ struct LeitnerBoxApp: App, DropDelegate {
             }
             .onDrop(of: [.fileURL, .data], delegate: self)
             .environment(\.avSpeechSynthesisVoice, AVSpeechSynthesisVoice(identifier:  UserDefaults.standard.string(forKey: "selectedVoiceIdentifire") ?? "") ?? AVSpeechSynthesisVoice(language: "en-GB")!)
-            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-            .environmentObject(LeitnerViewModel(viewContext: PersistenceController.shared.container.viewContext))
-            .environmentObject(StatisticsViewModel(viewContext: PersistenceController.shared.container.viewContext))
+            .environment(\.managedObjectContext, context)
+            .environmentObject(LeitnerViewModel(viewContext: context))
+            .environmentObject(StatisticsViewModel(viewContext: context))
             .animation(.easeInOut, value: hideSplash)
             .animation(.easeInOut, value: hideSplash)
             .onAppear {
