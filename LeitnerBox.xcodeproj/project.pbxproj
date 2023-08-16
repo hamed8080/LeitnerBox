@@ -23,7 +23,6 @@
 		051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1073291137B400F990BD /* PassOrFailButtons.swift */; };
 		051E1076291137D100F990BD /* DeleteDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1075291137D100F990BD /* DeleteDialog.swift */; };
 		051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1077291137EC00F990BD /* TapToAnswerView.swift */; };
-		051E107A2911380A00F990BD /* ReviewControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E10792911380A00F990BD /* ReviewControls.swift */; };
 		051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E107B2911383000F990BD /* FinishedReviewView.swift */; };
 		05219C0A2859F6DB00D3ECF5 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05219C092859F6DB00D3ECF5 /* Sequence+.swift */; };
 		05266ABA28367DA9004693BC /* LeitnerBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05266AB928367DA9004693BC /* LeitnerBoxApp.swift */; };
@@ -172,7 +171,6 @@
 		051E1073291137B400F990BD /* PassOrFailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassOrFailButtons.swift; sourceTree = "<group>"; };
 		051E1075291137D100F990BD /* DeleteDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDialog.swift; sourceTree = "<group>"; };
 		051E1077291137EC00F990BD /* TapToAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToAnswerView.swift; sourceTree = "<group>"; };
-		051E10792911380A00F990BD /* ReviewControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewControls.swift; sourceTree = "<group>"; };
 		051E107B2911383000F990BD /* FinishedReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedReviewView.swift; sourceTree = "<group>"; };
 		05219C092859F6DB00D3ECF5 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		05266AB628367DA9004693BC /* LeitnerBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeitnerBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,7 +327,6 @@
 				051E1073291137B400F990BD /* PassOrFailButtons.swift */,
 				051E1075291137D100F990BD /* DeleteDialog.swift */,
 				051E1077291137EC00F990BD /* TapToAnswerView.swift */,
-				051E10792911380A00F990BD /* ReviewControls.swift */,
 				051E107B2911383000F990BD /* FinishedReviewView.swift */,
 			);
 			path = Views;
@@ -878,7 +875,6 @@
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
 				05901AB929B1E8550032A742 /* LeitnerBox.xcdatamodeld in Sources */,
-				051E107A2911380A00F990BD /* ReviewControls.swift in Sources */,
 				05219C0A2859F6DB00D3ECF5 /* Sequence+.swift in Sources */,
 				058EA39628AF59CA0080BDDF /* TopSheetTextEditorView.swift in Sources */,
 				051B7DAE288B02C300465C24 /* WidgetQuestion.swift in Sources */,

@@ -32,7 +32,6 @@ struct LeitnerBoxApp: App, DropDelegate {
             .environmentObject(LeitnerViewModel(viewContext: context))
             .environmentObject(StatisticsViewModel(viewContext: context))
             .animation(.easeInOut, value: hideSplash)
-            .animation(.easeInOut, value: hideSplash)
             .onAppear {
                 if !isUnitTesting {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

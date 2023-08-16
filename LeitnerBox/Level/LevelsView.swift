@@ -103,7 +103,12 @@ struct LevelsView: View {
 
 struct LevelsView_Previews: PreviewProvider {
     struct Preview: View {
+        static let context = PersistenceController.shared.viewContext
         static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
+        var leitnerViewModel: LeitnerViewModel {
+            _ = PersistenceController.shared.generateAndFillLeitner()
+            return LeitnerViewModel(viewContext: PersistenceController.shared.viewContext)
+        }
         @StateObject var viewModel = LevelsViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner)
         @StateObject var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
@@ -113,6 +118,7 @@ struct LevelsView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environmentObject(viewModel)
                 .environmentObject(searchViewModel)
+                .environmentObject(ObjectsContainer(context: Preview.context, leitner: Preview.leitner, leitnerVM: leitnerViewModel))
         }
     }
 

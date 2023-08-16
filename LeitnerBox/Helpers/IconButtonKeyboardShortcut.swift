@@ -34,13 +34,43 @@ struct ReviewIconStyle: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .foregroundColor(accent ? .accentColor : .orange)
-            .frame(width: 32, height: 32)
+            .frame(width: 22, height: 22)
+            .padding()
+            .cornerRadius(6)
+            .background(Color.accentColor.opacity(0.09).cornerRadius(12))
+            .foregroundColor(Color.accentColor)
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.accentColor, lineWidth: 1)
+            }
     }
 }
 
 extension View {
     func reviewIconStyle(accent: Bool = true) -> some View {
         modifier(ReviewIconStyle(accent: accent))
+    }
+}
+
+struct ReviewReviewStyle_Previews: PreviewProvider {
+    struct Preview: View {
+
+        var body: some View {
+            Button {
+
+            } label: {
+                IconButtonKeyboardShortcut(title: "", systemImageName: "star")
+            }
+            .reviewIconStyle()
+        }
+    }
+
+    static var previews: some View {
+        NavigationStack {
+            HStack {
+                Preview()
+            }
+            .frame(width: 64, height: 64)
+        }
     }
 }

@@ -29,9 +29,7 @@ struct ReviewView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 48) {
                             ReviewHeader()
-                                .environmentObject(viewModel)
                             ReviewQuestion()
-                                .environmentObject(viewModel)
                             if let question = question {
                                 VStack(alignment: .leading, spacing: 12) {
                                     Button {
@@ -60,27 +58,22 @@ struct ReviewView: View {
                                     }
                                 }
                             }
-                            ReviewControls()
-                                .environmentObject(viewModel)
                             if viewModel.isShowingAnswer {
                                 ReviewAnswer()
-                                    .environmentObject(viewModel)
                             } else {
                                 TapToAnswerView()
-                                    .environmentObject(viewModel)
                             }
                         }
                     }
                     Spacer()
                     PassOrFailButtons()
-                        .environmentObject(viewModel)
                 }
             }
+            .environmentObject(viewModel)
             .animation(.easeInOut, value: tags.count)
             .animation(.easeInOut, value: synonyms.count)
             .animation(.easeInOut, value: viewModel.isShowingAnswer)
             .padding()
-            .background(Color(named: "dialogBackground"))
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
@@ -126,11 +119,16 @@ struct ReviewView_Previews: PreviewProvider {
     struct Preview: View {
         static let leitner = PersistenceController.shared.generateAndFillLeitner().first!
         static let level = (leitner.levels).filter { $0.level == 1 }.first
-        @StateObject var viewModel = ReviewViewModel(viewContext: PersistenceController.shared.viewContext, levelValue: 1, leitnerId: 1, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+        static let context = PersistenceController.shared.viewContext
+        @StateObject var leitnerVM = LeitnerViewModel(viewContext: context)
+        @StateObject var viewModel = ReviewViewModel(viewContext: context,
+                                                     levelValue: 1, leitnerId: 1, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
+
         var body: some View {
             ReviewView(viewModel: viewModel)
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+                .environment(\.managedObjectContext, Preview.context)
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
+                .environmentObject(ObjectsContainer(context: Preview.context, leitner: Preview.leitner, leitnerVM: leitnerVM))
         }
     }
 
