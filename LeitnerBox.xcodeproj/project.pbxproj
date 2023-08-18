@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0500C62C29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0500C62B29A8FAF700C4A5D4 /* NSManagedObjectContextProtocol.swift */; };
+		05031DA92A8E5A13000E789A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053710612A8E577D008637C6 /* SettingsViewModel.swift */; };
+		05031DAA2A8E5A16000E789A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053710622A8E578C008637C6 /* SettingsView.swift */; };
 		05081530285C719000CF632E /* NotAnyToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0508152F285C719000CF632E /* NotAnyToReviewView.swift */; };
 		050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BAE21128379B820043FAEB /* QuestionViewModel.swift */; };
 		050D6DD42879EB220020BCDB /* QuestionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050D6DD32879EB220020BCDB /* QuestionViewModelTests.swift */; };
@@ -20,7 +22,7 @@
 		051E106E291136F200F990BD /* ReviewQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E106D291136F200F990BD /* ReviewQuestion.swift */; };
 		051E10702911376500F990BD /* ReviewAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E106F2911376500F990BD /* ReviewAnswer.swift */; };
 		051E10722911379800F990BD /* ReviewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E10712911379800F990BD /* ReviewHeader.swift */; };
-		051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1073291137B400F990BD /* PassOrFailButtons.swift */; };
+		051E1074291137B400F990BD /* ReviewControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1073291137B400F990BD /* ReviewControls.swift */; };
 		051E1076291137D100F990BD /* DeleteDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1075291137D100F990BD /* DeleteDialog.swift */; };
 		051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E1077291137EC00F990BD /* TapToAnswerView.swift */; };
 		051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E107B2911383000F990BD /* FinishedReviewView.swift */; };
@@ -168,7 +170,7 @@
 		051E106D291136F200F990BD /* ReviewQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewQuestion.swift; sourceTree = "<group>"; };
 		051E106F2911376500F990BD /* ReviewAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAnswer.swift; sourceTree = "<group>"; };
 		051E10712911379800F990BD /* ReviewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHeader.swift; sourceTree = "<group>"; };
-		051E1073291137B400F990BD /* PassOrFailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassOrFailButtons.swift; sourceTree = "<group>"; };
+		051E1073291137B400F990BD /* ReviewControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewControls.swift; sourceTree = "<group>"; };
 		051E1075291137D100F990BD /* DeleteDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDialog.swift; sourceTree = "<group>"; };
 		051E1077291137EC00F990BD /* TapToAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToAnswerView.swift; sourceTree = "<group>"; };
 		051E107B2911383000F990BD /* FinishedReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedReviewView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,8 @@
 		053666DD28377B5B002F899F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		053666E328378918002F899F /* Color+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		053666E528378949002F899F /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		053710612A8E577D008637C6 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		053710622A8E578C008637C6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0543D0EC2870B3AC005807ED /* LeitnerBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeitnerBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0543D0EE2870B3AC005807ED /* LeitnerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerViewModelTests.swift; sourceTree = "<group>"; };
 		0545068E284A3519007EBAFA /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
@@ -324,7 +328,7 @@
 				051E106D291136F200F990BD /* ReviewQuestion.swift */,
 				051E106F2911376500F990BD /* ReviewAnswer.swift */,
 				051E10712911379800F990BD /* ReviewHeader.swift */,
-				051E1073291137B400F990BD /* PassOrFailButtons.swift */,
+				051E1073291137B400F990BD /* ReviewControls.swift */,
 				051E1075291137D100F990BD /* DeleteDialog.swift */,
 				051E1077291137EC00F990BD /* TapToAnswerView.swift */,
 				051E107B2911383000F990BD /* FinishedReviewView.swift */,
@@ -363,6 +367,7 @@
 		05266AB828367DA9004693BC /* LeitnerBox */ = {
 			isa = PBXGroup;
 			children = (
+				053710602A8E5771008637C6 /* Settings */,
 				052CA6EE283CE06E00376E79 /* LeitnerBox.entitlements */,
 				05867E6B283A1D7100F4A413 /* Info.plist */,
 				059D2DA428A500F500231E09 /* LeitnerBox.docc */,
@@ -460,6 +465,15 @@
 				05A854EC29541BFA0039AA17 /* AVSpeechSynthesisVoiceProtocol.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		053710602A8E5771008637C6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				053710612A8E577D008637C6 /* SettingsViewModel.swift */,
+				053710622A8E578C008637C6 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		0543D0ED2870B3AC005807ED /* LeitnerBoxTests */ = {
@@ -861,7 +875,7 @@
 				05D0329F2838DB2B00FE67D5 /* Date+.swift in Sources */,
 				058EA39428AF520E0080BDDF /* TagsListPickerView.swift in Sources */,
 				05B80B642836979600390EF9 /* LevelsView.swift in Sources */,
-				051E1074291137B400F990BD /* PassOrFailButtons.swift in Sources */,
+				051E1074291137B400F990BD /* ReviewControls.swift in Sources */,
 				059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */,
 				051E1076291137D100F990BD /* DeleteDialog.swift in Sources */,
 				05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */,
@@ -870,7 +884,9 @@
 				053666E428378918002F899F /* Color+.swift in Sources */,
 				053666E628378949002F899F /* UIColor+.swift in Sources */,
 				051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */,
+				05031DA92A8E5A13000E789A /* SettingsViewModel.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
+				05031DAA2A8E5A16000E789A /* SettingsView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,

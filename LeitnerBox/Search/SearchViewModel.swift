@@ -26,7 +26,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     @Published var editQuestion: Question?
     @Published var selectedSort: SearchSort = .date
     @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
-    @Published var reviewStatus: ReviewStatus = .unInitialized
+    var reviewStatus: ReviewStatus = .unInitialized
     private(set) var questions: [Question] = []
     private(set) var searchedQuestions: [Question] = []
     var synthesizer: AVSpeechSynthesizerProtocol
@@ -288,6 +288,9 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     }
 
     func viewDidAppear() {
+        commandCenter?.playCommand.removeTarget(self)
+        commandCenter?.pauseCommand.removeTarget(self)
+
         commandCenter = MPRemoteCommandCenter.shared()
         commandCenter?.playCommand.addTarget { [weak self] _ -> MPRemoteCommandHandlerStatus in
             self?.togglePlayPauseReview()

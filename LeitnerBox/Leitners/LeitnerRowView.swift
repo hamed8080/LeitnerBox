@@ -21,10 +21,12 @@ struct LeitnerRowView: View {
         }
         .contextMenu {
             Button {
-                viewModel.selectedLeitner = leitner
-                viewModel.leitnerTitle = viewModel.selectedLeitner?.name ?? ""
-                viewModel.backToTopLevel = leitner.backToTopLevel
-                viewModel.showEditOrAddLeitnerAlert.toggle()
+                withAnimation {
+                    viewModel.selectedLeitner = leitner
+                    viewModel.leitnerTitle = viewModel.selectedLeitner?.name ?? ""
+                    viewModel.backToTopLevel = leitner.backToTopLevel
+                    viewModel.showEditOrAddLeitnerAlert.toggle()
+                }
             } label: {
                 Label("Rename and Edit", systemImage: "gear")
             }

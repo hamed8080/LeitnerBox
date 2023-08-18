@@ -9,21 +9,14 @@ import CoreData
 import SwiftUI
 
 struct ReviewView: View {
-    @EnvironmentObject var objVM: ObjectsContainer
     @StateObject var viewModel: ReviewViewModel
-    @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
-    @State var showTagPicker: Bool = false
-    @State var showSynonymPicker: Bool = false
     private var question: Question? { viewModel.selectedQuestion }
-    private var tags: [Tag] { question?.tagsArray ?? [] }
-    private var synonyms: [Question] { question?.synonymsArray ?? [] }
 
     var body: some View {
         if viewModel.isFinished {
             NotAnyToReviewView()
-        } else if Level.hasAnyReviewable(context: context, level: viewModel.level, leitnerId: viewModel.leitner?.id ?? -1) {
+        } else {
             ZStack {
                 VStack {
                     ScrollView(showsIndicators: false) {
@@ -31,32 +24,7 @@ struct ReviewView: View {
                             ReviewHeader()
                             ReviewQuestion()
                             if let question = question {
-                                VStack(alignment: .leading, spacing: 12) {
-                                    Button {
-                                        showTagPicker.toggle()
-                                    } label: {
-                                        Label("Tags", systemImage: "plus.circle")
-                                    }
-                                    .keyboardShortcut("t", modifiers: [.command])
-                                    .buttonStyle(.borderless)
-
-                                    QuestionTagList(tags: tags) { tag in
-                                        objVM.tagVM.removeTagForQuestion(tag, question: question)
-                                    }
-
-                                    Button {
-                                        showSynonymPicker.toggle()
-                                    } label: {
-                                        Label("Synonyms", systemImage: "plus.circle")
-                                    }
-                                    .buttonStyle(.borderless)
-
-                                    QuestionSynonymList(synonyms: synonyms) { _ in
-                                        // Navigate to add or edit question
-                                    } onLongClick: { synonymQuestion in
-                                        objVM.synonymVM.removeQuestionFromSynonym(synonymQuestion)
-                                    }
-                                }
+                                ReviewSheetButtonsMutableView(question: question)
                             }
                             if viewModel.isShowingAnswer {
                                 ReviewAnswer()
@@ -66,27 +34,15 @@ struct ReviewView: View {
                         }
                     }
                     Spacer()
-                    PassOrFailButtons()
+                    ReviewControls()
                 }
             }
             .environmentObject(viewModel)
-            .animation(.easeInOut, value: tags.count)
-            .animation(.easeInOut, value: synonyms.count)
             .animation(.easeInOut, value: viewModel.isShowingAnswer)
-            .padding()
+            .padding([.leading, .trailing])
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
-                        AddOrEditQuestionView()
-                            .environmentObject(objVM)
-                    }
-                    .keyboardShortcut("a", modifiers: [.command, .option])
-
-                    ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
-                        SearchView()
-                            .environmentObject(objVM)
-                    }
-                    .keyboardShortcut("s", modifiers: [.command, .option])
+                    ReviewMutableToolbarView()
                 }
             }
             .customDialog(isShowing: $viewModel.showDelete) {
@@ -96,21 +52,75 @@ struct ReviewView: View {
             .onDisappear {
                 viewModel.stopPronounce()
             }
-            .sheet(isPresented: $showSynonymPicker) {
-                QuestionSynonymPickerView { question in
-                    guard let baseQuestion = self.question else { return }
-                    objVM.synonymVM.addSynonymToQuestion(baseQuestion, question)
-                }
-                .environmentObject(objVM)
+        }
+    }
+}
+
+struct ReviewMutableToolbarView: View {
+    @EnvironmentObject var container: ObjectsContainer
+
+    var body: some View {
+        ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
+            AddOrEditQuestionView()
+                .environmentObject(container)
+        }
+        .keyboardShortcut("a", modifiers: [.command, .option])
+
+        ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
+            SearchView(container: container)
+                .environmentObject(container.searchVM)
+        }
+        .keyboardShortcut("s", modifiers: [.command, .option])
+    }
+}
+
+struct ReviewSheetButtonsMutableView: View {
+    let question: Question
+    @EnvironmentObject var objVM: ObjectsContainer
+    @State var showTagPicker: Bool = false
+    @State var showSynonymPicker: Bool = false
+    private var tags: [Tag] { question.tagsArray ?? [] }
+    private var synonyms: [Question] { question.synonymsArray ?? [] }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button {
+                showTagPicker.toggle()
+            } label: {
+                Label("Tags", systemImage: "plus.circle")
             }
-            .sheet(isPresented: $showTagPicker) {
-                TagsListPickerView { tag in
-                    objVM.tagVM.addTagToQuestion(tag, question: question)
-                }
+            .keyboardShortcut("t", modifiers: [.command])
+            .buttonStyle(.borderless)
+
+            QuestionTagList(tags: tags) { tag in
+                objVM.tagVM.removeTagForQuestion(tag, question: question)
             }
 
-        } else {
-            NotAnyToReviewView()
+            Button {
+                showSynonymPicker.toggle()
+            } label: {
+                Label("Synonyms", systemImage: "plus.circle")
+            }
+            .buttonStyle(.borderless)
+
+            QuestionSynonymList(synonyms: synonyms) { _ in
+                // Navigate to add or edit question
+            } onLongClick: { synonymQuestion in
+                objVM.synonymVM.removeQuestionFromSynonym(synonymQuestion)
+            }
+        }
+        .animation(.easeInOut, value: tags.count)
+        .animation(.easeInOut, value: synonyms.count)
+        .sheet(isPresented: $showSynonymPicker) {
+            QuestionSynonymPickerView { question in
+                objVM.synonymVM.addSynonymToQuestion(self.question, question)
+            }
+            .environmentObject(objVM)
+        }
+        .sheet(isPresented: $showTagPicker) {
+            TagsListPickerView { tag in
+                objVM.tagVM.addTagToQuestion(tag, question: question)
+            }
         }
     }
 }

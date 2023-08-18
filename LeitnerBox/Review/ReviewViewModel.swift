@@ -43,6 +43,7 @@ final class ReviewViewModel: ObservableObject {
         do {
             questions = try viewContext.fetch(req).filter(\.isReviewable).shuffled()
             totalCount = questions.count
+            isFinished = totalCount == 0
             preapareNext(questions.first)
             loadTags()
         } catch {

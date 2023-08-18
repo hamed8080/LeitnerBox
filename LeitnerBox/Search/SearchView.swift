@@ -8,39 +8,38 @@ import CoreData
 import SwiftUI
 
 struct SearchView: View {
-    @EnvironmentObject var objVM: ObjectsContainer
-    @Environment(\.colorScheme) var colorScheme
+    let container: ObjectsContainer
+    @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    @State var favoriteCount: Int = 0
-    private var searchVM: SearchViewModel { objVM.searchVM }
-    private var searchedQuestions: [Question] { searchVM.searchedQuestions }
+    private var searchedQuestions: [Question] { viewModel.searchedQuestions }
 
     var body: some View {
         List {
-            ForEach(searchedQuestions.count > 0 ? searchedQuestions : searchVM.questions) { question in
+            ForEach(searchedQuestions.count > 0 ? searchedQuestions : viewModel.questions) { question in
                 NormalQuestionRow(question: question)
                     .listRowInsets(EdgeInsets())
                     .onAppear {
-                        if question == searchVM.questions.last {
-                            searchVM.fetchMoreQuestion()
+                        if question == viewModel.questions.last {
+                            viewModel.fetchMoreQuestion()
                         }
                     }
             }
-            .onDelete(perform: searchVM.deleteItems)
+            .onDelete(perform: viewModel.deleteItems)
         }
         .if(.iOS) { view in
             view.refreshable {
                 context.rollback()
-                searchVM.reload()
+                viewModel.reload()
             }
         }
-        .animation(.easeInOut, value: searchVM.questions.count)
+        .environmentObject(container)
+        .animation(.easeInOut, value: viewModel.questions.count)
         .animation(.easeInOut, value: searchedQuestions.count)
-        .animation(.easeInOut, value: searchVM.reviewStatus)
-        .navigationTitle("Advance Search in \(searchVM.leitner.name ?? "")")
+        .animation(.easeInOut, value: viewModel.reviewStatus)
+        .navigationTitle("Advance Search in \(viewModel.leitner.name ?? "")")
         .listStyle(.plain)
-        .searchable(text: $objVM.searchVM.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-            if searchVM.searchText.isEmpty == false, searchedQuestions.count < 1 {
+        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
+            if viewModel.searchText.isEmpty == false, searchedQuestions.count < 1 {
                 HStack {
                     Image(systemName: "doc.text.magnifyingglass")
                         .foregroundColor(.gray.opacity(0.8))
@@ -51,104 +50,126 @@ struct SearchView: View {
         }
         .overlay {
             PronunceWordsView()
+                .environmentObject(container)
         }
         .onAppear {
-            searchVM.viewDidAppear()
-            searchVM.resumeSpeaking()
-            favoriteCount = Leitner.fetchFavCount(context: context, leitnerId: searchVM.leitner.id)
+            viewModel.viewDidAppear()
+            viewModel.resumeSpeaking()
         }
         .onDisappear {
-            searchVM.pauseSpeaking()
+            viewModel.pauseSpeaking()
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
-                    AddOrEditQuestionView()
-                        .environmentObject(objVM)
-                }
+                MutableSearchViewToolbar(container: container, viewModel: viewModel)
+            }
+        }
+    }
+}
 
+struct MutableSearchViewToolbar: View {
+    let container: ObjectsContainer
+    @State var favoriteCount: Int = 0
+    let viewModel: SearchViewModel
+    @State var reviewStatus: ReviewStatus = .unInitialized
+
+    var body: some View {
+        ToolbarNavigation(title: "Add Question", systemImageName: "plus.square") {
+            AddOrEditQuestionView()
+                .environmentObject(container)
+        }
+
+        Button {
+            withAnimation {
+                viewModel.playReview()
+                reviewStatus = viewModel.reviewStatus
+            }
+        } label: {
+            IconButtonKeyboardShortcut(title: "Play", systemImageName: "play.square")
+        }
+        .toobarNavgationButtonStyle()
+        .disabled(reviewStatus == .isPlaying)
+        .opacity(reviewStatus == .isPlaying ? 0.7 : 1)
+        .scaleEffect(x: reviewStatus == .isPlaying ? 0.8 : 1.0, y: reviewStatus == .isPlaying ? 0.8 : 1.0)
+        .keyboardShortcut("p", modifiers: [.command, .option])
+
+        Button {
+            withAnimation {
+                viewModel.stopReview()
+                reviewStatus = viewModel.reviewStatus
+            }
+        } label: {
+            IconButtonKeyboardShortcut(title: "Stop", systemImageName: "stop.circle")
+        }
+        .toobarNavgationButtonStyle()
+        .disabled(reviewStatus != .isPlaying)
+        .opacity(reviewStatus == .isPlaying ? 1 : 0.7)
+        .scaleEffect(x: (reviewStatus == .unInitialized || reviewStatus == .isPaused) ? 0.8 : 1.0, y: (reviewStatus == .unInitialized || reviewStatus == .isPaused) ? 0.8 : 1.0)
+        .keyboardShortcut("s", modifiers: [.command, .option])
+
+        Button {
+            withAnimation {
+                viewModel.pauseReview()
+                reviewStatus = viewModel.reviewStatus
+            }
+        } label: {
+            IconButtonKeyboardShortcut(title: "Pause", systemImageName: "pause.circle")
+        }
+        .toobarNavgationButtonStyle()
+        .disabled(reviewStatus != .isPlaying)
+        .opacity(reviewStatus == .isPlaying ? 1 : 0.7)
+        .scaleEffect(x: reviewStatus == .isPlaying ? 1.0 : 0.8, y: reviewStatus == .isPlaying ? 1.0 : 0.8)
+        .keyboardShortcut("p", modifiers: [.command, .option])
+
+        Button {
+            withAnimation {
+                viewModel.playNextImmediately()
+                reviewStatus = viewModel.reviewStatus
+            }
+        } label: {
+            IconButtonKeyboardShortcut(title: "Next", systemImageName: "forward.end")
+                .foregroundStyle(Color.accentColor)
+        }
+        .toobarNavgationButtonStyle()
+        .disabled(reviewStatus != .isPlaying)
+        .opacity(reviewStatus == .isPlaying ? 1 : 0.7)
+        .scaleEffect(x: reviewStatus == .isPlaying ? 1.0 : 0.8, y: reviewStatus == .isPlaying ? 1.0 : 0.8, anchor: .center)
+        .keyboardShortcut("n", modifiers: [.command, .option])
+
+        Menu {
+            Text("Sort By")
+
+            ForEach(searchSorts, id: \.self) { sortItem in
                 Button {
                     withAnimation {
-                        searchVM.stopReview()
+                        viewModel.sort(sortItem.sortType)
                     }
                 } label: {
-                    IconButtonKeyboardShortcut(title: "Stop", systemImageName: "stop.circle")
+                    let countText = sortItem.sortType == .favorite ? " (\(favoriteCount))" : ""
+                    Label("\(viewModel.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
                 }
-                .toobarNavgationButtonStyle()
-                .disabled(searchVM.reviewStatus != .isPlaying)
-                .opacity(searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
-                .keyboardShortcut("s", modifiers: [.command, .option])
+            }
 
-                Button {
-                    withAnimation {
-                        searchVM.pauseReview()
-                    }
-                } label: {
-                    IconButtonKeyboardShortcut(title: "Pause", systemImageName: "pause.circle")
-                }
-                .toobarNavgationButtonStyle()
-                .disabled(searchVM.reviewStatus != .isPlaying)
-                .opacity(searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
-                .keyboardShortcut("p", modifiers: [.command, .option])
-
-                Button {
-                    withAnimation {
-                        searchVM.playReview()
-                    }
-                } label: {
-                    IconButtonKeyboardShortcut(title: "Play", systemImageName: "play.square")
-                }
-                .toobarNavgationButtonStyle()
-                .disabled(searchVM.reviewStatus == .isPlaying)
-                .opacity(searchVM.reviewStatus == .isPlaying ? 0.7 : 1)
-                .keyboardShortcut("p", modifiers: [.command, .option])
-
-                Button {
-                    withAnimation {
-                        searchVM.playNextImmediately()
-                    }
-                } label: {
-                    IconButtonKeyboardShortcut(title: "Next", systemImageName: "forward.end")
-                        .foregroundStyle(Color.accentColor)
-                }
-                .toobarNavgationButtonStyle()
-                .disabled(searchVM.reviewStatus != .isPlaying)
-                .opacity(searchVM.reviewStatus == .isPlaying ? 1 : 0.7)
-                .keyboardShortcut("n", modifiers: [.command, .option])
-
-                Menu {
-                    Text("Sort By")
-
-                    ForEach(searchSorts, id: \.self) { sortItem in
-                        Button {
-                            withAnimation {
-                                searchVM.sort(sortItem.sortType)
-                            }
-                        } label: {
-                            let countText = sortItem.sortType == .favorite ? " (\(favoriteCount))" : ""
-                            Label("\(searchVM.selectedSort == sortItem.sortType ? "✔︎ " : "")" + sortItem.title + countText, systemImage: sortItem.iconName)
-                        }
-                    }
-
-                    Menu {
-                        ForEach(searchVM.sortedTags, id: \.self) { tag in
-                            Button {
-                                withAnimation {
-                                    searchVM.sort(.date, tag)
-                                }
-                            } label: {
-                                Text(tag.name ?? "")
-                            }
+            Menu {
+                ForEach(viewModel.sortedTags, id: \.self) { tag in
+                    Button {
+                        withAnimation {
+                            viewModel.sort(.date, tag)
                         }
                     } label: {
-                        Text("Sort By Tag")
+                        Text(tag.name ?? "")
                     }
-
-                } label: {
-                    Label("More", systemImage: "ellipsis.circle")
                 }
-                .toobarNavgationButtonStyle()
+            } label: {
+                Text("Sort By Tag")
             }
+
+        } label: {
+            Label("More", systemImage: "ellipsis.circle")
+        }
+        .toobarNavgationButtonStyle()
+        .onAppear {
+            favoriteCount = Leitner.fetchFavCount(context: viewModel.viewContext, leitnerId: viewModel.leitner.id)
         }
     }
 }
@@ -225,7 +246,7 @@ struct SearchView_Previews: PreviewProvider {
         )
 
         var body: some View {
-            SearchView()
+            SearchView(container: ObjectsContainer(context: Preview.context, leitner: Preview.leitner, leitnerVM: LeitnerViewModel(viewContext: Preview.context)))
                 .environment(\.managedObjectContext, Preview.context)
                 .environmentObject(LeitnerViewModel(viewContext: Preview.context))
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)

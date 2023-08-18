@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LeitnerView: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
+    @StateObject var settingsViewModel = SettingsViewModel()
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State var selectedLeitner: Leitner?
 
@@ -19,25 +20,32 @@ struct LeitnerView: View {
                 EmptyLeitnerAnimation()
             } else {
                 SidebarListView(selectedLeitner: $selectedLeitner)
+                    .navigationDestination(for: String.self) { value in
+                        if value == "Settings" {
+                            SettingsView()
+                                .environmentObject(settingsViewModel)
+                        }
+                    }
             }
         } detail: {
             NavigationStack {
                 if let leitner = selectedLeitner {
-                    LevelsView()
+                    let container = ObjectsContainer(context: context, leitner: leitner, leitnerVM: viewModel)
+                    LevelsView(container: container)
                         .id(leitner.id)
-                        .environmentObject(ObjectsContainer(context: context, leitner: leitner, leitnerVM: viewModel))
+                        .environmentObject(container.levelsVM)
                 }
             }
         }
         .animation(.easeInOut, value: selectedLeitner)
-        .sheet(isPresented: Binding(get: { viewModel.backupFile != nil }, set: { _ in })) {
+        .sheet(isPresented: Binding(get: { settingsViewModel.backupFile != nil }, set: { _ in })) {
             if .iOS == true {
                 Task {
-                    await viewModel.deleteBackupFile()
+                    await settingsViewModel.deleteBackupFile()
                 }
             }
         } content: {
-            if let fileUrl = viewModel.backupFile?.fileURL {
+            if let fileUrl = settingsViewModel.backupFile?.fileURL {
                 ActivityViewControllerWrapper(activityItems: [fileUrl])
             } else {
                 EmptyView()
@@ -107,85 +115,47 @@ struct LeitnerView: View {
 }
 
 struct SidebarListView: View {
-    @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
     @Binding var selectedLeitner: Leitner?
     @EnvironmentObject var viewModel: LeitnerViewModel
 
     var body: some View {
-        List(viewModel.leitners, selection: $selectedLeitner) { leitner in
-            NavigationLink(value: leitner) {
-                LeitnerRowView(leitner: leitner)
+        List(selection: $selectedLeitner) {
+            Section(String(localized: .init("Leitners"))) {
+                ForEach(viewModel.leitners) { leitner in
+                    NavigationLink(value: leitner) {
+                        LeitnerRowView(leitner: leitner)
+                    }
+                    .id(leitner.id)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            viewModel.delete(leitner)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+                }
             }
-            .id(leitner.id)
-            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button(role: .destructive) {
-                    viewModel.delete(leitner)
-                } label: {
-                    Label("Delete", systemImage: "trash")
+            Section(String(localized: .init("Settings"))) {
+                NavigationLink(value: "Settings") {
+                    Label("Settings", systemImage: "gear")
                 }
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                toolbarView
+                Button {
+                    viewModel.clear()
+                    viewModel.showEditOrAddLeitnerAlert.toggle()
+                } label: {
+                    Label("Add Item", systemImage: "plus")
+                }
             }
         }
         .refreshable {
             viewModel.load()
         }
-        .listStyle(.plain)
+        .listStyle(.insetGrouped)
         .navigationTitle("Leitner Box")
-    }
-
-    var toolbarView: some View {
-        HStack {
-            Button {
-                Task {
-                    await viewModel.exportDB()
-                }
-            } label: {
-                if viewModel.isBackuping {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .tint(Color.accentColor)
-                } else {
-                    Label("Export", systemImage: "square.and.arrow.up")
-                }
-            }
-
-            Button {
-                viewModel.clear()
-                viewModel.showEditOrAddLeitnerAlert.toggle()
-            } label: {
-                Label("Add Item", systemImage: "plus")
-            }
-
-            Menu {
-                Toggle(isOn: $pronounceDetailAnswer) {
-                    Label("Prononce \ndetails answer ", systemImage: "mic")
-                }
-
-                Divider()
-
-                Menu {
-                    ForEach(viewModel.voices, id: \.self) { voice in
-                        let isSelected = viewModel.selectedVoiceIdentifire == voice.identifier
-                        Button {
-                            viewModel.setSelectedVoice(voice)
-                        } label: {
-                            Text("\(isSelected ? "✔︎" : "") \(voice.name) - \(voice.language)")
-                        }
-                    }
-                    Divider()
-
-                } label: {
-                    Label("Pronounce Voice", systemImage: "waveform")
-                }
-
-            } label: {
-                Label("More", systemImage: "gear")
-            }
-        }
     }
 }
 

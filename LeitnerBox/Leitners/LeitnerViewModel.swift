@@ -16,16 +16,11 @@ final class LeitnerViewModel: ObservableObject {
     @Published var selectedLeitner: Leitner?
     @Published var leitnerTitle: String = ""
     @Published var backToTopLevel = false
-    @Published var backupFile: TemporaryFile?
     @Published var selectedVoiceIdentifire: String?
-    @Published var voices: [AVSpeechSynthesisVoice] = []
-    @Published var isBackuping = false
-
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
-    init(viewContext: NSManagedObjectContextProtocol, voices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices().sorted(by: { $0.language > $1.language })) {
+    init(viewContext: NSManagedObjectContextProtocol) {
         self.viewContext = viewContext
-        self.voices = voices
         selectedVoiceIdentifire = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
         load()
     }
@@ -104,58 +99,6 @@ final class LeitnerViewModel: ObservableObject {
         backToTopLevel = false
         selectedLeitner = nil
     }
-
-    func deleteBackupFile() async {
-        try? backupFile?.deleteDirectory()
-        await MainActor.run {
-            backupFile = nil
-        }
-    }
-
-    func exportDB() async {
-        await showLoading(show: true)
-        let backupStoreOptions: [AnyHashable: Any] = [
-            NSReadOnlyPersistentStoreOption: true,
-            // Disable write-ahead logging. Benefit: the entire store will be
-            // contained in a single file. No need to handle -wal/-shm files.
-            // https://developer.apple.com/library/content/qa/qa1809/_index.html
-            NSSQLitePragmasOption: ["journal_mode": "DELETE"],
-            // Minimize file size
-            NSSQLiteManualVacuumOption: true,
-        ]
-        guard let sourcePersistentStore = PersistenceController.shared.container.persistentStoreCoordinator.persistentStores.first else { return }
-        let managedObjectModel = PersistenceController.shared.container.managedObjectModel
-        let backupPersistentContainer = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        let intermediateStoreOptions = (sourcePersistentStore.options ?? [:]).merging([NSReadOnlyPersistentStoreOption: true], uniquingKeysWith: { $1 })
-        do {
-            let newPersistentStore = try backupPersistentContainer.addPersistentStore(
-                ofType: sourcePersistentStore.type,
-                configurationName: sourcePersistentStore.configurationName,
-                at: sourcePersistentStore.url,
-                options: intermediateStoreOptions
-            )
-
-            let exportFile = makeFilename(sourcePersistentStore)
-            let backupFile = try TemporaryFile(creatingTempDirectoryForFilename: exportFile)
-            try backupPersistentContainer.migratePersistentStore(newPersistentStore, to: backupFile.fileURL, options: backupStoreOptions, withType: NSSQLiteStoreType)
-            await showLoading(show: false)
-            await MainActor.run {
-                self.backupFile = backupFile
-            }
-            print("file exported to\(backupFile.fileURL)")
-        } catch {
-            await showLoading(show: false)
-            print("failed to export: Error \(error.localizedDescription)")
-        }
-    }
-
-    func showLoading(show: Bool) async {
-        await MainActor.run {
-            isBackuping = show
-        }
-    }
-
-    func importDB() {}
 
     // Filename format: basename-date.sqlite
     // E.g. "MyStore-20180221T200731.sqlite" (time is in UTC)

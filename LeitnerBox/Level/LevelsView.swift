@@ -9,45 +9,47 @@ import CoreData
 import SwiftUI
 
 struct LevelsView: View {
-    @EnvironmentObject var objVM: ObjectsContainer
-    @Environment(\.avSpeechSynthesisVoice) var voiceSpeech: AVSpeechSynthesisVoice
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    @State var showDaysAfterDialog: Bool = false
+    let container: ObjectsContainer
+    @EnvironmentObject var viewModel: LevelsViewModel
     @Environment(\.isSearching) var isSearching
 
     var body: some View {
         List {
-            if objVM.levelsVM.searchedQuestions.count >= 1 {
-                searchResult
-            } else {
-                header
-                ForEach(objVM.levelsVM.levels) { levelRowData in
-                    LevelRow(levelRowData: levelRowData)
+            header
+            ForEach(viewModel.levels) { levelRowData in
+                LevelRow(levelRowData: levelRowData, container: container)
+            }
+        }
+        .overlay {
+            if viewModel.searchedQuestions.count >= 1 {
+                List {
+                    searchResult
                 }
             }
         }
         .listStyle(.plain)
         .if(.iOS) { view in
             view.refreshable {
-                objVM.levelsVM.load()
+                viewModel.load()
             }
         }
         .onChange(of: isSearching) { newValue in
-            objVM.levelsVM.isSearching = newValue
+            viewModel.isSearching = newValue
         }
-        .searchable(text: $objVM.levelsVM.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
-        .animation(.easeInOut, value: objVM.levelsVM.searchWord)
-        .navigationTitle(objVM.leitner.name ?? "")
+        .searchable(text: $viewModel.searchWord, placement: .navigationBarDrawer, prompt: "Search inside leitner...")
+        .animation(.easeInOut, value: viewModel.searchWord)
+        .navigationTitle(viewModel.leitner.name ?? "")
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                toolbars
+                LevelsToolbarView()
+                    .environmentObject(container)
             }
         }
     }
 
     @ViewBuilder var header: some View {
         VStack(alignment: .leading, spacing: 4) {
-            let text = "\(objVM.levelsVM.totalCount) total, \(objVM.levelsVM.completedCount) completed, \(objVM.levelsVM.reviewableCount) reviewable".uppercased()
+            let text = "\(viewModel.totalCount) total, \(viewModel.completedCount) completed, \(viewModel.reviewableCount) reviewable".uppercased()
             Text(text)
                 .font(.footnote.weight(.bold))
                 .foregroundColor(.gray)
@@ -56,9 +58,10 @@ struct LevelsView: View {
     }
 
     @ViewBuilder var searchResult: some View {
-        if objVM.levelsVM.searchedQuestions.count > 0 || objVM.levelsVM.searchWord.isEmpty {
-            ForEach(objVM.levelsVM.searchedQuestions) { question in
+        if viewModel.searchedQuestions.count > 0 || viewModel.searchWord.isEmpty {
+            ForEach(viewModel.searchedQuestions) { question in
                 NormalQuestionRow(question: question)
+                    .environmentObject(container)
             }
         } else {
             HStack {
@@ -69,23 +72,27 @@ struct LevelsView: View {
             }
         }
     }
+}
 
-    @ViewBuilder var toolbars: some View {
+struct LevelsToolbarView: View {
+    @EnvironmentObject var container: ObjectsContainer
+
+    var body: some View {
         ToolbarNavigation(title: "Add Item", systemImageName: "plus.square") {
             AddOrEditQuestionView()
-                .environmentObject(objVM)
+                .environmentObject(container)
         }
         .keyboardShortcut("a", modifiers: [.command, .option])
 
         ToolbarNavigation(title: "Search View", systemImageName: "square.text.square") {
-            SearchView()
-                .environmentObject(objVM)
+            SearchView(container: container)
+                .environmentObject(container.searchVM)
         }
         .keyboardShortcut("f", modifiers: [.command, .option])
 
         ToolbarNavigation(title: "Tags", systemImageName: "tag.square") {
             TagView()
-                .environmentObject(objVM)
+                .environmentObject(container)
         }
         .keyboardShortcut("t", modifiers: [.command, .option])
 
@@ -95,7 +102,7 @@ struct LevelsView: View {
 
         ToolbarNavigation(title: "Synonyms", systemImageName: "arrow.left.and.right.square") {
             SynonymsView()
-                .environmentObject(objVM)
+                .environmentObject(container)
         }
         .keyboardShortcut("s", modifiers: [.command, .option])
     }
@@ -113,12 +120,11 @@ struct LevelsView_Previews: PreviewProvider {
         @StateObject var searchViewModel = SearchViewModel(viewContext: PersistenceController.shared.viewContext, leitner: Preview.leitner, voiceSpeech: EnvironmentValues().avSpeechSynthesisVoice)
 
         var body: some View {
-            LevelsView()
+            LevelsView(container: ObjectsContainer(context: Preview.context, leitner: Preview.leitner, leitnerVM: leitnerViewModel))
                 .environment(\.avSpeechSynthesisVoice, EnvironmentValues().avSpeechSynthesisVoice)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
                 .environmentObject(viewModel)
                 .environmentObject(searchViewModel)
-                .environmentObject(ObjectsContainer(context: Preview.context, leitner: Preview.leitner, leitnerVM: leitnerViewModel))
         }
     }
 
