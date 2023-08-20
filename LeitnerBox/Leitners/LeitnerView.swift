@@ -10,8 +10,7 @@ import SwiftUI
 
 struct LeitnerView: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
-    @StateObject var settingsViewModel = SettingsViewModel()
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    let context: NSManagedObjectContext
     @State var selectedLeitner: Leitner?
 
     var body: some View {
@@ -23,7 +22,6 @@ struct LeitnerView: View {
                     .navigationDestination(for: String.self) { value in
                         if value == "Settings" {
                             SettingsView()
-                                .environmentObject(settingsViewModel)
                         }
                     }
             }
@@ -37,20 +35,7 @@ struct LeitnerView: View {
                 }
             }
         }
-        .animation(.easeInOut, value: selectedLeitner)
-        .sheet(isPresented: Binding(get: { settingsViewModel.backupFile != nil }, set: { _ in })) {
-            if .iOS == true {
-                Task {
-                    await settingsViewModel.deleteBackupFile()
-                }
-            }
-        } content: {
-            if let fileUrl = settingsViewModel.backupFile?.fileURL {
-                ActivityViewControllerWrapper(activityItems: [fileUrl])
-            } else {
-                EmptyView()
-            }
-        }
+        .animation(.easeInOut, value: selectedLeitner)        
         .customDialog(isShowing: $viewModel.showEditOrAddLeitnerAlert) {
             editOrAddLeitnerView
         }
@@ -211,8 +196,7 @@ struct LeitnerView_Previews: PreviewProvider {
         }
 
         var body: some View {
-            LeitnerView()
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+            LeitnerView(context: PersistenceController.shared.viewContext)                
                 .environmentObject(viewModel)
         }
     }

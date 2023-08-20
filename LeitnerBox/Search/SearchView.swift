@@ -175,13 +175,12 @@ struct MutableSearchViewToolbar: View {
 }
 
 struct PronunceWordsView: View {
-    @EnvironmentObject var objVM: ObjectsContainer
+    @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    private var searchVM: SearchViewModel { objVM.searchVM }
 
     var body: some View {
-        if searchVM.reviewStatus == .isPlaying || searchVM.reviewStatus == .isPaused {
-            let question = searchVM.lastPlayedQuestion
+        if viewModel.reviewStatus == .isPlaying || viewModel.reviewStatus == .isPaused {
+            let question = viewModel.lastPlayedQuestion
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -212,7 +211,7 @@ struct PronunceWordsView: View {
                                     .font(.body.weight(.medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            Text(verbatim: "\(searchVM.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: searchVM.leitner.id))")
+                            Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
                                 .font(.footnote.bold())
                             if let question {
                                 QuestionTagList(tags: question.tagsArray ?? [])
@@ -228,7 +227,7 @@ struct PronunceWordsView: View {
                 .background(.thinMaterial)
                 .cornerRadius(24, corners: [.topLeft, .topRight])
             }
-            .animation(.easeInOut, value: searchVM.lastPlayedQuestion)
+            .animation(.easeInOut, value: viewModel.lastPlayedQuestion)
             .transition(.move(edge: .bottom))
             .ignoresSafeArea(.all, edges: .bottom)
         }

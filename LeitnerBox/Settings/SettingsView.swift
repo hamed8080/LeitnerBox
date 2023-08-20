@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var viewModel = SettingsViewModel()
+    @State private var showBackupSheet = false
     @AppStorage("pronounceDetailAnswer") private var pronounceDetailAnswer = false
 
     var body: some View {
@@ -51,6 +52,24 @@ struct SettingsView: View {
                         Label("Export", systemImage: "square.and.arrow.up")
                     }
                 }
+            }
+        }
+        .onChange(of: viewModel.backupFile?.fileURL) { newValue in
+            if let newValue {
+                showBackupSheet = true
+            }
+        }
+        .sheet(isPresented: $showBackupSheet) {
+            if .iOS == true {
+                Task {
+                    await viewModel.deleteBackupFile()
+                }
+            }
+        } content: {
+            if let fileUrl = viewModel.backupFile?.fileURL {
+                ActivityViewControllerWrapper(activityItems: [fileUrl])
+            } else {
+                EmptyView()
             }
         }
     }

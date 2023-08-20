@@ -20,14 +20,10 @@ struct LevelsView: View {
                 LevelRow(levelRowData: levelRowData, container: container)
             }
         }
-        .overlay {
-            if viewModel.searchedQuestions.count >= 1 {
-                List {
-                    searchResult
-                }
-            }
-        }
         .listStyle(.plain)
+        .overlay {
+            LevelsSearchItemsOverlay(viewModel: viewModel, container: container)
+        }
         .if(.iOS) { view in
             view.refreshable {
                 viewModel.load()
@@ -55,22 +51,6 @@ struct LevelsView: View {
                 .foregroundColor(.gray)
         }
         .listRowSeparator(.hidden)
-    }
-
-    @ViewBuilder var searchResult: some View {
-        if viewModel.searchedQuestions.count > 0 || viewModel.searchWord.isEmpty {
-            ForEach(viewModel.searchedQuestions) { question in
-                NormalQuestionRow(question: question)
-                    .environmentObject(container)
-            }
-        } else {
-            HStack {
-                Image(systemName: "doc.text.magnifyingglass")
-                    .foregroundColor(.gray.opacity(0.8))
-                Text("Nothind has found.")
-                    .foregroundColor(.gray.opacity(0.8))
-            }
-        }
     }
 }
 

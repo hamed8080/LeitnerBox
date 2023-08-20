@@ -84,6 +84,7 @@
 		0591796128C149F100228D7F /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0591796028C149F100228D7F /* Array+.swift */; };
 		059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA428A500F500231E09 /* LeitnerBox.docc */; };
 		059D2DA728A527C600231E09 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D2DA628A527C600231E09 /* SplashScreen.swift */; };
+		05A0215C2A91EECF00A629F2 /* LevelsSearchItemsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0215B2A91EECF00A629F2 /* LevelsSearchItemsOverlay.swift */; };
 		05A854EB29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A854EA29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift */; };
 		05A854ED29541BFA0039AA17 /* AVSpeechSynthesisVoiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A854EC29541BFA0039AA17 /* AVSpeechSynthesisVoiceProtocol.swift */; };
 		05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */; };
@@ -242,6 +243,7 @@
 		0591796028C149F100228D7F /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		059D2DA428A500F500231E09 /* LeitnerBox.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LeitnerBox.docc; sourceTree = "<group>"; };
 		059D2DA628A527C600231E09 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		05A0215B2A91EECF00A629F2 /* LevelsSearchItemsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsSearchItemsOverlay.swift; sourceTree = "<group>"; };
 		05A854EA29541BD20039AA17 /* MockAVSpeechSynthesisVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAVSpeechSynthesisVoice.swift; sourceTree = "<group>"; };
 		05A854EC29541BFA0039AA17 /* AVSpeechSynthesisVoiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVSpeechSynthesisVoiceProtocol.swift; sourceTree = "<group>"; };
 		05AE08A428B180E4002EF9E9 /* NormalQuestionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalQuestionRow.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 				05B80B632836979600390EF9 /* LevelsView.swift */,
 				05BAE2142837BA480043FAEB /* LevelRow.swift */,
 				05867E6E283A334900F4A413 /* LevelsViewModel.swift */,
+				05A0215B2A91EECF00A629F2 /* LevelsSearchItemsOverlay.swift */,
 			);
 			path = Level;
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				05AE08A528B180E4002EF9E9 /* NormalQuestionRow.swift in Sources */,
 				05867E71283A469000F4A413 /* Level+.swift in Sources */,
 				053666DC2837758F002F899F /* View+.swift in Sources */,
+				05A0215C2A91EECF00A629F2 /* LevelsSearchItemsOverlay.swift in Sources */,
 				051E10702911376500F990BD /* ReviewAnswer.swift in Sources */,
 				05DB660128AFFFCD00E01999 /* SynonymsView.swift in Sources */,
 				052CA6EC283CE01800376E79 /* AppGroupLocalStorage.swift in Sources */,

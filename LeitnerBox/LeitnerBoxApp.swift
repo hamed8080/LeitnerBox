@@ -22,7 +22,7 @@ struct LeitnerBoxApp: App, DropDelegate {
                 } else if hideSplash == false {
                     SplashScreen()
                 } else {
-                    LeitnerView()
+                    LeitnerView(context: context)
                     UpdateDatabaseInBackground()
                 }
             }

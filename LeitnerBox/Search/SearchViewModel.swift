@@ -213,6 +213,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
             pronounce(firstQuestion)
             lastPlayedQuestion = firstQuestion
         }
+        objectWillChange.send()
     }
 
     func playNext() {
@@ -224,6 +225,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
             pronounce(nextQuestion)
             self.lastPlayedQuestion = nextQuestion
         }
+        objectWillChange.send()
     }
 
     func playNextImmediately() {
@@ -255,6 +257,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         if synthesizer.isSpeaking {
             _ = synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
         }
+        objectWillChange.send()
     }
 
     func stopReview() {
@@ -262,11 +265,13 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         reviewStatus = .unInitialized
         task?.cancel()
         lastPlayedQuestion = nil
+        objectWillChange.send()
     }
 
     func finished() {
         reviewStatus = .unInitialized
         lastPlayedQuestion = nil
+        objectWillChange.send()
     }
 
     var reviewdCount: Int {
