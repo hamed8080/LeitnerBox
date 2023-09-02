@@ -95,6 +95,8 @@
 		05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */; };
 		05BD6FCA2954A45B005BE4CB /* build+docc+commit.sh in Resources */ = {isa = PBXBuildFile; fileRef = 05BD6FC92954A45B005BE4CB /* build+docc+commit.sh */; };
 		05BE4312285615E800B80E5E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589EA5528538D1400354C8C /* StatisticsView.swift */; };
+		05C9E6682AA1D72100905C8D /* RestorableReviewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9E6672AA1D72100905C8D /* RestorableReviewState.swift */; };
+		05C9E66A2AA1D74700905C8D /* SearchViewModel+Restore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9E6692AA1D74700905C8D /* SearchViewModel+Restore.swift */; };
 		05D0329F2838DB2B00FE67D5 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0329E2838DB2B00FE67D5 /* Date+.swift */; };
 		05D032A52838E82C00FE67D5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A42838E82C00FE67D5 /* SearchViewModel.swift */; };
 		05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D032A62838F8D300FE67D5 /* CustomDialog.swift */; };
@@ -254,6 +256,8 @@
 		05BAE2172837CCA50043FAEB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		05BBC3E4284FB31E00477BF5 /* QuestionsInsideTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsInsideTagView.swift; sourceTree = "<group>"; };
 		05BD6FC92954A45B005BE4CB /* build+docc+commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build+docc+commit.sh"; sourceTree = "<group>"; };
+		05C9E6672AA1D72100905C8D /* RestorableReviewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableReviewState.swift; sourceTree = "<group>"; };
+		05C9E6692AA1D74700905C8D /* SearchViewModel+Restore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewModel+Restore.swift"; sourceTree = "<group>"; };
 		05D0329E2838DB2B00FE67D5 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		05D032A42838E82C00FE67D5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		05D032A62838F8D300FE67D5 /* CustomDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialog.swift; sourceTree = "<group>"; };
@@ -601,6 +605,8 @@
 			children = (
 				05BAE2172837CCA50043FAEB /* SearchView.swift */,
 				05D032A42838E82C00FE67D5 /* SearchViewModel.swift */,
+				05C9E6672AA1D72100905C8D /* RestorableReviewState.swift */,
+				05C9E6692AA1D74700905C8D /* SearchViewModel+Restore.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				053666E628378949002F899F /* UIColor+.swift in Sources */,
 				051E107C2911383000F990BD /* FinishedReviewView.swift in Sources */,
 				05031DA92A8E5A13000E789A /* SettingsViewModel.swift in Sources */,
+				05C9E66A2AA1D74700905C8D /* SearchViewModel+Restore.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05031DAA2A8E5A16000E789A /* SettingsView.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
@@ -912,6 +919,7 @@
 				05867E73283A480600F4A413 /* Question+.swift in Sources */,
 				05081530285C719000CF632E /* NotAnyToReviewView.swift in Sources */,
 				05D62D34299CD0AD00AC1283 /* QuestionTagList.swift in Sources */,
+				05C9E6682AA1D72100905C8D /* RestorableReviewState.swift in Sources */,
 				054E7720284A523E006BCDEF /* Tag+.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
 				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,

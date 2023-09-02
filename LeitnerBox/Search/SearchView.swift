@@ -12,6 +12,7 @@ struct SearchView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     private var searchedQuestions: [Question] { viewModel.searchedQuestions }
+    @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
         List {
@@ -63,6 +64,9 @@ struct SearchView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 MutableSearchViewToolbar(container: container, viewModel: viewModel)
             }
+        }
+        .onChange(of: scenePhase) { newValue in
+            viewModel.onScenePhaseChanged(newValue)
         }
     }
 }

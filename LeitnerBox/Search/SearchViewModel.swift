@@ -27,7 +27,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     @Published var selectedSort: SearchSort = .date
     @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
     var reviewStatus: ReviewStatus = .unInitialized
-    private(set) var questions: [Question] = []
+    var questions: [Question] = []
     private(set) var searchedQuestions: [Question] = []
     var synthesizer: AVSpeechSynthesizerProtocol
     var commandCenter: MPRemoteCommandCenter?
@@ -36,8 +36,10 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     var sortedTags: [Tag] { leitner.tagsArray.sorted(by: { $0.name.isLessThan($1.name) }) }
     private(set) var cancellableSet: Set<AnyCancellable> = []
     var count = 20
-    private var offset = 0
+    internal var offset = 0
     var selectedTag: Tag?
+    var timer: Timer?
+    var lastPlayedQuestion: Question?
 
     init(viewContext: NSManagedObjectContextProtocol,
          leitner: Leitner,
@@ -195,8 +197,6 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         synthesizer.speak(utterance)
     }
 
-    var timer: Timer?
-    var lastPlayedQuestion: Question?
     func playReview() {
         reviewStatus = .isPlaying
         if synthesizer.isPaused {
@@ -265,6 +265,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         reviewStatus = .unInitialized
         task?.cancel()
         lastPlayedQuestion = nil
+        RestorableReviewState.clear(leitner.id)
         objectWillChange.send()
     }
 
@@ -305,6 +306,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
             self?.togglePlayPauseReview()
             return .success
         }
+        restoreState()
     }
 
     func togglePlayPauseReview() {
@@ -386,7 +388,7 @@ struct SortModel: Hashable {
     let sortType: SearchSort
 }
 
-enum SearchSort {
+enum SearchSort: Codable {
     case level
     case completed
     case alphabet
