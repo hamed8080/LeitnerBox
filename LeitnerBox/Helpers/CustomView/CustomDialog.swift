@@ -22,7 +22,7 @@ struct CustomDialog<DialogContent: View>: ViewModifier {
             if isShowing {
                 // the semi-transparent overlay
                 Rectangle()
-                    .background(.ultraThickMaterial)
+                    .background(.ultraThinMaterial)
                     .ignoresSafeArea()
                     .transition(.opacity)
                     .animation(.easeInOut, value: isShowing)

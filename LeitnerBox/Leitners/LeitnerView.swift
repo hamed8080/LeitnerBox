@@ -11,14 +11,13 @@ import SwiftUI
 struct LeitnerView: View {
     @EnvironmentObject var viewModel: LeitnerViewModel
     let context: NSManagedObjectContext
-    @State var selectedLeitner: Leitner?
 
     var body: some View {
         NavigationSplitView {
             if viewModel.leitners.count == 0 {
                 EmptyLeitnerAnimation()
             } else {
-                SidebarListView(selectedLeitner: $selectedLeitner)
+                SidebarListView(selectedLeitner: $viewModel.selectedLeitner)
                     .navigationDestination(for: String.self) { value in
                         if value == "Settings" {
                             SettingsView()
@@ -27,21 +26,18 @@ struct LeitnerView: View {
             }
         } detail: {
             NavigationStack {
-                if let leitner = selectedLeitner {
-                    let container = ObjectsContainer(context: context, leitner: leitner, leitnerVM: viewModel)
-                    LevelsView(container: container)
-                        .id(leitner.id)
-                        .environmentObject(container.levelsVM)
+                if viewModel.selectedLeitner != nil {
+                    SelectedLeitnerView()
                 }
             }
         }
-        .animation(.easeInOut, value: selectedLeitner)        
+        .animation(.easeInOut, value: viewModel.selectedLeitner)
         .customDialog(isShowing: $viewModel.showEditOrAddLeitnerAlert) {
             editOrAddLeitnerView
         }
         .onAppear {
-            if selectedLeitner == nil {
-                selectedLeitner = viewModel.leitners.first
+            if viewModel.selectedLeitner == nil {
+                viewModel.selectedLeitner = viewModel.leitners.first
             }
         }
     }
@@ -95,6 +91,18 @@ struct LeitnerView: View {
             .frame(maxWidth: .infinity)
             .tint(.red)
             .animation(.easeInOut, value: viewModel.showEditOrAddLeitnerAlert)
+        }
+    }
+}
+
+struct SelectedLeitnerView: View {
+    @EnvironmentObject var viewModel: LeitnerViewModel
+
+    var body: some View {
+        if let container = viewModel.selectedObjectContainer {
+            LevelsView(container: container)
+                .id(viewModel.selectedLeitner?.id)
+                .environmentObject(container.levelsVM)
         }
     }
 }

@@ -13,10 +13,18 @@ final class LeitnerViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var leitners: [Leitner] = []
     @Published var showEditOrAddLeitnerAlert = false
-    @Published var selectedLeitner: Leitner?
+    @Published var selectedLeitner: Leitner? {
+        didSet {
+            if let selectedLeitner {
+                selectedObjectContainer = ObjectsContainer(context: viewContext as! NSManagedObjectContext, leitner: selectedLeitner, leitnerVM: self)
+            }
+        }
+    }
+    
     @Published var leitnerTitle: String = ""
     @Published var backToTopLevel = false
     @Published var selectedVoiceIdentifire: String?
+    @Published var selectedObjectContainer: ObjectsContainer?
     @AppStorage("TopQuestionsForWidget", store: UserDefaults.group) var widgetQuestions: Data?
 
     init(viewContext: NSManagedObjectContextProtocol) {

@@ -171,9 +171,14 @@ struct MutableSearchViewToolbar: View {
         } label: {
             Label("More", systemImage: "ellipsis.circle")
         }
-        .toobarNavgationButtonStyle()
+        .tint(Color("AccentColor"))
         .onAppear {
             favoriteCount = Leitner.fetchFavCount(context: viewModel.viewContext, leitnerId: viewModel.leitner.id)
+        }
+        .onReceive(container.searchVM.objectWillChange) { _ in
+            if reviewStatus != viewModel.reviewStatus {
+                self.reviewStatus = viewModel.reviewStatus
+            }
         }
     }
 }
@@ -188,46 +193,49 @@ struct PronunceWordsView: View {
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
-                    HStack {
-                        if question?.favorite == true {
-                            Image(systemName: "star.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                                .padding(8)
-                                .foregroundColor(.accentColor)
-                        }
+                    ScrollView {
+                        HStack {
+                            if question?.favorite == true {
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .padding(8)
+                                    .foregroundColor(.accentColor)
+                            }
 
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(verbatim: question?.question ?? "")
-                                .foregroundColor(.primary)
-                                .font(.title.weight(.bold))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            if let answer = question?.answer, !answer.isEmpty {
-                                Text(verbatim: answer)
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(verbatim: question?.question ?? "")
                                     .foregroundColor(.primary)
-                                    .font(.body.weight(.medium))
+                                    .font(.title.weight(.bold))
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            if let description = question?.detailDescription, !description.isEmpty {
-                                Text(verbatim: description)
-                                    .foregroundColor(.primary)
-                                    .font(.body.weight(.medium))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
-                                .font(.footnote.bold())
-                            if let question {
-                                QuestionTagList(tags: question.tagsArray ?? [])
-                                    .environmentObject(question)
-                                    .frame(maxHeight: 64)
+                                if let answer = question?.answer, !answer.isEmpty {
+                                    Text(verbatim: answer)
+                                        .foregroundColor(.primary)
+                                        .font(.body.weight(.medium))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                if let description = question?.detailDescription, !description.isEmpty {
+                                    Text(verbatim: description)
+                                        .foregroundColor(.primary)
+                                        .font(.body.weight(.medium))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
+                                    .font(.footnote.bold())
+                                if let question {
+                                    QuestionTagList(tags: question.tagsArray ?? [])
+                                        .environmentObject(question)
+                                        .frame(maxHeight: 64)
+                                }
                             }
                         }
+                        .padding([.top, .leading])
                     }
+                    .frame(maxHeight: 256)
+                    .padding([.leading, .trailing])
                     Spacer()
                 }
-                .padding()
-                .padding(.bottom, 24)
                 .background(.thinMaterial)
                 .cornerRadius(24, corners: [.topLeft, .topRight])
             }

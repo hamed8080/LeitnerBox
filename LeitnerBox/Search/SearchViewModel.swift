@@ -153,7 +153,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         viewContext.delete(question)
         questions.removeAll(where: { $0 == question })
         PersistenceController.saveDB(viewContext: viewContext)
-        objectWillChange.send() // notify to redrawn filtred items and delete selected question
+        animateObjectWillChange() // notify to redrawn filtred items and delete selected question
     }
 
     func toggleCompleted(_ question: Question) {
@@ -213,7 +213,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
             pronounce(firstQuestion)
             lastPlayedQuestion = firstQuestion
         }
-        objectWillChange.send()
+        animateObjectWillChange()
     }
 
     func playNext() {
@@ -225,7 +225,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
             pronounce(nextQuestion)
             self.lastPlayedQuestion = nextQuestion
         }
-        objectWillChange.send()
+        animateObjectWillChange()
     }
 
     func playNextImmediately() {
@@ -257,7 +257,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         if synthesizer.isSpeaking {
             _ = synthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
         }
-        objectWillChange.send()
+        animateObjectWillChange()
     }
 
     func stopReview() {
@@ -266,13 +266,11 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         task?.cancel()
         lastPlayedQuestion = nil
         RestorableReviewState.clear(leitner.id)
-        objectWillChange.send()
+        animateObjectWillChange()
     }
 
     func finished() {
-        reviewStatus = .unInitialized
-        lastPlayedQuestion = nil
-        objectWillChange.send()
+        stopReview()
     }
 
     var reviewdCount: Int {
@@ -290,7 +288,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         question.leitner = leitner
         PersistenceController.saveDB(viewContext: viewContext)
         questions.removeAll(where: { $0 == question })
-        objectWillChange.send()
+        animateObjectWillChange()
     }
 
     func viewDidAppear() {

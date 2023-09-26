@@ -43,7 +43,7 @@ struct ToolbarNavigationModifire: ViewModifier {
         content
             .font(.title3)
             .symbolRenderingMode(.palette)
-            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color.accentColor)
+            .foregroundStyle(colorScheme == .dark ? .white : .black.opacity(0.5), Color("AccentColor"))
     }
 }
 
