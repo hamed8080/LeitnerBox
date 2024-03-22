@@ -199,9 +199,13 @@ extension PersistenceController {
                         if FileManager.default.fileExists(atPath: newFileLocation.path) {
                             try FileManager.default.removeItem(atPath: newFileLocation.path)
                         }
+                        let isAccessing = url.startAccessingSecurityScopedResource()
                         let fileData = try Data(contentsOf: url)
                         try fileData.write(to: newFileLocation)
                         PersistenceController.shared.replaceDatabase(appSuppportFile: newFileLocation)
+                        if isAccessing {
+                            url.stopAccessingSecurityScopedResource()
+                        }
                     }
                 } catch {
                     print("error happend\(error.localizedDescription)")

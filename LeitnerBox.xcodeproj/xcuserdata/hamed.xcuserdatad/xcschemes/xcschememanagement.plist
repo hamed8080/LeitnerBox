@@ -21,8 +21,10 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Share.xcscheme_^#shared#^_</key>
+		<key>Share.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>

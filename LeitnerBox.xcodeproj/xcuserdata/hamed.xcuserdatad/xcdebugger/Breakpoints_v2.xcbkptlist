@@ -52,5 +52,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CFC3E7F-5924-41C6-8196-603A97E3D78E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeitnerBox/Persistence.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "moveAppGroupFileToAppSupportFolder()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7CFC3E7F-5924-41C6-8196-603A97E3D78E - 69bc09afd0ebca3b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBox.PersistenceController.moveAppGroupFileToAppSupportFolder() -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "LeitnerBox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Persistence.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "2736">
+               </Location>
+               <Location
+                  uuid = "7CFC3E7F-5924-41C6-8196-603A97E3D78E - 69bc09afd0ebca3b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBox.PersistenceController.moveAppGroupFileToAppSupportFolder() -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "LeitnerBox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Persistence.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "2876">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C5D7D1D-FEB6-4777-9026-1647E7D0E4FB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeitnerBox/Persistence.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "moveAppGroupFileToAppSupportFolder()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7C5D7D1D-FEB6-4777-9026-1647E7D0E4FB - 69bc09afd0ebc8f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBox.PersistenceController.moveAppGroupFileToAppSupportFolder() -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "LeitnerBox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Persistence.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "1000">
+               </Location>
+               <Location
+                  uuid = "7C5D7D1D-FEB6-4777-9026-1647E7D0E4FB - 69bc09afd0ebc8f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LeitnerBox.PersistenceController.moveAppGroupFileToAppSupportFolder() -&gt; Swift.Optional&lt;Foundation.URL&gt;"
+                  moduleName = "LeitnerBox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamed/Desktop/Workspace/ios/LeitnerBox/LeitnerBox/LeitnerBox/Persistence.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "1140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
