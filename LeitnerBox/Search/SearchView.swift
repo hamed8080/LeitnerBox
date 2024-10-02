@@ -15,10 +15,87 @@ struct SearchView: View {
     @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
-        List {
+        compatibleScrollView
+            .if(.iOS) { view in
+                view.refreshable {
+                    context.rollback()
+                    viewModel.reload()
+                }
+            }
+            .environmentObject(container)
+            .animation(.easeInOut, value: viewModel.questions.count)
+            .animation(.easeInOut, value: searchedQuestions.count)
+            .animation(.easeInOut, value: viewModel.reviewStatus)
+            .navigationTitle("Advance Search in \(viewModel.leitner.name ?? "")")
+            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
+                if viewModel.searchText.isEmpty == false, searchedQuestions.count < 1 {
+                    HStack {
+                        Image(systemName: "doc.text.magnifyingglass")
+                            .foregroundColor(.gray.opacity(0.8))
+                        Text("Nothind has found.")
+                            .foregroundColor(.gray.opacity(0.8))
+                    }
+                }
+            }
+            .overlay {
+                PronunceWordsView()
+                    .environmentObject(container)
+            }
+            .onAppear {
+                viewModel.viewDidAppear()
+                viewModel.resumeSpeaking()
+            }
+            .onDisappear {
+                viewModel.pauseSpeaking()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    MutableSearchViewToolbar(container: container, viewModel: viewModel)
+                }
+            }
+            .onChange(of: scenePhase) { newValue in
+                viewModel.onScenePhaseChanged(newValue)
+            }
+    }
+
+    @ViewBuilder
+    private var compatibleScrollView: some View {
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            iOS17ScrollView
+        } else {
+            iOS16ScrollView
+        }
+    }
+
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    private var iOS17ScrollView: some View {
+        ScrollView {
+            scrollContent
+                .scrollTargetLayout()
+        }
+        .scrollPosition(id: $viewModel.scrollToId, anchor: .top)
+    }
+
+    private var iOS16ScrollView: some View {
+        ScrollViewReader { reader in
+            ScrollView {
+                scrollContent
+                    .onChange(of: viewModel.scrollToId) { newValue in
+                        withAnimation {
+                            reader.scrollTo(newValue, anchor: .top)
+                        }
+                    }
+            }
+        }
+    }
+
+    private var scrollContent: some View {
+        LazyVStack {
             ForEach(searchedQuestions.count > 0 ? searchedQuestions : viewModel.questions) { question in
                 NormalQuestionRow(question: question)
+                    .id(question.question)
                     .listRowInsets(EdgeInsets())
+                    .background(viewModel.scrollToId == question.question ? Color.accentColor.opacity(0.5) : Color.clear)
                     .onAppear {
                         if question == viewModel.questions.last {
                             viewModel.fetchMoreQuestion()
@@ -26,47 +103,6 @@ struct SearchView: View {
                     }
             }
             .onDelete(perform: viewModel.deleteItems)
-        }
-        .if(.iOS) { view in
-            view.refreshable {
-                context.rollback()
-                viewModel.reload()
-            }
-        }
-        .environmentObject(container)
-        .animation(.easeInOut, value: viewModel.questions.count)
-        .animation(.easeInOut, value: searchedQuestions.count)
-        .animation(.easeInOut, value: viewModel.reviewStatus)
-        .navigationTitle("Advance Search in \(viewModel.leitner.name ?? "")")
-        .listStyle(.plain)
-        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "Search inside leitner...") {
-            if viewModel.searchText.isEmpty == false, searchedQuestions.count < 1 {
-                HStack {
-                    Image(systemName: "doc.text.magnifyingglass")
-                        .foregroundColor(.gray.opacity(0.8))
-                    Text("Nothind has found.")
-                        .foregroundColor(.gray.opacity(0.8))
-                }
-            }
-        }
-        .overlay {
-            PronunceWordsView()
-                .environmentObject(container)
-        }
-        .onAppear {
-            viewModel.viewDidAppear()
-            viewModel.resumeSpeaking()
-        }
-        .onDisappear {
-            viewModel.pauseSpeaking()
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                MutableSearchViewToolbar(container: container, viewModel: viewModel)
-            }
-        }
-        .onChange(of: scenePhase) { newValue in
-            viewModel.onScenePhaseChanged(newValue)
         }
     }
 }
@@ -186,48 +222,22 @@ struct MutableSearchViewToolbar: View {
 struct PronunceWordsView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    private var question: Question? { viewModel.lastPlayedQuestion }
 
     var body: some View {
         if viewModel.reviewStatus == .isPlaying || viewModel.reviewStatus == .isPaused {
-            let question = viewModel.lastPlayedQuestion
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
                     ScrollView {
                         HStack {
-                            if question?.favorite == true {
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 24, height: 24)
-                                    .padding(8)
-                                    .foregroundColor(.accentColor)
-                            }
-
+                            starView
                             VStack(alignment: .leading, spacing: 8) {
-                                Text(verbatim: question?.question ?? "")
-                                    .foregroundColor(.primary)
-                                    .font(.title.weight(.bold))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                if let answer = question?.answer, !answer.isEmpty {
-                                    Text(verbatim: answer)
-                                        .foregroundColor(.primary)
-                                        .font(.body.weight(.medium))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                if let description = question?.detailDescription, !description.isEmpty {
-                                    Text(verbatim: description)
-                                        .foregroundColor(.primary)
-                                        .font(.body.weight(.medium))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
-                                    .font(.footnote.bold())
-                                if let question {
-                                    QuestionTagList(tags: question.tagsArray ?? [])
-                                        .environmentObject(question)
-                                        .frame(maxHeight: 64)
-                                }
+                                questionView
+                                answerView
+                                descriptionView
+                                countView
+                                tagsView
                             }
                         }
                         .padding([.top, .leading])
@@ -242,6 +252,72 @@ struct PronunceWordsView: View {
             .animation(.easeInOut, value: viewModel.lastPlayedQuestion)
             .transition(.move(edge: .bottom))
             .ignoresSafeArea(.all, edges: .bottom)
+        }
+    }
+
+    @ViewBuilder
+    private var starView: some View {
+        if question?.favorite == true {
+            Image(systemName: "star.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+                .padding(8)
+                .foregroundColor(.accentColor)
+        }
+    }
+
+    @ViewBuilder
+    private var questionView: some View {
+        Button {
+            withAnimation {
+                viewModel.scrollToId = question?.question
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.easeInOut) {
+                    viewModel.scrollToId = nil
+                }
+            }
+        } label: {
+            Text(verbatim: question?.question ?? "")
+                .foregroundColor(.primary)
+                .font(.title.weight(.bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private var answerView: some View {
+        if let answer = question?.answer, !answer.isEmpty {
+            Text(verbatim: answer)
+                .foregroundColor(.primary)
+                .font(.body.weight(.medium))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private var descriptionView: some View {
+        if let description = question?.detailDescription, !description.isEmpty {
+            Text(verbatim: description)
+                .foregroundColor(.primary)
+                .font(.body.weight(.medium))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private var countView: some View {
+        Text(verbatim: "\(viewModel.reviewdCount) / \(Leitner.fetchLeitnerQuestionsCount(context: context, leitnerId: viewModel.leitner.id))")
+            .font(.footnote.bold())
+    }
+
+    @ViewBuilder
+    private var tagsView: some View {
+        if let question {
+            QuestionTagList(tags: question.tagsArray ?? [])
+                .environmentObject(question)
+                .frame(maxHeight: 64)
         }
     }
 }

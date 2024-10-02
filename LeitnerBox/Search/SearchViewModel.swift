@@ -25,6 +25,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     @Published var leitner: Leitner
     @Published var editQuestion: Question?
     @Published var selectedSort: SearchSort = .date
+    @Published var scrollToId: String?
     @AppStorage("selectedVoiceIdentifire") var selectedVoiceIdentifire = ""
     var reviewStatus: ReviewStatus = .unInitialized
     var questions: [Question] = []
