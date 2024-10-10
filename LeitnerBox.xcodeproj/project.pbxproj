@@ -63,6 +63,8 @@
 		05747BFC28AE82ED00868CC6 /* Synonym+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFB28AE82BE00868CC6 /* Synonym+.swift */; };
 		05747BFF28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747BFE28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift */; };
 		05747C0128AE9DA800868CC6 /* SynonymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */; };
+		057871BF2CB8657D00BBC3C8 /* EditOrAddLeitnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057871BE2CB8657D00BBC3C8 /* EditOrAddLeitnerView.swift */; };
+		057871C12CB866AF00BBC3C8 /* EmptyLeitnerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057871C02CB866AF00BBC3C8 /* EmptyLeitnerAnimation.swift */; };
 		0579D4A7283CE459000BD93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0579D4A5283CE459000BD93D /* MainInterface.storyboard */; };
 		0579D4B0283CE46F000BD93D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D4AF283CE46F000BD93D /* ShareViewController.swift */; };
 		0579D4B1283CE855000BD93D /* AppGroupLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052CA6EB283CE01800376E79 /* AppGroupLocalStorage.swift */; };
@@ -212,6 +214,8 @@
 		05747BFB28AE82BE00868CC6 /* Synonym+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Synonym+.swift"; sourceTree = "<group>"; };
 		05747BFE28AE9D7B00868CC6 /* QuestionSynonymPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSynonymPickerView.swift; sourceTree = "<group>"; };
 		05747C0028AE9DA800868CC6 /* SynonymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymViewModel.swift; sourceTree = "<group>"; };
+		057871BE2CB8657D00BBC3C8 /* EditOrAddLeitnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrAddLeitnerView.swift; sourceTree = "<group>"; };
+		057871C02CB866AF00BBC3C8 /* EmptyLeitnerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyLeitnerAnimation.swift; sourceTree = "<group>"; };
 		0579D4A1283CE459000BD93D /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0579D4A6283CE459000BD93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0579D4A8283CE459000BD93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -520,6 +524,8 @@
 				05266ABB28367DA9004693BC /* LeitnerView.swift */,
 				054AB5C62839602C008BC840 /* LeitnerRowView.swift */,
 				054AB5C8283960A4008BC840 /* LeitnerViewModel.swift */,
+				057871BE2CB8657D00BBC3C8 /* EditOrAddLeitnerView.swift */,
+				057871C02CB866AF00BBC3C8 /* EmptyLeitnerAnimation.swift */,
 			);
 			path = Leitners;
 			sourceTree = "<group>";
@@ -869,6 +875,7 @@
 				05867E6D283A2A9100F4A413 /* RoundedCorner+.swift in Sources */,
 				05266AC328367DAA004693BC /* Persistence.swift in Sources */,
 				05D032A72838F8D300FE67D5 /* CustomDialog.swift in Sources */,
+				057871BF2CB8657D00BBC3C8 /* EditOrAddLeitnerView.swift in Sources */,
 				05D62D38299CD7F100AC1283 /* QuestionSynonymList.swift in Sources */,
 				05F1C8B2288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */,
 				05266ABC28367DA9004693BC /* LeitnerView.swift in Sources */,
@@ -892,6 +899,7 @@
 				05C9E66A2AA1D74700905C8D /* SearchViewModel+Restore.swift in Sources */,
 				054E7722284A52FF006BCDEF /* TagView.swift in Sources */,
 				05031DAA2A8E5A16000E789A /* SettingsView.swift in Sources */,
+				057871C12CB866AF00BBC3C8 /* EmptyLeitnerAnimation.swift in Sources */,
 				05BBC3E5284FB31E00477BF5 /* QuestionsInsideTagView.swift in Sources */,
 				050D6DD22879EAFB0020BCDB /* QuestionViewModel.swift in Sources */,
 				054AB5C72839602C008BC840 /* LeitnerRowView.swift in Sources */,
