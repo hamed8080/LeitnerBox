@@ -13,6 +13,7 @@ struct SearchView: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     private var searchedQuestions: [Question] { viewModel.searchedQuestions }
     @Environment(\.scenePhase) var scenePhase
+    @State private var scrollPosition: String? = nil
 
     var body: some View {
         compatibleScrollView
@@ -73,7 +74,11 @@ struct SearchView: View {
             scrollContent
                 .scrollTargetLayout()
         }
-        .scrollPosition(id: $viewModel.scrollToId, anchor: .top)
+        .scrollPosition(id: $scrollPosition, anchor: .top)
+        .onChange(of: viewModel.scrollToId) { newValue in
+            //When user click on the question in pronounce view
+            scrollPosition = newValue
+        }
     }
 
     private var iOS16ScrollView: some View {

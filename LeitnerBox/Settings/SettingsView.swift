@@ -55,7 +55,7 @@ struct SettingsView: View {
             }
         }
         .onChange(of: viewModel.backupFile?.fileURL) { newValue in
-            if let newValue {
+            if newValue != nil {
                 showBackupSheet = true
             }
         }

@@ -13,13 +13,8 @@ final class LeitnerViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContextProtocol
     @Published var leitners: [Leitner] = []
     @Published var showEditOrAddLeitnerAlert = false
-    @Published var selectedLeitner: Leitner? {
-        didSet {
-            if let selectedLeitner {
-                selectedObjectContainer = ObjectsContainer(context: viewContext as! NSManagedObjectContext, leitner: selectedLeitner, leitnerVM: self)
-            }
-        }
-    }
+    @Published var selectedLeitner: Leitner?
+    @Published var settingSelected = false
     
     @Published var leitnerTitle: String = ""
     @Published var backToTopLevel = false
@@ -31,6 +26,9 @@ final class LeitnerViewModel: ObservableObject {
         self.viewContext = viewContext
         selectedVoiceIdentifire = UserDefaults.standard.string(forKey: "selectedVoiceIdentifire")
         load()
+        if selectedLeitner == nil, let firstLeitner = leitners.first {
+            setLeithner(firstLeitner)
+        }
     }
 
     func load() {
@@ -49,6 +47,10 @@ final class LeitnerViewModel: ObservableObject {
     }
 
     func delete(_ leitner: Leitner) {
+        if selectedLeitner?.id == leitner.id {
+            // Switch navigation view to nil
+            selectedLeitner = nil
+        }
         if let index = leitners.firstIndex(where: { $0 == leitner }) {
             leitners.remove(at: index)
         }
@@ -124,4 +126,9 @@ final class LeitnerViewModel: ObservableObject {
     }
 
     func fillWidgetTopQuestions() {}
+    
+    func setLeithner(_ leitner: Leitner) {
+        selectedLeitner = leitner
+        selectedObjectContainer = ObjectsContainer(context: viewContext as! NSManagedObjectContext, leitner: leitner, leitnerVM: self)
+    }
 }

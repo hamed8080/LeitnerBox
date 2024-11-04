@@ -18,9 +18,7 @@ struct LeitnerView: View {
             } else {
                 SidebarListView()
                     .navigationDestination(for: String.self) { value in
-                        if value == "Settings" {
-                            SettingsView()
-                        }
+                        settingView(value)
                     }
             }
         } detail: {
@@ -33,10 +31,18 @@ struct LeitnerView: View {
         .customDialog(isShowing: $viewModel.showEditOrAddLeitnerAlert) {
             EditOrAddLeitnerView()
         }
-        .onAppear {
-            if viewModel.selectedLeitner == nil {
-                viewModel.selectedLeitner = viewModel.leitners.first
-            }
+    }
+    
+    @ViewBuilder
+    private func settingView(_ value: String) -> some View {
+        if value == "Settings" {
+            SettingsView()
+                .onAppear {
+                    viewModel.settingSelected = true
+                }
+                .onDisappear {
+                    viewModel.settingSelected = false
+                }
         }
     }
 }
@@ -62,20 +68,19 @@ struct SidebarListView: View {
             settingSection
         }
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    viewModel.clear()
-                    viewModel.showEditOrAddLeitnerAlert.toggle()
-                } label: {
-                    Label("Add Item", systemImage: "plus")
-                }
-            }
+            leadingToolbarView
         }
         .refreshable {
             viewModel.load()
         }
         .listStyle(.insetGrouped)
+        .tint(.clear)
         .navigationTitle("Leitner Box")
+        .onChange(of: viewModel.selectedLeitner) { newValue in
+            if let leitner = newValue {
+                viewModel.setLeithner(leitner)
+            }
+        }
     }
 
     private var leitnersSection: some View {
@@ -85,6 +90,7 @@ struct SidebarListView: View {
                     LeitnerRowView(leitner: leitner)
                 }
                 .id(leitner.id)
+                .listRowBackground(viewModel.selectedLeitner?.id == leitner.id ? Color(.systemFill) : Color(.secondarySystemGroupedBackground))
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     deleteActionView(leitner)
                 }
@@ -95,26 +101,41 @@ struct SidebarListView: View {
     private var settingSection: some View {
         Section(String(localized: .init("Settings"))) {
             NavigationLink(value: "Settings") {
-                Label("Settings", systemImage: "gear")
+                HStack {
+                    Image(systemName: "gear")
+                        .foregroundStyle(Color(named: "AccentColor"))
+                        
+                    Text("Settings")
+                    Spacer()
+                }
             }
+            .listRowBackground(viewModel.settingSelected ? Color(.systemFill) : Color(.secondarySystemGroupedBackground))
         }
     }
 
     @ViewBuilder
     private func deleteActionView(_ leitner: Leitner) -> some View {
         Button(role: .destructive) {
-            onDeleteTapped(leitner)
+            viewModel.delete(leitner)
         } label: {
             Label("Delete", systemImage: "trash")
         }
     }
-
-    private func onDeleteTapped(_ leitner: Leitner) {
-        if viewModel.selectedLeitner?.id == leitner.id {
-            // Switch navigation view to nil
-            viewModel.selectedLeitner = nil
+    
+    private var leadingToolbarView: ToolbarItemGroup<some View> {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button {
+                viewModel.clear()
+                viewModel.showEditOrAddLeitnerAlert.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "plus")
+                        .accessibilityHint("Add Item")
+                        .foregroundStyle(Color(named: "AccentColor"))
+                    Spacer()
+                }
+            }
         }
-        viewModel.delete(leitner)
     }
 }
 

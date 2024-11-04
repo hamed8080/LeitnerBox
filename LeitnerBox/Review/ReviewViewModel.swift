@@ -34,7 +34,7 @@ final class ReviewViewModel: ObservableObject {
 
         let levelReq = Level.fetchRequest()
         levelReq.predicate = NSPredicate(format: "leitner.id == %i AND level == %i", leitnerId, levelValue)
-        let level = try! viewContext.fetch(levelReq).first!
+        let level = (try? viewContext.fetch(levelReq).first) ?? .init()
         self.level = level
         leitner = level.leitner
 
