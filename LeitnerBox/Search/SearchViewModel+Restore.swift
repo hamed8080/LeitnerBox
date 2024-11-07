@@ -9,17 +9,6 @@ import Foundation
 import SwiftUI
 
 extension SearchViewModel {
-    func onScenePhaseChanged(_ scenePhase: ScenePhase) {
-        switch scenePhase {
-        case .background:
-            saveState()
-        case .active:
-            restoreState()
-        default:
-            break
-        }
-    }
-
     func saveState() {
         if reviewStatus != .unInitialized {
             let reviewState = RestorableReviewState(leitnerId: leitner.id,

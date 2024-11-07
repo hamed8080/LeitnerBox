@@ -41,6 +41,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     var selectedTag: Tag?
     var timer: Timer?
     var lastPlayedQuestion: Question?
+    private let appIcon = UIImage(named: "global_app_icon")
 
     init(viewContext: NSManagedObjectContextProtocol,
          leitner: Leitner,
@@ -199,6 +200,9 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     }
 
     func playReview() {
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playback)
+        try? session.setActive(true)
         reviewStatus = .isPlaying
         if synthesizer.isPaused {
             _ = synthesizer.continueSpeaking()
@@ -224,8 +228,10 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         if let lastPlayedQuestion = lastPlayedQuestion, let index = questions.firstIndex(of: lastPlayedQuestion), questions.indices.contains(index + 1) {
             let nextQuestion = questions[index + 1]
             pronounce(nextQuestion)
+            setupNowPlayingInfo(nextQuestion)
             self.lastPlayedQuestion = nextQuestion
         }
+        saveState()
         animateObjectWillChange()
     }
 
@@ -253,6 +259,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     }
 
     func pauseReview() {
+        try? AVAudioSession.sharedInstance().setActive(false)
         reviewStatus = .isPaused
         task?.cancel()
         if synthesizer.isSpeaking {
@@ -262,6 +269,7 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
     }
 
     func stopReview() {
+        try? AVAudioSession.sharedInstance().setActive(false)
         _ = synthesizer.stopSpeaking(at: .immediate)
         reviewStatus = .unInitialized
         task?.cancel()
@@ -303,6 +311,10 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
         }
         commandCenter?.pauseCommand.addTarget { [weak self] _ -> MPRemoteCommandHandlerStatus in
             self?.togglePlayPauseReview()
+            return .success
+        }
+        commandCenter?.nextTrackCommand.addTarget { [weak self] _ -> MPRemoteCommandHandlerStatus in
+            self?.playNextImmediately()
             return .success
         }
         restoreState()
@@ -367,6 +379,27 @@ final class SearchViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDele
                 self?.playNext()
             }
         }
+    }
+    
+    func setupNowPlayingInfo(_ question: Question) {
+        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
+        var nowPlayingInfo: [String: Any] = [
+            MPMediaItemPropertyTitle: question.question ?? "",
+            MPMediaItemPropertyArtist: question.answer ?? ""
+        ]
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = appArtwrok
+        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+    }
+    
+    private var appArtwrok: MPMediaItemArtwork? {
+        // Set artwork (if available)
+        if let appIcon = appIcon {
+            let artwork = MPMediaItemArtwork(boundsSize: appIcon.size) { _ in
+                return appIcon
+            }
+            return artwork
+        }
+        return nil
     }
 }
 
