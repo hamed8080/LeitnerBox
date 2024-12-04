@@ -7,7 +7,7 @@
 import Foundation
 
 final class AppGroupLocalStorage {
-    static let groupName = "group.my.app_group"
+    static let groupName = "group.com.lmlvrmedia.leitnerbox"
     static let shared = AppGroupLocalStorage()
 
     func saveFile(fileURL: URL, result: (Error?) -> Void) {

@@ -9,7 +9,7 @@ import UniformTypeIdentifiers
 
 @objc(ShareViewController)
 final class ShareViewController: UIViewController {
-    static let groupName = "group.my.app_group"
+    static let groupName = "group.com.lmlvrmedia.leitnerbox"
 
     @IBOutlet var img: UIImageView!
     @IBOutlet var lbl: UILabel!
