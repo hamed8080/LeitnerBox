@@ -115,6 +115,9 @@ extension PersistenceController {
                 let questions = generateQuestions(20, level, leitner)
                 generateTags(5, leitner).forEach { tag in
                     questions.forEach { question in
+                        generateImages().forEach { image in
+                            question.addToImages(image)
+                        }
                         tag.addToQuestion(question)
                         generateStatistics(question)
                     }
@@ -166,6 +169,16 @@ extension PersistenceController {
         statistic.actionDate = Calendar.current.date(byAdding: .day, value: -(Int.random(in: 1 ... 360)), to: .now)
         statistic.isPassed = Bool.random()
         statistic.question = question
+    }
+    
+    func generateImages() -> [ImageURL] {
+        var images: [ImageURL] = []
+        for _ in 0...10 {
+            let imageURL = ImageURL(context: viewContext)
+            imageURL.url = "www.google.com"
+            images.append(imageURL)
+        }
+        return images
     }
 
     func generateQuestions(_ count: Int, _ level: Level, _ leitner: Leitner) -> [Question] {

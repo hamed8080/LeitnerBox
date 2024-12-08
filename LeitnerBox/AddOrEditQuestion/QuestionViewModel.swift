@@ -19,6 +19,7 @@ final class QuestionViewModel: ObservableObject {
     @Published var batchInserPhrasesMode = false
     @Published var tags: [Tag] = []
     @Published var synonyms: [Question] = []
+    @Published var images: [ImageURL] = []
     let leitner: Leitner
     var question: Question?
     var title: String {
@@ -53,6 +54,7 @@ final class QuestionViewModel: ObservableObject {
         setLevelToLatestIfCompeleted(question)
         setSynonyms(question: question)
         setTags(question: question)
+        setImages(question)
         if question.favorite == false, favorite {
             question.favoriteDate = Date()
         }
@@ -69,6 +71,7 @@ final class QuestionViewModel: ObservableObject {
         setSynonyms(question: question)
         setTags(question: question)
         setLevelToLatestIfCompeleted(question)
+        setImages(question)
         question.createTime = Date()
         question.favorite = favorite
         if question.favorite {
@@ -138,6 +141,7 @@ final class QuestionViewModel: ObservableObject {
         favorite = editQuestion.favorite
         synonyms = editQuestion.synonymsArray ?? []
         tags = editQuestion.tagsArray ?? []
+        images = editQuestion.imagesArray ?? []
     }
 
     func addTagToQuestion(_ tag: Tag) {
@@ -189,4 +193,23 @@ final class QuestionViewModel: ObservableObject {
             question.addToTag(tag)
         }
     }
+    
+    func addImage(_ link: String) {
+        if images.contains(where: {$0.url == link}) { return }
+        let imageURL = ImageURL(context: viewContext)
+        imageURL.url = link
+        images.append(imageURL)
+    }
+    
+    func removeImage(_ imageURL: ImageURL) {
+        images.removeAll{$0 == imageURL}
+        question?.removeFromImages(imageURL)
+    }
+    
+    func setImages(_ question: Question) {
+        images.forEach { image in
+            question.addToImages(image)
+        }
+    }
+    
 }

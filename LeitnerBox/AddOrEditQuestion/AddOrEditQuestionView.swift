@@ -102,6 +102,9 @@ struct AddOrEditQuestionView: View {
                             }
                         }
                     }
+                    
+                    QuestionImagesView(isInReviewView: false)
+                        .environmentObject(questionVM)
 
                     Button {
                         questionVM.save()

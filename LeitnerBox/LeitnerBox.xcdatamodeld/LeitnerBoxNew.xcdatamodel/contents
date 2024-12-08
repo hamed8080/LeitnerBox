@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24B83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ImageURL" representedClassName="ImageURL" syncable="YES" codeGenerationType="class">
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Leitner" representedClassName="Leitner" syncable="YES" codeGenerationType="class">
         <attribute name="backToTopLevel" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -35,6 +38,7 @@
         <attribute name="passTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="question" attributeType="String"/>
         <attribute name="tagsCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="tag.@count" usesScalarValueType="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImageURL"/>
         <relationship name="leitner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Leitner" inverseName="questions" inverseEntity="Leitner"/>
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="questions" inverseEntity="Level"/>
         <relationship name="statistics" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Statistic" inverseName="question" inverseEntity="Statistic"/>

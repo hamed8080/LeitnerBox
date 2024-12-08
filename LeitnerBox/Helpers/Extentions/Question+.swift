@@ -64,6 +64,10 @@ extension Question {
     var tagsArray: [Tag]? {
         tag?.allObjects as? [Tag]
     }
+    
+    var imagesArray: [ImageURL]? {
+        images?.allObjects as? [ImageURL]
+    }
 
     var synonymsArray: [Question]? {
         guard let synonym = (synonyms?.allObjects as? [Synonym])?.first else { return nil }

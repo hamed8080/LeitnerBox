@@ -31,6 +31,11 @@ struct ReviewView: View {
                             } else {
                                 TapToAnswerView()
                             }
+                            
+                            if question?.imagesArray?.isEmpty == false {
+                                QuestionImagesView(isInReviewView: true)
+                                    .environmentObject(QuestionViewModel(viewContext: context, leitner: question?.leitner ?? .init(), question: question))
+                            }
                         }
                     }
                     Spacer()
