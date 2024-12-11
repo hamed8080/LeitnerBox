@@ -118,6 +118,7 @@
 		05F1C8B1288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 05F1C8AD288AD07A00CD5F1E /* ReviewWidget.intentdefinition */; };
 		05F1C8B2288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 05F1C8AD288AD07A00CD5F1E /* ReviewWidget.intentdefinition */; };
 		05F1C8B5288AD07B00CD5F1E /* ReviewWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 05F1C8A5288AD07A00CD5F1E /* ReviewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AC5BEEA52D0872E9005AF803 /* QuestionLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BEEA42D0872E9005AF803 /* QuestionLocationView.swift */; };
 		ACDD7BE12D055FC800EE1321 /* QuestionImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD7BE02D055FC800EE1321 /* QuestionImagesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +276,7 @@
 		05F1C8AE288AD07B00CD5F1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05F1C8B0288AD07B00CD5F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05F1C8B6288AD07B00CD5F1E /* ReviewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReviewWidgetExtension.entitlements; sourceTree = "<group>"; };
+		AC5BEEA42D0872E9005AF803 /* QuestionLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionLocationView.swift; sourceTree = "<group>"; };
 		ACDD7BE02D055FC800EE1321 /* QuestionImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionImagesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -596,6 +598,7 @@
 		05BAE21328379C9E0043FAEB /* AddOrEditQuestion */ = {
 			isa = PBXGroup;
 			children = (
+				AC5BEEA32D0872D4005AF803 /* QuestionLocation */,
 				ACDD7BDF2D055FAD00EE1321 /* QuestionImages */,
 				053666D32837714F002F899F /* AddOrEditQuestionView.swift */,
 				05BAE21128379B820043FAEB /* QuestionViewModel.swift */,
@@ -623,6 +626,14 @@
 				05F1C8B0288AD07B00CD5F1E /* Info.plist */,
 			);
 			path = ReviewWidget;
+			sourceTree = "<group>";
+		};
+		AC5BEEA32D0872D4005AF803 /* QuestionLocation */ = {
+			isa = PBXGroup;
+			children = (
+				AC5BEEA42D0872E9005AF803 /* QuestionLocationView.swift */,
+			);
+			path = QuestionLocation;
 			sourceTree = "<group>";
 		};
 		ACDD7BDF2D055FAD00EE1321 /* QuestionImages */ = {
@@ -936,6 +947,7 @@
 				05C9E6682AA1D72100905C8D /* RestorableReviewState.swift in Sources */,
 				054E7720284A523E006BCDEF /* Tag+.swift in Sources */,
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
+				AC5BEEA52D0872E9005AF803 /* QuestionLocationView.swift in Sources */,
 				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,
 				051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */,
 				051B7DAB288B00BC00465C24 /* UserDefaults+.swift in Sources */,

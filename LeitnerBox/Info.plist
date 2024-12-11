@@ -6,5 +6,11 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>LeitnerBox uses your location for storing a location question if you need.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>LeitnerBox uses your location for storing a location question if you need.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>LeitnerBox uses your location for storing a location question if you need.</string>
 </dict>
 </plist>

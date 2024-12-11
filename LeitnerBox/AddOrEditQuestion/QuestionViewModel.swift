@@ -212,4 +212,20 @@ final class QuestionViewModel: ObservableObject {
         }
     }
     
+    func addLocation(latitude: Double, longitude: Double) {
+        let string = "\(latitude),\(longitude)"
+        question?.location = string
+    }
+    
+    func removeLocation() {
+        question?.location = nil
+    }
+    
+    func questionCoordiante() -> (lat: Double, lng: Double)? {
+        guard let arr = question?.location?.split(separator: ","),
+                 let lat = Double(arr[0]),
+                 let lng = Double(arr[1])
+        else { return nil }
+        return (lat, lng)
+    }
 }

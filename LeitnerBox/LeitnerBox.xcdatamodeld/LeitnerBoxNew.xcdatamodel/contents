@@ -35,6 +35,7 @@
         <attribute name="favoriteDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="leitnerId" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="leitner.id" usesScalarValueType="YES"/>
         <attribute name="levelValue" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="level.level" usesScalarValueType="YES"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="passTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="question" attributeType="String"/>
         <attribute name="tagsCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="tag.@count" usesScalarValueType="YES"/>

@@ -36,6 +36,14 @@ struct ReviewView: View {
                                 QuestionImagesView(isInReviewView: true)
                                     .environmentObject(QuestionViewModel(viewContext: context, leitner: question?.leitner ?? .init(), question: question))
                             }
+                            
+                            
+                            if #available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *) {
+                                if question?.location != nil {
+                                    QuestionLocationView(isInReviewView: true)
+                                        .environmentObject(QuestionViewModel(viewContext: context, leitner: question?.leitner ?? .init(), question: question))
+                                }
+                            }
                         }
                     }
                     Spacer()

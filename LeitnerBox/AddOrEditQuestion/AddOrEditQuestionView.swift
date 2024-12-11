@@ -105,6 +105,10 @@ struct AddOrEditQuestionView: View {
                     
                     QuestionImagesView(isInReviewView: false)
                         .environmentObject(questionVM)
+                    if #available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *) {
+                        QuestionLocationView(isInReviewView: false)
+                            .environmentObject(questionVM)
+                    }
 
                     Button {
                         questionVM.save()
