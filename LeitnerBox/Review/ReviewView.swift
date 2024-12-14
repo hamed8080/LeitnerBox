@@ -32,6 +32,10 @@ struct ReviewView: View {
                                 TapToAnswerView()
                             }
                             
+                            if let question = viewModel.selectedQuestion {
+                                DownloadAndPlayButton(question: question)
+                            }
+                            
                             if question?.imagesArray?.isEmpty == false {
                                 QuestionImagesView(isInReviewView: true)
                                     .environmentObject(QuestionViewModel(viewContext: context, leitner: question?.leitner ?? .init(), question: question))

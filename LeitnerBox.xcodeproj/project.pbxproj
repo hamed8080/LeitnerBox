@@ -119,6 +119,24 @@
 		05F1C8B2288AD07B00CD5F1E /* ReviewWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 05F1C8AD288AD07A00CD5F1E /* ReviewWidget.intentdefinition */; };
 		05F1C8B5288AD07B00CD5F1E /* ReviewWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 05F1C8A5288AD07A00CD5F1E /* ReviewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC5BEEA52D0872E9005AF803 /* QuestionLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BEEA42D0872E9005AF803 /* QuestionLocationView.swift */; };
+		ACCDFBB42D0DEBEC00C048C3 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAC2D0DEBEC00C048C3 /* libavutil.xcframework */; };
+		ACCDFBB52D0DEBEC00C048C3 /* libavutil.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAC2D0DEBEC00C048C3 /* libavutil.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBB62D0DEBEC00C048C3 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAD2D0DEBEC00C048C3 /* libavdevice.xcframework */; };
+		ACCDFBB72D0DEBEC00C048C3 /* libavdevice.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAD2D0DEBEC00C048C3 /* libavdevice.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBB82D0DEBEC00C048C3 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAE2D0DEBEC00C048C3 /* libavformat.xcframework */; };
+		ACCDFBB92D0DEBEC00C048C3 /* libavformat.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAE2D0DEBEC00C048C3 /* libavformat.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBBA2D0DEBEC00C048C3 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAF2D0DEBEC00C048C3 /* libswresample.xcframework */; };
+		ACCDFBBB2D0DEBEC00C048C3 /* libswresample.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBAF2D0DEBEC00C048C3 /* libswresample.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBBC2D0DEBEC00C048C3 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB02D0DEBEC00C048C3 /* libavcodec.xcframework */; };
+		ACCDFBBD2D0DEBEC00C048C3 /* libavcodec.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB02D0DEBEC00C048C3 /* libavcodec.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBBE2D0DEBEC00C048C3 /* ffmpegkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB12D0DEBEC00C048C3 /* ffmpegkit.xcframework */; };
+		ACCDFBBF2D0DEBEC00C048C3 /* ffmpegkit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB12D0DEBEC00C048C3 /* ffmpegkit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBC02D0DEBEC00C048C3 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB22D0DEBEC00C048C3 /* libavfilter.xcframework */; };
+		ACCDFBC12D0DEBEC00C048C3 /* libavfilter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB22D0DEBEC00C048C3 /* libavfilter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBC22D0DEBEC00C048C3 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB32D0DEBEC00C048C3 /* libswscale.xcframework */; };
+		ACCDFBC32D0DEBEC00C048C3 /* libswscale.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACCDFBB32D0DEBEC00C048C3 /* libswscale.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACCDFBC62D0DEFD900C048C3 /* LeitnerBoxOpusConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCDFBC52D0DEFD900C048C3 /* LeitnerBoxOpusConverter.swift */; };
+		ACCDFBC82D0E054D00C048C3 /* DownloadAndPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCDFBC72D0E054D00C048C3 /* DownloadAndPlayButton.swift */; };
 		ACDD7BE12D055FC800EE1321 /* QuestionImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD7BE02D055FC800EE1321 /* QuestionImagesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +174,24 @@
 				05F1C8B5288AD07B00CD5F1E /* ReviewWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACCDFBC42D0DEBEC00C048C3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ACCDFBB72D0DEBEC00C048C3 /* libavdevice.xcframework in Embed Frameworks */,
+				ACCDFBC12D0DEBEC00C048C3 /* libavfilter.xcframework in Embed Frameworks */,
+				ACCDFBBD2D0DEBEC00C048C3 /* libavcodec.xcframework in Embed Frameworks */,
+				ACCDFBB92D0DEBEC00C048C3 /* libavformat.xcframework in Embed Frameworks */,
+				ACCDFBBB2D0DEBEC00C048C3 /* libswresample.xcframework in Embed Frameworks */,
+				ACCDFBB52D0DEBEC00C048C3 /* libavutil.xcframework in Embed Frameworks */,
+				ACCDFBC32D0DEBEC00C048C3 /* libswscale.xcframework in Embed Frameworks */,
+				ACCDFBBF2D0DEBEC00C048C3 /* ffmpegkit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -277,6 +313,16 @@
 		05F1C8B0288AD07B00CD5F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05F1C8B6288AD07B00CD5F1E /* ReviewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReviewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		AC5BEEA42D0872E9005AF803 /* QuestionLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionLocationView.swift; sourceTree = "<group>"; };
+		ACCDFBAC2D0DEBEC00C048C3 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = Frameworks/libavutil.xcframework; sourceTree = "<group>"; };
+		ACCDFBAD2D0DEBEC00C048C3 /* libavdevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavdevice.xcframework; path = Frameworks/libavdevice.xcframework; sourceTree = "<group>"; };
+		ACCDFBAE2D0DEBEC00C048C3 /* libavformat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavformat.xcframework; path = Frameworks/libavformat.xcframework; sourceTree = "<group>"; };
+		ACCDFBAF2D0DEBEC00C048C3 /* libswresample.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libswresample.xcframework; path = Frameworks/libswresample.xcframework; sourceTree = "<group>"; };
+		ACCDFBB02D0DEBEC00C048C3 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavcodec.xcframework; path = Frameworks/libavcodec.xcframework; sourceTree = "<group>"; };
+		ACCDFBB12D0DEBEC00C048C3 /* ffmpegkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ffmpegkit.xcframework; path = Frameworks/ffmpegkit.xcframework; sourceTree = "<group>"; };
+		ACCDFBB22D0DEBEC00C048C3 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = Frameworks/libavfilter.xcframework; sourceTree = "<group>"; };
+		ACCDFBB32D0DEBEC00C048C3 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libswscale.xcframework; path = Frameworks/libswscale.xcframework; sourceTree = "<group>"; };
+		ACCDFBC52D0DEFD900C048C3 /* LeitnerBoxOpusConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeitnerBoxOpusConverter.swift; sourceTree = "<group>"; };
+		ACCDFBC72D0E054D00C048C3 /* DownloadAndPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadAndPlayButton.swift; sourceTree = "<group>"; };
 		ACDD7BE02D055FC800EE1321 /* QuestionImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionImagesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +331,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACCDFBB62D0DEBEC00C048C3 /* libavdevice.xcframework in Frameworks */,
+				ACCDFBC02D0DEBEC00C048C3 /* libavfilter.xcframework in Frameworks */,
+				ACCDFBBC2D0DEBEC00C048C3 /* libavcodec.xcframework in Frameworks */,
+				ACCDFBB82D0DEBEC00C048C3 /* libavformat.xcframework in Frameworks */,
+				ACCDFBBA2D0DEBEC00C048C3 /* libswresample.xcframework in Frameworks */,
+				ACCDFBB42D0DEBEC00C048C3 /* libavutil.xcframework in Frameworks */,
+				ACCDFBC22D0DEBEC00C048C3 /* libswscale.xcframework in Frameworks */,
+				ACCDFBBE2D0DEBEC00C048C3 /* ffmpegkit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +393,7 @@
 				051E1075291137D100F990BD /* DeleteDialog.swift */,
 				051E1077291137EC00F990BD /* TapToAnswerView.swift */,
 				051E107B2911383000F990BD /* FinishedReviewView.swift */,
+				ACCDFBC72D0E054D00C048C3 /* DownloadAndPlayButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,6 +465,14 @@
 		052CA6D7283C9E2E00376E79 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACCDFBB12D0DEBEC00C048C3 /* ffmpegkit.xcframework */,
+				ACCDFBB02D0DEBEC00C048C3 /* libavcodec.xcframework */,
+				ACCDFBAD2D0DEBEC00C048C3 /* libavdevice.xcframework */,
+				ACCDFBB22D0DEBEC00C048C3 /* libavfilter.xcframework */,
+				ACCDFBAE2D0DEBEC00C048C3 /* libavformat.xcframework */,
+				ACCDFBAC2D0DEBEC00C048C3 /* libavutil.xcframework */,
+				ACCDFBAF2D0DEBEC00C048C3 /* libswresample.xcframework */,
+				ACCDFBB32D0DEBEC00C048C3 /* libswscale.xcframework */,
 				052CA6D8283C9E2E00376E79 /* UniformTypeIdentifiers.framework */,
 				05F1C8A6288AD07A00CD5F1E /* WidgetKit.framework */,
 				05F1C8A8288AD07A00CD5F1E /* SwiftUI.framework */,
@@ -445,6 +508,7 @@
 				05E315C228A63AB100E020FC /* AnimatableGradientModifier.swift */,
 				058EB56C28CF9AD700622B76 /* ToolbarNavigation.swift */,
 				058EB56828CF84E700622B76 /* IconButtonKeyboardShortcut.swift */,
+				ACCDFBC52D0DEFD900C048C3 /* LeitnerBoxOpusConverter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -657,6 +721,7 @@
 				052CA6BF283C9A9500376E79 /* Embed Foundation Extensions */,
 				051E106B2911292900F990BD /* SwiftLint */,
 				05A9438529557FBE003657DB /* SwiftFormat */,
+				ACCDFBC42D0DEBEC00C048C3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -932,6 +997,7 @@
 				058EB56D28CF9ADA00622B76 /* ToolbarNavigation.swift in Sources */,
 				05867E6F283A334900F4A413 /* LevelsViewModel.swift in Sources */,
 				05747BFC28AE82ED00868CC6 /* Synonym+.swift in Sources */,
+				ACCDFBC82D0E054D00C048C3 /* DownloadAndPlayButton.swift in Sources */,
 				059D2DA528A500F500231E09 /* LeitnerBox.docc in Sources */,
 				05BAE2182837CCB50043FAEB /* SearchView.swift in Sources */,
 				052CA6AC283C988F00376E79 /* ActivityViewControllerWrapper.swift in Sources */,
@@ -949,6 +1015,7 @@
 				053666D42837714F002F899F /* AddOrEditQuestionView.swift in Sources */,
 				AC5BEEA52D0872E9005AF803 /* QuestionLocationView.swift in Sources */,
 				054E7724284A544B006BCDEF /* TagRowView.swift in Sources */,
+				ACCDFBC62D0DEFD900C048C3 /* LeitnerBoxOpusConverter.swift in Sources */,
 				051E1078291137EC00F990BD /* TapToAnswerView.swift in Sources */,
 				051B7DAB288B00BC00465C24 /* UserDefaults+.swift in Sources */,
 				051E106E291136F200F990BD /* ReviewQuestion.swift in Sources */,
@@ -1184,7 +1251,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lmlvrmedia.leitnerbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -1218,7 +1285,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lmlvrmedia.leitnerbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;

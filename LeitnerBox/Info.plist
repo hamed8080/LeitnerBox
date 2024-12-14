@@ -12,5 +12,20 @@
 	<string>LeitnerBox uses your location for storing a location question if you need.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>LeitnerBox uses your location for storing a location question if you need.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>188.132.192.219</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>
